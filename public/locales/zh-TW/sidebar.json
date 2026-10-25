@@ -1,0 +1,91 @@
+{
+  "groups": {
+    "dashboard": "儀表板",
+    "cellular": "蜂窩網路",
+    "local_network": "本地網路",
+    "monitoring": "監控",
+    "system": "系統"
+  },
+  "breadcrumb": "麵包屑導航",
+  "items": {
+    "home": "主頁",
+    "cellular_overview": "概覽",
+    "sms_inbox": "收件箱",
+    "band_locking_bands": "頻段鎖定",
+    "cell_scanner_full_scan": "全面掃描",
+    "cellular_settings_general": "一般",
+    "ip_passthrough": "IP 直通",
+    "connection_quality_overview": "概覽",
+    "system_settings_general": "一般",
+    "cellular_information": "蜂窩網路資訊",
+    "antenna_statistics": "天線統計",
+    "antenna_alignment": "天線對準",
+    "sms_center": "簡訊中心",
+    "sms_forwarding": "簡訊轉發",
+    "custom_profiles": "自訂設定",
+    "band_locking": "頻段選擇",
+    "tower_locking": "基站鎖定",
+    "frequency_locking": "頻率鎖定",
+    "cell_scanner": "小區掃描",
+    "neighboring_cells": "鄰近小區",
+    "frequency_calculator": "頻率計算器",
+    "settings": "設定",
+    "apn_management": "APN 設定",
+    "network_priority": "網路優先順序",
+    "imei_settings": "IMEI 設定",
+    "fplmn_settings": "FPLMN 設定",
+    "ethernet_status": "乙太網狀態",
+    "local_network_settings": "設定",
+    "custom_dns": "自訂 DNS",
+    "ttl_mtu_settings": "TTL 和 MTU 設定",
+    "video_optimizer": "影片最佳化器",
+    "traffic_masquerade": "流量偽裝",
+    "traffic_engine": "流量引擎",
+    "network_events": "網路事件",
+    "latency_monitor": "延遲監控",
+    "alerts": "警報",
+    "tailscale": "Tailscale",
+    "netbird": "NetBird",
+    "watchdog": "看門狗",
+    "system_settings": "系統設定",
+    "configuration_backup": "設定備份",
+    "device_access": "裝置存取",
+    "ssh_password": "SSH 密碼",
+    "connection_quality": "連線質量",
+    "adaptive_polling": "自適應輪詢",
+    "hardware": "硬體",
+    "logs": "日誌",
+    "system_health_check": "系統健康檢查",
+    "software_update": "軟體更新",
+    "at_terminal": "AT 終端",
+    "luci": "Luci",
+    "about_device": "關於裝置",
+    "support": "支援",
+    "donate": "捐贈專案",
+    "languages": "語言",
+    "prometheus": "Prometheus"
+  },
+  "switcher": {
+    "opens_new_tab": "在新標籤頁中開啟",
+    "apps": "應用程式",
+    "current": "目前應用程式"
+  },
+  "user": {
+    "signed_in": "已登入"
+  },
+  "actions": {
+    "toggle_section": "展開/收合 {{section}} 分區",
+    "toggle_sidebar": "展開/收合側邊欄",
+    "skip_to_content": "跳到主要內容"
+  },
+  "mobile": {
+    "title": "側邊欄",
+    "description": "QManager 的主導覽。"
+  },
+  "status": {
+    "watchdog_acting": "處理中",
+    "watchdog_acting_detail": "看門狗正在恢復連線（第 {{tier}} 級）。",
+    "watchdog_settling": "觀察中",
+    "watchdog_settling_detail": "看門狗正在確認恢復後連線是否穩定。"
+  }
+}

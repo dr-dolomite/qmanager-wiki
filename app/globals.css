@@ -1,0 +1,304 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@utility quotes-none {
+  quotes: none;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-border-subtle: var(--border-subtle);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-surface: var(--surface);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+
+  --color-lte: var(--lte);
+  --color-downlink: var(--downlink);
+  --color-uplink: var(--uplink);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 16px);
+
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-figure: var(--font-rethink-sans), sans-serif;
+}
+
+:root {
+  /* GitBook-inspired clean, high-contrast light mode */
+  --background: oklch(0.995 0.002 258);
+  --foreground: oklch(0.180 0.015 258);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.180 0.015 258);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.180 0.015 258);
+  --primary: oklch(0.450 0.200 255);
+  --primary-foreground: oklch(0.995 0 0);
+  --secondary: oklch(0.960 0.005 258);
+  --secondary-foreground: oklch(0.200 0.015 258);
+  --muted: oklch(0.955 0.005 258);
+  --muted-foreground: oklch(0.460 0.015 258);
+  --accent: oklch(0.940 0.008 258);
+  --accent-foreground: oklch(0.180 0.015 258);
+  --destructive: oklch(0.580 0.220 25);
+  --destructive-foreground: oklch(0.995 0 0);
+  --border: oklch(0.890 0.008 258);
+  --border-hover: oklch(0.720 0.012 258);
+  --border-subtle: oklch(0.930 0.006 258);
+  --input: oklch(0.890 0.008 258);
+  --ring: oklch(0.450 0.200 255);
+  --radius: 0.5rem;
+
+  --surface: oklch(1 0 0);
+  --surface-container: oklch(0.965 0.005 258);
+  --surface-container-high: oklch(0.935 0.008 258);
+
+  --lte: oklch(0.560 0.190 296);
+  --downlink: oklch(0.540 0.200 341);
+  --uplink: oklch(0.500 0.180 200);
+  --success: oklch(0.560 0.170 149);
+  --warning: oklch(0.680 0.160 72);
+}
+
+.dark {
+  /* GitBook-inspired deep, calm slate dark mode */
+  --background: oklch(0.130 0.008 258);
+  --foreground: oklch(0.950 0.004 258);
+  --card: oklch(0.165 0.009 258);
+  --card-foreground: oklch(0.950 0.004 258);
+  --popover: oklch(0.165 0.009 258);
+  --popover-foreground: oklch(0.950 0.004 258);
+  --primary: oklch(0.660 0.185 262);
+  --primary-foreground: oklch(0.120 0.010 258);
+  --secondary: oklch(0.200 0.010 258);
+  --secondary-foreground: oklch(0.950 0.004 258);
+  --muted: oklch(0.195 0.010 258);
+  --muted-foreground: oklch(0.620 0.012 258);
+  --accent: oklch(0.225 0.010 258);
+  --accent-foreground: oklch(0.950 0.004 258);
+  --destructive: oklch(0.620 0.200 27);
+  --destructive-foreground: oklch(0.990 0.006 262);
+  --border: oklch(0.250 0.010 258);
+  --border-hover: oklch(0.360 0.014 258);
+  --border-subtle: oklch(0.210 0.008 258);
+  --input: oklch(0.250 0.010 258);
+  --ring: oklch(0.620 0.200 262);
+  --radius: 0.5rem;
+
+  --surface: oklch(0.165 0.009 258);
+  --surface-container: oklch(0.195 0.010 258);
+  --surface-container-high: oklch(0.230 0.012 258);
+
+  --lte: oklch(0.680 0.170 296);
+  --downlink: oklch(0.640 0.190 341);
+  --uplink: oklch(0.780 0.130 200);
+  --success: oklch(0.660 0.170 149);
+  --warning: oklch(0.760 0.155 72);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: oklch(0.550 0.200 255 / 0.25);
+  color: inherit;
+}
+
+.font-figure {
+  font-family: var(--font-rethink-sans), sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Minimal GitBook custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Code block styles */
+pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+/* Ensure markdown blockquotes and callouts render without unwanted pseudo-element quotes */
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+  content: none !important;
+}
+
+/* docs */
+/* Callout surfaces and labels; labels hold >= 4.5:1 on their bg. */
+:root {
+  --callout-neutral: oklch(0.965 0.005 258);
+  --callout-tip-label: oklch(0.480 0.130 150);
+  --callout-warn-bg: oklch(0.965 0.035 80);
+  --callout-warn-label: oklch(0.470 0.110 60);
+  --callout-danger-bg: oklch(0.960 0.025 25);
+  --callout-danger-label: oklch(0.500 0.180 27);
+}
+
+.dark {
+  --callout-neutral: oklch(0.185 0.010 258);
+  --callout-tip-label: oklch(0.780 0.150 150);
+  --callout-warn-bg: oklch(0.210 0.030 70);
+  --callout-warn-label: oklch(0.820 0.130 80);
+  --callout-danger-bg: oklch(0.210 0.040 25);
+  --callout-danger-label: oklch(0.780 0.130 25);
+}
+
+@theme inline {
+  /* docs */
+  --color-callout-neutral: var(--callout-neutral);
+  --color-callout-tip-label: var(--callout-tip-label);
+  --color-callout-warn-bg: var(--callout-warn-bg);
+  --color-callout-warn-label: var(--callout-warn-label);
+  --color-callout-danger-bg: var(--callout-danger-bg);
+  --color-callout-danger-label: var(--callout-danger-label);
+}
+
+/* Compatibility tiers: the signal bars acquire "signal" as the cards scroll into view.
+   Bars are fully visible by default; the rise only applies where scroll timelines exist. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .signal-bar {
+      transform-origin: bottom;
+      animation: signal-rise cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: entry calc(8% + var(--i, 0) * 9%) entry calc(46% + var(--i, 0) * 9%);
+    }
+  }
+}
+
+/* Get started: "Searching" settles into "Connected" once the bars above it have risen;
+   the rings open outward. Defaults show the finished state (Connected, rings at rest). */
+.cta-searching {
+  opacity: 0;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .cta-searching,
+    .cta-connected {
+      animation: cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: entry 55% entry 90%;
+    }
+
+    .cta-searching {
+      animation-name: cta-fade-out;
+    }
+
+    .cta-connected {
+      animation-name: cta-fade-in;
+    }
+
+    .cta-ring {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: cta-ring-open cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--i, 0) * 8%) entry calc(70% + var(--i, 0) * 6%);
+    }
+  }
+}
+
+/* Choosing a modem re-acquires the signal: the bars rise again, tallest last. */
+@media (prefers-reduced-motion: no-preference) {
+  .cta-screen:has(.cta-row:is(:hover, :focus-visible)) .signal-bar {
+    transform-origin: bottom;
+    animation: signal-rise 520ms cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 60ms) both;
+    animation-timeline: auto;
+    animation-range: normal;
+  }
+}
+
+@keyframes cta-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes cta-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cta-ring-open {
+  from {
+    transform: scale(0.55);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes signal-rise {
+  from {
+    transform: scaleY(0.12);
+    opacity: 0.2;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}

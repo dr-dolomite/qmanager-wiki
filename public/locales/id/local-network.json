@@ -1,0 +1,580 @@
+{
+  "shared": {
+    "status_active": "Aktif",
+    "status_inactive": "Tidak Aktif",
+    "status_not_installed": "Tidak Terinstal",
+    "validation_domain_required": "Domain diperlukan",
+    "validation_domain_invalid_format": "Format domain tidak valid",
+    "validation_domain_needs_dot": "Harus mengandung setidaknya satu titik",
+    "validation_domain_too_long": "Domain terlalu panjang (maks 253 karakter)",
+    "validation_domain_duplicate": "Domain sudah ada di daftar"
+  },
+  "traffic_engine": {
+    "page_title": "Traffic Engine",
+    "page_description": "Satu mesin DPI, dua mode. Lewati pembatasan video operator, atau buat trafik HTTPS tampak seperti layanan dalam daftar putih. Hanya satu mode berjalan pada satu waktu.",
+    "mode_video": "Video Optimizer",
+    "mode_masquerade": "Masquerade",
+    "aria_mode_selector": "Mode mesin",
+    "state_starting": "Memulai",
+    "state_stopping": "Menghentikan",
+    "state_switching": "Beralih",
+    "hero_rate_unit": "pkt/d",
+    "tile_uptime": "Uptime",
+    "toast_video_enabled": "Video Optimizer kini melindungi video",
+    "toast_video_disabled": "Video Optimizer dimatikan",
+    "toast_masquerade_enabled": "Masquerade kini aktif",
+    "toast_masquerade_disabled": "Masquerade dimatikan",
+    "error_load_failed": "Modem tidak merespons. Periksa koneksi lalu coba lagi.",
+    "onboarding_title": "Instal Traffic Engine",
+    "onboarding_description": "Satu instalasi membuka Video Optimizer dan Masquerade sekaligus.",
+    "onboarding_zapret_attribution": "Diunduh otomatis dari proyek <link>zapret</link>.",
+    "onboarding_install": "Instal Mesin",
+    "onboarding_installing": "Menginstal",
+    "onboarding_check_again": "Periksa Lagi",
+    "advanced_remove_button": "Hapus",
+    "advanced_removing": "Menghapus",
+    "advanced_dialog_title": "Hapus binary mesin?",
+    "advanced_dialog_desc": "Kedua mode memakai mesin ini, jadi menghapusnya mematikan Video Optimizer dan Masquerade sampai Anda menginstalnya lagi.",
+    "advanced_toast_success": "Binary mesin dihapus",
+    "advanced_toast_error": "Gagal menghapus binary mesin",
+    "video_tagline": "Melawan throttling video oleh operator agar lebih sedikit buffering.",
+    "masquerade_tagline": "Menyamarkan HTTPS di balik satu domain whitelist agar operator tidak bisa menargetkannya untuk throttling.",
+    "bypass_label": "Lewati Deteksi Hotspot",
+    "bypass_helper_external": "Diatur di tempat lain ke TTL {{ttl}} / HL {{hl}} (halaman TTL atau profil SIM). Kelola di sana.",
+    "bypass_toast_enabled": "Bypass hotspot aktif",
+    "bypass_toast_disabled": "Bypass hotspot nonaktif",
+    "bypass_toast_error": "Tidak dapat mengubah lewati hotspot",
+    "kernel_module_hint": "Instal paket kmod-nft-queue di modem, lalu muat ulang halaman ini.",
+    "aria_kernel_module_hint": "Cara menambahkan dukungan antrean paket",
+    "stat_empty": "—",
+    "toast_applied": "Pengaturan Traffic Engine diterapkan",
+    "error_load_title": "Tidak dapat membaca Traffic Engine",
+    "refresh": "Segarkan",
+    "kernel_banner_desc": "Firmware ini tidak memiliki dukungan antrean paket yang dibutuhkan mesin, sehingga kedua mode tidak dapat diaktifkan.",
+    "aria_bypass_hint": "Tentang Bypass Hotspot",
+    "bypass_hint": "Operator mengenali perangkat tethering dari jumlah hop paket yang tiba. Mengunci setiap paket ke 64 membuat perangkat di belakang modem terlihat seperti modem itu sendiri.",
+    "back": "Kembali",
+    "pkg_available": "Tersedia",
+    "pkg_missing": "Tidak ada",
+    "package_title": "Paket Mesin",
+    "engine_title": "Mesin",
+    "package_desc": "Mesin paket yang dipakai kedua mode, beserta kebutuhannya dari firmware.",
+    "engine_desc": "Pilih mode dan pantau paket yang ditangani mesin.",
+    "pkg_queue": "Dukungan antrean paket",
+    "pkg_engine": "Mesin",
+    "pkg_installed": "Terpasang",
+    "pkg_source": "Sumber",
+    "pkg_source_value": "Proyek zapret",
+    "pkg_status_busy": "Matikan mesin sebelum menghapusnya.",
+    "pkg_status_idle": "Anda dapat memasangnya lagi dari halaman ini.",
+    "advanced_dialog_confirm": "Hapus Mesin",
+    "label_mode": "Mode",
+    "mode_off": "Mati",
+    "mode_reason_kernel": "Firmware ini tidak mendukung antrean paket, sehingga tidak ada mode yang bisa berjalan.",
+    "metric_packets": "Paket ditangani",
+    "metric_package": "Paket",
+    "aria_open_package": "Tampilkan detail paket mesin",
+    "pkg_queue_missing": "Antrean tidak ada",
+    "live_legend": "Paket ditangani (60 dtk terakhir)",
+    "strip_sni": "SNI: {{domain}}",
+    "strip_fragment": "1 B",
+    "strip_rest": "Sisa handshake",
+    "strip_decoy": "Umpan",
+    "strip_real": "Handshake asli",
+    "strip_aria_video_one": "Awal handshake dikirim sebagai {{count}} potongan satu byte, sehingga operator tidak pernah membaca nama host secara utuh.",
+    "strip_aria_video_other": "Awal handshake dikirim sebagai {{count}} potongan satu byte, sehingga operator tidak pernah membaca nama host secara utuh.",
+    "strip_aria_masquerade": "Dua handshake umpan bernama {{domain}} dikirim sebelum yang asli, sehingga operator membaca penyamarannya.",
+    "strip_eyebrow": "Yang dilihat operator",
+    "strip_preview": "Pratinjau",
+    "strip_axis_first": "Dikirim pertama",
+    "strip_axis_last": "Dikirim terakhir",
+    "hosts_add": "Tambah",
+    "hosts_empty_title": "Belum ada nama host",
+    "hosts_empty_desc": "Tambahkan domain CDN video di atas, atau pulihkan bawaan.",
+    "hosts_group_custom": "Kustom",
+    "saving": "Menyimpan",
+    "foot_invalid": "Perbaiki domain untuk menerapkan.",
+    "foot_restart": "Menerapkan akan memulai ulang mesin sebentar.",
+    "foot_switch_to_apply": "Berlaku saat Anda mengalihkan mesin ke {{mode}}.",
+    "foot_on_enable": "Berlaku saat Anda menyalakan {{mode}}.",
+    "apply_blocked_other": "{{mode}} sedang berjalan. Ganti mode untuk menerapkan ini.",
+    "applying": "Menerapkan",
+    "state_applying": "Menerapkan",
+    "check_passed": "Lulus",
+    "check_not_detected": "Tidak terdeteksi",
+    "check_failed": "Gagal",
+    "check_injection_confirmed_other": "Injeksi SNI palsu terkonfirmasi ({{count}} paket diproses)",
+    "acts_on_domains_one": "{{count}} nama host",
+    "acts_on_domains_other": "{{count}} nama host",
+    "hosts_title": "Nama Host",
+    "hosts_desc": "Domain CDN video yang ditangani Video Optimizer.",
+    "hosts_not_used": "Tidak dipakai",
+    "aria_video_how": "Cara kerja Video Optimizer",
+    "video_how": "DPI operator membaca nama host di setiap handshake untuk mengenali video. Video Optimizer mengirim awal handshake dalam potongan satu byte, sehingga nama host tidak pernah tiba utuh dan video tidak ditandai.",
+    "metric_carrier_reads": "Operator membaca",
+    "carrier_reads_none": "Tanpa nama host",
+    "metric_acts_on": "Bekerja pada",
+    "aria_edit_hostnames": "Edit nama host",
+    "aria_strength_lower": "Turunkan kekuatan",
+    "aria_strength_raise": "Naikkan kekuatan",
+    "check_blocked": "Nyalakan {{mode}} untuk menjalankan pemeriksaan ini.",
+    "aria_masquerade_how": "Cara kerja Masquerade",
+    "masquerade_how": "Sebelum setiap handshake asli, Masquerade mengirim dua umpan bernama domain samaran. Operator membaca umpan itu dan menganggap koneksi sebagai layanan tersebut.",
+    "acts_on_all": "Semua lalu lintas HTTPS",
+    "chart_aria_idle": "Tidak ada paket ditangani dalam 60 detik terakhir",
+    "chart_empty": "Nyalakan mode untuk melihat paket",
+    "chart_x_start": "60 dtk lalu",
+    "chart_x_end": "Sekarang",
+    "toast_install_success": "Traffic Engine terpasang",
+    "toast_install_error": "Gagal memasang Traffic Engine",
+    "kernel_banner_title": "Dukungan antrean paket tidak ada",
+    "chart_aria": "Paket ditangani per detik selama 60 detik terakhir, puncak {{max}}"
+  },
+  "ethernet": {
+    "page": {
+      "title": "Status Ethernet",
+      "description": "Pantau tautan ethernet, batasi kecepatannya, dan atur gateway LAN.",
+      "refresh": "Muat ulang"
+    },
+    "strip": {
+      "label": "Port ethernet",
+      "unresponsive": "Tidak merespons",
+      "unavailable_title": "Tidak dapat membaca port ethernet",
+      "unavailable_body": "Mencoba lagi setiap 10 detik. Tidak ada yang diubah.",
+      "absent_title": "Tidak ada pengontrol ethernet",
+      "absent_body": "Perangkat ini tidak memiliki port ethernet, jadi tidak ada yang dapat dilaporkan atau dikonfigurasi."
+    },
+    "tiles": {
+      "link": {
+        "label": "Status tautan",
+        "value_up": "Terhubung",
+        "value_down": "Terputus",
+        "value_unknown": "Tidak diketahui",
+        "caption_up": "Kabel terhubung ke port host",
+        "caption_down": "Tidak ada kabel terdeteksi di port host",
+        "caption_unknown": "Menunggu status tautan"
+      },
+      "speed": {
+        "label": "Kecepatan negosiasi",
+        "caption": "Dinogosiasikan dengan perangkat lawan",
+        "caption_ceiling": "Dari {{ceiling}} yang didukung port",
+        "caption_down": "Memerlukan tautan aktif"
+      },
+      "duplex": {
+        "label": "Dupleks",
+        "caption": "Mengirim dan menerima sekaligus",
+        "caption_down": "Memerlukan tautan aktif",
+        "value_full": "Penuh",
+        "value_half": "Setengah"
+      },
+      "negotiation": {
+        "label": "Negosiasi",
+        "value_auto": "Otomatis",
+        "value_forced": "Dipaksa",
+        "value_unknown": "Tidak diketahui",
+        "caption_auto": "Tidak ada batas kecepatan",
+        "caption_limited": "Dibatasi ke {{speed}}"
+      }
+    },
+    "settings": {
+      "title": "Port Ethernet",
+      "description": "Atur kecepatan tautan port dan cara modem memberi daya pada pengontrol ethernet.",
+      "row_label": "Batas kecepatan",
+      "placeholder": "Pilih kecepatan",
+      "option_auto": "Otomatis (maks)",
+      "option_10": "10 Mbps",
+      "option_100": "100 Mbps",
+      "option_1000": "1 Gbps",
+      "option_2500": "2.5 Gbps",
+      "consequence": "Menerapkan akan memutus tautan beberapa detik saat port bernegosiasi ulang. Anda sedang menggunakan tautan itu.",
+      "consequence_applying": "Tautan terputus saat port bernegosiasi ulang. Halaman ini mengonfirmasi kecepatan baru dengan sendirinya.",
+      "consequence_unresponsive": "Modem berhenti merespons, jadi kontrol ini ditahan sampai pembacaan berhasil berikutnya.",
+      "consequence_unread": "Modem belum merespons, jadi tidak ada yang dapat diubah sampai pembacaan pertama masuk.",
+      "consequence_absent": "Tidak ada port ethernet yang dapat dikonfigurasi di perangkat ini.",
+      "toast_success": "Kecepatan tautan diperbarui",
+      "toast_error": "Gagal mengatur kecepatan tautan",
+      "toast_confirm_error": "Tidak dapat mengonfirmasi kecepatan baru. Periksa tautan.",
+      "apply": "Terapkan perubahan",
+      "aspm_label": "Hemat daya PCIe",
+      "aspm_hint_aria": "Tentang hemat daya PCIe",
+      "aspm_hint": "Active State Power Management (ASPM) membiarkan tautan PCIe ke pengontrol ethernet tertidur di antara paket. Performa membuatnya tetap aktif.",
+      "aspm_consequence": "Mode hemat daya dapat menyebabkan putus koneksi dan latensi tambahan pada port ethernet. Menerapkan tidak memutus tautan.",
+      "aspm_placeholder": "Pilih kebijakan",
+      "aspm_option_performance": "Performa (disarankan)",
+      "aspm_option_default": "Bawaan kernel",
+      "aspm_option_powersave": "Hemat daya",
+      "aspm_option_powersupersave": "Hemat daya maksimum",
+      "toast_aspm_success": "Hemat daya PCIe diperbarui"
+    }
+  },
+  "lan_config": {
+    "card_title": "Alamat LAN",
+    "card_description": "Atur alamat IP LAN router (gateway yang digunakan perangkat Anda) dan ukuran jaringan lokal.",
+    "label_gateway": "Alamat IP Gateway",
+    "help_gateway": "Alamat router itu sendiri di LAN. Perangkat menggunakannya sebagai gateway default.",
+    "label_subnet": "Subnet Mask",
+    "help_subnet": "Pilih ukuran jaringan LAN sebagai prefiks CIDR.",
+    "action_apply": "Terapkan Perubahan",
+    "confirm_title": "Ubah alamat LAN?",
+    "confirm_body": "LAN akan beralih ke {{address}} (netmask {{netmask}}). Ini akan mengikat ulang jaringan dan koneksi Anda saat ini akan terputus.",
+    "confirm_reconnect": "Setelah diterapkan, jaringan diikat ulang dan koneksi Anda terputus sebentar. Router atau perangkat yang memakai DHCP akan tersambung kembali otomatis dalam beberapa detik; yang memakai IP statis harus dipindahkan ke subnet baru secara manual. Anda lalu membuka alamat baru untuk melanjutkan.",
+    "confirm_action": "Terapkan & Sambungkan Ulang",
+    "applied_title": "Alamat LAN sedang berubah",
+    "applied_body": "Perangkat berpindah ke {{address}}. Koneksi Anda akan terputus sekitar {{seconds}} detik — sambungkan ulang kabel LAN atau Ethernet, lalu buka alamat baru:",
+    "applied_body_auto": "Perangkat berpindah ke {{address}}. Router yang diatur ke DHCP akan tersambung kembali sendiri dalam sekitar {{seconds}} detik dan mengambil gateway baru. Jika tidak, sambungkan ulang kabel, lalu buka alamat baru:",
+    "reconnecting_title": "Menyambungkan ulang ke alamat baru…",
+    "reconnecting_auto_note": "Halaman ini akan membuka alamat baru secara otomatis.",
+    "reconnecting_opening": "Membuka alamat baru…",
+    "toast_error_save": "Gagal menerapkan pengaturan LAN",
+    "error_invalid_ipaddr": "Masukkan alamat IPv4 unicast yang valid (mis. 192.168.1.1).",
+    "error_invalid_host_in_subnet": "Ini adalah alamat jaringan atau broadcast untuk subnet yang dipilih. Pilih alamat host yang dapat digunakan.",
+    "error_invalid_prefix": "Pilih prefiks subnet antara /16 dan /30.",
+    "errors": {
+      "fetch_failed": "Gagal memuat pengaturan LAN",
+      "save_failed": "Gagal menyimpan pengaturan LAN",
+      "parse_failed": "Gagal membaca respons penyimpanan"
+    }
+  },
+  "dns": {
+    "page_title": "DNS Kustom",
+    "page_description": "Timpa server DNS yang ditetapkan operator dengan resolver pilihan Anda untuk semua perangkat di jaringan lokal.",
+    "provider_custom": "Kustom",
+    "placeholder_primary_dns": "contoh: 8.8.8.8",
+    "placeholder_secondary_dns": "contoh: 1.1.1.1",
+    "placeholder_tertiary_dns": "contoh: 8.8.4.4",
+    "placeholder_primary_dns6": "contoh: 2606:4700:4700::1111",
+    "placeholder_secondary_dns6": "contoh: 2606:4700:4700::1001",
+    "error_at_least_one": "Masukkan setidaknya satu alamat server DNS",
+    "error_invalid_ipv6": "Masukkan alamat IPv6 yang valid (contoh: 2606:4700:4700::1111).",
+    "toast_success_enabled": "DNS kustom berhasil diterapkan",
+    "toast_success_disabled": "Kembali ke DNS operator",
+    "toast_error_apply": "Tidak dapat menerapkan pengaturan DNS",
+    "error_load_title": "Tidak dapat membaca pengaturan DNS",
+    "error_load_desc": "Modem tidak merespons. Periksa koneksi lalu coba lagi.",
+    "errors": {
+      "fetch_failed": "Tidak dapat memuat pengaturan DNS",
+      "apply_failed": "Tidak dapat menerapkan pengaturan DNS"
+    },
+    "error_invalid_ipv4": "Masukkan alamat IPv4 yang valid (contoh: 9.9.9.9).",
+    "blocked_invalid": "Perbaiki dulu alamat yang ditandai.",
+    "cards": {
+      "resolver": {
+        "title": "Resolver",
+        "description": "Server DNS yang diberikan ke perangkat di jaringan Anda."
+      },
+      "ipv4": {
+        "title": "Server IPv4",
+        "description": "Hingga tiga, dicoba berurutan."
+      },
+      "ipv6": {
+        "title": "Server IPv6",
+        "description": "Hingga dua, untuk perangkat yang memakai IPv6."
+      }
+    },
+    "rows": {
+      "mode": {
+        "label": "DNS Kustom",
+        "consequence_on": "Perangkat di jaringan Anda memakai server di bawah.",
+        "consequence_off": "Perangkat memakai server yang ditetapkan operator."
+      },
+      "provider": {
+        "label": "Penyedia",
+        "consequence": "Mengisi kedua daftar server. Mengubah alamat menjadikannya Kustom."
+      },
+      "primary": "Primer",
+      "secondary": "Sekunder",
+      "tertiary": "Tersier"
+    }
+  },
+  "ttl_mtu": {
+    "page_title": "TTL & MTU",
+    "page_description": "Tulis ulang jumlah hop dan ukuran paket yang dipasang modem pada antarmuka seluler.",
+    "refresh": "Segarkan",
+    "strip": {
+      "label": "Berlaku sekarang",
+      "chip_custom": "Kustom",
+      "chip_default": "Bawaan operator",
+      "retry": "Coba lagi",
+      "unavailable_title": "Tidak dapat membaca TTL atau MTU",
+      "unavailable_body": "Modem tidak menjawab. Tidak ada yang diubah.",
+      "idle_title": "Tidak ada penggantian yang berlaku",
+      "idle_body": "Modem memakai TTL dan MTU operator persis seperti hasil negosiasi. Aktifkan salah satu di bawah untuk mengubahnya."
+    },
+    "tiles": {
+      "shared": {
+        "caption_pending": "Masih membaca",
+        "caption_unread": "Modem tidak menjawab"
+      },
+      "ttl": {
+        "label": "TTL (IPv4)",
+        "caption_active": "Ditulis ulang pada setiap paket",
+        "caption_idle": "Tidak ditulis ulang"
+      },
+      "hl": {
+        "label": "Batas hop (IPv6)",
+        "caption_active": "Ditulis ulang pada setiap paket",
+        "caption_idle": "Tidak ditulis ulang"
+      },
+      "mtu": {
+        "label": "MTU",
+        "unit": "byte",
+        "caption_active": "Bawaan operator adalah {{carrier}}",
+        "caption_idle": "Dinegosiasikan operator"
+      }
+    },
+    "banner": {
+      "title": "TTL dan batas hop berasal dari profil {{profile}}",
+      "body": "Mengaktifkan profil itu menulis kedua nilai tersebut, jadi kartu ini ditahan agar dua penulis tidak saling menimpa. Ubah nilainya di profil itu, atau aktifkan profil yang membiarkan TTL kosong."
+    },
+    "cards": {
+      "ttl": {
+        "title": "TTL & Batas Hop",
+        "description": "Diterapkan pada paket keluar di antarmuka seluler."
+      },
+      "mtu": {
+        "title": "Unit transmisi maksimum",
+        "description": "Paket terbesar yang dikirim antarmuka seluler tanpa fragmentasi."
+      }
+    },
+    "rows": {
+      "shared": {
+        "consequence_off": "Aktifkan penulisan ulang untuk mengatur nilai.",
+        "consequence_unread": "Modem belum menjawab, jadi belum ada yang dapat diubah."
+      },
+      "rewrite": {
+        "label": "Tulis ulang jumlah hop",
+        "consequence": "Jika nonaktif, modem meneruskan jumlah hop apa adanya dari klien. Sebagian operator menghitung hop untuk mendeteksi tethering."
+      },
+      "ttl_value": {
+        "label": "Nilai TTL",
+        "consequence": "{{min}}–{{max}}. Perangkat yang berjarak satu hop dari modem biasanya memakai 64."
+      },
+      "hl_value": {
+        "label": "Nilai batas hop",
+        "consequence": "Padanan IPv6-nya. Atur keduanya kecuali Anda tahu klien hanya single-stack."
+      },
+      "mtu_toggle": {
+        "label": "Ganti nilai MTU",
+        "consequence": "Jika nonaktif, nilai hasil negosiasi operator dipulihkan di antarmuka seluler."
+      },
+      "mtu_value": {
+        "label": "Nilai MTU",
+        "consequence": "{{min}}–{{max}}. Di bawah sekitar 1400 dapat merusak path MTU discovery pada situs yang membuang ICMP.",
+        "consequence_off": "Aktifkan penggantian untuk mengatur nilai."
+      }
+    },
+    "values": {
+      "on": "Aktif",
+      "off": "Nonaktif"
+    },
+    "errors": {
+      "value_range": "TTL dan batas hop masing-masing harus antara {{min}} dan {{max}}.",
+      "no_value": "Isi TTL atau batas hop sebelum menerapkan.",
+      "mtu_range": "MTU harus antara {{min}} dan {{max}}."
+    },
+    "toast_ttl_applied": "Diterapkan (TTL {{ttl}}, batas hop {{hl}}).",
+    "toast_ttl_cleared": "Modem kembali memakai jumlah hop dari operator.",
+    "toast_ttl_error": "Tidak dapat menerapkan TTL dan batas hop.",
+    "toast_mtu_applied": "MTU disetel ke {{mtu}}.",
+    "toast_mtu_cleared": "MTU kembali ke nilai hasil negosiasi operator.",
+    "toast_mtu_error": "Tidak dapat menerapkan MTU."
+  },
+  "ippt": {
+    "page": {
+      "title": "Passthrough IP & USB",
+      "description": "Serahkan IP publik modem langsung ke satu perangkat yang terhubung, bukan merutekan untuk seluruh LAN."
+    },
+    "header": {
+      "refresh": "Segarkan"
+    },
+    "status": {
+      "label": "Terakhir diterapkan",
+      "mode_title": {
+        "disabled": "Mode router",
+        "eth": "Passthrough Ethernet",
+        "usb": "Passthrough USB"
+      },
+      "blurb": {
+        "disabled": "Modem merutekan untuk LAN",
+        "eth": "Disetel untuk menyerahkan IP WAN ke perangkat Ethernet",
+        "usb": "Disetel untuk menyerahkan IP WAN ke perangkat USB"
+      },
+      "gateway_off": "Gateway LAN tidak dilayani"
+    },
+    "card": {
+      "description": "Menerapkan akan menulis semua pengaturan dan me-reboot modem.",
+      "network_description": "Diterapkan bersama passthrough, dengan satu kali reboot.",
+      "apply": "Terapkan dan reboot",
+      "mac_label": "Alamat MAC target",
+      "mac_placeholder": "XX:XX:XX:XX:XX:XX"
+    },
+    "groups": {
+      "passthrough": "Passthrough",
+      "network": "Jaringan"
+    },
+    "rows": {
+      "mode": {
+        "label": "Mode",
+        "description": "Rutekan seluruh LAN, atau teruskan IP publik ke satu perangkat."
+      },
+      "target": {
+        "label": "Perangkat target",
+        "pick_mode": "Pilih mode terlebih dahulu.",
+        "description": "Perangkat yang menerima IP publik."
+      },
+      "nat": {
+        "label": "NAT",
+        "description": "Dengan NAT cocok untuk hampir semua pengaturan."
+      },
+      "usb": {
+        "label": "Koneksi USB",
+        "description": "Protokol yang dipakai saat modem terhubung lewat USB."
+      },
+      "dns": {
+        "label": "Proxy DNS",
+        "description": "Aktif, modem menjawab DNS lewat DHCP untuk perangkat target."
+      }
+    },
+    "options": {
+      "mode_disabled": "Router",
+      "mode_eth": "Ethernet",
+      "mode_usb": "USB",
+      "target_automatic": "Otomatis",
+      "target_device": "Dari LAN",
+      "target_manual": "Lewat MAC",
+      "nat_on": "Dengan NAT",
+      "nat_off": "Tanpa NAT",
+      "dns_off": "Nonaktif",
+      "dns_on": "Aktif"
+    },
+    "mode_note": {
+      "rest": "Ethernet atau USB menyerahkan IP WAN ke satu perangkat, dan modem berhenti menjawab di gateway LAN-nya. Siapkan Tailscale atau jalan masuk lain.",
+      "to_passthrough": "Menerapkan akan me-reboot modem dan tab ini kehilangan koneksinya. Setelah itu gateway LAN berhenti menjawab, jadi siapkan Tailscale atau jalan masuk lain."
+    },
+    "dialog": {
+      "title": "Terapkan dan reboot sekarang?",
+      "body": "Pengaturan ditulis dan modem langsung reboot. Halaman ini beralih ke hitung mundur reboot dan mengeluarkan Anda dari sesi.",
+      "body_gateway": "Begitu passthrough aktif, modem berhenti menjawab di alamat gateway LAN-nya. Pastikan Anda punya Tailscale, perangkat passthrough itu sendiri, atau konsol serial untuk masuk kembali.",
+      "body_persist": "Pengaturan ini bertahan pada reboot berikutnya.",
+      "cancel": "Batal",
+      "confirm": "Terapkan dan reboot"
+    },
+    "toast_apply_error": "Tidak dapat menerapkan pengaturan Passthrough IP",
+    "errors": {
+      "read_title": "Tidak dapat membaca konfigurasi passthrough",
+      "read_body": "Tidak ada yang diubah. Coba lagi, atau periksa apakah modem menjawab.",
+      "retry": "Coba lagi",
+      "card_unread": "Modem belum menjawab, jadi tidak ada yang dapat diubah sampai pembacaan pertama masuk.",
+      "mac_invalid": "Masukkan alamat MAC lengkap, enam pasang digit heksadesimal.",
+      "no_changes": "Belum ada yang berubah.",
+      "device_unpicked": "Pilih perangkat terhubung terlebih dahulu."
+    },
+    "device": {
+      "label": "Perangkat target dari daftar perangkat terhubung",
+      "placeholder": "Pilih Perangkat",
+      "scanning": "Memindai perangkat terhubung…",
+      "error": "Gagal memuat daftar perangkat terhubung.",
+      "empty": "Tidak ada perangkat terhubung yang ditemukan. Hubungkan perangkat ke modem, lalu pindai ulang.",
+      "retry": "Coba lagi",
+      "rescan": "Pindai Ulang",
+      "rescan_label": "Pindai ulang perangkat terhubung",
+      "enter_manually": "Masukkan secara manual",
+      "unknown": "Perangkat tidak dikenal"
+    },
+    "locked_by_verizon": {
+      "title": "IP Passthrough dikelola oleh profil Verizon Anda",
+      "body": "Profil aktif: \"{{name}}\". Untuk mengubah pengaturan ini, nonaktifkan profil dari Profil Kustom.",
+      "cta": "Buka Profil Kustom",
+      "blocked": "Profil Verizon Anda mengelola IP Passthrough."
+    }
+  },
+  "masquerade": {
+    "page_title": "Traffic Masquerade",
+    "page_description": "Buat semua lalu lintas HTTPS tampak sebagai layanan yang masuk whitelist untuk DPI operator",
+    "card_title": "Traffic Masquerade",
+    "card_description": "Buat lalu lintas HTTPS tampak sebagai layanan yang masuk whitelist untuk DPI operator.",
+    "error_load_failed": "Gagal memuat pengaturan.",
+    "label_enable": "Aktifkan Traffic Masquerade",
+    "label_domain": "Domain Masquerade",
+    "placeholder_domain": "speedtest.net",
+    "helper_domain": "Domain yang tampil dalam handshake TLS palsu yang dikirim ke operator.",
+    "help_domain": "Operator membaca SNI — nama server yang dikirim tanpa enkripsi di setiap handshake TLS — untuk menentukan apa yang dibatasi. Masquerade menulis ulangnya menjadi domain ini agar trafik Anda tampak seperti layanan tersebut.",
+    "aria_domain_info": "Informasi lebih lanjut tentang domain masquerade",
+    "test_hint": "Lolos berarti handshake HTTPS Anda membawa nama palsu, sehingga operator melihat domain ini, bukan yang asli.",
+    "aria_test_hint": "Arti uji injeksi yang lolos",
+    "toast_success_enabled": "Traffic Masquerade diaktifkan",
+    "toast_success_disabled": "Traffic Masquerade dinonaktifkan",
+    "toast_error_apply": "Gagal menyimpan pengaturan",
+    "test_title": "Uji Injeksi",
+    "test_description": "Konfirmasi bahwa paket SNI palsu sedang disuntikkan ke lalu lintas HTTPS",
+    "state_testing": "Menguji",
+    "button_run_test": "Jalankan Uji",
+    "errors": {
+      "load_failed": "Gagal memuat pengaturan",
+      "save_failed": "Gagal menyimpan pengaturan",
+      "uninstall_failed": "Gagal mencopot",
+      "test_failed": "Pengujian gagal"
+    }
+  },
+  "video_optimizer": {
+    "page_title": "Video Optimizer",
+    "page_description": "Bypass throttling video operator menggunakan DPI evasion pada hostname CDN video yang ditargetkan",
+    "card_title": "Video Optimizer",
+    "card_description": "Bypass throttling video operator pada koneksi seluler menggunakan DPI evasion.",
+    "error_load_failed": "Gagal memuat pengaturan.",
+    "label_enable": "Aktifkan Video Optimizer",
+    "label_desync_repeats": "Kekuatan Desync",
+    "help_desync_repeats": "Jumlah pengiriman paket pengelak DPI untuk setiap aliran yang cocok. Nilai lebih tinggi meningkatkan keandalan saat paket hilang atau diurutkan ulang, tetapi meningkatkan penggunaan CPU dan bandwidth upstream. Default 1 cocok untuk sebagian besar pengguna.",
+    "helper_desync_repeats": "Nilai lebih tinggi melawan DPI yang lebih ketat tetapi menambah sedikit beban. Nilai 1 cocok untuk sebagian besar jaringan.",
+    "verify_hint": "Lolos berarti mesin mencegat trafik ke domain daftar host Anda dan menerapkan pengelakan DPI.",
+    "aria_verify_hint": "Arti verifikasi yang lolos",
+    "aria_desync_repeats_info": "Info lebih lanjut tentang Kekuatan Desync",
+    "toast_success_enabled": "Video Optimizer diaktifkan",
+    "toast_success_disabled": "Video Optimizer dinonaktifkan",
+    "toast_error_apply": "Gagal menyimpan pengaturan",
+    "verify_title": "Verifikasi Layanan",
+    "verify_description": "Konfirmasi bahwa DPI evasion sedang mencegat lalu lintas untuk domain yang masuk daftar host",
+    "state_verifying": "Memverifikasi",
+    "button_verify_service": "Verifikasi Layanan",
+    "hostlist_card_title": "Daftar Hostname CDN",
+    "hostlist_card_description": "Domain CDN video yang ditangani Video Optimizer.",
+    "hostlist_error_load_failed": "Gagal memuat daftar hostname.",
+    "aria_sort_az": "Urutkan A ke Z",
+    "aria_sort_za": "Urutkan Z ke A",
+    "aria_sort_clear": "Hapus urutan",
+    "aria_menu_options": "Opsi daftar host",
+    "menu_export": "Ekspor daftar",
+    "menu_import": "Impor daftar",
+    "placeholder_new_domain": "contoh: cdn.example.com",
+    "aria_new_domain": "Domain baru",
+    "aria_add_domain": "Tambah domain",
+    "empty_state_no_domains": "Tidak ada domain yang dikonfigurasi",
+    "aria_custom_domain_badge": "Domain kustom",
+    "aria_remove_domain": "Hapus {{domain}}",
+    "toast_save_success": "Daftar hostname tersimpan",
+    "toast_save_error": "Gagal menyimpan daftar hostname",
+    "toast_restore_success": "Hostname default berhasil dipulihkan",
+    "toast_restore_error": "Gagal memulihkan default",
+    "toast_export_success_one": "{{count}} domain diekspor",
+    "toast_export_success_other": "{{count}} domain diekspor",
+    "toast_import_no_new": "Tidak ada domain baru untuk diimpor — semua sudah ada di daftar",
+    "toast_import_success_one": "{{count}} domain baru diimpor",
+    "toast_import_success_other": "{{count}} domain baru diimpor",
+    "button_restore_defaults": "Pulihkan Default",
+    "state_restoring": "Memulihkan",
+    "dialog_restore_title": "Pulihkan Hostname Default?",
+    "dialog_restore_desc": "Ini akan mengganti daftar saat ini dengan hostname CDN default pabrik. Domain kustom yang Anda tambahkan akan dihapus.",
+    "dialog_action_restore": "Pulihkan Default",
+    "errors": {
+      "load_failed": "Gagal memuat pengaturan",
+      "save_failed": "Gagal menyimpan pengaturan",
+      "uninstall_failed": "Gagal mencopot",
+      "verify_start_failed": "Gagal memulai verifikasi",
+      "install_start_failed": "Gagal memulai instalasi",
+      "install_starting": "Memulai instalasi…",
+      "hostlist_load_failed": "Gagal memuat daftar hostname",
+      "hostlist_save_failed": "Gagal menyimpan daftar hostname",
+      "hostlist_restore_failed": "Gagal memulihkan default"
+    }
+  }
+}

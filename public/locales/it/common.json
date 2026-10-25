@@ -1,0 +1,712 @@
+{
+  "actions": {
+    "save": "Salva",
+    "saving": "Salvataggio…",
+    "saved": "Salvato!",
+    "save_settings": "Salva impostazioni",
+    "cancel": "Annulla",
+    "confirm": "Conferma",
+    "apply": "Applica",
+    "close": "Chiudi",
+    "retry": "Riprova",
+    "reboot": "Riavvia",
+    "log_out": "Esci",
+    "reboot_device": "Riavvia il dispositivo",
+    "reconnect_modem": "Riconnetti modem",
+    "change_display_name": "Modifica nome visualizzato",
+    "change_password": "Cambia password",
+    "toggle_theme": "Cambia tema",
+    "discard": "Annulla modifiche"
+  },
+  "motion": {
+    "label": "Animazioni",
+    "system": "Sistema",
+    "full": "Complete",
+    "reduced": "Ridotte"
+  },
+  "account": {
+    "photo_invalid": "Seleziona un file immagine.",
+    "photo_updated": "Foto profilo aggiornata.",
+    "change_photo_aria": "Cambia foto profilo",
+    "name_placeholder": "Il tuo nome",
+    "name_saved": "Nome visualizzato aggiornato.",
+    "name_save_failed": "Impossibile aggiornare il nome visualizzato.",
+    "reconnect_description": "Il modem verrà disconnesso per alcuni secondi, poi si riconnetterà automaticamente.",
+    "disconnecting_description": "Disconnessione del modem dalla rete…",
+    "reconnecting_description": "Riconnessione del modem alla rete…",
+    "reconnect_action": "Riconnetti",
+    "reconnect_complete": "Modem riconnesso.",
+    "reconnect_failed": "Impossibile riconnettere il modem.",
+    "reboot_description": "Il dispositivo si riavvierà e tutte le connessioni di rete cadranno finché non torna online.",
+    "reboot_sent": "Comando di riavvio inviato. Verrai disconnesso a breve…",
+    "reboot_now": "Riavvia ora"
+  },
+  "state": {
+    "loading": "Caricamento…",
+    "saving": "Salvataggio…",
+    "applying": "Applicazione…",
+    "disconnecting": "Disconnessione…",
+    "reconnecting": "Riconnessione…",
+    "installing": "Installazione…",
+    "removing": "Rimozione…",
+    "enabled": "Abilita",
+    "disabled": "Disabilita",
+    "on": "Attivo",
+    "off": "Disattivo"
+  },
+  "connection": {
+    "reconnecting": "Connessione al dispositivo persa. Riconnessione…"
+  },
+  "time": {
+    "just_now": "Proprio adesso",
+    "now": "Ora",
+    "unknown": "Sconosciuto",
+    "minutes_ago_one": "{{count}}m fa",
+    "minutes_ago_other": "{{count}}m fa",
+    "hours_ago_one": "{{count}}h fa",
+    "hours_ago_other": "{{count}}h fa",
+    "days_ago_one": "{{count}}d fa",
+    "days_ago_other": "{{count}}d fa"
+  },
+  "language": {
+    "label": "Lingua",
+    "switch_aria": "Cambia lingua"
+  },
+  "login": {
+    "brand_label": "Console operatore QManager",
+    "welcome": "Benvenuto in QManager",
+    "password_label": "Password",
+    "submit": "Accedi",
+    "signing_in": "Accesso in corso…",
+    "locked_countdown": "Bloccato ({{seconds}})",
+    "show_password": "Mostra password",
+    "hide_password": "Nascondi password",
+    "session_expired": "Il dispositivo è stato irraggiungibile troppo a lungo. Accedi di nuovo per continuare.",
+    "session_expired_title": "Sessione terminata",
+    "signing_in_to": "Accesso a {{hostname}}",
+    "signing_in_as": "Accedi come {{hostname}}",
+    "recovery": {
+      "toggle": "Non riesci ad accedere?",
+      "intro": "Se hai perso la password di amministratore, hai due opzioni di ripristino:",
+      "option_reset_command": "Apri una sessione SSH sul dispositivo ed esegui {{command}} per impostare una nuova password di amministratore. (Richiede l'accesso SSH già abilitato.)",
+      "option_backup": "Se hai salvato un file .qmbackup, riprogramma il firmware del dispositivo e ripristina da quel file."
+    },
+    "attempts_left_one": "Password errata. {{count}} tentativo rimasto.",
+    "attempts_left_other": "Password errata. {{count}} tentativi rimasti.",
+    "invalid_password": "Password errata.",
+    "locked_body": "Bloccato per {{seconds}} per proteggere il dispositivo.",
+    "locked_title": "Troppi tentativi",
+    "lockout_seconds": "{{seconds}} s",
+    "sign_in_to_label": "Accedi a"
+  },
+  "overview": {
+    "title": "Panoramica modem",
+    "tagline": "Stato del modem in tempo reale",
+    "login_button": "Accedi",
+    "header": {
+      "carrier": "Operatore",
+      "network": "Rete",
+      "bands": "Larghezza di banda"
+    },
+    "status": {
+      "overall": "Generale",
+      "connectivity": "Internet",
+      "temperature": "Temperatura"
+    },
+    "actions": {
+      "login": "Accedi per gestire",
+      "luci": "LuCI",
+      "luci_aria": "Apri l'interfaccia avanzata LuCI",
+      "theme_toggle_aria": "Cambia tema",
+      "theme_light": "Chiaro",
+      "theme_dark": "Scuro",
+      "theme_system": "Sistema"
+    },
+    "field": {
+      "carrier": "Operatore",
+      "aggregation": "Bande",
+      "uptime": "Tempo di attività",
+      "temperature": "Temp",
+      "temp_warn": "Surriscaldamento lieve",
+      "temp_danger": "Surriscaldamento",
+      "empty": "—"
+    },
+    "aggregation": {
+      "band_with_bw": "{{band}} ({{bandwidth}} MHz)",
+      "band_only": "{{band}}",
+      "pci_label": "PCI"
+    },
+    "bands": {
+      "toggle_multi_band": "Bande attive",
+      "toggle_single_band": "Operatore singolo",
+      "section": "Bande",
+      "count_one": "{{count}} attiva",
+      "count_other": "{{count}} attive",
+      "bandwidth": "{{bandwidth}} MHz",
+      "rsrp_unit": "{{rsrp}} dBm",
+      "section_count_one": "Portante",
+      "section_count_other": "Portanti"
+    },
+    "metrics": {
+      "rsrp": "RSRP",
+      "rsrq": "RSRQ",
+      "sinr": "SINR",
+      "rsrp_value": "{{rsrp}} dBm",
+      "rsrq_value": "{{rsrq}} dB",
+      "sinr_value": "{{sinr}} dB",
+      "toggle_aria": "Cambia metrica del segnale della banda"
+    },
+    "signal": {
+      "dual": "{{rsrp}} dBm · {{sinr}} dB SINR",
+      "rsrp_only": "{{rsrp}} dBm",
+      "sinr_only": "{{sinr}} dB SINR",
+      "none": "—"
+    },
+    "quality": {
+      "overall_label": "Generale",
+      "excellent": "Eccellente",
+      "good": "Buono",
+      "fair": "Discreto",
+      "poor": "Scarso",
+      "none": "Nessun segnale",
+      "bad": "Molto debole"
+    },
+    "connection": {
+      "connected": "Connesso",
+      "searching": "Ricerca in corso",
+      "limited": "Limitato",
+      "inactive": "Inattivo",
+      "error": "Errore",
+      "disconnected": "Disconnesso",
+      "unknown": "Sconosciuto",
+      "modem_unreachable": "Offline"
+    },
+    "stale_indicator": "I dati potrebbero non essere aggiornati",
+    "redirecting_setup": "Reindirizzamento alla configurazione iniziale…",
+    "loading_status": "Caricamento dello stato del modem…",
+    "empty": {
+      "title": "Stato del modem non disponibile",
+      "subtitle": "Il modem non risponde da un minuto. Potrebbe essere in riavvio — la lettura riprende da sola.",
+      "fetch_error": "Impossibile raggiungere il dispositivo.",
+      "retry": "Riprova"
+    },
+    "uptime": {
+      "days": "{{days}}g {{hours}}h",
+      "hours": "{{hours}}h {{minutes}}m",
+      "minutes": "{{minutes}}m"
+    },
+    "copyright": "© {{year}} QManager",
+    "stale": {
+      "banner": "Le letture risalgono a <age>{{age}}</age> fa. Il dispositivo potrebbe essere occupato."
+    },
+    "footer": {
+      "updated_ago": "aggiornato {{age}} fa",
+      "retrying": "nuovo tentativo ogni {{seconds}}s",
+      "signin_works": "l'accesso funziona comunque"
+    },
+    "loading_chip": "Lettura",
+    "unreachable": {
+      "banner": "Il modem non risponde in questo momento. Potrebbe essere occupato o in fase di riavvio."
+    }
+  },
+  "networkEvents": {
+    "page": {
+      "title": "Eventi di rete",
+      "description": "Modifiche alla radio e alla connessione, dalle più recenti."
+    },
+    "actions": {
+      "refresh": "Aggiorna",
+      "updates_aria": "Aggiornamenti",
+      "live": "In diretta",
+      "paused": "In pausa"
+    },
+    "now": {
+      "title": "Adesso",
+      "description": "Cosa è ancora in corso e cosa continua a ripetersi.",
+      "ongoing_one": "{{count}} problema in corso",
+      "ongoing_other": "{{count}} problemi in corso",
+      "oldest_started": "Il più vecchio è iniziato {{age}}",
+      "clear": "Nessun problema in corso",
+      "last_problem": "Ultimo problema {{age}}",
+      "no_problems": "Nessun problema registrato",
+      "no_events": "Nessun evento ancora registrato",
+      "repeating": "Ripetuti",
+      "repeat_meta_one": "{{count}} cambio in {{span}}",
+      "repeat_meta_other": "{{count}} cambi in {{span}}",
+      "nothing_repeating": "Nulla si sta ripetendo."
+    },
+    "activity": {
+      "title": "Attività",
+      "window_last_one": "Ultimo {{count}} evento, in {{span}}.",
+      "window_last_other": "Ultimi {{count}} eventi, in {{span}}.",
+      "window_all_one": "{{count}} evento dall'avvio del modem.",
+      "window_all_other": "Tutti i {{count}} eventi dall'avvio del modem.",
+      "window_empty": "Nessun evento dall'avvio del modem.",
+      "chart_aria": "Eventi nel tempo",
+      "column_one": "Da {{from}} a {{to}}: {{count}} evento",
+      "column_other": "Da {{from}} a {{to}}: {{count}} eventi",
+      "now": "Ora",
+      "problems": "Problemi",
+      "recoveries": "Ripristini",
+      "routine": "Ordinari"
+    },
+    "span": {
+      "minutes_one": "{{count}} minuto",
+      "minutes_other": "{{count}} minuti",
+      "hours_one": "{{count}} ora",
+      "hours_other": "{{count}} ore"
+    },
+    "log": {
+      "title": "Registro eventi",
+      "description_loading": "Caricamento degli eventi.",
+      "description_unreadable": "Nessun conteggio da mostrare finché il registro non è leggibile.",
+      "description": "Le ripetizioni sono raggruppate; aprine una per vedere ogni evento.",
+      "scroll_aria": "Eventi"
+    },
+    "run": {
+      "title": "{{label}} continuava a cambiare",
+      "meta_one": "{{count}} evento in {{span}}",
+      "meta_other": "{{count}} eventi in {{span}}",
+      "show": "Mostra {{count}}",
+      "hide": "Nascondi"
+    },
+    "filters": {
+      "all": "Tutti",
+      "radio": "Radio",
+      "connectivity": "Connettività",
+      "mode": "Modalità"
+    },
+    "sort": {
+      "label": "Ordina",
+      "newest": "Prima i più recenti",
+      "oldest": "Prima i meno recenti"
+    },
+    "row": {
+      "ongoing": "In corso"
+    },
+    "day": {
+      "today": "Oggi",
+      "yesterday": "Ieri"
+    },
+    "empty": {
+      "title": "Nessun evento",
+      "description": "Il registro ricomincia quando il modem si riavvia. Gli eventi compaiono qui man mano che accadono.",
+      "filtered_title": "Nulla in questa vista",
+      "filtered_description": "Al momento nel registro non ci sono eventi di questo tipo."
+    },
+    "error": {
+      "title": "Impossibile caricare gli eventi",
+      "description": "{{message}}",
+      "retry": "Riprova"
+    },
+    "notice": {
+      "stale": "Mostriamo gli ultimi eventi che siamo riusciti a leggere. {{message}}"
+    }
+  },
+  "aboutDevice": {
+    "page": {
+      "title": "Informazioni dispositivo",
+      "description": "Identità del dispositivo, indirizzi e software in esecuzione."
+    },
+    "actions": {
+      "refresh": "Aggiorna",
+      "refreshing": "Aggiornamento…",
+      "retry": "Riprova"
+    },
+    "band": {
+      "label": "Identità",
+      "not_responding": "Non risponde",
+      "unreachable": {
+        "title": "Il dispositivo non ha risposto",
+        "detail": "{{reason}} da {{endpoint}}. Nessun dato è stato letto.",
+        "no_reason": "Nessuna risposta"
+      }
+    },
+    "tiles": {
+      "model": {
+        "eyebrow": "MODELLO"
+      },
+      "firmware": {
+        "eyebrow": "FIRMWARE MODEM",
+        "caption": "Compilato il {{date}}"
+      },
+      "host": {
+        "eyebrow": "SISTEMA HOST",
+        "caption": "Linux {{kernel}}"
+      },
+      "internet": {
+        "eyebrow": "INTERNET",
+        "reachable": "Raggiungibile",
+        "not_reachable": "Non raggiungibile",
+        "not_measured": "Non misurato",
+        "caption_reachable": "{{family}} risponde",
+        "caption_reachable_latency": "{{family}} risponde ({{latency}} ms)",
+        "caption_reachable_plain": "La sonda ping risponde",
+        "caption_unreachable": "Nessuna risposta dalla sonda ping",
+        "caption_unknown": "Nessuna sonda attiva"
+      }
+    },
+    "modem": {
+      "title": "Modem",
+      "description": "Identità hardware e release 3GPP implementata da ciascuna radio."
+    },
+    "addresses": {
+      "title": "Indirizzi",
+      "description": "Dove si colloca questo dispositivo sulla LAN e sulla rete dell’operatore.",
+      "provenance": "Gli indirizzi pubblici sono risolti tramite {{probe}}. Una lineetta indica che il dispositivo non ne riporta alcuno."
+    },
+    "groups": {
+      "three_gpp": "Release 3GPP",
+      "local": "Locale",
+      "wwan": "WWAN",
+      "public": "Pubblico"
+    },
+    "rows": {
+      "manufacturer": "Produttore",
+      "model": "Modello",
+      "firmware": "Firmware",
+      "openwrt_version": "Versione OpenWrt",
+      "build_date": "Data di build",
+      "imei": "IMEI",
+      "lte": "LTE",
+      "nr5g": "NR5G",
+      "device_ip": "IP dispositivo",
+      "lan_subnet": "Subnet LAN",
+      "ipv4": "IPv4",
+      "ipv6": "IPv6"
+    },
+    "empty": {
+      "title": "Nessun dato letto",
+      "modem": "Questi valori provengono dal dispositivo, che non ha risposto.",
+      "addresses": "Gli indirizzi vengono letti dalla stessa richiesta."
+    },
+    "qmanager": {
+      "title": "Informazioni su QManager",
+      "note": "Ciao! Sono Rus. QManager è l’ultima evoluzione di QuecManager, costruita con un approccio più moderno e affidabile rispetto al suo predecessore — pur continuando a unire impostazioni tecniche per utenti esperti a un’interfaccia semplice per chi inizia. Un ringraziamento speciale a iamromulan, clndwhr e Wutang Clan!",
+      "copyright": "© {{year}} QManager. Tutti i diritti riservati.",
+      "repository": "Repository GitHub",
+      "release_notes": "Note di rilascio",
+      "credits": "Crediti",
+      "support": "Sostieni il progetto"
+    },
+    "credits": {
+      "title": "Crediti",
+      "description": "QManager si appoggia a alcuni servizi esterni e a dati aperti. Grazie a tutti coloro che li rendono possibili.",
+      "roles": {
+        "apn": "Preset APN degli operatori",
+        "logos": "Loghi dei brand per mittenti SMS e siti monitorati",
+        "icons": "Icone dei siti quando non si trova un logo"
+      }
+    },
+    "errors": {
+      "fetch_failed": "Impossibile leggere le informazioni del dispositivo"
+    }
+  },
+  "support": {
+    "page": {
+      "title": "Supporto",
+      "description": "Segnala un bug, chiedi alla community o contatta il manutentore."
+    },
+    "help": {
+      "title": "Ottieni aiuto",
+      "description": "Quattro percorsi, nell’ordine in cui servono più spesso.",
+      "bug": {
+        "label": "Segnala un bug"
+      },
+      "community": {
+        "label": "Chiedi alla community"
+      },
+      "email": {
+        "label": "Scrivi al manutentore"
+      },
+      "release_notes": {
+        "label": "Leggi le note di rilascio",
+        "dest": "Installata: {{version}}"
+      }
+    },
+    "community": {
+      "title": "Community",
+      "description": "Gli utenti condividono configurazioni, risolvono problemi insieme e parlano di reti cellulari. Scansiona o apri l’invito.",
+      "open_invite": "Apri l’invito",
+      "qr_alt": "Codice QR per l’invito al server Discord di QManager"
+    },
+    "opens_new_tab": "si apre in una nuova scheda"
+  },
+  "donate": {
+    "dialog": {
+      "title": "Sostieni il progetto",
+      "description": "Aiuta QManager ad andare avanti.",
+      "body": "Ciao, sono Rus. QManager è un progetto personale che mantengo gratuitamente. Se ti è stato utile, anche un piccolo contributo significa molto e mi permette di continuare.",
+      "thanks": "Grazie di cuore. 💙"
+    },
+    "links": {
+      "group_label": "Canali di donazione",
+      "opens_new_tab": "si apre in una nuova scheda"
+    },
+    "band": {
+      "title": "Sostieni il progetto",
+      "body": "QManager è un progetto personale, mantenuto gratuitamente. Se ti è stato utile, un contributo lo tiene in vita — e in ogni caso non arriverà alcun paywall."
+    }
+  },
+  "tailscale": {
+    "actions": {
+      "cancel": "Annulla",
+      "retry": "Riprova"
+    },
+    "page": {
+      "title": "Tailscale VPN",
+      "description": "La tua mesh VPN: cosa fa questo modem sulla tailnet, e chi altro c'è.",
+      "refresh": "Aggiorna",
+      "stale": "Mostriamo l'ultimo stato che siamo riusciti a leggere. {{message}}",
+      "unreadableTitle": "Impossibile leggere lo stato di Tailscale",
+      "unreadable": "Il dispositivo non ha risposto."
+    },
+    "status": {
+      "aria": "Stato di Tailscale",
+      "running": "Connesso",
+      "needsLogin": "Richiede accesso",
+      "disconnected": "Disconnesso",
+      "serviceStopped": "Servizio fermo",
+      "notInstalled": "Non installato",
+      "unknown": "Sconosciuto"
+    },
+    "band": {
+      "dash": "—",
+      "connectionEyebrow": "Connessione",
+      "version": "Versione {{version}}",
+      "versionUnknown": "Versione sconosciuta",
+      "deviceEyebrow": "Questo dispositivo",
+      "deviceUnknown": "Ancora nessun indirizzo tailnet",
+      "tailnetEyebrow": "Tailnet",
+      "magicDnsOn": "MagicDNS è attivo",
+      "magicDnsOff": "MagicDNS è disattivo",
+      "peersEyebrow": "Peer online",
+      "exitNodes_one": "{{count}} nodo di uscita",
+      "exitNodes_other": "{{count}} nodi di uscita",
+      "noExitNode": "Nessun nodo di uscita"
+    },
+    "connection": {
+      "title": "Connessione",
+      "description": "Se questo modem si unisce alla tailnet, e come si comporta una volta fatto.",
+      "version": "v{{version}}",
+      "connect": "Connetti",
+      "connecting": "Connessione…",
+      "disconnect": "Disconnetti",
+      "disconnecting": "Disconnessione…",
+      "startService": "Avvia servizio",
+      "starting": "Avvio…",
+      "stopService": "Ferma servizio",
+      "stopping": "Arresto…",
+      "logout": "Esci",
+      "logoutDialogTitle": "Uscire da Tailscale?",
+      "logoutDialogDescription": "Questo rimuove il modem dalla tua tailnet. Dovrai accedere di nuovo prima che possa riconnettersi.",
+      "authTitle": "Accedi per completare la connessione",
+      "authDescription": "Apri la pagina di accesso e autenticati con il tuo account Tailscale. Il modem si unisce alla tailnet non appena lo approvi.",
+      "openLogin": "Apri la pagina di accesso",
+      "authWaiting": "In attesa del tuo accesso",
+      "bootTitle": "Avvia all'accensione",
+      "bootDescription": "Avvia Tailscale automaticamente dopo il riavvio del modem.",
+      "on": "Attivo",
+      "off": "Spento",
+      "exitNodeTitle": "Annuncia come exit node",
+      "exitNodeDescription": "Consente ad altri dispositivi di instradare il loro traffico Internet attraverso questo modem. Lo approvi nella console di amministrazione di Tailscale.",
+      "exitNodeLocked": "Connettiti a Tailscale per modificarlo.",
+      "sshTitle": "Tailscale SSH",
+      "sshDescription": "Consenti ai membri della tailnet di aprire una sessione SSH su questo modem, secondo le tue ACL del pannello admin.",
+      "sshLocked": "Connettiti a Tailscale per cambiare questa impostazione.",
+      "sshDialogTitle": "Attivare Tailscale SSH?",
+      "sshDialogDescription": "I membri della tailnet potranno collegarsi via SSH a questo modem in base alle ACL del tuo pannello admin Tailscale. Controlla prima quella policy, così solo le persone che intendi possono raggiungere il dispositivo.",
+      "sshConfirm": "Attiva SSH",
+      "updateAvailable": "Aggiornamento disponibile ({{version}})",
+      "update": "Aggiorna",
+      "updating": "Aggiornamento…",
+      "updateDialogTitle": "Aggiornare Tailscale alla versione {{version}}?",
+      "updateDialogDescription": "Il tunnel si riconnette per qualche secondo mentre si avvia la nuova versione.",
+      "updateLogTitle": "Registro dell'aggiornamento",
+      "communityBuild": "Versione community",
+      "netFixesTitle": "Correzioni di rete",
+      "netFixesDescription": "Permette ai dispositivi della tua tailnet di raggiungere questo modem e la sua LAN."
+    },
+    "device": {
+      "title": "Questo dispositivo",
+      "description": "Come il modem si identifica sulla tailnet.",
+      "hostname": "Hostname",
+      "ipv4": "IPv4",
+      "ipv6": "IPv6",
+      "dnsName": "Nome DNS",
+      "tailnet": "Tailnet",
+      "magicDns": "MagicDNS",
+      "relay": "Relay DERP",
+      "version": "Versione",
+      "emptyTitle": "Non sulla tailnet",
+      "emptyDescription": "Connetti Tailscale e qui compariranno l'indirizzo, il nome DNS e il relay di questo modem."
+    },
+    "peers": {
+      "title": "Peer di rete",
+      "description": "Gli altri dispositivi sulla tua tailnet, e se sono raggiungibili.",
+      "dash": "—",
+      "unnamed": "Dispositivo senza nome",
+      "exitNode": "Nodo di uscita",
+      "colDevice": "Dispositivo",
+      "colAddress": "Indirizzo",
+      "colOs": "SO",
+      "colStatus": "Stato",
+      "colLastSeen": "Ultimo accesso",
+      "online": "Online",
+      "offline": "Offline",
+      "seenNow": "Ora",
+      "seenUnknown": "Sconosciuto",
+      "seenJustNow": "Proprio adesso",
+      "seenMinutes": "{{n}} min fa",
+      "seenHours": "{{n}} h fa",
+      "seenDays": "{{n}} d fa",
+      "countOnline": "{{online}} di {{total}} online",
+      "countExitNodes_one": "{{count}} nodo di uscita",
+      "countExitNodes_other": "{{count}} nodi di uscita",
+      "errorTitle": "Impossibile caricare i peer",
+      "emptyTitle": "Nessun altro dispositivo",
+      "emptyDescription": "Nessun altro si è ancora unito a questa tailnet. Aggiungi un dispositivo dalla console admin di Tailscale e comparirà qui.",
+      "offlineTitle": "Non connesso",
+      "offlineDescription": "Connetti Tailscale per vedere gli altri dispositivi sulla tua tailnet."
+    },
+    "install": {
+      "title": "Tailscale",
+      "description": "Installa la versione ufficiale di Tailscale, una mesh VPN per raggiungere questo modem da ovunque, senza aprire una porta.",
+      "conditionTitle": "Tailscale non è installato",
+      "conditionDescription": "L'installazione scarica i pacchetti Tailscale sulla stessa connessione cellulare su cui gira questa sessione, quindi consuma il tuo traffico dati e la connessione sarà più lenta durante l'operazione.",
+      "install": "Installa Tailscale",
+      "installing": "Installazione…",
+      "checkAgain": "Controlla di nuovo",
+      "done": "Tailscale installato.",
+      "failed": "L'installazione non è andata a buon fine.",
+      "logTitle": "Log di installazione",
+      "logWaiting": "In attesa di output…"
+    },
+    "danger": {
+      "uninstall": "Disinstalla",
+      "removing": "Rimozione…",
+      "dialogTitle": "Disinstallare Tailscale?",
+      "dialogDescription": "Questo rimuove i pacchetti Tailscale, le sue regole firewall e tutto lo stato di connessione da questo modem. Un riavvio successivo elimina ciò che resta.",
+      "rebootTitle": "Riavvio consigliato",
+      "rebootDescription": "Tailscale è stato rimosso. Riavviare elimina le regole firewall residue e altri artefatti. Riavviare ora?",
+      "rebootLater": "Riavvia più tardi",
+      "rebootNow": "Riavvia ora",
+      "rebooting": "Riavvio…"
+    },
+    "toast": {
+      "bootEnabled": "Tailscale si avvierà all'accensione",
+      "bootDisabled": "Tailscale non si avvierà all'accensione",
+      "bootFailed": "Impossibile cambiare l'impostazione di avvio",
+      "connected": "Connessione a Tailscale in corso",
+      "connectFailed": "Impossibile avviare la connessione",
+      "disconnected": "Tailscale disconnesso",
+      "disconnectFailed": "Impossibile disconnettersi",
+      "loggedOut": "Uscito da Tailscale",
+      "logoutFailed": "Impossibile uscire",
+      "serviceStarted": "Servizio Tailscale avviato",
+      "serviceStartFailed": "Impossibile avviare il servizio Tailscale",
+      "serviceStopped": "Servizio Tailscale fermato",
+      "serviceStopFailed": "Impossibile fermare il servizio Tailscale",
+      "uninstalled": "Tailscale disinstallato",
+      "uninstallFailed": "Impossibile disinstallare Tailscale",
+      "exitNodeEnabled": "Annuncio come exit node attivo",
+      "exitNodeDisabled": "Annuncio come exit node disattivato",
+      "exitNodeFailed": "Impossibile modificare l'annuncio come exit node",
+      "sshEnabled": "Tailscale SSH è attivo",
+      "sshEnableFailed": "Impossibile attivare Tailscale SSH",
+      "sshDisabled": "Tailscale SSH è disattivo",
+      "sshDisableFailed": "Impossibile disattivare Tailscale SSH",
+      "installed": "Tailscale installato",
+      "installFailed": "L'installazione di Tailscale non è stata completata",
+      "updated": "Tailscale aggiornato alla versione {{version}}",
+      "updateFailed": "Impossibile aggiornare Tailscale",
+      "netFixesOn": "Correzioni di rete attivate",
+      "netFixesOff": "Correzioni di rete disattivate",
+      "netFixesFailed": "Impossibile modificare le correzioni di rete"
+    },
+    "mutex": {
+      "title": "È installata un'altra VPN",
+      "description": "È possibile installare una sola VPN alla volta. Disinstalla prima {{other_vpn}} dalla pagina <link>NetBird</link>."
+    },
+    "legacy": {
+      "title": "Versione community precedente",
+      "description": "Questo modem usa la versione community precedente di Tailscale. Disinstallala e installala di nuovo per passare alla versione ufficiale."
+    }
+  },
+  "pending_reboot": {
+    "title": "Riavvia per completare le modifiche",
+    "reboot_now": "Riavvia ora",
+    "rebooting": "Riavvio…",
+    "dismiss": "Ignora",
+    "reboot_failed_toast": "Impossibile avviare il riavvio. Riprova.",
+    "description": {
+      "config_restore": "Una modifica IMEI o un profilo SIM del ripristino avrà effetto dopo il prossimo riavvio.",
+      "verizon_revert": "Il ripristino del profilo Verizon si completa dopo il prossimo riavvio.",
+      "imei": "Il nuovo IMEI avrà effetto dopo il prossimo riavvio.",
+      "netbird": "NetBird è stato rimosso. Il riavvio elimina le regole del firewall residue.",
+      "mbn": "Il nuovo profilo dell'operatore entra in vigore dopo il riavvio del modem.",
+      "ipa_offload": "La modifica all'offload hardware avrà effetto dopo il prossimo riavvio.",
+      "default": "Alcune modifiche avranno effetto dopo il prossimo riavvio."
+    },
+    "dismiss_dialog": {
+      "title": "Ignorare il promemoria di riavvio?",
+      "description": "Le modifiche che richiedono un riavvio restano inattive finché il modem non si riavvia. Ignora solo se hai già riavviato.",
+      "keep": "Mantieni promemoria",
+      "confirm": "Ignora"
+    }
+  },
+  "reboot_page": {
+    "phase": {
+      "shutting_down": "Spegnimento…",
+      "restarting": "Riavvio dei servizi…",
+      "almost_ready": "Quasi pronto…",
+      "overtime": "Ci vuole più del solito…"
+    },
+    "subtitle": {
+      "normal": "Il dispositivo tornerà online a breve",
+      "overtime": "Il dispositivo si sta ancora riavviando"
+    },
+    "timer_aria_one": "{{count}} secondo rimanente",
+    "timer_aria_other": "{{count}} secondi rimanenti",
+    "timer_overtime_aria": "Riconnessione in corso, ci vuole più del solito",
+    "seconds_unit": "sec",
+    "escape": "Il dispositivo potrebbe richiedere un intervento manuale. Vai all'accesso"
+  },
+  "change_password": {
+    "title": "Cambia password",
+    "description": "Dopo aver cambiato la password verrai disconnesso.",
+    "current_label": "Password attuale",
+    "new_label": "Nuova password",
+    "confirm_label": "Conferma nuova password",
+    "match": "Le password coincidono",
+    "mismatch": "Le password non coincidono",
+    "error_weak": "La nuova password deve contenere almeno 5 caratteri.",
+    "error_weak_strong": "La nuova password deve contenere almeno 5 caratteri e includere maiuscole, minuscole e un numero.",
+    "error_mismatch": "Le nuove password non coincidono.",
+    "failed_toast": "Impossibile cambiare la password. Riprova.",
+    "cancel": "Annulla",
+    "submit": "Cambia password",
+    "submitting": "Modifica in corso…"
+  },
+  "password_rules": {
+    "requirements_label": "Requisiti della password",
+    "rule": {
+      "length": "Almeno 5 caratteri",
+      "uppercase": "Lettera maiuscola",
+      "lowercase": "Lettera minuscola",
+      "number": "Numero"
+    },
+    "met": "(soddisfatto)",
+    "not_met": "(non soddisfatto)",
+    "strong_label": "Usa password sicura",
+    "strong_hint_label": "Informazioni sulle password sicure",
+    "strong_hint": "Richiede lettere maiuscole, minuscole e caratteri numerici."
+  },
+  "not_found": {
+    "scene_label": "Un falò che scoppietta sotto un cielo stellato",
+    "title": "Sembra che tu ti sia perso, avventuriero",
+    "description": "Vuoi tornare a migliorare le tue connessioni?",
+    "home": "Torna alla Dashboard",
+    "footer": "QManager"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "groups": {
+    "dashboard": "Panoramica",
+    "cellular": "Rete mobile",
+    "local_network": "Rete locale",
+    "monitoring": "Monitoraggio",
+    "system": "Sistema"
+  },
+  "breadcrumb": "Percorso di navigazione",
+  "items": {
+    "home": "Home",
+    "cellular_overview": "Panoramica",
+    "sms_inbox": "Posta in arrivo",
+    "band_locking_bands": "Blocco bande",
+    "cell_scanner_full_scan": "Scansione completa",
+    "cellular_settings_general": "Generali",
+    "ip_passthrough": "Passthrough IP",
+    "connection_quality_overview": "Panoramica",
+    "system_settings_general": "Generali",
+    "cellular_information": "Informazioni rete mobile",
+    "antenna_statistics": "Statistiche dell'antenna",
+    "antenna_alignment": "Allineamento dell'antenna",
+    "sms_center": "Centro SMS",
+    "sms_forwarding": "Inoltro SMS",
+    "custom_profiles": "Profili personalizzati",
+    "band_locking": "Selezione bande",
+    "tower_locking": "Blocco BTS",
+    "frequency_locking": "Blocco frequenze",
+    "cell_scanner": "Scanner celle",
+    "neighboring_cells": "Celle vicine",
+    "frequency_calculator": "Calcolatore frequenze",
+    "settings": "Impostazioni",
+    "apn_management": "Impostazioni APN",
+    "network_priority": "Priorità di rete",
+    "imei_settings": "Impostazioni IMEI",
+    "fplmn_settings": "Impostazioni FPLMN",
+    "ethernet_status": "Stato Ethernet",
+    "local_network_settings": "Impostazioni",
+    "custom_dns": "DNS personalizzato",
+    "ttl_mtu_settings": "Impostazioni TTL e MTU",
+    "video_optimizer": "Ottimizzatore video",
+    "traffic_masquerade": "Traffic Masquerade",
+    "traffic_engine": "Traffic Engine",
+    "network_events": "Eventi di rete",
+    "latency_monitor": "Monitoraggio della latenza",
+    "alerts": "Avvisi",
+    "tailscale": "Tailscale",
+    "netbird": "NetBird",
+    "watchdog": "Watchdog",
+    "system_settings": "Impostazioni di sistema",
+    "configuration_backup": "Backup della configurazione",
+    "device_access": "Accesso al dispositivo",
+    "ssh_password": "Password SSH",
+    "connection_quality": "Qualità della connessione",
+    "adaptive_polling": "Polling Adattivo",
+    "hardware": "Hardware",
+    "logs": "Log",
+    "system_health_check": "Controllo integrità del sistema",
+    "software_update": "Aggiornamento del software",
+    "at_terminal": "Terminale AT",
+    "luci": "LuCI",
+    "about_device": "Informazioni sul dispositivo",
+    "support": "Supporto",
+    "donate": "Dona al progetto",
+    "languages": "Lingue",
+    "prometheus": "Prometheus"
+  },
+  "switcher": {
+    "opens_new_tab": "Si apre in una nuova scheda",
+    "apps": "App",
+    "current": "App corrente"
+  },
+  "user": {
+    "signed_in": "Connesso"
+  },
+  "actions": {
+    "toggle_section": "Apri o chiudi la sezione {{section}}",
+    "toggle_sidebar": "Mostra o nascondi la barra laterale",
+    "skip_to_content": "Vai al contenuto principale"
+  },
+  "mobile": {
+    "title": "Barra laterale",
+    "description": "Navigazione principale di QManager."
+  },
+  "status": {
+    "watchdog_acting": "in azione",
+    "watchdog_acting_detail": "Il watchdog sta ripristinando la connessione (livello {{tier}}).",
+    "watchdog_settling": "verifica",
+    "watchdog_settling_detail": "Il watchdog sta verificando che la connessione regga dopo il ripristino."
+  }
+}

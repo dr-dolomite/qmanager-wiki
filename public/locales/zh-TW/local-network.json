@@ -1,0 +1,580 @@
+{
+  "shared": {
+    "status_active": "已啟用",
+    "status_inactive": "未啟用",
+    "status_not_installed": "未安裝",
+    "validation_domain_required": "請輸入域名",
+    "validation_domain_invalid_format": "域名格式無效",
+    "validation_domain_needs_dot": "必須至少包含一個點",
+    "validation_domain_too_long": "域名過長（最多 253 個字元）",
+    "validation_domain_duplicate": "域名已在列表中"
+  },
+  "traffic_engine": {
+    "page_title": "流量引擎",
+    "page_description": "一個 DPI 引擎，兩種模式。繞過運營商影片限速，或讓 HTTPS 流量看起來像訪問白名單服務。同一時間只能執行一種模式。",
+    "mode_video": "影片最佳化器",
+    "mode_masquerade": "流量偽裝",
+    "aria_mode_selector": "引擎模式",
+    "state_starting": "正在啟動",
+    "state_stopping": "正在停止",
+    "state_switching": "正在切換",
+    "hero_rate_unit": "包/秒",
+    "tile_uptime": "執行時長",
+    "toast_video_enabled": "影片最佳化器正在保護影片",
+    "toast_video_disabled": "影片最佳化器已關閉",
+    "toast_masquerade_enabled": "流量偽裝已啟用",
+    "toast_masquerade_disabled": "流量偽裝已關閉",
+    "error_load_failed": "數據機沒有回應。請檢查連線後再試一次。",
+    "onboarding_title": "安裝流量引擎",
+    "onboarding_description": "一次安裝即可解鎖影片最佳化器和流量偽裝。",
+    "onboarding_zapret_attribution": "自動從 <link>zapret</link> 專案下載。",
+    "onboarding_install": "安裝引擎",
+    "onboarding_installing": "正在安裝",
+    "onboarding_check_again": "重新檢查",
+    "advanced_remove_button": "移除",
+    "advanced_removing": "正在移除",
+    "advanced_dialog_title": "移除引擎程式？",
+    "advanced_dialog_desc": "兩種模式共用此引擎，移除後影片最佳化器和流量偽裝都會關閉，直到您重新安裝。",
+    "advanced_toast_success": "引擎程式已移除",
+    "advanced_toast_error": "移除引擎程式失敗",
+    "video_tagline": "對抗運營商對影片的限速，減少緩衝。",
+    "masquerade_tagline": "將 HTTPS 偽裝成單一白名單域名，使運營商無法識別並限速。",
+    "bypass_label": "繞過熱點檢測",
+    "bypass_helper_external": "已在其他處設為 TTL {{ttl}} / HL {{hl}}（TTL 頁面或 SIM 設定檔）。請在那裡管理。",
+    "bypass_toast_enabled": "熱點繞過已開啟",
+    "bypass_toast_disabled": "熱點繞過已關閉",
+    "bypass_toast_error": "無法更改熱點繞過",
+    "kernel_module_hint": "請在數據機上安裝 kmod-nft-queue 套件，然後重新載入此頁面。",
+    "aria_kernel_module_hint": "如何新增封包佇列支援",
+    "stat_empty": "—",
+    "toast_applied": "流量引擎設定已套用",
+    "error_load_title": "無法讀取流量引擎",
+    "refresh": "重新整理",
+    "kernel_banner_desc": "此韌體缺少引擎所需的封包佇列支援，因此兩種模式都無法開啟。",
+    "aria_bypass_hint": "關於繞過熱點檢測",
+    "bypass_hint": "運營商通過封包到達時的跳數識別共享網路的裝置。將所有封包固定為 64，可讓數據機後面的裝置看起來與數據機本身一樣。",
+    "back": "返回",
+    "pkg_available": "可用",
+    "pkg_missing": "缺失",
+    "package_title": "引擎軟體包",
+    "engine_title": "引擎",
+    "package_desc": "兩種模式共用的封包引擎，以及它對韌體的要求。",
+    "engine_desc": "選擇一種模式，並檢視引擎處理的封包。",
+    "pkg_queue": "封包佇列支援",
+    "pkg_engine": "引擎",
+    "pkg_installed": "已安裝",
+    "pkg_source": "來源",
+    "pkg_source_value": "zapret 專案",
+    "pkg_status_busy": "移除前請先關閉引擎。",
+    "pkg_status_idle": "可以隨時在此頁面重新安裝。",
+    "advanced_dialog_confirm": "移除引擎",
+    "label_mode": "模式",
+    "mode_off": "關閉",
+    "mode_reason_kernel": "此韌體缺少封包佇列支援，因此無法執行任何模式。",
+    "metric_packets": "已處理封包",
+    "metric_package": "軟體包",
+    "aria_open_package": "檢視引擎軟體包詳情",
+    "pkg_queue_missing": "缺少佇列",
+    "live_legend": "已處理封包（最近 60 秒）",
+    "strip_sni": "SNI：{{domain}}",
+    "strip_fragment": "1 B",
+    "strip_rest": "握手其餘部分",
+    "strip_decoy": "誘餌",
+    "strip_real": "真實握手",
+    "strip_aria_video_one": "握手開頭以 {{count}} 個單位元組片段發出，運營商無法讀取完整的主機名。",
+    "strip_aria_video_other": "握手開頭以 {{count}} 個單位元組片段發出，運營商無法讀取完整的主機名。",
+    "strip_aria_masquerade": "兩個指向 {{domain}} 的誘餌握手先於真實握手發出，運營商讀取到的是偽裝域名。",
+    "strip_eyebrow": "運營商看到的內容",
+    "strip_preview": "預覽",
+    "strip_axis_first": "最先傳送",
+    "strip_axis_last": "最後傳送",
+    "hosts_add": "新增",
+    "hosts_empty_title": "暫無主機名",
+    "hosts_empty_desc": "在上方新增影片 CDN 域名，或恢復預設列表。",
+    "hosts_group_custom": "自訂",
+    "saving": "正在儲存",
+    "foot_invalid": "請先修正域名再套用。",
+    "foot_restart": "套用時引擎會短暫重啟。",
+    "foot_switch_to_apply": "將引擎切換到{{mode}}後生效。",
+    "foot_on_enable": "開啟{{mode}}後生效。",
+    "apply_blocked_other": "{{mode}}正在執行。請切換模式後再套用。",
+    "applying": "正在套用",
+    "state_applying": "正在套用",
+    "check_passed": "通過",
+    "check_not_detected": "未檢測到",
+    "check_failed": "失敗",
+    "check_injection_confirmed_other": "已確認偽造 SNI 注入（已處理 {{count}} 個封包）",
+    "acts_on_domains_one": "{{count}} 個主機名",
+    "acts_on_domains_other": "{{count}} 個主機名",
+    "hosts_title": "主機名",
+    "hosts_desc": "影片最佳化器作用的影片 CDN 域名。",
+    "hosts_not_used": "未使用",
+    "aria_video_how": "影片最佳化器的工作原理",
+    "video_how": "運營商 DPI 通過讀取每次握手中的主機名來識別影片。影片最佳化器將握手開頭拆成單位元組片段傳送，主機名無法完整到達，影片也就不會被標記。",
+    "metric_carrier_reads": "運營商讀取到",
+    "carrier_reads_none": "無主機名",
+    "metric_acts_on": "作用於",
+    "aria_edit_hostnames": "編輯主機名",
+    "aria_strength_lower": "降低強度",
+    "aria_strength_raise": "提高強度",
+    "check_blocked": "開啟{{mode}}後才能執行此檢查。",
+    "aria_masquerade_how": "流量偽裝的工作原理",
+    "masquerade_how": "在每次真實握手之前，流量偽裝會發送兩個指向偽裝域名的誘餌。運營商讀取誘餌後，會把該連線視為對應的服務。",
+    "acts_on_all": "所有 HTTPS 流量",
+    "chart_aria_idle": "最近 60 秒未處理任何封包",
+    "chart_empty": "開啟一種模式即可檢視封包",
+    "chart_x_start": "60 秒前",
+    "chart_x_end": "現在",
+    "toast_install_success": "流量引擎已安裝",
+    "toast_install_error": "無法安裝流量引擎",
+    "kernel_banner_title": "缺少封包佇列支援",
+    "chart_aria": "最近 60 秒每秒處理的封包，峰值 {{max}}"
+  },
+  "ethernet": {
+    "page": {
+      "title": "乙太網路狀態",
+      "description": "監控乙太網路鏈路、限制其速度並設定 LAN 閘道。",
+      "refresh": "重新整理"
+    },
+    "strip": {
+      "label": "乙太網路連接埠",
+      "unresponsive": "無回應",
+      "unavailable_title": "無法讀取乙太網路連接埠",
+      "unavailable_body": "每 10 秒重試一次。未做任何變更。",
+      "absent_title": "無乙太網路控制器",
+      "absent_body": "此裝置沒有乙太網路連接埠，因此沒有可回報或設定的內容。"
+    },
+    "tiles": {
+      "link": {
+        "label": "鏈路狀態",
+        "value_up": "已連線",
+        "value_down": "已中斷",
+        "value_unknown": "未知",
+        "caption_up": "纜線已連接到主機連接埠",
+        "caption_down": "未在主機連接埠偵測到纜線",
+        "caption_unknown": "等待鏈路狀態"
+      },
+      "speed": {
+        "label": "協商速率",
+        "caption": "與對端協商決定",
+        "caption_ceiling": "連接埠最高支援 {{ceiling}}",
+        "caption_down": "需要作用中鏈路"
+      },
+      "duplex": {
+        "label": "雙工模式",
+        "caption": "同時收發",
+        "caption_down": "需要作用中鏈路",
+        "value_full": "全雙工",
+        "value_half": "半雙工"
+      },
+      "negotiation": {
+        "label": "協商模式",
+        "value_auto": "自動",
+        "value_forced": "強制",
+        "value_unknown": "未知",
+        "caption_auto": "未設定速度限制",
+        "caption_limited": "限制為 {{speed}}"
+      }
+    },
+    "settings": {
+      "title": "乙太網路連接埠",
+      "description": "設定連接埠的鏈路速度，以及數據機為乙太網路控制器供電的方式。",
+      "row_label": "速度限制",
+      "placeholder": "選擇速度",
+      "option_auto": "自動（最大）",
+      "option_10": "10 Mbps",
+      "option_100": "100 Mbps",
+      "option_1000": "1 Gbps",
+      "option_2500": "2.5 Gbps",
+      "consequence": "套用後鏈路會中斷幾秒鐘，等待連接埠重新協商。你正在使用該鏈路。",
+      "consequence_applying": "連接埠重新協商期間鏈路已中斷。本頁面會自行確認新速度。",
+      "consequence_unresponsive": "數據機已停止回應，因此在下一次成功讀取前鎖定此控制項。",
+      "consequence_unread": "數據機尚未回應，在首次讀取完成前沒有可變更的內容。",
+      "consequence_absent": "此裝置上沒有可設定的乙太網路連接埠。",
+      "toast_success": "鏈路速度已更新",
+      "toast_error": "設定鏈路速度失敗",
+      "toast_confirm_error": "無法確認新速度。請檢查鏈路。",
+      "apply": "套用變更",
+      "aspm_label": "PCIe 節能",
+      "aspm_hint_aria": "關於 PCIe 節能",
+      "aspm_hint": "活動狀態電源管理（ASPM）允許通往乙太網路控制器的 PCIe 鏈路在封包之間休眠。效能模式讓它保持喚醒。",
+      "aspm_consequence": "節能模式可能導致乙太網路連接埠斷流並增加延遲。套用時不會中斷鏈路。",
+      "aspm_placeholder": "選擇策略",
+      "aspm_option_performance": "效能（建議）",
+      "aspm_option_default": "核心預設",
+      "aspm_option_powersave": "節能",
+      "aspm_option_powersupersave": "最大節能",
+      "toast_aspm_success": "PCIe 節能已更新"
+    }
+  },
+  "lan_config": {
+    "card_title": "LAN 地址",
+    "card_description": "設定路由器的 LAN IP 地址（裝置所用的閘道器）以及本地網路的大小。",
+    "label_gateway": "閘道器 IP 地址",
+    "help_gateway": "路由器在 LAN 上的自身地址。裝置將其用作預設閘道器。",
+    "label_subnet": "子網掩碼",
+    "help_subnet": "以 CIDR 字首形式選擇 LAN 網路的大小。",
+    "action_apply": "套用更改",
+    "confirm_title": "更改 LAN 地址？",
+    "confirm_body": "LAN 將切換為 {{address}}（掩碼 {{netmask}}）。此操作會重新繫結網路，您當前的連線將中斷。",
+    "confirm_reconnect": "套用後網路會重新繫結，您的連線將短暫中斷。使用 DHCP 的路由器或裝置會在幾秒內自動重新連線；使用靜態 IP 的裝置則需手動改到新子網。隨後請開啟新地址以繼續。",
+    "confirm_action": "套用並重新連線",
+    "applied_title": "LAN 地址正在更改",
+    "applied_body": "裝置正在切換到 {{address}}。連線將中斷約 {{seconds}} 秒 — 請重新插拔 LAN 或乙太網路線纜，然後開啟新地址：",
+    "applied_body_auto": "裝置正在切換到 {{address}}。設定為 DHCP 的路由器應會在約 {{seconds}} 秒內自動重新連線並取得新閘道。若未自動連線，請重新插拔線纜，然後開啟新地址：",
+    "reconnecting_title": "正在重新連線到新地址…",
+    "reconnecting_auto_note": "此頁面將自動開啟新地址。",
+    "reconnecting_opening": "正在開啟新地址…",
+    "toast_error_save": "套用 LAN 設定失敗",
+    "error_invalid_ipaddr": "請輸入有效的單播 IPv4 地址（例如 192.168.1.1）。",
+    "error_invalid_host_in_subnet": "這是所選子網的網路地址或廣播地址。請選擇可用的主機地址。",
+    "error_invalid_prefix": "請選擇 /16 到 /30 之間的子網字首。",
+    "errors": {
+      "fetch_failed": "載入 LAN 設定失敗",
+      "save_failed": "儲存 LAN 設定失敗",
+      "parse_failed": "無法讀取儲存回應"
+    }
+  },
+  "dns": {
+    "page_title": "自訂 DNS",
+    "page_description": "使用您偏好的解析器覆蓋運營商分配的 DNS 伺服器，適用於本地網路內的所有裝置。",
+    "provider_custom": "自訂",
+    "placeholder_primary_dns": "示例：8.8.8.8",
+    "placeholder_secondary_dns": "示例：1.1.1.1",
+    "placeholder_tertiary_dns": "示例：8.8.4.4",
+    "placeholder_primary_dns6": "示例：2606:4700:4700::1111",
+    "placeholder_secondary_dns6": "示例：2606:4700:4700::1001",
+    "error_at_least_one": "至少輸入一個 DNS 伺服器地址",
+    "error_invalid_ipv6": "請輸入有效的 IPv6 地址（例如 2606:4700:4700::1111）。",
+    "toast_success_enabled": "自訂 DNS 套用成功",
+    "toast_success_disabled": "已恢復運營商 DNS",
+    "toast_error_apply": "無法套用 DNS 設定",
+    "error_load_title": "無法讀取 DNS 設定",
+    "error_load_desc": "數據機沒有回應。請檢查連線後再試一次。",
+    "errors": {
+      "fetch_failed": "無法載入 DNS 設定",
+      "apply_failed": "無法套用 DNS 設定"
+    },
+    "error_invalid_ipv4": "請輸入有效的 IPv4 地址（例如 9.9.9.9）。",
+    "blocked_invalid": "請先修正標示的地址。",
+    "cards": {
+      "resolver": {
+        "title": "解析器",
+        "description": "為網路中的裝置分配哪些 DNS 伺服器。"
+      },
+      "ipv4": {
+        "title": "IPv4 伺服器",
+        "description": "最多三個，依序嘗試。"
+      },
+      "ipv6": {
+        "title": "IPv6 伺服器",
+        "description": "最多兩個，供使用 IPv6 的裝置。"
+      }
+    },
+    "rows": {
+      "mode": {
+        "label": "自訂 DNS",
+        "consequence_on": "網路中的裝置使用下方的伺服器。",
+        "consequence_off": "裝置使用電信業者指派的伺服器。"
+      },
+      "provider": {
+        "label": "服務商",
+        "consequence": "填入兩組伺服器清單。編輯任一地址即變為自訂。"
+      },
+      "primary": "主要",
+      "secondary": "備用",
+      "tertiary": "第三"
+    }
+  },
+  "ttl_mtu": {
+    "page_title": "TTL 與 MTU",
+    "page_description": "重寫數據機寫入行動網路介面的跳躍數與封包大小。",
+    "refresh": "重新整理",
+    "strip": {
+      "label": "目前生效",
+      "chip_custom": "自訂",
+      "chip_default": "電信商預設值",
+      "retry": "重試",
+      "unavailable_title": "無法讀取 TTL 或 MTU",
+      "unavailable_body": "數據機沒有回應。其上未做任何變更。",
+      "idle_title": "沒有生效的覆寫值",
+      "idle_body": "數據機完全依協商結果使用電信商的 TTL 與 MTU。在下方開啟其中一項即可變更。"
+    },
+    "tiles": {
+      "shared": {
+        "caption_pending": "仍在讀取",
+        "caption_unread": "數據機沒有回應"
+      },
+      "ttl": {
+        "label": "TTL（IPv4）",
+        "caption_active": "對每個封包重寫",
+        "caption_idle": "不重寫"
+      },
+      "hl": {
+        "label": "跳躍限制（IPv6）",
+        "caption_active": "對每個封包重寫",
+        "caption_idle": "不重寫"
+      },
+      "mtu": {
+        "label": "MTU 大小",
+        "unit": "位元組",
+        "caption_active": "電信商預設值為 {{carrier}}",
+        "caption_idle": "由電信商協商決定"
+      }
+    },
+    "banner": {
+      "title": "TTL 與跳躍限制來自 {{profile}} 設定檔",
+      "body": "啟用該設定檔會同時寫入這兩個值，因此此卡片已鎖定，以免兩個寫入端互相覆蓋。請在該設定檔中修改，或啟用一個未設定 TTL 的設定檔。"
+    },
+    "cards": {
+      "ttl": {
+        "title": "TTL 與跳躍限制",
+        "description": "套用於行動網路介面上的外送封包。"
+      },
+      "mtu": {
+        "title": "最大傳輸單元",
+        "description": "行動網路介面在不分片的情況下能送出的最大封包。"
+      }
+    },
+    "rows": {
+      "shared": {
+        "consequence_off": "開啟重寫後才能設定數值。",
+        "consequence_unread": "數據機尚未回應，目前沒有可變更的內容。"
+      },
+      "rewrite": {
+        "label": "重寫跳躍數",
+        "consequence": "關閉後，數據機會原樣轉送用戶端送出的跳躍數。部分電信商會統計跳躍數來偵測網路共享。"
+      },
+      "ttl_value": {
+        "label": "TTL 數值",
+        "consequence": "{{min}}–{{max}}。位於數據機後一跳的裝置通常設為 64。"
+      },
+      "hl_value": {
+        "label": "跳躍限制數值",
+        "consequence": "IPv6 的對應設定。除非確定用戶端是單一堆疊，否則兩項都要設定。"
+      },
+      "mtu_toggle": {
+        "label": "覆寫 MTU",
+        "consequence": "關閉後，行動網路介面會回到電信商協商的數值。"
+      },
+      "mtu_value": {
+        "label": "MTU 值",
+        "consequence": "{{min}}–{{max}}。低於約 1400 時，可能讓丟棄 ICMP 的網站無法完成路徑 MTU 探索。",
+        "consequence_off": "開啟覆寫後才能設定數值。"
+      }
+    },
+    "values": {
+      "on": "開",
+      "off": "關"
+    },
+    "errors": {
+      "value_range": "TTL 與跳躍限制都必須介於 {{min}} 到 {{max}} 之間。",
+      "no_value": "請先填寫 TTL 或跳躍限制，再套用。",
+      "mtu_range": "MTU 必須介於 {{min}} 到 {{max}} 之間。"
+    },
+    "toast_ttl_applied": "已套用（TTL {{ttl}}，跳躍限制 {{hl}}）。",
+    "toast_ttl_cleared": "數據機已回到電信商自己的跳躍數。",
+    "toast_ttl_error": "無法套用 TTL 與跳躍限制。",
+    "toast_mtu_applied": "MTU 已設為 {{mtu}}。",
+    "toast_mtu_cleared": "MTU 已回到電信商協商的數值。",
+    "toast_mtu_error": "無法套用 MTU。"
+  },
+  "ippt": {
+    "page": {
+      "title": "IP 直通與 USB",
+      "description": "將數據機的公網 IP 直接交給一台已連線的裝置，而不是為整個區域網路做路由。"
+    },
+    "header": {
+      "refresh": "重新整理"
+    },
+    "status": {
+      "label": "上次套用",
+      "mode_title": {
+        "disabled": "路由模式",
+        "eth": "乙太網路直通",
+        "usb": "USB 直通"
+      },
+      "blurb": {
+        "disabled": "數據機為區域網路做路由",
+        "eth": "設定為將 WAN IP 交給乙太網路裝置",
+        "usb": "設定為將 WAN IP 交給 USB 裝置"
+      },
+      "gateway_off": "區域網路閘道不提供服務"
+    },
+    "card": {
+      "description": "套用會寫入所有設定並重啟數據機。",
+      "network_description": "與直通設定一起套用，只需一次重啟。",
+      "apply": "套用並重啟",
+      "mac_label": "目標 MAC 位址",
+      "mac_placeholder": "XX:XX:XX:XX:XX:XX"
+    },
+    "groups": {
+      "passthrough": "直通",
+      "network": "網路"
+    },
+    "rows": {
+      "mode": {
+        "label": "模式",
+        "description": "路由整個區域網路，或將公網 IP 直通給一台裝置。"
+      },
+      "target": {
+        "label": "目標裝置",
+        "pick_mode": "請先選擇模式。",
+        "description": "接收公網 IP 的裝置。"
+      },
+      "nat": {
+        "label": "NAT 轉換",
+        "description": "幾乎所有情境都適合啟用 NAT。"
+      },
+      "usb": {
+        "label": "USB 連線",
+        "description": "數據機透過 USB 連線時使用的通訊協定。"
+      },
+      "dns": {
+        "label": "DNS 代理",
+        "description": "開啟後，由數據機為目標裝置回應 DHCP DNS。"
+      }
+    },
+    "options": {
+      "mode_disabled": "路由",
+      "mode_eth": "乙太網路",
+      "mode_usb": "USB",
+      "target_automatic": "自動",
+      "target_device": "從區域網路",
+      "target_manual": "依 MAC",
+      "nat_on": "啟用 NAT",
+      "nat_off": "不啟用 NAT",
+      "dns_off": "關閉",
+      "dns_on": "開啟"
+    },
+    "mode_note": {
+      "rest": "乙太網路或 USB 會把 WAN IP 交給一台裝置，數據機將不再於其區域網路閘道位址回應。請保留 Tailscale 或其他連入方式。",
+      "to_passthrough": "套用會重啟數據機，此分頁將與其斷線。之後區域網路閘道不再回應，請保留 Tailscale 或其他連入方式。"
+    },
+    "dialog": {
+      "title": "現在套用並重啟？",
+      "body": "設定會寫入，數據機隨即重啟。本頁面會轉到重啟倒數並將您登出。",
+      "body_gateway": "直通生效後，數據機將不再於區域網路閘道位址上回應。請確認您有 Tailscale、直通裝置本身或序列主控台可以重新連入。",
+      "body_persist": "此設定會在後續重啟後繼續保留。",
+      "cancel": "取消",
+      "confirm": "套用並重啟"
+    },
+    "toast_apply_error": "無法套用 IP 直通設定",
+    "errors": {
+      "read_title": "無法讀取直通設定",
+      "read_body": "未做任何變更。請再試一次，或確認數據機是否有回應。",
+      "retry": "重試",
+      "card_unread": "數據機尚未回應，在首次讀取完成前沒有可變更的內容。",
+      "mac_invalid": "請輸入完整的 MAC 位址，即六組十六進位數字。",
+      "no_changes": "尚未有任何變更。",
+      "device_unpicked": "請先選擇一個已連線的裝置。"
+    },
+    "device": {
+      "label": "從已連線清單中選擇目標裝置",
+      "placeholder": "選擇裝置",
+      "scanning": "正在掃描已連線裝置…",
+      "error": "無法載入已連線裝置。",
+      "empty": "找不到已連線裝置。請將裝置連接至調變解調器，然後重新掃描。",
+      "retry": "重試",
+      "rescan": "重新掃描",
+      "rescan_label": "重新掃描已連線裝置",
+      "enter_manually": "手動輸入",
+      "unknown": "未知裝置"
+    },
+    "locked_by_verizon": {
+      "title": "IP 穿透由您的 Verizon 設定檔管理",
+      "body": "活動設定檔：\"{{name}}\"。要更改這些設定，請從自訂設定檔中停用該設定檔。",
+      "cta": "開啟自訂設定檔",
+      "blocked": "IP 直通由您的 Verizon 設定檔管理。"
+    }
+  },
+  "masquerade": {
+    "page_title": "流量偽裝",
+    "page_description": "讓所有 HTTPS 流量在運營商 DPI 看來像是白名單服務",
+    "card_title": "流量偽裝",
+    "card_description": "讓 HTTPS 流量在運營商 DPI 看來像是白名單服務。",
+    "error_load_failed": "載入設定失敗。",
+    "label_enable": "啟用流量偽裝",
+    "label_domain": "偽裝域名",
+    "placeholder_domain": "speedtest.net",
+    "helper_domain": "出現在傳送給運營商的虛假 TLS 握手中的域名。",
+    "help_domain": "運營商通過讀取 SNI（每次 TLS 握手中以明文傳送的伺服器名稱）來決定限速物件。流量偽裝會將其改寫為此域名，使你的流量看起來像該服務。",
+    "aria_domain_info": "關於偽裝域名的更多資訊",
+    "test_hint": "通過表示你的 HTTPS 握手攜帶了偽造名稱，運營商看到的是此域名而非真實域名。",
+    "aria_test_hint": "注入測試通過的含義",
+    "toast_success_enabled": "流量偽裝已啟用",
+    "toast_success_disabled": "流量偽裝已停用",
+    "toast_error_apply": "儲存設定失敗",
+    "test_title": "注入測試",
+    "test_description": "確認偽造的 SNI 封包正被注入 HTTPS 流量",
+    "state_testing": "測試中",
+    "button_run_test": "執行測試",
+    "errors": {
+      "load_failed": "載入設定失敗",
+      "save_failed": "儲存設定失敗",
+      "uninstall_failed": "解除安裝失敗",
+      "test_failed": "測試失敗"
+    }
+  },
+  "video_optimizer": {
+    "page_title": "影片最佳化器",
+    "page_description": "透過針對目標影片 CDN 主機名使用 DPI 規避，繞過運營商的影片限速",
+    "card_title": "影片最佳化器",
+    "card_description": "透過 DPI 規避在蜂窩連線上繞過運營商影片限速。",
+    "error_load_failed": "載入設定失敗。",
+    "label_enable": "啟用影片最佳化器",
+    "label_desync_repeats": "DPI 干擾重複次數",
+    "help_desync_repeats": "每個匹配流傳送 DPI 干擾包的次數。數值越高，丟包或亂序時繞過越穩定，但 CPU 佔用和上行頻寬也會增加。預設 1 已適用於大多數使用者。",
+    "helper_desync_repeats": "數值越高越能對抗更嚴格的 DPI，但會增加少量開銷。1 適用於大多數網路。",
+    "verify_hint": "通過表示引擎正在攔截髮往主機列表域名的流量並套用 DPI 規避。",
+    "aria_verify_hint": "驗證通過的含義",
+    "aria_desync_repeats_info": "關於 DPI 干擾重複次數的更多資訊",
+    "toast_success_enabled": "影片最佳化器已啟用",
+    "toast_success_disabled": "影片最佳化器已停用",
+    "toast_error_apply": "儲存設定失敗",
+    "verify_title": "驗證服務",
+    "verify_description": "確認 DPI 規避正在攔截主機列表中域名的流量",
+    "state_verifying": "驗證中",
+    "button_verify_service": "驗證服務",
+    "hostlist_card_title": "CDN 主機名列表",
+    "hostlist_card_description": "影片最佳化器處理的影片 CDN 網域。",
+    "hostlist_error_load_failed": "載入主機名列表失敗。",
+    "aria_sort_az": "按字母升序排序",
+    "aria_sort_za": "按字母降序排序",
+    "aria_sort_clear": "清除排序",
+    "aria_menu_options": "主機名列表選項",
+    "menu_export": "匯出列表",
+    "menu_import": "匯入列表",
+    "placeholder_new_domain": "示例：cdn.example.com",
+    "aria_new_domain": "新域名",
+    "aria_add_domain": "新增域名",
+    "empty_state_no_domains": "尚未設定域名",
+    "aria_custom_domain_badge": "自訂域名",
+    "aria_remove_domain": "移除 {{domain}}",
+    "toast_save_success": "主機名列表已儲存",
+    "toast_save_error": "儲存主機名列表失敗",
+    "toast_restore_success": "已恢復預設主機名",
+    "toast_restore_error": "恢復預設失敗",
+    "toast_export_success_one": "已匯出 {{count}} 個域名",
+    "toast_export_success_other": "已匯出 {{count}} 個域名",
+    "toast_import_no_new": "沒有要匯入的新域名 — 均已在列表中",
+    "toast_import_success_one": "已匯入 {{count}} 個新域名",
+    "toast_import_success_other": "已匯入 {{count}} 個新域名",
+    "button_restore_defaults": "恢復預設",
+    "state_restoring": "恢復中",
+    "dialog_restore_title": "恢復預設主機名？",
+    "dialog_restore_desc": "這將使用出廠預設的 CDN 主機名替換當前列表。您新增的所有自訂域名將被移除。",
+    "dialog_action_restore": "恢復預設",
+    "errors": {
+      "load_failed": "載入設定失敗",
+      "save_failed": "儲存設定失敗",
+      "uninstall_failed": "解除安裝失敗",
+      "verify_start_failed": "無法啟動驗證",
+      "install_start_failed": "無法啟動安裝",
+      "install_starting": "正在啟動安裝…",
+      "hostlist_load_failed": "載入主機名列表失敗",
+      "hostlist_save_failed": "儲存主機名列表失敗",
+      "hostlist_restore_failed": "恢復預設失敗"
+    }
+  }
+}

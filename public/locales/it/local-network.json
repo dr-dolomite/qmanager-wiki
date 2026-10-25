@@ -1,0 +1,581 @@
+{
+  "shared": {
+    "status_active": "Attivo",
+    "status_inactive": "Inattivo",
+    "status_not_installed": "Non installato",
+    "validation_domain_required": "Il dominio è obbligatorio",
+    "validation_domain_invalid_format": "Formato di dominio non valido",
+    "validation_domain_needs_dot": "Deve contenere almeno un punto",
+    "validation_domain_too_long": "Dominio troppo lungo (max 253 caratteri)",
+    "validation_domain_duplicate": "Dominio già in elenco"
+  },
+  "traffic_engine": {
+    "page_title": "Traffic Engine",
+    "page_description": "Un motore DPI, due modalità. Aggira la limitazione video dell'operatore o fai sembrare il traffico HTTPS un servizio in whitelist. Funziona una sola modalità alla volta.",
+    "mode_video": "Ottimizzatore video",
+    "mode_masquerade": "Masquerade",
+    "aria_mode_selector": "Modalità motore",
+    "state_starting": "Avvio",
+    "state_stopping": "Arresto",
+    "state_switching": "Cambio",
+    "hero_rate_unit": "pkt/s",
+    "tile_uptime": "Tempo di attività",
+    "toast_video_enabled": "L'ottimizzatore video ora protegge il video",
+    "toast_video_disabled": "Ottimizzatore video disattivato",
+    "toast_masquerade_enabled": "Masquerade ora attivo",
+    "toast_masquerade_disabled": "Masquerade disattivato",
+    "error_load_failed": "Il modem non ha risposto. Controlla la connessione e riprova.",
+    "onboarding_title": "Installa il Traffic Engine",
+    "onboarding_description": "Una sola installazione sblocca sia l'ottimizzatore video sia Masquerade.",
+    "onboarding_zapret_attribution": "Scaricato automaticamente dal progetto <link>zapret</link>.",
+    "onboarding_install": "Installa motore",
+    "onboarding_installing": "Installazione",
+    "onboarding_check_again": "Controlla di nuovo",
+    "advanced_remove_button": "Rimuovi",
+    "advanced_removing": "Rimozione",
+    "advanced_dialog_title": "Rimuovere il binario del motore?",
+    "advanced_dialog_desc": "Il motore è condiviso da entrambe le modalità, quindi rimuoverlo disattiva l'ottimizzatore video e Masquerade finché non lo reinstalli.",
+    "advanced_toast_success": "Binario del motore rimosso",
+    "advanced_toast_error": "Rimozione del binario del motore non riuscita",
+    "video_tagline": "Contrasta il throttling video dell'operatore per ridurre il buffering.",
+    "masquerade_tagline": "Maschera l'HTTPS dietro un unico dominio in whitelist così l'operatore non può isolarlo per limitarlo.",
+    "bypass_label": "Aggira Hotspot",
+    "bypass_helper_external": "Impostato altrove su TTL {{ttl}} / HL {{hl}} (pagina TTL o un profilo SIM). Gestiscilo lì.",
+    "bypass_toast_enabled": "Aggira hotspot attivo",
+    "bypass_toast_disabled": "Aggira hotspot disattivato",
+    "bypass_toast_error": "Impossibile modificare aggira hotspot",
+    "kernel_module_hint": "Installa il pacchetto kmod-nft-queue sul modem, poi ricarica questa pagina.",
+    "aria_kernel_module_hint": "Come aggiungere il supporto alla coda di pacchetti",
+    "stat_empty": "—",
+    "toast_applied": "Impostazioni del Traffic Engine applicate",
+    "error_load_title": "Impossibile leggere il Traffic Engine",
+    "refresh": "Aggiorna",
+    "kernel_banner_desc": "Questo firmware non include il supporto alla coda di pacchetti richiesto dal motore, quindi nessuna modalità può essere attivata.",
+    "aria_bypass_hint": "Informazioni su Bypass hotspot",
+    "bypass_hint": "Gli operatori riconoscono i dispositivi in tethering dal numero di hop con cui arrivano i pacchetti. Fissare ogni pacchetto a 64 fa sembrare i dispositivi dietro il modem come il modem stesso.",
+    "back": "Indietro",
+    "pkg_available": "Disponibile",
+    "pkg_missing": "Mancante",
+    "package_title": "Pacchetto del motore",
+    "engine_title": "Motore",
+    "package_desc": "Il motore di pacchetti condiviso dalle due modalità e ciò che richiede al firmware.",
+    "engine_desc": "Scegli una modalità e osserva i pacchetti gestiti dal motore.",
+    "pkg_queue": "Supporto coda pacchetti",
+    "pkg_engine": "Motore",
+    "pkg_installed": "Installato",
+    "pkg_source": "Origine",
+    "pkg_source_value": "Progetto zapret",
+    "pkg_status_busy": "Spegni il motore prima di rimuoverlo.",
+    "pkg_status_idle": "Puoi reinstallarlo da questa pagina.",
+    "advanced_dialog_confirm": "Rimuovi motore",
+    "label_mode": "Modalità",
+    "mode_off": "Spento",
+    "mode_reason_kernel": "Questo firmware non supporta la coda pacchetti, quindi nessuna modalità può funzionare.",
+    "metric_packets": "Pacchetti gestiti",
+    "metric_package": "Pacchetto",
+    "aria_open_package": "Mostra i dettagli del pacchetto",
+    "pkg_queue_missing": "Coda mancante",
+    "live_legend": "Pacchetti gestiti (ultimi 60 s)",
+    "strip_sni": "SNI: {{domain}}",
+    "strip_fragment": "1 B",
+    "strip_rest": "Resto dell'handshake",
+    "strip_decoy": "Esca",
+    "strip_real": "Handshake reale",
+    "strip_aria_video_one": "L'inizio dell'handshake parte in {{count}} frammento da un byte, così l'operatore non legge mai il nome host intero.",
+    "strip_aria_video_other": "L'inizio dell'handshake parte in {{count}} frammenti da un byte, così l'operatore non legge mai il nome host intero.",
+    "strip_aria_masquerade": "Due handshake esca con {{domain}} partono prima di quello reale, così l'operatore legge il travestimento.",
+    "strip_eyebrow": "Cosa vede l'operatore",
+    "strip_preview": "Anteprima",
+    "strip_axis_first": "Inviato per primo",
+    "strip_axis_last": "Inviato per ultimo",
+    "hosts_add": "Aggiungi",
+    "hosts_empty_title": "Nessun nome host",
+    "hosts_empty_desc": "Aggiungi sopra un dominio CDN video oppure ripristina i predefiniti.",
+    "hosts_group_custom": "Personalizzati",
+    "saving": "Salvataggio",
+    "foot_invalid": "Correggi il dominio per applicare.",
+    "foot_restart": "L'applicazione riavvia brevemente il motore.",
+    "foot_switch_to_apply": "Ha effetto quando passi il motore a {{mode}}.",
+    "foot_on_enable": "Ha effetto quando attivi {{mode}}.",
+    "apply_blocked_other": "{{mode}} è in esecuzione. Cambia modalità per applicare.",
+    "applying": "Applicazione",
+    "state_applying": "Applicazione",
+    "check_passed": "Superato",
+    "check_not_detected": "Non rilevato",
+    "check_failed": "Non riuscito",
+    "check_injection_confirmed_one": "Iniezione SNI falsa confermata ({{count}} pacchetto elaborato)",
+    "check_injection_confirmed_other": "Iniezione SNI falsa confermata ({{count}} pacchetti elaborati)",
+    "acts_on_domains_one": "{{count}} nome host",
+    "acts_on_domains_other": "{{count}} nomi host",
+    "hosts_title": "Nomi host",
+    "hosts_desc": "I domini CDN video su cui agisce l'Ottimizzatore video.",
+    "hosts_not_used": "Non in uso",
+    "aria_video_how": "Come funziona l'Ottimizzatore video",
+    "video_how": "Il DPI dell'operatore legge il nome host in ogni handshake per riconoscere i video. Video Optimizer invia l'inizio dell'handshake in frammenti da un byte, così il nome host non arriva mai intero e il video non viene segnalato.",
+    "metric_carrier_reads": "L'operatore legge",
+    "carrier_reads_none": "Nessun nome host",
+    "metric_acts_on": "Agisce su",
+    "aria_edit_hostnames": "Modifica nomi host",
+    "aria_strength_lower": "Riduci intensità",
+    "aria_strength_raise": "Aumenta intensità",
+    "check_blocked": "Attiva {{mode}} per eseguire questo controllo.",
+    "aria_masquerade_how": "Come funziona Masquerade",
+    "masquerade_how": "Prima di ogni handshake reale, Masquerade invia due esche con il dominio di travestimento. L'operatore legge l'esca e tratta la connessione come quel servizio.",
+    "acts_on_all": "Tutto il traffico HTTPS",
+    "chart_aria_idle": "Nessun pacchetto gestito negli ultimi 60 secondi",
+    "chart_empty": "Attiva una modalità per vedere i pacchetti",
+    "chart_x_start": "60 s fa",
+    "chart_x_end": "Ora",
+    "toast_install_success": "Traffic Engine installato",
+    "toast_install_error": "Impossibile installare Traffic Engine",
+    "kernel_banner_title": "Manca il supporto alla coda pacchetti",
+    "chart_aria": "Pacchetti gestiti al secondo negli ultimi 60 secondi, picco {{max}}"
+  },
+  "ethernet": {
+    "page": {
+      "title": "Stato Ethernet",
+      "description": "Controlla il collegamento ethernet, limitane la velocità e imposta il gateway LAN.",
+      "refresh": "Aggiorna"
+    },
+    "strip": {
+      "label": "Porta ethernet",
+      "unresponsive": "Non risponde",
+      "unavailable_title": "Impossibile leggere la porta ethernet",
+      "unavailable_body": "Nuovo tentativo ogni 10 secondi. Nulla è stato modificato.",
+      "absent_title": "Nessun controller ethernet",
+      "absent_body": "Questo dispositivo non ha una porta ethernet, quindi non c'è nulla da segnalare o configurare."
+    },
+    "tiles": {
+      "link": {
+        "label": "Stato collegamento",
+        "value_up": "Connesso",
+        "value_down": "Disconnesso",
+        "value_unknown": "Sconosciuto",
+        "caption_up": "Cavo collegato alla porta host",
+        "caption_down": "Nessun cavo rilevato sulla porta host",
+        "caption_unknown": "In attesa dello stato del collegamento"
+      },
+      "speed": {
+        "label": "Velocità negoziata",
+        "caption": "Negoziata con il peer",
+        "caption_ceiling": "Su {{ceiling}} supportati dalla porta",
+        "caption_down": "Richiede un collegamento attivo"
+      },
+      "duplex": {
+        "label": "Duplex",
+        "caption": "Trasmette e riceve contemporaneamente",
+        "caption_down": "Richiede un collegamento attivo",
+        "value_full": "Completo",
+        "value_half": "Semi"
+      },
+      "negotiation": {
+        "label": "Negoziazione",
+        "value_auto": "Automatica",
+        "value_forced": "Forzata",
+        "value_unknown": "Sconosciuta",
+        "caption_auto": "Nessun limite di velocità impostato",
+        "caption_limited": "Limitata a {{speed}}"
+      }
+    },
+    "settings": {
+      "title": "Porta ethernet",
+      "description": "Imposta la velocità di collegamento della porta e come il modem alimenta il controller ethernet.",
+      "row_label": "Limite velocità",
+      "placeholder": "Seleziona velocità",
+      "option_auto": "Auto (max)",
+      "option_10": "10 Mbps",
+      "option_100": "100 Mbps",
+      "option_1000": "1 Gbps",
+      "option_2500": "2.5 Gbps",
+      "consequence": "L'applicazione interrompe il collegamento per alcuni secondi mentre la porta rinegozia. Tu sei su quel collegamento.",
+      "consequence_applying": "Il collegamento è interrotto mentre la porta rinegozia. Questa pagina conferma da sola la nuova velocità.",
+      "consequence_unresponsive": "Il modem ha smesso di rispondere, quindi questo controllo resta bloccato fino alla prossima lettura riuscita.",
+      "consequence_unread": "Il modem non ha ancora risposto, quindi non c'è nulla da modificare finché non arriva la prima lettura.",
+      "consequence_absent": "Su questo dispositivo non c'è alcuna porta ethernet da configurare.",
+      "toast_success": "Velocità collegamento aggiornata",
+      "toast_error": "Impossibile impostare la velocità del collegamento",
+      "toast_confirm_error": "Impossibile confermare la nuova velocità. Controlla il collegamento.",
+      "apply": "Applica modifiche",
+      "aspm_label": "Risparmio energetico PCIe",
+      "aspm_hint_aria": "Informazioni sul risparmio energetico PCIe",
+      "aspm_hint": "Active State Power Management (ASPM) lascia sospendere il collegamento PCIe al controller ethernet tra un pacchetto e l'altro. Prestazioni lo tiene attivo.",
+      "aspm_consequence": "Le modalità di risparmio possono causare interruzioni e latenza aggiuntiva sulla porta ethernet. L'applicazione non interrompe il collegamento.",
+      "aspm_placeholder": "Seleziona criterio",
+      "aspm_option_performance": "Prestazioni (consigliato)",
+      "aspm_option_default": "Predefinito del kernel",
+      "aspm_option_powersave": "Risparmio energetico",
+      "aspm_option_powersupersave": "Risparmio massimo",
+      "toast_aspm_success": "Risparmio energetico PCIe aggiornato"
+    }
+  },
+  "lan_config": {
+    "card_title": "Indirizzo LAN",
+    "card_description": "Imposta l'indirizzo IP LAN del router (il gateway usato dai tuoi dispositivi) e la dimensione della rete locale.",
+    "label_gateway": "Indirizzo IP Gateway",
+    "help_gateway": "L'indirizzo del router sulla LAN. I dispositivi lo usano come gateway predefinito.",
+    "label_subnet": "Maschera di Sottorete",
+    "help_subnet": "Scegli la dimensione della rete LAN come prefisso CIDR.",
+    "action_apply": "Applica Modifiche",
+    "confirm_title": "Cambiare l'indirizzo LAN?",
+    "confirm_body": "La LAN passerà a {{address}} (maschera {{netmask}}). Questo riavvia la rete e la connessione attuale verrà interrotta.",
+    "confirm_reconnect": "Dopo l'applicazione, la rete viene riassociata e la connessione si interrompe brevemente. Un router o dispositivo in DHCP si riconnetterà automaticamente entro pochi secondi; uno con IP statico va spostato manualmente sulla nuova sottorete. Dovrai poi accedere al nuovo indirizzo per continuare.",
+    "confirm_action": "Applica e Riconnetti",
+    "applied_title": "L'indirizzo LAN sta cambiando",
+    "applied_body": "Il dispositivo si sta spostando su {{address}}. La connessione si interromperà per circa {{seconds}} secondi — ricollega il cavo LAN o Ethernet, quindi apri il nuovo indirizzo:",
+    "applied_body_auto": "Il dispositivo si sta spostando su {{address}}. Un router impostato su DHCP dovrebbe riconnettersi da solo entro circa {{seconds}} secondi e acquisire il nuovo gateway. In caso contrario, ricollega il cavo, quindi apri il nuovo indirizzo:",
+    "reconnecting_title": "Riconnessione al nuovo indirizzo…",
+    "reconnecting_auto_note": "Questa pagina aprirà automaticamente il nuovo indirizzo.",
+    "reconnecting_opening": "Apertura del nuovo indirizzo…",
+    "toast_error_save": "Impossibile applicare le impostazioni LAN",
+    "error_invalid_ipaddr": "Inserisci un indirizzo IPv4 unicast valido (es. 192.168.1.1).",
+    "error_invalid_host_in_subnet": "Questo è l'indirizzo di rete o di broadcast per la sottorete scelta. Scegli un indirizzo host utilizzabile.",
+    "error_invalid_prefix": "Scegli un prefisso di sottorete tra /16 e /30.",
+    "errors": {
+      "fetch_failed": "Impossibile caricare le impostazioni LAN",
+      "save_failed": "Impossibile salvare le impostazioni LAN",
+      "parse_failed": "Impossibile leggere la risposta di salvataggio"
+    }
+  },
+  "dns": {
+    "page_title": "DNS personalizzato",
+    "page_description": "Sostituisci i server DNS assegnati dall'operatore con i tuoi risolutori preferiti per tutti i dispositivi sulla rete locale.",
+    "provider_custom": "Personalizzato",
+    "placeholder_primary_dns": "ad es. 8.8.8.8",
+    "placeholder_secondary_dns": "ad es. 1.1.1.1",
+    "placeholder_tertiary_dns": "ad es. 8.8.4.4",
+    "placeholder_primary_dns6": "ad es. 2606:4700:4700::1111",
+    "placeholder_secondary_dns6": "ad es. 2606:4700:4700::1001",
+    "error_at_least_one": "Inserisci almeno un indirizzo server DNS",
+    "error_invalid_ipv6": "Inserisci un indirizzo IPv6 valido (ad es. 2606:4700:4700::1111).",
+    "toast_success_enabled": "La personalizzazione DNS è stata applicata correttamente",
+    "toast_success_disabled": "Ripristinato all'operatore DNS",
+    "toast_error_apply": "Impossibile applicare le impostazioni DNS",
+    "error_load_title": "Impossibile leggere le impostazioni DNS",
+    "error_load_desc": "Il modem non ha risposto. Controlla la connessione e riprova.",
+    "errors": {
+      "fetch_failed": "Impossibile caricare le impostazioni DNS",
+      "apply_failed": "Impossibile applicare le impostazioni DNS"
+    },
+    "error_invalid_ipv4": "Inserisci un indirizzo IPv4 valido (ad es. 9.9.9.9).",
+    "blocked_invalid": "Correggi prima l'indirizzo evidenziato.",
+    "cards": {
+      "resolver": {
+        "title": "Resolver",
+        "description": "Quali server DNS ricevono i dispositivi della tua rete."
+      },
+      "ipv4": {
+        "title": "Server IPv4",
+        "description": "Fino a tre, provati in ordine."
+      },
+      "ipv6": {
+        "title": "Server IPv6",
+        "description": "Fino a due, per i dispositivi che usano IPv6."
+      }
+    },
+    "rows": {
+      "mode": {
+        "label": "DNS personalizzato",
+        "consequence_on": "I dispositivi della rete usano i server qui sotto.",
+        "consequence_off": "I dispositivi usano i server assegnati dall'operatore."
+      },
+      "provider": {
+        "label": "Provider",
+        "consequence": "Compila entrambi gli elenchi. Modificare un indirizzo lo rende Personalizzato."
+      },
+      "primary": "Primario",
+      "secondary": "Secondario",
+      "tertiary": "Terziario"
+    }
+  },
+  "ttl_mtu": {
+    "page_title": "TTL e MTU",
+    "page_description": "Riscrivi il conteggio degli hop e la dimensione dei pacchetti che il modem applica sull'interfaccia cellulare.",
+    "refresh": "Aggiorna",
+    "strip": {
+      "label": "Attivo ora",
+      "chip_custom": "Personalizzati",
+      "chip_default": "Valori predefiniti dell'operatore",
+      "retry": "Riprova",
+      "unavailable_title": "Impossibile leggere TTL o MTU",
+      "unavailable_body": "Il modem non ha risposto. Non è stato modificato nulla.",
+      "idle_title": "Nessuna sostituzione attiva",
+      "idle_body": "Il modem usa TTL e MTU dell'operatore esattamente come sono stati negoziati. Attivane uno qui sotto per cambiarli."
+    },
+    "tiles": {
+      "shared": {
+        "caption_pending": "Lettura in corso",
+        "caption_unread": "Il modem non ha risposto"
+      },
+      "ttl": {
+        "label": "TTL (IPv4)",
+        "caption_active": "Riscritto su ogni pacchetto",
+        "caption_idle": "Non riscritto"
+      },
+      "hl": {
+        "label": "Limite di hop (IPv6)",
+        "caption_active": "Riscritto su ogni pacchetto",
+        "caption_idle": "Non riscritto"
+      },
+      "mtu": {
+        "label": "MTU",
+        "unit": "byte",
+        "caption_active": "Il valore predefinito dell'operatore è {{carrier}}",
+        "caption_idle": "Negoziata con l'operatore"
+      }
+    },
+    "banner": {
+      "title": "TTL e limite di hop arrivano dal profilo {{profile}}",
+      "body": "Attivare quel profilo scrive entrambi i valori, quindi questa scheda resta bloccata per evitare che i due scrittori si sovrascrivano a vicenda. Cambiali nel profilo, oppure attiva un profilo che lascia il TTL non impostato."
+    },
+    "cards": {
+      "ttl": {
+        "title": "TTL e limite di hop",
+        "description": "Applicati ai pacchetti in uscita sull'interfaccia cellulare."
+      },
+      "mtu": {
+        "title": "Unità massima di trasmissione",
+        "description": "Il pacchetto più grande che l'interfaccia cellulare invia senza frammentarlo."
+      }
+    },
+    "rows": {
+      "shared": {
+        "consequence_off": "Attiva la riscrittura per impostare un valore.",
+        "consequence_unread": "Il modem non ha risposto, quindi per ora non c'è nulla da modificare."
+      },
+      "rewrite": {
+        "label": "Riscrivi il conteggio degli hop",
+        "consequence": "Se disattivata, il modem inoltra il conteggio di hop così come lo ha inviato il client. Alcuni operatori contano gli hop per individuare il tethering."
+      },
+      "ttl_value": {
+        "label": "Valore TTL",
+        "consequence": "{{min}}–{{max}}. Un dispositivo a un hop dal modem di solito vuole 64."
+      },
+      "hl_value": {
+        "label": "Valore del limite di hop",
+        "consequence": "L'equivalente IPv6. Impostali entrambi, a meno che tu non sappia che il client è single-stack."
+      },
+      "mtu_toggle": {
+        "label": "Sostituisci la MTU",
+        "consequence": "Se disattivata, sull'interfaccia cellulare viene ripristinato il valore negoziato con l'operatore."
+      },
+      "mtu_value": {
+        "label": "Valore MTU",
+        "consequence": "{{min}}–{{max}}. Sotto circa 1400 si può rompere la path MTU discovery sui siti che scartano ICMP.",
+        "consequence_off": "Attiva la sostituzione per impostare un valore."
+      }
+    },
+    "values": {
+      "on": "Attivo",
+      "off": "Disattivo"
+    },
+    "errors": {
+      "value_range": "TTL e limite di hop devono essere entrambi compresi tra {{min}} e {{max}}.",
+      "no_value": "Inserisci un TTL o un limite di hop prima di applicare.",
+      "mtu_range": "La MTU deve essere compresa tra {{min}} e {{max}}."
+    },
+    "toast_ttl_applied": "Applicati (TTL {{ttl}}, limite di hop {{hl}}).",
+    "toast_ttl_cleared": "Il modem è tornato al conteggio di hop dell'operatore.",
+    "toast_ttl_error": "Impossibile applicare TTL e limite di hop.",
+    "toast_mtu_applied": "MTU impostata a {{mtu}}.",
+    "toast_mtu_cleared": "La MTU è tornata al valore negoziato con l'operatore.",
+    "toast_mtu_error": "Impossibile applicare la MTU."
+  },
+  "ippt": {
+    "page": {
+      "title": "Passthrough IP e USB",
+      "description": "Assegna l'IP pubblico del modem direttamente a un solo dispositivo collegato, invece di far instradare tutta la LAN dal modem."
+    },
+    "header": {
+      "refresh": "Aggiorna"
+    },
+    "status": {
+      "label": "Ultima applicazione",
+      "mode_title": {
+        "disabled": "Modalità router",
+        "eth": "Passthrough Ethernet",
+        "usb": "Passthrough USB"
+      },
+      "blurb": {
+        "disabled": "Il modem instrada per la LAN",
+        "eth": "Impostato per assegnare l'IP WAN al dispositivo Ethernet",
+        "usb": "Impostato per assegnare l'IP WAN al dispositivo USB"
+      },
+      "gateway_off": "Gateway LAN non servito"
+    },
+    "card": {
+      "description": "Applicare scrive tutte le impostazioni e riavvia il modem.",
+      "network_description": "Applicate insieme al passthrough, con un solo riavvio.",
+      "apply": "Applica e riavvia",
+      "mac_label": "Indirizzo MAC di destinazione",
+      "mac_placeholder": "XX:XX:XX:XX:XX:XX"
+    },
+    "groups": {
+      "passthrough": "Passthrough",
+      "network": "Rete"
+    },
+    "rows": {
+      "mode": {
+        "label": "Modalità",
+        "description": "Instrada tutta la LAN o passa l'IP pubblico a un solo dispositivo."
+      },
+      "target": {
+        "label": "Dispositivo di destinazione",
+        "pick_mode": "Scegli prima una modalità.",
+        "description": "Il dispositivo che riceve l'IP pubblico."
+      },
+      "nat": {
+        "label": "NAT",
+        "description": "Con NAT va bene per quasi ogni configurazione."
+      },
+      "usb": {
+        "label": "Connessione USB",
+        "description": "Il protocollo usato quando il modem si collega via USB."
+      },
+      "dns": {
+        "label": "Proxy DNS",
+        "description": "Attivo, il modem risponde al DNS via DHCP per il dispositivo di destinazione."
+      }
+    },
+    "options": {
+      "mode_disabled": "Router",
+      "mode_eth": "Ethernet",
+      "mode_usb": "USB",
+      "target_automatic": "Automatico",
+      "target_device": "Da LAN",
+      "target_manual": "Per MAC",
+      "nat_on": "Con NAT",
+      "nat_off": "Senza NAT",
+      "dns_off": "Disattivo",
+      "dns_on": "Attivo"
+    },
+    "mode_note": {
+      "rest": "Ethernet o USB assegnano l'IP WAN a un solo dispositivo, e il modem smette di rispondere al suo gateway LAN. Tieni pronto Tailscale o un altro modo per entrare.",
+      "to_passthrough": "Applicare riavvia il modem e questa scheda lo perde. Dopo, il gateway LAN smette di rispondere, quindi tieni pronto Tailscale o un altro modo per entrare."
+    },
+    "dialog": {
+      "title": "Applicare e riavviare adesso?",
+      "body": "Le impostazioni vengono scritte e il modem si riavvia subito. Questa pagina passa il testimone al conto alla rovescia del riavvio e ti disconnette.",
+      "body_gateway": "Una volta attivo il passthrough, il modem smette di rispondere al suo indirizzo di gateway sulla LAN. Assicurati di avere Tailscale, il dispositivo in passthrough stesso o una console seriale per rientrare.",
+      "body_persist": "L'impostazione resta anche ai riavvii successivi.",
+      "cancel": "Annulla",
+      "confirm": "Applica e riavvia"
+    },
+    "toast_apply_error": "Impossibile applicare le impostazioni di Passthrough IP",
+    "errors": {
+      "read_title": "Impossibile leggere la configurazione del passthrough",
+      "read_body": "Non è stato modificato nulla. Riprova, oppure controlla che il modem stia rispondendo.",
+      "retry": "Riprova",
+      "card_unread": "Il modem non ha ancora risposto, quindi non c'è nulla da modificare finché non arriva la prima lettura.",
+      "mac_invalid": "Inserisci un indirizzo MAC completo, sei coppie di cifre esadecimali.",
+      "no_changes": "Non è ancora cambiato nulla.",
+      "device_unpicked": "Scegli prima un dispositivo connesso."
+    },
+    "device": {
+      "label": "Dispositivo di destinazione dall'elenco dei dispositivi connessi",
+      "placeholder": "Seleziona un dispositivo",
+      "scanning": "Ricerca dei dispositivi connessi…",
+      "error": "Impossibile caricare i dispositivi connessi.",
+      "empty": "Nessun dispositivo connesso trovato. Collega il dispositivo al modem, quindi esegui una nuova scansione.",
+      "retry": "Riprova",
+      "rescan": "Esegui nuova scansione",
+      "rescan_label": "Esegui una nuova scansione dei dispositivi connessi",
+      "enter_manually": "Inserisci manualmente",
+      "unknown": "Dispositivo sconosciuto"
+    },
+    "locked_by_verizon": {
+      "title": "Il passthrough IP è gestito dal tuo profilo Verizon",
+      "body": "Profilo attivo: \"{{name}}\". Per modificare queste impostazioni, disattiva il profilo da Profili personalizzati.",
+      "cta": "Apri Profili personalizzati",
+      "blocked": "Il passthrough IP è gestito dal tuo profilo Verizon."
+    }
+  },
+  "masquerade": {
+    "page_title": "Traffic Masquerade",
+    "page_description": "Fai in modo che tutto il traffico HTTPS venga visualizzato come servizio autorizzato dal DPI dell'operatore",
+    "card_title": "Traffic Masquerade",
+    "card_description": "Fai in modo che il traffico HTTPS venga visualizzato come servizio autorizzato dal DPI dell'operatore.",
+    "error_load_failed": "Impossibile caricare le impostazioni.",
+    "label_enable": "Abilita il mascheramento del traffico",
+    "label_domain": "Dominio mascherato",
+    "placeholder_domain": "speedtest.net",
+    "helper_domain": "Il dominio che appare nel falso handshake TLS inviato al corriere.",
+    "help_domain": "Gli operatori leggono l'SNI — il nome del server inviato in chiaro in ogni handshake TLS — per decidere cosa limitare. Masquerade lo riscrive con questo dominio così il traffico sembra quel servizio.",
+    "aria_domain_info": "Maggiori informazioni sul dominio masquerade",
+    "test_hint": "Esito positivo significa che gli handshake HTTPS contengono il nome falsificato, quindi l'operatore vede questo dominio invece di quello reale.",
+    "aria_test_hint": "Cosa significa una prova di iniezione superata",
+    "toast_success_enabled": "Mascheramento del traffico abilitato",
+    "toast_success_disabled": "Mascheramento del traffico disabilitato",
+    "toast_error_apply": "Impossibile salvare le impostazioni",
+    "test_title": "Prova di iniezione",
+    "test_description": "Conferma che i pacchetti SNI falsi vengano inseriti nel traffico HTTPS",
+    "state_testing": "Prova",
+    "button_run_test": "Esegui prova",
+    "errors": {
+      "load_failed": "Impossibile caricare le impostazioni",
+      "save_failed": "Impossibile salvare le impostazioni",
+      "uninstall_failed": "Impossibile disinstallare",
+      "test_failed": "Test non riuscito"
+    }
+  },
+  "video_optimizer": {
+    "page_title": "Ottimizzatore video",
+    "page_description": "Evita la limitazione del video dell'operatore utilizzando l'evasione DPI sui nomi host CDN video target",
+    "card_title": "Ottimizzatore video",
+    "card_description": "Evita la limitazione video dell'operatore sulle connessioni cellulari utilizzando l'evasione DPI.",
+    "error_load_failed": "Impossibile caricare le impostazioni.",
+    "label_enable": "Abilita l'ottimizzatore video",
+    "label_desync_repeats": "Intensità di desincronizzazione",
+    "help_desync_repeats": "Numero di volte in cui il pacchetto che elude DPI viene inviato per ciascun flusso corrispondente. Valori più alti migliorano l'affidabilità quando i pacchetti vengono persi o riordinati, ma aumentano l'utilizzo di CPU e la larghezza di banda upstream. Il valore predefinito 1 funziona per la maggior parte degli utenti.",
+    "helper_desync_repeats": "Valori più alti resistono a DPI più aggressivi ma aggiungono un piccolo sovraccarico. Il valore 1 è adatto alla maggior parte delle reti.",
+    "verify_hint": "Esito positivo significa che il motore intercetta il traffico verso i domini in elenco e applica l'elusione DPI.",
+    "aria_verify_hint": "Cosa significa una verifica superata",
+    "aria_desync_repeats_info": "Ulteriori informazioni sull'intensità di desincronizzazione",
+    "toast_success_enabled": "Ottimizzatore video abilitato",
+    "toast_success_disabled": "Ottimizzatore video disabilitato",
+    "toast_error_apply": "Impossibile salvare le impostazioni",
+    "verify_title": "Verifica servizio",
+    "verify_description": "Conferma che l'evasione DPI sta intercettando il traffico per i domini in elenco host",
+    "state_verifying": "Verifica",
+    "button_verify_service": "Verifica servizio",
+    "hostlist_card_title": "CDN Elenco nomi host",
+    "hostlist_card_description": "I domini CDN video su cui lavora l'ottimizzatore video.",
+    "hostlist_error_load_failed": "Impossibile caricare l'elenco dei nomi host.",
+    "aria_sort_az": "Ordina in ordine alfabetico",
+    "aria_sort_za": "Ordina dalla Z alla A",
+    "aria_sort_clear": "Ordinamento chiaro",
+    "aria_menu_options": "Opzioni dell'elenco host",
+    "menu_export": "Elenco di esportazione",
+    "menu_import": "Elenco di importazione",
+    "placeholder_new_domain": "ad es. cdn.esempio.com",
+    "aria_new_domain": "Nuovo dominio",
+    "aria_add_domain": "Aggiungi dominio",
+    "empty_state_no_domains": "Nessun dominio configurato",
+    "aria_custom_domain_badge": "Dominio personalizzato",
+    "aria_remove_domain": "Rimuovi {{domain}}",
+    "toast_save_success": "Elenco dei nomi host salvato",
+    "toast_save_error": "Impossibile salvare l'elenco dei nomi host",
+    "toast_restore_success": "Nomi host predefiniti ripristinati",
+    "toast_restore_error": "Impossibile ripristinare le impostazioni predefinite",
+    "toast_export_success_one": "Dominio {{count}} esportato",
+    "toast_export_success_other": "Domini {{count}} esportati",
+    "toast_import_no_new": "Nessun nuovo dominio da importare: tutto già nell'elenco",
+    "toast_import_success_one": "Importato {{count}} nuovo dominio",
+    "toast_import_success_other": "Importati {{count}} nuovi domini",
+    "button_restore_defaults": "Ripristina le impostazioni predefinite",
+    "state_restoring": "Ripristino",
+    "dialog_restore_title": "Ripristinare i nomi host predefiniti?",
+    "dialog_restore_desc": "Ciò sostituirà l'elenco corrente con i nomi host CDN predefiniti di fabbrica. Tutti i domini personalizzati che hai aggiunto verranno rimossi.",
+    "dialog_action_restore": "Ripristina le impostazioni predefinite",
+    "errors": {
+      "load_failed": "Impossibile caricare le impostazioni",
+      "save_failed": "Impossibile salvare le impostazioni",
+      "uninstall_failed": "Impossibile disinstallare",
+      "verify_start_failed": "Impossibile avviare la verifica",
+      "install_start_failed": "Impossibile avviare l'installazione",
+      "install_starting": "Avvio dell'installazione…",
+      "hostlist_load_failed": "Impossibile caricare l'elenco dei nomi host",
+      "hostlist_save_failed": "Impossibile salvare l'elenco dei nomi host",
+      "hostlist_restore_failed": "Impossibile ripristinare le impostazioni predefinite"
+    }
+  }
+}

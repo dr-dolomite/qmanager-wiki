@@ -1,0 +1,84 @@
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import { Radio, Zap, ShieldCheck, Globe, ArrowRight } from "lucide-react";
+
+interface QuickTask {
+  title: string;
+  description: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const QUICK_TASKS: QuickTask[] = [
+  {
+    title: "Boost Signal & Aim Antennas",
+    description: "Live signal meter to help you point and position directional antennas for peak RSRP and SINR.",
+    href: "/docs/cellular/antenna-alignment/",
+    icon: Radio,
+  },
+  {
+    title: "Lock Fast Bands & Towers",
+    description: "Pin your connection to the fastest 5G & LTE frequency bands or lock onto specific cell towers.",
+    href: "/docs/cellular/band-locking/",
+    icon: Zap,
+  },
+  {
+    title: "Automated Watchdog",
+    description: "Self-healing recovery daemon that monitors latency and automatically restores dropped links.",
+    href: "/docs/resilience/connection-watchdog/",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Remote Mesh Access",
+    description: "Securely monitor and configure your modem from anywhere over Tailscale or Netbird VPN.",
+    href: "/docs/management/tailscale-vpn/",
+    icon: Globe,
+  },
+];
+
+export default function QuickTasks() {
+  return (
+    <section className="py-12 sm:py-16">
+      <div className="mb-10">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+          Popular tasks &amp; guides
+        </h2>
+        <p className="mt-2 max-w-xl text-base text-muted-foreground leading-relaxed text-pretty">
+          Direct, practical tutorials for the most widely used modem optimization workflows.
+        </p>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {QUICK_TASKS.map((task) => {
+          const Icon = task.icon;
+          return (
+            <Link
+              key={task.title}
+              href={task.href}
+              className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-5 sm:p-6 transition-[border-color,box-shadow] duration-150 hover:border-primary/40 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <div>
+                <div className="mb-4 flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <Icon className="size-5" aria-hidden="true" />
+                </div>
+                <h3 className="text-base font-semibold text-foreground tracking-tight transition-colors group-hover:text-primary">
+                  {task.title}
+                </h3>
+                <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed text-pretty">
+                  {task.description}
+                </p>
+              </div>
+
+              <div className="mt-5 flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors group-hover:text-foreground">
+                <span>Read guide</span>
+                <ArrowRight className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" aria-hidden="true" />
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    </section>
+  );
+}

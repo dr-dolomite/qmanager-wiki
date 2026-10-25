@@ -1,0 +1,822 @@
+{
+  "shared": {
+    "os_linux": "Linux",
+    "os_macos": "macOS",
+    "os_windows": "Windows",
+    "os_ios": "iOS",
+    "os_android": "Android",
+    "os_freebsd": "FreeBSD",
+    "os_unknown": "—",
+    "unknown": "Tidak Diketahui"
+  },
+  "network_events": {
+    "title": "Peristiwa Jaringan",
+    "description": "Telusuri peristiwa koneksi, sinyal, dan konfigurasi terkini.",
+    "card_title": "Peristiwa Jaringan",
+    "card_description": "Peristiwa jaringan terkini yang ditangkap oleh poller perangkat.",
+    "tab_all": "Semua",
+    "tab_band_changes": "Perubahan Band",
+    "tab_network_mode": "Mode Jaringan",
+    "tab_data_connection": "Koneksi Data",
+    "sort_label": "Urutkan berdasarkan",
+    "sort_newest": "Terbaru lebih dulu",
+    "sort_oldest": "Terlama lebih dulu",
+    "sort_type": "Jenis peristiwa",
+    "limit_label": "Maks Peristiwa",
+    "limit_all": "Semua Peristiwa",
+    "limit_10": "10 Peristiwa",
+    "limit_25": "25 Peristiwa",
+    "empty_all": "Tidak ada peristiwa jaringan ditemukan.",
+    "empty_band_changes": "Tidak ada peristiwa perubahan band ditemukan.",
+    "empty_network_mode": "Tidak ada peristiwa mode jaringan ditemukan.",
+    "empty_data_connection": "Tidak ada peristiwa koneksi data ditemukan.",
+    "auto_refresh_paused": "Auto-refresh dijeda — menampilkan peristiwa per {{time}}.",
+    "failed_to_load": "Gagal memuat peristiwa jaringan: {{error}}",
+    "auto_refresh_label": "Auto-refresh",
+    "refresh_button": "Muat Ulang",
+    "table_header_event_type": "Jenis Peristiwa",
+    "table_header_message": "Pesan",
+    "table_header_time": "Tanggal & Waktu",
+    "showing_count_one": "Menampilkan {{shown}} dari {{total}} peristiwa",
+    "showing_count_other": "Menampilkan {{shown}} dari {{total}} peristiwa",
+    "last_updated": "Terakhir diperbarui: {{time}}",
+    "aria_refresh": "Muat ulang peristiwa jaringan"
+  },
+  "alerts": {
+    "activity": {
+      "cause": {
+        "planned": "Direncanakan",
+        "unexpected": "Tidak terduga",
+        "watchdog": "Watchdog"
+      },
+      "channel": {
+        "email": "Email",
+        "sms": "SMS"
+      },
+      "day": {
+        "today": "Hari ini",
+        "undated": "Waktu tidak tercatat",
+        "yesterday": "Kemarin"
+      },
+      "description": "Peringatan terkirim dan reboot, terbaru di atas.",
+      "empty": {
+        "description": "Peringatan muncul di sini setelah salurannya mengirim satu, dan reboot dicatat otomatis beserta penyebabnya.",
+        "title": "Belum ada yang terjadi"
+      },
+      "error": {
+        "title": "Tidak dapat memuat aktivitas",
+        "description": "Perangkat tidak menjawab. Coba lagi sebentar lagi.",
+        "retry": "Coba lagi"
+      },
+      "event": {
+        "reboot": "Modem reboot"
+      },
+      "notice": {
+        "stale": "Menampilkan aktivitas terakhir yang berhasil kami baca."
+      },
+      "sr": {
+        "failed": "Peringatan gagal",
+        "reboot": "Reboot tercatat",
+        "sent": "Peringatan terkirim"
+      },
+      "time": {
+        "days_one": "{{count}}h lalu",
+        "days_other": "{{count}}h lalu",
+        "hours_one": "{{count}}j lalu",
+        "hours_other": "{{count}}j lalu",
+        "just_now": "Baru saja",
+        "minutes_one": "{{count}}m lalu",
+        "minutes_other": "{{count}}m lalu",
+        "unknown": "Tidak diketahui"
+      },
+      "title": "Aktivitas",
+      "transcript_label": "Riwayat peringatan dan reboot",
+      "trigger": {
+        "test": "Peringatan uji"
+      }
+    },
+    "channels": {
+      "description": "Atur bagaimana masing-masing menjangkau Anda.",
+      "email": {
+        "address_error": "Masukkan alamat email yang valid.",
+        "mailer_install": "Instal msmtp",
+        "mailer_installing": "Menginstal…",
+        "mailer_missing": "Mailer msmtp belum terinstal, jadi email belum bisa dikirim. SMS tetap tersimpan.",
+        "mailer_recheck": "Periksa lagi",
+        "password_hide": "Sembunyikan kata sandi aplikasi",
+        "password_hint": "Buat kata sandi aplikasi untuk perangkat ini di Akun Google Anda.",
+        "password_keep": "Biarkan kosong untuk tetap memakai kata sandi tersimpan",
+        "password_label": "Kata sandi aplikasi Gmail",
+        "password_link": "Buka kata sandi aplikasi Google",
+        "password_missing": "Kata sandi aplikasi diperlukan untuk mengirim email.",
+        "password_placeholder": "xxxx xxxx xxxx xxxx",
+        "password_show": "Tampilkan kata sandi aplikasi",
+        "recipient_hint": "Tujuan pengiriman peringatan.",
+        "recipient_label": "Email penerima",
+        "recipient_missing": "Alamat penerima diperlukan.",
+        "sender_hint": "Akun Gmail yang mengirim peringatan.",
+        "sender_label": "Email pengirim",
+        "sender_missing": "Alamat pengirim diperlukan.",
+        "test": "Kirim email tes",
+        "title": "Peringatan email",
+        "sub": "Dikirim lewat Gmail setelah koneksi kembali."
+      },
+      "empty": {
+        "description": "Perangkat ini tidak mengembalikan saluran peringatan apa pun, sehingga belum ada yang dapat dikonfigurasi.",
+        "title": "Tidak ada saluran yang dilaporkan"
+      },
+      "loading": "Memuat saluran peringatan",
+      "name": {
+        "email": "Email",
+        "sms": "SMS"
+      },
+      "rail_label": "Saluran peringatan",
+      "save": {
+        "action": "Simpan Pengaturan",
+        "blocked": "Perbaiki kolom yang ditandai",
+        "blocked_in": "Perbaiki kesalahan di {{channels}}",
+        "clean": "Semua perubahan tersimpan",
+        "discard": "Buang",
+        "failed": "Pengaturan tidak dapat disimpan.",
+        "succeeded": "Pengaturan peringatan tersimpan",
+        "errors": {}
+      },
+      "secret_saved": "Tersimpan",
+      "sms": {
+        "phone_error": "Masukkan nomor beserta kode negaranya, seperti +14155551234.",
+        "phone_hint": "Sertakan kode negara dengan tanda plus di depan.",
+        "phone_label": "Telepon penerima",
+        "phone_missing": "Nomor telepon penerima diperlukan.",
+        "test": "Kirim SMS tes",
+        "title": "Peringatan SMS",
+        "sub": "Tetap sampai meski saat gangguan."
+      },
+      "status": {
+        "incomplete": "Perlu disiapkan",
+        "needs_fixing": "Ada kesalahan yang belum disimpan",
+        "off": "Mati",
+        "ready": "Siap",
+        "unused": "Tidak ada peristiwa yang dirutekan"
+      },
+      "test": {
+        "blocked_busy": "Tes lain masih berjalan.",
+        "blocked_dirty": "Simpan perubahan Anda dahulu. Tes berjalan berdasarkan pengaturan yang tersimpan.",
+        "blocked_incomplete": "Selesaikan penyiapan saluran ini, lalu simpan, untuk mengirim tes.",
+        "blocked_mailer": "Instal mailer msmtp untuk mengirim email tes.",
+        "blocked_off": "Aktifkan saluran ini, lalu simpan, untuk mengirim tes.",
+        "failed": "Tes tidak dapat dikirim.",
+        "sending": "Mengirim…",
+        "succeeded": "Tes {{channel}} terkirim",
+        "errors": {
+          "send_failed_sms": "SMS tes tidak terkirim, jadi periksa sinyal, pulsa SIM, dan nomornya.",
+          "send_failed_email": "Email tes tidak terkirim, jadi periksa alamat, sandi aplikasi, dan koneksinya."
+        }
+      },
+      "threshold_error": "Masukkan jumlah menit bulat dari 1 sampai 60.",
+      "threshold_hint": "Gangguan yang lebih singkat dicatat, tidak dikirim.",
+      "threshold_label": "Tunggu sebelum memberi peringatan",
+      "threshold_unit": "mnt",
+      "title": "Saluran",
+      "sends_for": "Dikirim untuk",
+      "error": {
+        "title": "Saluran tidak dapat dimuat",
+        "description": "Perangkat tidak menjawab. Coba lagi sebentar lagi.",
+        "retry": "Coba lagi"
+      }
+    },
+    "coverage": {
+      "description": "Apa yang sampai ke Anda, sesuai yang disimpan.",
+      "emptyDesc": "Perangkat tidak melaporkan kemampuan peringatan apa pun, sehingga tidak ada yang dapat diaktifkan di sini.",
+      "emptyTitle": "Tidak ada yang dapat dirutekan",
+      "errorDesc": "Perangkat tidak menjawab, sehingga kami tidak dapat menunjukkan apa yang akan terpicu.",
+      "errorRetry": "Coba lagi",
+      "errorTitle": "Tidak dapat memuat cakupan",
+      "event": {
+        "connection_lost": {
+          "name": "Koneksi terputus"
+        },
+        "connection_restored": {
+          "name": "Koneksi pulih"
+        },
+        "reboot": {
+          "name": "Modem reboot"
+        }
+      },
+      "loading": "Memuat cakupan",
+      "reason": {
+        "email_needs_internet": "Perlu internet",
+        "not_supported": "Saluran ini tidak dapat mengirim peristiwa ini"
+      },
+      "staleNotice": "Menampilkan pengaturan terakhir yang berhasil kami baca dari perangkat.",
+      "title": "Cakupan",
+      "verdict": {
+        "all": "Semua tercakup",
+        "outage": "Gangguan tidak tercakup",
+        "partial": "{{covered}} dari {{total}} tercakup",
+        "none": "Tidak ada yang akan dikirim"
+      },
+      "needsSetup": "{{channel}} perlu disiapkan",
+      "notSent": "Tidak dikirim"
+    },
+    "page": {
+      "description": "Siapa yang diberi tahu saat koneksi terputus, kembali, atau modem reboot.",
+      "refresh": "Segarkan",
+      "title": "Peringatan",
+      "unreadable": "Perangkat tidak menjawab."
+    }
+  },
+  "watchdog": {
+    "page": {
+      "title": "Watchdog",
+      "description": "Memantau koneksi internet dan menjalankan urutan pemulihan saat koneksi terputus.",
+      "refresh": "Segarkan",
+      "unreadableTitle": "Tidak dapat membaca pengaturan watchdog",
+      "unreadable": "Modem tidak menjawab.",
+      "retry": "Coba lagi"
+    },
+    "band": {
+      "checks": "Pemeriksaan Gagal",
+      "recoveries": "Pemulihan",
+      "reboots": "Reboot",
+      "absent": "Tidak dilaporkan",
+      "checksCaption": "Sebelum pemulihan dimulai",
+      "cooldownCaption": "Memeriksa ulang dalam {{seconds}} detik",
+      "recoveriesLast": "Langkah {{tier}}, {{ago}}",
+      "recoveriesNone": "Belum pernah",
+      "rebootsCaption": "Dalam satu jam terakhir",
+      "rebootsOff": "Langkah reboot nonaktif",
+      "aria": "Status watchdog",
+      "cooldownStep": "Langkah {{tier}} dijalankan. Memeriksa ulang dalam {{seconds}} detik."
+    },
+    "phase": {
+      "off": {
+        "label": "Mati",
+        "blurb": "Watchdog tidak memantau koneksi."
+      },
+      "unknown": {
+        "label": "Tidak diketahui",
+        "blurb": "Modem tidak merespons, sehingga status watchdog tidak dapat diketahui."
+      },
+      "starting": {
+        "label": "Memulai",
+        "blurb": "Layanan baru saja diaktifkan dan belum melaporkan apa pun."
+      },
+      "not_running": {
+        "label": "Tidak dilaporkan",
+        "blurb": "Diaktifkan, tetapi watchdog berhenti melapor."
+      },
+      "auto_disabled": {
+        "label": "Mati otomatis",
+        "blurb": "Batas reboot tercapai. Nyalakan lagi setelah koneksi stabil."
+      },
+      "monitor": {
+        "label": "Memantau",
+        "blurb": "Koneksi dalam kondisi baik. Memantau kemungkinan gangguan."
+      },
+      "suspect": {
+        "label": "Memeriksa",
+        "blurb": "Pemeriksaan konektivitas baru saja gagal. Memastikan sebelum bertindak."
+      },
+      "recovery": {
+        "label": "Memulihkan",
+        "blurb": "Menjalankan urutan pemulihan untuk memulihkan koneksi."
+      },
+      "cooldown": {
+        "label": "Cooldown",
+        "blurb": "Menunggu langkah pemulihan terakhir stabil sebelum memeriksa ulang."
+      },
+      "locked": {
+        "label": "Dijeda",
+        "blurb": "Pemeliharaan sedang berlangsung, sehingga watchdog menahan diri sementara."
+      },
+      "radio_off": {
+        "blurb": "Radio sedang mati, sehingga watchdog menahan diri sementara."
+      },
+      "disabled": {
+        "label": "Nonaktif",
+        "blurb": "Layanan berjalan, tetapi dimatikan."
+      },
+      "ssr_hold": {
+        "label": "Menahan",
+        "blurb": "Baseband sedang memulai ulang sendiri. Pemulihan menunggu hingga kembali."
+      }
+    },
+    "master": {
+      "aria": "Aktifkan watchdog koneksi"
+    },
+    "ladder": {
+      "title": "Urutan pemulihan",
+      "description": "Dicoba berurutan, mulai dari yang paling ringan.",
+      "aria": "Urutan pemulihan",
+      "status": {
+        "blocked": "Perlu slot",
+        "done": "Sudah dicoba",
+        "running": "Sedang berjalan"
+      },
+      "tier1": {
+        "name": "Daftar ulang ke jaringan",
+        "consequence": "Koneksi terputus selama beberapa detik."
+      },
+      "tier2": {
+        "name": "Mulai ulang radio",
+        "consequence": "Dilewati saat penguncian tower aktif."
+      },
+      "tier3": {
+        "name": "Beralih ke SIM cadangan",
+        "consequence": "Tetap memakai SIM cadangan sampai Anda mengembalikannya.",
+        "slotLabel": "Slot SIM cadangan",
+        "slot": "Slot {{slot}}"
+      },
+      "tier4": {
+        "name": "Reboot Perangkat",
+        "consequence": "Offline sekitar satu menit.",
+        "capLabel": "Maksimum reboot per jam",
+        "capLead": "Hingga",
+        "capUnit": "per jam"
+      },
+      "tierAria": "Aktifkan langkah pemulihan ini: {{name}}",
+      "failback": {
+        "name": "Kembali ke SIM utama",
+        "consequence": "Mencoba ulang SIM utama; koneksi terputus sebentar tiap percobaan.",
+        "lead": "Setiap",
+        "unit": "mnt",
+        "intervalLabel": "Interval cek ulang SIM utama"
+      }
+    },
+    "detection": {
+      "title": "Deteksi",
+      "description": "Seberapa cepat koneksi yang diam dianggap sebagai gangguan.",
+      "probe": {
+        "label": "Periksa setiap",
+        "short": "{{seconds}} dtk"
+      },
+      "threshold": {
+        "label": "Terputus setelah",
+        "unit": "pemeriksaan gagal"
+      },
+      "cooldown": {
+        "label": "Jeda antarlangkah",
+        "unit": "dtk"
+      },
+      "timeline": {
+        "eyebrow": "Jika koneksi terputus",
+        "declaredStep": "Gangguan dinyatakan, langkah {{tier}}",
+        "declaredReboot": "Gangguan dinyatakan, langkah 4, reboot",
+        "step": "Langkah {{tier}}",
+        "reboot": "Langkah 4, reboot",
+        "about": "sekitar {{time}}",
+        "seconds": "{{s}} dtk",
+        "minutes": "{{m}} mnt",
+        "minutesSeconds": "{{m}} mnt {{s}} dtk",
+        "off": "Watchdog mati, jadi tidak ada yang berjalan.",
+        "none": "Tidak ada langkah yang aktif, jadi tidak ada yang berjalan.",
+        "invalid": "Masukkan nilai deteksi yang valid untuk melihat pratinjau urutan waktu.",
+        "stopped": "Langkah 3 tidak punya slot, jadi urutan berhenti di sana."
+      },
+      "quality": {
+        "label": "Pemicu kualitas",
+        "unit": "cek",
+        "caption": "Lebih dari {{ms}} ms atau kehilangan {{pct}}%",
+        "link": "Ambang batas"
+      },
+      "ssr": {
+        "label": "Tahan saat baseband restart",
+        "unit": "dtk",
+        "caption": "Biarkan modem selesai memulai ulang sendiri dulu"
+      }
+    },
+    "activity": {
+      "title": "Aktivitas pemulihan",
+      "description": "Tindakan yang telah dilakukan watchdog, terbaru dulu.",
+      "tier4Reboot": "Watchdog me-restart modem",
+      "type": {
+        "recovery": "Pemulihan",
+        "failover": "Failover SIM"
+      },
+      "day": {
+        "today": "Hari ini",
+        "yesterday": "Kemarin"
+      },
+      "time": {
+        "just_now": "Baru saja",
+        "minutes_one": "{{count}}m lalu",
+        "minutes_other": "{{count}}m lalu",
+        "hours_one": "{{count}}j lalu",
+        "hours_other": "{{count}}j lalu",
+        "days_one": "{{count}}h lalu",
+        "days_other": "{{count}}h lalu"
+      },
+      "empty": {
+        "title": "Belum ada aktivitas pemulihan",
+        "description": "Langkah pemulihan dan failover SIM muncul di sini saat watchdog menangani gangguan."
+      },
+      "error": {
+        "title": "Tidak dapat memuat aktivitas pemulihan",
+        "retry": "Coba lagi"
+      },
+      "allEvents": "Semua peristiwa"
+    },
+    "save": {
+      "discard": "Buang",
+      "action": "Simpan",
+      "clean": "Semua perubahan tersimpan",
+      "blockedIn": "Periksa {{fields}} sebelum menyimpan",
+      "toastOk": "Pengaturan watchdog tersimpan",
+      "toastFail": "Tidak dapat menyimpan pengaturan watchdog",
+      "confirmReboot": {
+        "title": "Izinkan watchdog me-reboot modem?",
+        "body": "Setelah disimpan, watchdog dapat memulai ulang modem sendiri ketika semua langkah yang lebih ringan telah gagal. Halaman ini akan hilang sekitar satu menit selama modem kembali aktif.",
+        "cap": "Reboot dibatasi {{cap}} kali per jam. Saat batas itu tercapai, watchdog mematikan dirinya sampai Anda menyalakannya lagi.",
+        "cancel": "Batal",
+        "action": "Izinkan reboot"
+      }
+    },
+    "errors": {
+      "failThreshold": "Harus antara 1 dan 20",
+      "probeInterval": "Harus antara 1 dan 60 detik",
+      "cooldown": "Harus antara 10 dan 300 detik",
+      "maxReboots": "Harus antara 1 dan 10",
+      "backupSim": "Pilih slot SIM cadangan untuk mengaktifkan failover",
+      "qualityConsecutive": "Harus antara 1 dan 60",
+      "ssrGrace": "Harus antara 10 dan 120 detik",
+      "recheckInterval": "Harus antara 5 dan 1440 menit"
+    },
+    "failover": {
+      "title": "Berjalan menggunakan SIM cadangan",
+      "body": "Beralih ke slot {{current}} {{since}}. SIM asli berada di slot {{original}}.",
+      "recently": "baru-baru ini",
+      "revert": "Pulihkan SIM asli",
+      "reverting": "Memulihkan…",
+      "confirmTitle": "Pulihkan SIM asli?",
+      "confirmBody": "Ini akan beralih kembali ke slot SIM {{original}}. Internet Anda akan terputus sebentar saat modem tersambung ulang.",
+      "cancel": "Batal",
+      "confirm": "Pulihkan SIM",
+      "requested": "Permintaan pemulihan SIM diterima. Watchdog akan segera memprosesnya.",
+      "failed": "Tidak dapat meminta pemulihan SIM"
+    },
+    "strip": {
+      "title": "Pemeriksaan",
+      "noReply": "Tanpa balasan",
+      "reply": "{{ms}} ms",
+      "tipAgo": "{{time}} lalu",
+      "ago": "{{minutes}} mnt lalu",
+      "now": "Sekarang",
+      "empty": "Tidak ada data pemeriksaan dari modem",
+      "aria": "{{total}} pemeriksaan, {{missed}} tanpa balasan"
+    },
+    "sim_swap_title": "Kartu SIM baru terdeteksi",
+    "sim_swap_with_profile": "Profil <strong>{{profile_name}}</strong> cocok dengan SIM ini.",
+    "sim_swap_no_profile": "Tidak ada profil yang cocok ditemukan.",
+    "sim_swap_apply_button": "Terapkan Profil",
+    "sim_swap_dismiss_button": "Tutup",
+    "sim_swap_dismiss_aria": "Tutup notifikasi pergantian SIM"
+  },
+  "netbird": {
+    "actions": {
+      "cancel": "Batal",
+      "retry": "Coba lagi"
+    },
+    "page": {
+      "title": "NetBird VPN",
+      "description": "VPN mesh Anda: apa yang dilakukan modem ini di jaringan, dan siapa lagi yang ada di dalamnya.",
+      "refresh": "Segarkan",
+      "stale": "Menampilkan status terakhir yang berhasil dibaca. {{message}}",
+      "unreadableTitle": "Tidak dapat membaca status NetBird",
+      "unreadable": "Perangkat tidak merespons."
+    },
+    "mutex": {
+      "title": "VPN lain sudah terinstal",
+      "description": "Hanya satu VPN yang dapat diinstal dalam satu waktu. Copot {{other_vpn}} dari <link>halaman Tailscale</link> terlebih dahulu."
+    },
+    "status": {
+      "aria": "Status NetBird",
+      "connected": "Terhubung",
+      "disconnected": "Terputus",
+      "serviceStopped": "Layanan berhenti",
+      "notInstalled": "Belum terinstal",
+      "unknown": "Tidak diketahui"
+    },
+    "band": {
+      "dash": "—",
+      "connectionEyebrow": "Koneksi",
+      "version": "Versi {{version}}",
+      "versionUnknown": "Versi tidak diketahui",
+      "deviceEyebrow": "Perangkat ini",
+      "deviceUnknown": "Belum ada alamat NetBird",
+      "controlEyebrow": "Bidang kontrol",
+      "controlIssue": "Perlu perhatian",
+      "controlIdle": "Tersedia setelah terhubung",
+      "controlOk": "Manajemen dan sinyal",
+      "controlDetail": "Manajemen: {{management}}, sinyal: {{signal}}",
+      "peersEyebrow": "Peer online",
+      "peersTotal_one": "{{count}} peer di jaringan Anda",
+      "peersTotal_other": "{{count}} peer di jaringan Anda",
+      "noPeers": "Belum ada peer"
+    },
+    "connection": {
+      "title": "Koneksi",
+      "description": "Apakah modem ini bergabung ke jaringan NetBird, dan bagaimana perilakunya setelah bergabung.",
+      "version": "v{{version}}",
+      "connect": "Hubungkan",
+      "connecting": "Menghubungkan…",
+      "disconnect": "Putuskan",
+      "disconnecting": "Memutuskan…",
+      "startService": "Mulai layanan",
+      "starting": "Memulai…",
+      "stopService": "Hentikan layanan",
+      "stopping": "Menghentikan…",
+      "bootTitle": "Mulai saat boot",
+      "bootDescription": "Aktifkan NetBird otomatis setelah modem dimulai ulang.",
+      "on": "Aktif",
+      "off": "Nonaktif",
+      "setupKeyLabel": "Setup key",
+      "setupKeyPlaceholder": "Masukkan setup key (opsional)",
+      "setupKeyHelp": "Tempel setup key dari dashboard NetBird, atau kosongkan jika modem ini sudah terdaftar."
+    },
+    "device": {
+      "title": "Perangkat ini",
+      "description": "Cara modem mengenali dirinya di jaringan NetBird.",
+      "fqdn": "FQDN",
+      "netbirdIp": "NetBird IP",
+      "interface": "Antarmuka",
+      "management": "Manajemen",
+      "signal": "Sinyal",
+      "emptyTitle": "Belum ada di jaringan",
+      "emptyDescription": "Hubungkan NetBird, dan alamat, nama, serta kondisi tautan modem ini akan muncul di sini."
+    },
+    "peers": {
+      "title": "Peer jaringan",
+      "description": "Perangkat lain di jaringan NetBird Anda, dan apakah dapat dijangkau.",
+      "dash": "—",
+      "unnamed": "Perangkat tanpa nama",
+      "colDevice": "Perangkat",
+      "colAddress": "Alamat",
+      "colConnection": "Jalur",
+      "colStatus": "Status",
+      "colLastSeen": "Terakhir terlihat",
+      "online": "Online",
+      "offline": "Offline",
+      "p2p": "P2P",
+      "relayed": "Relayed",
+      "countOnline": "{{online}} dari {{total}} online",
+      "errorTitle": "Gagal memuat peer",
+      "emptyTitle": "Tidak ada perangkat lain",
+      "emptyDescription": "Belum ada perangkat lain yang bergabung ke jaringan ini. Tambahkan perangkat dari dashboard NetBird dan perangkat itu akan muncul di sini.",
+      "offlineTitle": "Tidak terhubung",
+      "offlineDescription": "Hubungkan NetBird untuk melihat perangkat lain di jaringan Anda.",
+      "connectedCount_one": "{{count}} peer terhubung",
+      "connectedCount_other": "{{count}} peer terhubung",
+      "noDetail": "Versi NetBird ini tidak menampilkan detail per peer. Perbarui NetBird untuk melihatnya."
+    },
+    "install": {
+      "title": "NetBird",
+      "description": "VPN mesh untuk menjangkau modem ini dari mana saja, tanpa membuka port.",
+      "conditionTitle": "NetBird belum terinstal",
+      "conditionDescription": "Instalasi mengunduh paket NetBird melalui tautan seluler yang sama dengan sesi ini, sehingga memakai kuota data dan koneksi akan lebih lambat selama prosesnya.",
+      "install": "Instal NetBird",
+      "installing": "Menginstal…",
+      "checkAgain": "Periksa lagi",
+      "done": "NetBird terinstal.",
+      "failed": "Instalasi tidak selesai.",
+      "manualLabel": "Atau instal dari shell",
+      "copyCommand": "Salin perintah instalasi",
+      "manualCommand": "opkg update && opkg install netbird"
+    },
+    "danger": {
+      "uninstall": "Copot",
+      "removing": "Menghapus…",
+      "dialogTitle": "Copot NetBird?",
+      "dialogDescription": "Ini menghapus paket NetBird, aturan firewall-nya, dan semua status koneksi dari modem ini. Reboot setelahnya membersihkan sisa yang tertinggal.",
+      "rebootTitle": "Reboot disarankan",
+      "rebootDescription": "NetBird telah dihapus. Reboot membersihkan sisa aturan firewall dan artefak lainnya. Reboot sekarang?",
+      "rebootLater": "Reboot nanti",
+      "rebootNow": "Reboot sekarang",
+      "rebooting": "Memulai ulang…"
+    },
+    "toast": {
+      "bootEnabled": "NetBird akan dimulai saat boot",
+      "bootDisabled": "NetBird tidak akan dimulai saat boot",
+      "bootFailed": "Tidak dapat mengubah pengaturan boot",
+      "connected": "Menghubungkan ke NetBird",
+      "connectFailed": "Tidak dapat terhubung ke NetBird",
+      "disconnected": "NetBird terputus",
+      "disconnectFailed": "Tidak dapat memutuskan NetBird",
+      "serviceStarted": "Layanan NetBird dimulai",
+      "serviceStartFailed": "Tidak dapat memulai layanan NetBird",
+      "serviceStopped": "Layanan NetBird dihentikan",
+      "serviceStopFailed": "Tidak dapat menghentikan layanan NetBird",
+      "uninstalled": "NetBird dicopot",
+      "uninstallFailed": "Tidak dapat mencopot NetBird",
+      "installed": "NetBird terinstal",
+      "installFailed": "Instalasi NetBird tidak selesai",
+      "copied": "Perintah instalasi disalin",
+      "copyFailed": "Tidak dapat menyalin perintah"
+    },
+    "errors": {
+      "fetch_failed": "Tidak dapat memuat status NetBird"
+    }
+  },
+  "connection_quality": {
+    "page": {
+      "title": "Kualitas Koneksi",
+      "description": "Endpoint yang di-ping modem dan batas yang menjadikan koneksi lambat sebagai peristiwa."
+    },
+    "targets": {
+      "title": "Target Probe",
+      "description": "Di-ping berurutan sampai ada yang menjawab, untuk mengetahui apakah internet tersambung.",
+      "restore": "Pulihkan bawaan",
+      "save": "Simpan Target Probe",
+      "leg": {
+        "ipv4": "Target IPv4",
+        "ipv6": "Target cadangan IPv6"
+      },
+      "error": {
+        "title": "Tidak dapat membaca target probe",
+        "body": "Target yang tersimpan tetap digunakan.",
+        "retry": "Coba lagi"
+      },
+      "toast": {
+        "saved": "Target probe tersimpan.",
+        "failed": "Gagal menyimpan target probe."
+      },
+      "validation": {
+        "empty": "Masukkan sebuah target.",
+        "too_long": "Gunakan maksimal {{max}} karakter.",
+        "spaces": "Spasi tidak diperbolehkan.",
+        "disallowed": "Mengandung karakter yang tidak diperbolehkan.",
+        "ipv4_invalid": "Masukkan alamat IPv4 atau nama host.",
+        "ipv6_invalid": "Bukan alamat IPv6 yang valid.",
+        "ipv6_colon": "Alamat IPv6 mengandung titik dua."
+      },
+      "verdict": {
+        "ipv4": "IPv4 menjawab",
+        "ipv6": "IPv6 menjawab",
+        "none": "Tidak ada jawaban",
+        "unknown": "Tidak melapor"
+      },
+      "group": {
+        "sensitivity": "Sensitivitas",
+        "ipv4": "IPv4",
+        "ipv6": "Cadangan IPv6"
+      },
+      "fallback_hint": "Di-ping hanya saat target IPv4 tidak menjawab, jadi koneksi khusus IPv6 tidak dianggap sebagai pemadaman.",
+      "fallback_hint_label": "Tentang cadangan IPv6",
+      "interval": {
+        "label": "Interval probe",
+        "value": "Setiap {{seconds}} detik",
+        "override": "Setiap {{seconds}} detik (diatur oleh Watchdog)"
+      },
+      "failed": "Gagal menyimpan",
+      "profile": {
+        "sensitive": "Sensitif",
+        "regular": "Reguler",
+        "relaxed": "Santai",
+        "quiet": "Senyap"
+      }
+    },
+    "thresholds": {
+      "title": "Ambang Kualitas",
+      "description": "Kapan koneksi yang lambat atau kehilangan paket dicatat sebagai peristiwa jaringan.",
+      "latency": {
+        "title": "Latensi"
+      },
+      "loss": {
+        "title": "Kehilangan paket"
+      },
+      "preset": {
+        "standard": "Standar",
+        "tolerant": "Toleran",
+        "very_tolerant": "Sangat toleran",
+        "custom": "Kustom"
+      },
+      "save": "Simpan Ambang",
+      "error": {
+        "title": "Tidak dapat membaca ambang kualitas",
+        "body": "Batas yang tersimpan tetap digunakan.",
+        "retry": "Coba lagi"
+      },
+      "toast": {
+        "saved": "Ambang kualitas tersimpan.",
+        "failed": "Gagal menyimpan ambang kualitas."
+      },
+      "row": {
+        "flags": "Ditandai setelah",
+        "now": "Saat ini",
+        "limit": "Batas"
+      },
+      "flags": {
+        "latency_one": "{{count}} sampel di atas {{ms}} ms",
+        "latency_other": "{{count}} sampel di atas {{ms}} ms",
+        "loss_one": "{{count}} sampel pada {{pct}}% atau lebih",
+        "loss_other": "{{count}} sampel pada {{pct}}% atau lebih",
+        "pending": "Masukkan batas"
+      },
+      "now": {
+        "latency": "{{ms}} ms",
+        "loss": "{{pct}}%",
+        "no_reply": "Tidak ada balasan",
+        "collecting": "Mengumpulkan",
+        "over_latency": "Melebihi batas {{ms}} ms",
+        "over_loss": "Melebihi batas {{pct}}%"
+      },
+      "default_chip": "Nilai bawaan",
+      "failed": "Gagal menyimpan",
+      "unit": {
+        "latency": "ms",
+        "loss": "%"
+      },
+      "validation": {
+        "range": "Masukkan bilangan bulat dari {{min}} sampai {{max}}."
+      }
+    }
+  },
+  "prometheus": {
+    "page": {
+      "title": "Prometheus",
+      "description": "Izinkan server Prometheus mengumpulkan data sinyal dan kondisi modem ini."
+    },
+    "card": {
+      "title": "Metrik Prometheus",
+      "description": "Scrape memerlukan token di bawah; pengenal perangkat tidak pernah disertakan."
+    },
+    "endpoint": {
+      "label": "Endpoint metrik",
+      "consequence_off": "Prometheus tidak dapat membaca modem ini.",
+      "consequence_on": "Prometheus dapat membaca data sinyal, operator, dan kondisi dengan token."
+    },
+    "freshness": {
+      "label": "Kesegaran scrape",
+      "hint_label": "Tentang kesegaran scrape",
+      "hint": "Hanya berlaku selama Prometheus melakukan scrape setidaknya sekali per menit. Polling normal dilanjutkan dua menit setelah scrape terakhir.",
+      "options": {
+        "adaptive": "Adaptif",
+        "balanced": "Seimbang",
+        "realtime": "Waktu nyata"
+      },
+      "consequence": {
+        "adaptive": "Scrape tidak mengubah seberapa sering modem dibaca.",
+        "balanced": "Modem tidak pernah turun ke polling paling lambat selama Prometheus melakukan scrape.",
+        "realtime": "Modem dibaca setiap 2 detik selama Prometheus melakukan scrape, seperti dasbor yang sedang dibuka."
+      }
+    },
+    "status": {
+      "label": "Status scrape",
+      "endpoint_off": "Endpoint nonaktif"
+    },
+    "facts": {
+      "no_scrapes": "Belum ada scrape",
+      "last_scrape_seconds_one": "Scrape terakhir {{count}} dtk lalu",
+      "last_scrape_seconds_other": "Scrape terakhir {{count}} dtk lalu",
+      "last_scrape_minutes_one": "Scrape terakhir {{count}} mnt lalu",
+      "last_scrape_minutes_other": "Scrape terakhir {{count}} mnt lalu",
+      "last_scrape_hours_one": "Scrape terakhir {{count}} j lalu",
+      "last_scrape_hours_other": "Scrape terakhir {{count}} j lalu",
+      "holding": "Polling cepat dipertahankan",
+      "adaptive_off": "Polling adaptif nonaktif, sehingga data selalu langsung"
+    },
+    "token": {
+      "label": "Token Bearer",
+      "consequence": "Tempelkan ke Prometheus sebagai kredensial scrape.",
+      "show": "Tampilkan token",
+      "hide": "Sembunyikan token",
+      "copy": "Salin",
+      "regenerate": "Buat ulang"
+    },
+    "regenerate_dialog": {
+      "title": "Buat token baru?",
+      "description": "Prometheus tidak dapat melakukan scrape sampai Anda menempelkan token baru ke konfigurasinya.",
+      "cancel": "Batal",
+      "confirm": "Buat token"
+    },
+    "config": {
+      "label": "Konfigurasi scrape",
+      "consequence": "Tambahkan job ini ke konfigurasi Prometheus Anda.",
+      "hint_label": "Tentang konfigurasi scrape",
+      "hint": "Sertifikat modem ditandatangani sendiri, sehingga verifikasi dilewati. Melalui Tailscale, http biasa juga berfungsi.",
+      "copy": "Salin konfigurasi",
+      "copied": "Tersalin",
+      "wrap": "Bungkus baris",
+      "empty_title": "Belum ada konfigurasi scrape",
+      "empty_description": "Aktifkan endpoint lalu simpan untuk mendapatkannya."
+    },
+    "foot": {
+      "save": "Simpan",
+      "discard": "Buang",
+      "token_on_save": "Token dibuat saat Anda menyimpan."
+    },
+    "toast": {
+      "saved": "Pengaturan Prometheus disimpan.",
+      "save_failed": "Tidak dapat menyimpan pengaturan Prometheus.",
+      "regenerated": "Token baru dibuat.",
+      "regenerate_failed": "Tidak dapat membuat token baru.",
+      "token_copied": "Token disalin.",
+      "config_copied": "Konfigurasi scrape disalin.",
+      "copy_failed": "Tidak dapat menyalin ke papan klip."
+    },
+    "error": {
+      "title": "Tidak dapat memuat pengaturan Prometheus",
+      "description": "Modem tidak merespons. Periksa koneksi lalu coba lagi.",
+      "retry": "Coba lagi"
+    }
+  }
+}

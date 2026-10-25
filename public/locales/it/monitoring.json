@@ -1,0 +1,822 @@
+{
+  "shared": {
+    "os_linux": "Linux",
+    "os_macos": "macOS",
+    "os_windows": "Finestre",
+    "os_ios": "iOS",
+    "os_android": "Androide",
+    "os_freebsd": "FreeBSD",
+    "os_unknown": "—",
+    "unknown": "Sconosciuto"
+  },
+  "network_events": {
+    "title": "Eventi di rete",
+    "description": "Sfoglia gli eventi recenti di connessione, segnale e configurazione.",
+    "card_title": "Eventi di rete",
+    "card_description": "Eventi di rete recenti acquisiti dal poller del dispositivo.",
+    "tab_all": "Tutto",
+    "tab_band_changes": "Cambiamenti di banda",
+    "tab_network_mode": "Modalità di rete",
+    "tab_data_connection": "Connessione dati",
+    "sort_label": "Ordina per",
+    "sort_newest": "Prima il più recente",
+    "sort_oldest": "Prima il più vecchio",
+    "sort_type": "Tipo di evento",
+    "limit_label": "Eventi massimi",
+    "limit_all": "Tutti gli eventi",
+    "limit_10": "10 eventi",
+    "limit_25": "25 eventi",
+    "empty_all": "Nessun evento di rete trovato.",
+    "empty_band_changes": "Nessun evento di cambio banda trovato.",
+    "empty_network_mode": "Nessun evento in modalità rete trovato.",
+    "empty_data_connection": "Nessun evento di connessione dati trovato.",
+    "auto_refresh_paused": "Aggiornamento automatico in pausa: vengono visualizzati gli eventi a partire da {{time}}.",
+    "failed_to_load": "Impossibile caricare gli eventi di rete: {{error}}",
+    "auto_refresh_label": "Aggiornamento automatico",
+    "refresh_button": "Aggiorna",
+    "table_header_event_type": "Tipo di evento",
+    "table_header_message": "Messaggio",
+    "table_header_time": "Data e ora",
+    "showing_count_one": "Visualizzazione di {{shown}} dell'evento {{total}}",
+    "showing_count_other": "Visualizzazione di {{shown}} di {{total}} eventi",
+    "last_updated": "Ultimo aggiornamento: {{time}}",
+    "aria_refresh": "Aggiorna gli eventi di rete"
+  },
+  "alerts": {
+    "activity": {
+      "cause": {
+        "planned": "Pianificato",
+        "unexpected": "Imprevisto",
+        "watchdog": "Watchdog"
+      },
+      "channel": {
+        "email": "Email",
+        "sms": "SMS"
+      },
+      "day": {
+        "today": "Oggi",
+        "undated": "Nessun orario registrato",
+        "yesterday": "Ieri"
+      },
+      "description": "Avvisi inviati e riavvii, dal più recente.",
+      "empty": {
+        "description": "Gli avvisi compaiono qui non appena un canale ne invia uno, e i riavvii vengono registrati automaticamente con la loro causa.",
+        "title": "Non è ancora successo nulla"
+      },
+      "error": {
+        "title": "Impossibile caricare l'attività",
+        "description": "Il dispositivo non ha risposto. Riprova tra poco.",
+        "retry": "Riprova"
+      },
+      "event": {
+        "reboot": "Modem riavviato"
+      },
+      "notice": {
+        "stale": "Mostriamo l'ultima attività che siamo riusciti a leggere."
+      },
+      "sr": {
+        "failed": "Avviso non riuscito",
+        "reboot": "Riavvio registrato",
+        "sent": "Avviso inviato"
+      },
+      "time": {
+        "days_one": "{{count}}d fa",
+        "days_other": "{{count}}d fa",
+        "hours_one": "{{count}}h fa",
+        "hours_other": "{{count}}h fa",
+        "just_now": "Proprio adesso",
+        "minutes_one": "{{count}}m fa",
+        "minutes_other": "{{count}}m fa",
+        "unknown": "Sconosciuto"
+      },
+      "title": "Attività",
+      "transcript_label": "Cronologia di avvisi e riavvii",
+      "trigger": {
+        "test": "Avviso di prova"
+      }
+    },
+    "channels": {
+      "description": "Configura come ciascuno ti raggiunge.",
+      "email": {
+        "address_error": "Inserisci un indirizzo email valido.",
+        "mailer_install": "Installa msmtp",
+        "mailer_installing": "Installazione",
+        "mailer_missing": "Il client di posta msmtp non è installato, quindi le email non possono ancora essere inviate. Gli SMS vengono comunque salvati.",
+        "mailer_recheck": "Controlla di nuovo",
+        "password_hide": "Nascondi la password per le app",
+        "password_hint": "Genera una password per le app per questo dispositivo nel tuo Account Google.",
+        "password_keep": "Lascia vuoto per mantenere la password salvata",
+        "password_label": "Password per le app di Gmail",
+        "password_link": "Apri le password per le app di Google",
+        "password_missing": "Per inviare email è necessaria una password per le app.",
+        "password_placeholder": "xxxx xxxx xxxx xxxx",
+        "password_show": "Mostra la password per le app",
+        "recipient_hint": "Dove vengono recapitati gli avvisi.",
+        "recipient_label": "Email del destinatario",
+        "recipient_missing": "È necessario un indirizzo del destinatario.",
+        "sender_hint": "L'account Gmail che invia l'avviso.",
+        "sender_label": "Email del mittente",
+        "sender_missing": "È necessario un indirizzo del mittente.",
+        "test": "Invia un'email di prova",
+        "title": "Avvisi email",
+        "sub": "Inviati tramite Gmail quando il collegamento torna."
+      },
+      "empty": {
+        "description": "Questo dispositivo non ha restituito alcun canale di avviso, quindi per ora non c'è nulla da configurare.",
+        "title": "Nessun canale segnalato"
+      },
+      "loading": "Caricamento dei canali di avviso…",
+      "name": {
+        "email": "Email",
+        "sms": "SMS"
+      },
+      "rail_label": "Canale di avviso",
+      "save": {
+        "action": "Salva impostazioni",
+        "blocked": "Correggi i campi evidenziati",
+        "blocked_in": "Correggi gli errori in {{channels}}",
+        "clean": "Tutte le modifiche sono state salvate",
+        "discard": "Scarta",
+        "failed": "Non è stato possibile salvare le impostazioni.",
+        "succeeded": "Impostazioni di avviso salvate",
+        "errors": {}
+      },
+      "secret_saved": "Salvato",
+      "sms": {
+        "phone_error": "Inserisci un numero con il prefisso internazionale, ad esempio +14155551234.",
+        "phone_hint": "Includi il prefisso internazionale con il segno più iniziale.",
+        "phone_label": "Telefono del destinatario",
+        "phone_missing": "È necessario un numero di telefono del destinatario.",
+        "test": "Invia un SMS di prova",
+        "title": "Avvisi SMS",
+        "sub": "Arrivano anche durante un'interruzione."
+      },
+      "status": {
+        "incomplete": "Richiede configurazione",
+        "needs_fixing": "Ha errori non salvati",
+        "off": "Disattivo",
+        "ready": "Pronto",
+        "unused": "Nessun evento instradato"
+      },
+      "test": {
+        "blocked_busy": "Un altro test è ancora in corso.",
+        "blocked_dirty": "Salva prima le modifiche. Un test viene eseguito sulle impostazioni salvate.",
+        "blocked_incomplete": "Completa la configurazione di questo canale, poi salva, per inviare un test.",
+        "blocked_mailer": "Installa il client di posta msmtp per inviare un'email di prova.",
+        "blocked_off": "Attiva questo canale, poi salva, per inviare un test.",
+        "failed": "Non è stato possibile inviare il test.",
+        "sending": "Invio in corso",
+        "succeeded": "Test {{channel}} inviato",
+        "errors": {
+          "send_failed_sms": "L'SMS di test non è stato inviato: controlla il segnale, il credito della SIM e il numero.",
+          "send_failed_email": "L'email di test non è stata inviata: controlla gli indirizzi, la password per le app e la connessione."
+        }
+      },
+      "threshold_error": "Inserisci un numero intero di minuti da 1 a 60.",
+      "threshold_hint": "Le interruzioni più brevi vengono registrate, non inviate.",
+      "threshold_label": "Attesa prima di avvisare",
+      "threshold_unit": "min",
+      "title": "Canali",
+      "sends_for": "Invia per",
+      "error": {
+        "title": "Impossibile caricare i canali",
+        "description": "Il dispositivo non ha risposto. Riprova tra poco.",
+        "retry": "Riprova"
+      }
+    },
+    "coverage": {
+      "description": "Cosa ti raggiunge, come salvato.",
+      "emptyDesc": "Il dispositivo non ha segnalato alcuna capacità di avviso, quindi qui non c'è nulla da attivare.",
+      "emptyTitle": "Non è possibile instradare nulla",
+      "errorDesc": "Il dispositivo non ha risposto, quindi non possiamo mostrare cosa scatterà.",
+      "errorRetry": "Riprova",
+      "errorTitle": "Impossibile caricare la copertura",
+      "event": {
+        "connection_lost": {
+          "name": "Connessione persa"
+        },
+        "connection_restored": {
+          "name": "Connessione ripristinata"
+        },
+        "reboot": {
+          "name": "Modem riavviato"
+        }
+      },
+      "loading": "Caricamento della copertura…",
+      "reason": {
+        "email_needs_internet": "Richiede internet",
+        "not_supported": "Questo canale non può inviare questo evento"
+      },
+      "staleNotice": "Mostriamo le ultime impostazioni lette dal dispositivo.",
+      "title": "Copertura",
+      "verdict": {
+        "all": "Tutto coperto",
+        "outage": "Interruzione non coperta",
+        "partial": "{{covered}} di {{total}} coperti",
+        "none": "Non verrà inviato nulla"
+      },
+      "needsSetup": "{{channel}} da configurare",
+      "notSent": "Non inviato"
+    },
+    "page": {
+      "description": "Chi viene avvisato quando la connessione cade, torna, o il modem si riavvia.",
+      "refresh": "Aggiorna",
+      "title": "Avvisi",
+      "unreadable": "Il dispositivo non ha risposto."
+    }
+  },
+  "watchdog": {
+    "page": {
+      "title": "Watchdog",
+      "description": "Monitora il collegamento a internet e percorre una sequenza di ripristino quando cade.",
+      "refresh": "Aggiorna",
+      "unreadableTitle": "Impossibile leggere le impostazioni del watchdog",
+      "unreadable": "Il modem non ha risposto.",
+      "retry": "Riprova"
+    },
+    "band": {
+      "checks": "Controlli falliti",
+      "recoveries": "Ripristini",
+      "reboots": "Riavvii",
+      "absent": "Non segnalato",
+      "checksCaption": "Prima che inizi il ripristino",
+      "cooldownCaption": "Nuovo controllo tra {{seconds}} secondi",
+      "recoveriesLast": "Passaggio {{tier}}, {{ago}}",
+      "recoveriesNone": "Nessuno finora",
+      "rebootsCaption": "Nell'ultima ora",
+      "rebootsOff": "Passaggio di riavvio disattivo",
+      "aria": "Stato del watchdog",
+      "cooldownStep": "Passaggio {{tier}} eseguito. Nuovo controllo tra {{seconds}} s."
+    },
+    "phase": {
+      "off": {
+        "label": "Spento",
+        "blurb": "Il watchdog non sta monitorando la connessione."
+      },
+      "unknown": {
+        "label": "Sconosciuto",
+        "blurb": "Il modem non risponde, quindi non possiamo sapere cosa sta facendo il watchdog."
+      },
+      "starting": {
+        "label": "Avvio in corso",
+        "blurb": "Il servizio è stato appena abilitato e non ha ancora inviato alcun rapporto."
+      },
+      "not_running": {
+        "label": "Non segnalato",
+        "blurb": "Abilitato, ma il watchdog ha smesso di inviare rapporti."
+      },
+      "auto_disabled": {
+        "label": "Disattivato automaticamente",
+        "blurb": "Ha raggiunto il limite di riavvii. Riattivalo quando il collegamento è stabile."
+      },
+      "monitor": {
+        "label": "Monitoraggio",
+        "blurb": "La connessione è in buono stato. Monitoraggio delle interruzioni in corso."
+      },
+      "suspect": {
+        "label": "Verifica in corso",
+        "blurb": "Un controllo di connettività non è riuscito. Verifica in corso prima di agire."
+      },
+      "recovery": {
+        "label": "Ripristino in corso",
+        "blurb": "Esecuzione dei passaggi della sequenza di ripristino per ripristinare la connessione."
+      },
+      "cooldown": {
+        "label": "Cooldown",
+        "blurb": "In attesa che l'ultimo passaggio di ripristino si stabilizzi prima di ricontrollare."
+      },
+      "locked": {
+        "label": "In pausa",
+        "blurb": "È in corso un intervento di manutenzione, quindi il watchdog rimane in attesa."
+      },
+      "radio_off": {
+        "blurb": "La radio è spenta, quindi il watchdog rimane in attesa."
+      },
+      "disabled": {
+        "label": "Disattivato",
+        "blurb": "Il servizio è in esecuzione ma disattivato."
+      },
+      "ssr_hold": {
+        "label": "In attesa",
+        "blurb": "Il baseband si sta riavviando da solo. Il ripristino attende che torni."
+      }
+    },
+    "master": {
+      "aria": "Abilita il watchdog della connessione"
+    },
+    "ladder": {
+      "title": "Sequenza di ripristino",
+      "description": "Provati in ordine, dal più delicato.",
+      "aria": "Sequenza di ripristino",
+      "status": {
+        "blocked": "Serve uno slot",
+        "done": "Provato",
+        "running": "In esecuzione"
+      },
+      "tier1": {
+        "name": "Ripeti la registrazione alla rete",
+        "consequence": "Il collegamento cade per qualche secondo."
+      },
+      "tier2": {
+        "name": "Riavvia la radio",
+        "consequence": "Saltato quando è attivo un blocco della torre."
+      },
+      "tier3": {
+        "name": "Passa alla SIM di backup",
+        "consequence": "Resta sulla SIM di backup finché non torni indietro.",
+        "slotLabel": "Slot SIM di backup",
+        "slot": "Slot {{slot}}"
+      },
+      "tier4": {
+        "name": "Riavvia il dispositivo",
+        "consequence": "Offline per circa un minuto.",
+        "capLabel": "Numero massimo di riavvii all'ora",
+        "capLead": "Fino a",
+        "capUnit": "all'ora"
+      },
+      "tierAria": "Attiva questo passaggio di ripristino: {{name}}",
+      "failback": {
+        "name": "Torna alla SIM principale",
+        "consequence": "Riprova la principale; il collegamento cade brevemente a ogni tentativo.",
+        "lead": "Ogni",
+        "unit": "min",
+        "intervalLabel": "Intervallo di ricontrollo della SIM principale"
+      }
+    },
+    "detection": {
+      "title": "Rilevamento",
+      "description": "Quanto rapidamente un collegamento silenzioso viene considerato un'interruzione.",
+      "probe": {
+        "label": "Controlla ogni",
+        "short": "{{seconds}}s"
+      },
+      "threshold": {
+        "label": "Interruzione dopo",
+        "unit": "controlli falliti"
+      },
+      "cooldown": {
+        "label": "Attesa tra i passaggi",
+        "unit": "s"
+      },
+      "timeline": {
+        "eyebrow": "Se il collegamento cade",
+        "declaredStep": "Interruzione dichiarata, passaggio {{tier}}",
+        "declaredReboot": "Interruzione dichiarata, passaggio 4, riavvio",
+        "step": "Passaggio {{tier}}",
+        "reboot": "Passaggio 4, riavvio",
+        "about": "circa {{time}}",
+        "seconds": "{{s}} s",
+        "minutes": "{{m}} min",
+        "minutesSeconds": "{{m}} min {{s}} s",
+        "off": "Il watchdog è disattivo, quindi non viene eseguito nulla.",
+        "none": "Nessun passaggio è attivo, quindi non viene eseguito nulla.",
+        "invalid": "Inserisci valori di rilevamento validi per vedere la sequenza.",
+        "stopped": "Il passaggio 3 non ha uno slot, quindi la sequenza si ferma lì."
+      },
+      "quality": {
+        "label": "Attivazione per qualità",
+        "unit": "controlli",
+        "caption": "Oltre {{ms}} ms o {{pct}}% di perdita",
+        "link": "Soglie"
+      },
+      "ssr": {
+        "label": "Attesa riavvio baseband",
+        "unit": "s",
+        "caption": "Lascia terminare prima un riavvio automatico del modem"
+      }
+    },
+    "activity": {
+      "title": "Attività di ripristino",
+      "description": "Le azioni svolte dal watchdog, dalla più recente.",
+      "tier4Reboot": "Il watchdog ha riavviato il modem",
+      "type": {
+        "recovery": "Ripristino",
+        "failover": "Failover SIM"
+      },
+      "day": {
+        "today": "Oggi",
+        "yesterday": "Ieri"
+      },
+      "time": {
+        "just_now": "Proprio adesso",
+        "minutes_one": "{{count}}m fa",
+        "minutes_other": "{{count}}m fa",
+        "hours_one": "{{count}}h fa",
+        "hours_other": "{{count}}h fa",
+        "days_one": "{{count}}d fa",
+        "days_other": "{{count}}d fa"
+      },
+      "empty": {
+        "title": "Nessuna attività di ripristino",
+        "description": "I passaggi di ripristino e i failover SIM compaiono qui quando il watchdog interviene su un'interruzione."
+      },
+      "error": {
+        "title": "Impossibile caricare l'attività di ripristino",
+        "retry": "Riprova"
+      },
+      "allEvents": "Tutti gli eventi"
+    },
+    "save": {
+      "discard": "Scarta",
+      "action": "Salva",
+      "clean": "Tutte le modifiche sono state salvate",
+      "blockedIn": "Controlla {{fields}} prima di salvare",
+      "toastOk": "Impostazioni del watchdog salvate",
+      "toastFail": "Impossibile salvare le impostazioni del watchdog",
+      "confirmReboot": {
+        "title": "Consentire al watchdog di riavviare il modem?",
+        "body": "Salvando, il watchdog potrà riavviare il modem da solo quando tutti i passaggi più leggeri hanno fallito. Questa pagina non sarà raggiungibile per circa un minuto, mentre il modem si riavvia.",
+        "cap": "I riavvii sono limitati a {{cap}} all'ora. Al raggiungimento del limite il watchdog si disattiva finché non lo riattivi.",
+        "cancel": "Annulla",
+        "action": "Consenti i riavvii"
+      }
+    },
+    "errors": {
+      "failThreshold": "Deve essere compreso tra 1 e 20",
+      "probeInterval": "Deve essere compreso tra 1 e 60 secondi",
+      "cooldown": "Deve essere compreso tra 10 e 300 secondi",
+      "maxReboots": "Deve essere compreso tra 1 e 10",
+      "backupSim": "Scegli uno slot SIM di backup per abilitare il failover",
+      "qualityConsecutive": "Deve essere tra 1 e 60",
+      "ssrGrace": "Deve essere tra 10 e 120 secondi",
+      "recheckInterval": "Deve essere tra 5 e 1440 minuti"
+    },
+    "failover": {
+      "title": "In esecuzione sulla SIM di backup",
+      "body": "Passato allo slot {{current}} {{since}}. La SIM originale si trova nello slot {{original}}.",
+      "recently": "di recente",
+      "revert": "Ripristina la SIM originale",
+      "reverting": "Ripristino…",
+      "confirmTitle": "Ripristinare la SIM originale?",
+      "confirmBody": "Questo torna alla SIM nello slot {{original}}. La connessione a internet si interromperà brevemente mentre il modem si riconnette.",
+      "cancel": "Annulla",
+      "confirm": "Ripristina SIM",
+      "requested": "Ripristino della SIM richiesto. Il watchdog lo elaborerà a breve.",
+      "failed": "Impossibile richiedere il ripristino della SIM"
+    },
+    "strip": {
+      "title": "Controlli",
+      "noReply": "Nessuna risposta",
+      "reply": "{{ms}} ms",
+      "tipAgo": "{{time}} fa",
+      "ago": "{{minutes}} min fa",
+      "now": "Ora",
+      "empty": "Nessun dato di controllo dal modem",
+      "aria": "{{total}} controlli, {{missed}} senza risposta"
+    },
+    "sim_swap_title": "Rilevata nuova carta SIM",
+    "sim_swap_with_profile": "Il profilo <strong>{{profile_name}}</strong> corrisponde a questo SIM.",
+    "sim_swap_no_profile": "Nessun profilo corrispondente trovato.",
+    "sim_swap_apply_button": "Applica profilo",
+    "sim_swap_dismiss_button": "Ignora",
+    "sim_swap_dismiss_aria": "Ignora la notifica di scambio SIM"
+  },
+  "netbird": {
+    "actions": {
+      "cancel": "Annulla",
+      "retry": "Riprova"
+    },
+    "page": {
+      "title": "NetBird VPN",
+      "description": "La tua VPN mesh: cosa fa questo modem sulla rete e chi altro c'è.",
+      "refresh": "Aggiorna",
+      "stale": "Mostra l'ultimo stato letto. {{message}}",
+      "unreadableTitle": "Impossibile leggere lo stato di NetBird",
+      "unreadable": "Il dispositivo non ha risposto."
+    },
+    "mutex": {
+      "title": "È installata un'altra VPN",
+      "description": "È possibile installare una sola VPN alla volta. Disinstallare prima {{other_vpn}} dalla pagina <link>Tailscale</link>."
+    },
+    "status": {
+      "aria": "Stato di NetBird",
+      "connected": "Connesso",
+      "disconnected": "Disconnesso",
+      "serviceStopped": "Servizio fermo",
+      "notInstalled": "Non installato",
+      "unknown": "Sconosciuto"
+    },
+    "band": {
+      "dash": "—",
+      "connectionEyebrow": "Connessione",
+      "version": "Versione {{version}}",
+      "versionUnknown": "Versione sconosciuta",
+      "deviceEyebrow": "Questo dispositivo",
+      "deviceUnknown": "Ancora nessun indirizzo NetBird",
+      "controlEyebrow": "Piano di controllo",
+      "controlIssue": "Richiede attenzione",
+      "controlIdle": "Disponibile dopo la connessione",
+      "controlOk": "Gestione e segnalazione",
+      "controlDetail": "Gestione: {{management}}, segnalazione: {{signal}}",
+      "peersEyebrow": "Peer online",
+      "peersTotal_one": "{{count}} peer sulla tua rete",
+      "peersTotal_other": "{{count}} peer sulla tua rete",
+      "noPeers": "Ancora nessun peer"
+    },
+    "connection": {
+      "title": "Connessione",
+      "description": "Se questo modem entra nella rete NetBird e come si comporta una volta connesso.",
+      "version": "v{{version}}",
+      "connect": "Connetti",
+      "connecting": "Connessione…",
+      "disconnect": "Disconnetti",
+      "disconnecting": "Disconnessione…",
+      "startService": "Avvia servizio",
+      "starting": "Avvio…",
+      "stopService": "Ferma servizio",
+      "stopping": "Arresto…",
+      "bootTitle": "Avvia all'accensione",
+      "bootDescription": "Attiva NetBird automaticamente dopo il riavvio del modem.",
+      "on": "Attivo",
+      "off": "Disattivo",
+      "setupKeyLabel": "Chiave di configurazione",
+      "setupKeyPlaceholder": "Inserisci la chiave di configurazione (facoltativa)",
+      "setupKeyHelp": "Incolla una chiave di configurazione dalla dashboard NetBird, oppure lascia vuoto se questo modem è già registrato."
+    },
+    "device": {
+      "title": "Questo dispositivo",
+      "description": "Come il modem si identifica sulla rete NetBird.",
+      "fqdn": "FQDN",
+      "netbirdIp": "IP NetBird",
+      "interface": "Interfaccia",
+      "management": "Gestione",
+      "signal": "Segnalazione",
+      "emptyTitle": "Non sei in rete",
+      "emptyDescription": "Connetti NetBird e qui compariranno indirizzo, nome e stato del collegamento di questo modem."
+    },
+    "peers": {
+      "title": "Peer di rete",
+      "description": "Gli altri dispositivi sulla tua rete NetBird e se sono raggiungibili.",
+      "dash": "—",
+      "unnamed": "Dispositivo senza nome",
+      "colDevice": "Dispositivo",
+      "colAddress": "Indirizzo",
+      "colConnection": "Percorso",
+      "colStatus": "Stato",
+      "colLastSeen": "Ultimo accesso",
+      "online": "In linea",
+      "offline": "Non in linea",
+      "p2p": "P2P",
+      "relayed": "Tramite relay",
+      "countOnline": "{{online}} di {{total}} in linea",
+      "errorTitle": "Impossibile caricare i peer",
+      "emptyTitle": "Nessun altro dispositivo",
+      "emptyDescription": "Nessun altro dispositivo è ancora entrato in questa rete. Aggiungine uno dalla dashboard NetBird e comparirà qui.",
+      "offlineTitle": "Non connesso",
+      "offlineDescription": "Connetti NetBird per vedere gli altri dispositivi della tua rete.",
+      "connectedCount_one": "{{count}} peer connesso",
+      "connectedCount_other": "{{count}} peer connessi",
+      "noDetail": "Questa versione di NetBird non elenca i dettagli dei singoli peer. Aggiorna NetBird per vederli."
+    },
+    "install": {
+      "title": "NetBird",
+      "description": "Una VPN mesh per raggiungere questo modem da ovunque, senza aprire porte.",
+      "conditionTitle": "NetBird non è installato",
+      "conditionDescription": "L'installazione scarica il pacchetto NetBird tramite lo stesso collegamento cellulare su cui gira questa sessione, quindi consuma traffico dati e la connessione sarà più lenta durante l'operazione.",
+      "install": "Installa NetBird",
+      "installing": "Installazione…",
+      "checkAgain": "Controlla di nuovo",
+      "done": "NetBird installato.",
+      "failed": "L'installazione non è terminata.",
+      "manualLabel": "Oppure installa da shell",
+      "copyCommand": "Copia il comando di installazione",
+      "manualCommand": "opkg update && opkg install netbird"
+    },
+    "danger": {
+      "uninstall": "Disinstalla",
+      "removing": "Rimozione…",
+      "dialogTitle": "Disinstallare NetBird?",
+      "dialogDescription": "Rimuove da questo modem il pacchetto NetBird, le sue regole del firewall e tutto lo stato di connessione. Un riavvio successivo elimina eventuali residui.",
+      "rebootTitle": "Riavvio consigliato",
+      "rebootDescription": "NetBird è stato rimosso. Il riavvio elimina le regole del firewall residue e altri artefatti. Riavviare ora?",
+      "rebootLater": "Riavvia più tardi",
+      "rebootNow": "Riavvia ora",
+      "rebooting": "Riavvio…"
+    },
+    "toast": {
+      "bootEnabled": "NetBird si avvierà all'accensione",
+      "bootDisabled": "NetBird non si avvierà all'accensione",
+      "bootFailed": "Impossibile modificare l'impostazione di avvio",
+      "connected": "Connessione a NetBird in corso",
+      "connectFailed": "Impossibile connettersi a NetBird",
+      "disconnected": "NetBird disconnesso",
+      "disconnectFailed": "Impossibile disconnettere NetBird",
+      "serviceStarted": "Servizio NetBird avviato",
+      "serviceStartFailed": "Impossibile avviare il servizio NetBird",
+      "serviceStopped": "Servizio NetBird fermato",
+      "serviceStopFailed": "Impossibile fermare il servizio NetBird",
+      "uninstalled": "NetBird disinstallato",
+      "uninstallFailed": "Impossibile disinstallare NetBird",
+      "installed": "NetBird installato",
+      "installFailed": "L'installazione di NetBird non è terminata",
+      "copied": "Comando di installazione copiato",
+      "copyFailed": "Impossibile copiare il comando"
+    },
+    "errors": {
+      "fetch_failed": "Impossibile caricare lo stato di NetBird"
+    }
+  },
+  "connection_quality": {
+    "page": {
+      "title": "Qualità della connessione",
+      "description": "Gli endpoint a cui il modem invia ping e i limiti che trasformano una connessione lenta in un evento."
+    },
+    "targets": {
+      "title": "Destinazioni delle sonde",
+      "description": "Interrogati in ordine finché uno risponde, per capire se internet è raggiungibile.",
+      "restore": "Ripristina i valori predefiniti",
+      "save": "Salva le destinazioni",
+      "leg": {
+        "ipv4": "Destinazione IPv4",
+        "ipv6": "Destinazione IPv6 di riserva"
+      },
+      "error": {
+        "title": "Impossibile leggere le destinazioni delle sonde",
+        "body": "Restano in uso le destinazioni salvate.",
+        "retry": "Riprova"
+      },
+      "toast": {
+        "saved": "Destinazioni delle sonde salvate.",
+        "failed": "Impossibile salvare le destinazioni delle sonde."
+      },
+      "validation": {
+        "empty": "Inserisci una destinazione.",
+        "too_long": "Usa al massimo {{max}} caratteri.",
+        "spaces": "Gli spazi non sono ammessi.",
+        "disallowed": "Contiene caratteri non ammessi.",
+        "ipv4_invalid": "Inserisci un indirizzo IPv4 o un nome host.",
+        "ipv6_invalid": "Non è un indirizzo IPv6 valido.",
+        "ipv6_colon": "Un indirizzo IPv6 contiene i due punti."
+      },
+      "verdict": {
+        "ipv4": "IPv4 risponde",
+        "ipv6": "IPv6 risponde",
+        "none": "Nessuna risposta",
+        "unknown": "Nessun dato"
+      },
+      "group": {
+        "sensitivity": "Sensibilità",
+        "ipv4": "IPv4",
+        "ipv6": "Riserva IPv6"
+      },
+      "fallback_hint": "Interrogata solo quando la destinazione IPv4 non risponde, così una connessione solo IPv6 non viene scambiata per un'interruzione.",
+      "fallback_hint_label": "Informazioni sulla riserva IPv6",
+      "interval": {
+        "label": "Intervallo delle sonde",
+        "value": "Ogni {{seconds}} s",
+        "override": "Ogni {{seconds}} s (impostato dal Watchdog)"
+      },
+      "failed": "Salvataggio non riuscito",
+      "profile": {
+        "sensitive": "Sensibile",
+        "regular": "Normale",
+        "relaxed": "Rilassato",
+        "quiet": "Silenzioso"
+      }
+    },
+    "thresholds": {
+      "title": "Soglie di qualità",
+      "description": "Quando una connessione lenta o con perdite viene registrata come evento di rete.",
+      "latency": {
+        "title": "Latenza"
+      },
+      "loss": {
+        "title": "Perdita pacchetti"
+      },
+      "preset": {
+        "standard": "Standard",
+        "tolerant": "Tollerante",
+        "very_tolerant": "Molto tollerante",
+        "custom": "Personalizzato"
+      },
+      "save": "Salva le soglie",
+      "error": {
+        "title": "Impossibile leggere le soglie di qualità",
+        "body": "Restano in uso i limiti salvati.",
+        "retry": "Riprova"
+      },
+      "toast": {
+        "saved": "Soglie di qualità salvate.",
+        "failed": "Impossibile salvare le soglie di qualità."
+      },
+      "row": {
+        "flags": "Segnala dopo",
+        "now": "Adesso",
+        "limit": "Limite"
+      },
+      "flags": {
+        "latency_one": "{{count}} campione oltre {{ms}} ms",
+        "latency_other": "{{count}} campioni oltre {{ms}} ms",
+        "loss_one": "{{count}} campione al {{pct}}% o più",
+        "loss_other": "{{count}} campioni al {{pct}}% o più",
+        "pending": "Inserisci un limite"
+      },
+      "now": {
+        "latency": "{{ms}} ms",
+        "loss": "{{pct}}%",
+        "no_reply": "Nessuna risposta",
+        "collecting": "Raccolta in corso",
+        "over_latency": "Oltre il limite di {{ms}} ms",
+        "over_loss": "Oltre il limite del {{pct}}%"
+      },
+      "default_chip": "Valori predefiniti",
+      "failed": "Salvataggio non riuscito",
+      "unit": {
+        "latency": "ms",
+        "loss": "%"
+      },
+      "validation": {
+        "range": "Inserisci un numero intero da {{min}} a {{max}}."
+      }
+    }
+  },
+  "prometheus": {
+    "page": {
+      "title": "Prometheus",
+      "description": "Permetti a un server Prometheus di raccogliere i dati di segnale e stato di questo modem."
+    },
+    "card": {
+      "title": "Metriche Prometheus",
+      "description": "Per lo scrape serve il token qui sotto; gli identificativi del dispositivo non sono mai inclusi."
+    },
+    "endpoint": {
+      "label": "Endpoint delle metriche",
+      "consequence_off": "Prometheus non può leggere questo modem.",
+      "consequence_on": "Prometheus può leggere i dati di segnale, operatore e stato con il token."
+    },
+    "freshness": {
+      "label": "Aggiornamento dello scrape",
+      "hint_label": "Informazioni sull'aggiornamento dello scrape",
+      "hint": "Vale solo mentre Prometheus fa scrape almeno una volta al minuto. Il polling normale riprende due minuti dopo l'ultimo scrape.",
+      "options": {
+        "adaptive": "Adattivo",
+        "balanced": "Bilanciato",
+        "realtime": "Tempo reale"
+      },
+      "consequence": {
+        "adaptive": "Gli scrape non cambiano la frequenza di lettura del modem.",
+        "balanced": "Il modem non scende mai al polling più lento mentre Prometheus fa scrape.",
+        "realtime": "Il modem viene letto ogni 2 secondi mentre Prometheus fa scrape, come con una dashboard aperta."
+      }
+    },
+    "status": {
+      "label": "Stato dello scrape",
+      "endpoint_off": "Endpoint disattivato"
+    },
+    "facts": {
+      "no_scrapes": "Nessuno scrape finora",
+      "last_scrape_seconds_one": "Ultimo scrape {{count}} s fa",
+      "last_scrape_seconds_other": "Ultimo scrape {{count}} s fa",
+      "last_scrape_minutes_one": "Ultimo scrape {{count}} min fa",
+      "last_scrape_minutes_other": "Ultimo scrape {{count}} min fa",
+      "last_scrape_hours_one": "Ultimo scrape {{count}} h fa",
+      "last_scrape_hours_other": "Ultimo scrape {{count}} h fa",
+      "holding": "Polling più rapido mantenuto",
+      "adaptive_off": "Il polling adattivo è disattivato, quindi i dati sono sempre in tempo reale"
+    },
+    "token": {
+      "label": "Token Bearer",
+      "consequence": "Incollalo in Prometheus come credenziale di scrape.",
+      "show": "Mostra token",
+      "hide": "Nascondi token",
+      "copy": "Copia",
+      "regenerate": "Rigenera"
+    },
+    "regenerate_dialog": {
+      "title": "Generare un nuovo token?",
+      "description": "Prometheus non può fare scrape finché non incolli il nuovo token nella sua configurazione.",
+      "cancel": "Annulla",
+      "confirm": "Genera token"
+    },
+    "config": {
+      "label": "Configurazione dello scrape",
+      "consequence": "Aggiungi questo job alla configurazione di Prometheus.",
+      "hint_label": "Informazioni sulla configurazione dello scrape",
+      "hint": "Il certificato del modem è autofirmato, quindi la verifica viene saltata. Con Tailscale funziona anche http semplice.",
+      "copy": "Copia configurazione",
+      "copied": "Copiato",
+      "wrap": "A capo automatico",
+      "empty_title": "Nessuna configurazione dello scrape",
+      "empty_description": "Attiva l'endpoint e salva per ottenerla."
+    },
+    "foot": {
+      "save": "Salva",
+      "discard": "Scarta",
+      "token_on_save": "Un token viene creato al salvataggio."
+    },
+    "toast": {
+      "saved": "Impostazioni Prometheus salvate.",
+      "save_failed": "Impossibile salvare le impostazioni Prometheus.",
+      "regenerated": "Nuovo token generato.",
+      "regenerate_failed": "Impossibile generare un nuovo token.",
+      "token_copied": "Token copiato.",
+      "config_copied": "Configurazione dello scrape copiata.",
+      "copy_failed": "Impossibile copiare negli appunti."
+    },
+    "error": {
+      "title": "Impossibile caricare le impostazioni Prometheus",
+      "description": "Il modem non ha risposto. Controlla la connessione e riprova.",
+      "retry": "Riprova"
+    }
+  }
+}

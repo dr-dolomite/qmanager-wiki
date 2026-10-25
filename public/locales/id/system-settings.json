@@ -1,0 +1,1318 @@
+{
+  "page": {
+    "title": "Pengaturan Sistem",
+    "description": "Bagaimana perangkat ini menyimpan waktu, kapan perangkat dimulai ulang, dan SIM mana saja yang diingatnya.",
+    "refresh": "Segarkan"
+  },
+  "device_access": {
+    "page": {
+      "title": "Akses Perangkat",
+      "description": "Kata sandi dan port yang dipakai untuk menjangkau modem ini."
+    }
+  },
+  "hardware": {
+    "page": {
+      "title": "Hardware",
+      "description": "Bagaimana lalu lintas Ethernet dan host yang terhubung menjangkau perangkat keras modem."
+    }
+  },
+  "diagnostics": {
+    "card_title": "Laporan Debug",
+    "card_description": "Snapshot modem ini untuk dibagikan saat pemecahan masalah.",
+    "body": "Membuat snapshot teks-biasa dari kondisi modem saat ini (status radio, konfigurasi jaringan, dan log terbaru) lalu mengunduhnya ke perangkat Anda. Tidak ada data yang keluar dari modem sampai Anda memilih untuk membagikan file tersebut.",
+    "button_capture": "Unduh Laporan Debug",
+    "button_capturing": "Mengambil…",
+    "toast_success": "Laporan debug terunduh",
+    "toast_failed": "Tidak dapat mengambil diagnostik. Silakan coba lagi."
+  },
+  "ipa_offload": {
+    "card_title": "Hardware Offload",
+    "card_description": "Arahkan pemrosesan paket melalui jalur perangkat keras IPA pada modem.",
+    "enable_label": "Hardware offload",
+    "cpu_warning": "Jika Anda mengalami Ethernet terputus secara acak, matikan agar lalu lintas dialihkan melalui CPU.",
+    "unavailable_hint": "Firmware modem ini tidak memiliki jalur hardware offload yang dapat diubah.",
+    "pending_reboot_badge": "Menunggu reboot",
+    "toast_enabled": "Hardware offload diaktifkan. Reboot untuk menerapkan.",
+    "toast_disabled": "Hardware offload dinonaktifkan. Reboot untuk menerapkan.",
+    "toast_failed": "Tidak dapat memperbarui hardware offload.",
+    "reboot_note": "Berlaku setelah reboot.",
+    "unavailable_title": "Tidak tersedia di modem ini",
+    "error_title": "Tidak dapat membaca hardware offload",
+    "error_description": "Pengaturan tidak termuat. Coba lagi sebentar lagi.",
+    "path_eyebrow": "Jalur paket",
+    "path_hint_label": "Cara kerja hardware offload",
+    "path_hint": "IPA adalah mesin paket bawaan modem. Saat offload aktif, lalu lintas Ethernet ditangani di perangkat keras dan melewati CPU; saat mati, CPU menangani setiap paket.",
+    "path_preview": "Pratinjau",
+    "path_ethernet": "Ethernet",
+    "path_hardware": "Hardware",
+    "path_cpu": "CPU",
+    "path_cellular": "Seluler",
+    "path_aria_hardware": "Lalu lintas Ethernet menuju jaringan seluler melalui jalur hardware.",
+    "path_aria_cpu": "Lalu lintas Ethernet menuju jaringan seluler melalui CPU."
+  },
+  "host_at": {
+    "card_title": "Port AT Host",
+    "card_description": "Akses AT untuk komputer yang terhubung lewat USB atau PCIe.",
+    "access_label": "Akses host",
+    "consequence_usb": "Saat dimatikan, komputer yang terhubung tidak dapat mengirim perintah AT.",
+    "consequence_pcie": "Saat dimatikan, host tempat modem ini terpasang tidak dapat mengirim perintah AT.",
+    "unavailable": "Firmware ini tidak memiliki port AT host.",
+    "discard": "Buang",
+    "toast_on": "Port AT host dinyalakan.",
+    "toast_off": "Port AT host dimatikan.",
+    "toast_failed": "Tidak dapat memperbarui port AT host.",
+    "unavailable_title": "Tidak tersedia di modem ini",
+    "error_title": "Tidak dapat membaca port AT host",
+    "error_description": "Pengaturan tidak termuat. Coba lagi sebentar lagi.",
+    "path_eyebrow": "Jalur akses",
+    "path_hint_label": "Cara kerja akses AT host",
+    "path_hint": "QManager selalu menjangkau modem lewat tautan internalnya sendiri. Akses host hanya menentukan apakah komputer di USB atau PCIe juga dapat mengirim perintah AT.",
+    "path_preview": "Pratinjau",
+    "path_computer": "Komputer",
+    "path_qmanager": "QManager",
+    "path_port_usb": "Port USB",
+    "path_port_pcie": "Port PCIe",
+    "path_internal": "Bawaan",
+    "path_modem": "Modem",
+    "path_aria_open": "Komputer yang terhubung dan QManager sama-sama dapat mengirim perintah AT ke modem.",
+    "path_aria_closed": "Hanya QManager yang dapat mengirim perintah AT ke modem; port komputer tertutup."
+  },
+  "config_backup": {
+    "page_title": "Cadangan Konfigurasi",
+    "page_description": "Simpan salinan terenkripsi pengaturan Anda, atau pulihkan satu salinan ke modem ini.",
+    "reboot_now_button": "Reboot sekarang",
+    "reboot_failed_toast": "Tidak dapat memulai reboot. Coba lagi.",
+    "sections": {
+      "network_mode_apn": "Mode jaringan dan APN",
+      "bands": "Band LTE dan 5G yang diinginkan",
+      "tower_lock": "Penguncian tower",
+      "ttl_hl": "TTL dan hop limit",
+      "imei": "IMEI",
+      "profiles": "Profil SIM kustom",
+      "watchdog": "Watchdog koneksi",
+      "quality_thresholds": "Ambang kualitas koneksi",
+      "sites": "Situs monitor latensi",
+      "sms_alerts": "Peringatan SMS",
+      "alert_routing": "Perutean peringatan",
+      "sms_storage": "Penyimpanan SMS",
+      "metrics": "Metrik Prometheus"
+    },
+    "create": {
+      "card_title": "Buat cadangan",
+      "card_description": "Pilih yang akan disertakan, lalu enkripsi file dengan passphrase.",
+      "group_connection": "Koneksi",
+      "group_monitoring": "Pemantauan dan peringatan",
+      "group_encryption": "Enkripsi",
+      "profile_overlap_hint": "Disertakan bersama profil SIM kustom",
+      "profile_uncheck_hint": "Hapus centang mode jaringan, TTL, dan IMEI untuk menyertakan profil",
+      "passphrase_label": "Passphrase",
+      "passphrase_too_short": "Gunakan minimal {{min}} karakter.",
+      "warning": "Tanpa passphrase, cadangan tidak dapat dibuka. Tidak ada cara untuk memulihkannya.",
+      "passphrase_show_aria": "Tampilkan passphrase",
+      "passphrase_hide_aria": "Sembunyikan passphrase",
+      "confirm_label": "Konfirmasi passphrase",
+      "confirm_match": "Passphrase cocok",
+      "confirm_mismatch": "Passphrase tidak cocok",
+      "stage_collecting": "Mengumpulkan pengaturan…",
+      "stage_encrypting": "Mengenkripsi…",
+      "stage_downloading": "Mengunduh…",
+      "selected_count_one": "{{count}} bagian dipilih",
+      "selected_count_other": "{{count}} bagian dipilih",
+      "button_default": "Unduh cadangan",
+      "toast_success": "Cadangan diunduh.",
+      "toast_failed": "Gagal membuat cadangan."
+    },
+    "restore": {
+      "card_title": "Pulihkan dari file",
+      "card_description": "Ganti pengaturan yang ada dalam cadangan dengan nilai yang tersimpan di dalamnya.",
+      "idle_title": "Tidak ada cadangan yang dibuka",
+      "idle_description": "Pilih file .qmbackup yang dibuat oleh QManager.",
+      "reading_title": "Membaca file…",
+      "upload_button": "Pilih file",
+      "button_choose_another": "Pilih file lain",
+      "read_failed": "File ini tidak dapat dibaca.",
+      "receipt_model": "Dibuat di",
+      "receipt_created": "Dibuat pada",
+      "passphrase_label": "Passphrase",
+      "passphrase_consequence": "Passphrase yang diatur saat cadangan ini dibuat.",
+      "password_incorrect": "Passphrase salah. Periksa dan coba lagi.",
+      "button_unlock": "Buka kunci",
+      "model_warning": "Dibuat di {{from}}, dipulihkan ke {{to}}. Bagian yang tidak dapat digunakan modem ini dilewati.",
+      "model_unknown": "model tidak diketahui",
+      "overwrite_label": "Menggantikan pengaturan Anda saat ini",
+      "button_apply": "Pulihkan",
+      "toast_success": "Cadangan dipulihkan.",
+      "toast_partial_one": "Pemulihan selesai, tetapi {{count}} bagian gagal.",
+      "toast_partial_other": "Pemulihan selesai, tetapi {{count}} bagian gagal.",
+      "toast_cancelled_one": "Pemulihan dihentikan setelah {{count}} bagian.",
+      "toast_cancelled_other": "Pemulihan dihentikan setelah {{count}} bagian.",
+      "toast_failed": "Tidak dapat memulai pemulihan.",
+      "reboot_dialog_title": "Reboot untuk menyelesaikan pemulihan?",
+      "reboot_dialog_description": "Perubahan IMEI atau profil SIM berlaku setelah reboot. Halaman ini tidak tersedia sekitar satu menit.",
+      "reboot_later_button": "Nanti"
+    },
+    "pipeline": {
+      "title": "Memulihkan cadangan",
+      "description": "Dari {{model}}",
+      "preparing": "Memulai…",
+      "done_headline": "Cadangan dipulihkan",
+      "partial_headline": "Dipulihkan dengan bagian dilewati",
+      "failed_headline": "Pemulihan gagal",
+      "done_sub_one": "{{count}} bagian dipulihkan.",
+      "done_sub_other": "{{count}} bagian dipulihkan.",
+      "partial_sub": "{{restored}} dari {{total}} bagian dipulihkan.",
+      "cancelled_sub": "Dihentikan sebelum bagian yang tersisa.",
+      "failed_sub": "Tidak ada yang diubah.",
+      "step_progress": "Langkah {{current}} dari {{total}}",
+      "detail_incompatible": "Tidak didukung",
+      "detail_sim_mismatch": "SIM berbeda",
+      "detail_unchanged": "Tidak berubah",
+      "detail_retrying": "Mencoba ulang ({{n}}/3)",
+      "detail_failed": "Gagal",
+      "state_done": "Dipulihkan",
+      "state_running": "Memulihkan",
+      "state_retrying": "Mencoba ulang",
+      "state_failed": "Gagal",
+      "state_skipped": "Dilewati",
+      "state_pending": "Menunggu",
+      "progress_aria": "Progres pemulihan",
+      "ledger_aria": "Bagian",
+      "reboot_notice": "Beberapa perubahan berlaku setelah reboot. Anda yang menentukan kapan.",
+      "failed_hint": "Bagian yang gagal mempertahankan nilai saat ini. Periksa di halamannya masing-masing.",
+      "close": "Selesai",
+      "stop": "Hentikan"
+    }
+  },
+  "software_update": {
+    "page": {
+      "title": "Pembaruan Perangkat Lunak",
+      "description": "QManager memeriksa GitHub untuk rilis yang lebih baru dan memasangnya langsung di modem. Pemasangan mengganti aplikasi dan me-reboot perangkat, jadi sesi yang sedang Anda pakai untuk membaca ini akan terputus lalu kembali."
+    },
+    "actions": {
+      "check": "Periksa pembaruan",
+      "checking": "Memeriksa…",
+      "check_again": "Periksa lagi",
+      "download": "Unduh {{version}}",
+      "downloading": "Mengunduh…",
+      "install": "Pasang {{version}}",
+      "installing": "Memasang…",
+      "try_again": "Coba lagi",
+      "retry": "Ulangi",
+      "read_full_notes": "Baca catatan lengkapnya",
+      "rebooting": "Me-reboot…",
+      "verifying": "Memverifikasi…",
+      "retry_download": "Coba unduh lagi",
+      "reboot_now": "Reboot sekarang"
+    },
+    "band": {
+      "head": "Status pembaruan",
+      "chip_offline": "Offline",
+      "chip_in_progress": "Sedang berjalan",
+      "installed": {
+        "eyebrow": "Terpasang",
+        "caption_stable": "Kanal stabil",
+        "caption_prerelease": "Kanal pra-rilis",
+        "caption_interrupted": "Pemasangan mungkin belum lengkap"
+      },
+      "latest": {
+        "eyebrow": "Rilis terbaru",
+        "caption_checked": "Diperiksa {{ago}}",
+        "caption_downloading": "Mengunduh {{size}}…",
+        "caption_verified": "Terunduh dan terverifikasi",
+        "caption_installing": "Langkah {{step}} dari 4 — jangan matikan daya",
+        "caption_failed": "Tidak dapat menjangkau GitHub",
+        "caption_never": "Belum pernah diperiksa",
+        "value_none_label": "Tidak ada informasi rilis",
+        "caption_downloading_plain": "Mengunduh paketnya…",
+        "caption_verifying": "Memeriksa paketnya…",
+        "caption_failed_download": "Unduhan tidak selesai",
+        "caption_failed_install": "Pemasangan tidak selesai"
+      },
+      "auto": {
+        "eyebrow": "Pembaruan otomatis",
+        "value_on": "Aktif",
+        "value_off": "Mati",
+        "caption_on": "Pemeriksaan harian pada waktu acak",
+        "caption_off": "Hanya pembaruan manual"
+      },
+      "chip_failed": "Gagal"
+    },
+    "card": {
+      "loading": {
+        "title": "Memeriksa pembaruan",
+        "description": "Membaca daftar rilis dari GitHub."
+      },
+      "unreachable": {
+        "title": "Layanan pembaruan tidak tersedia",
+        "description": "QManager tidak dapat menjangkau endpoint pembaruan di modem ini, jadi ia tidak bisa memastikan apa yang terpasang atau apa yang tersedia."
+      },
+      "check_failed": {
+        "title": "Pemeriksaan pembaruan gagal",
+        "description": "Build di modem ini tidak tersentuh. QManager hanya gagal membaca daftar rilis kali ini."
+      },
+      "download_failed": {
+        "title": "Unduhan tidak selesai",
+        "description": "Tidak ada yang diganti. Build yang sudah ada di modem ini tidak tersentuh, jadi aman untuk mengunduh lagi."
+      },
+      "install_failed": {
+        "title": "Pemasangan tidak selesai",
+        "description": "Modem mungkin menjalankan berkas yang tercampur. Memasang lagi mengembalikannya ke build yang pasti."
+      },
+      "up_to_date": {
+        "title": "Anda sudah memakai build terbaru",
+        "description": "Tidak ada yang perlu dipasang. Empat langkah di bawah adalah yang dilakukan pembaruan saat ada yang datang."
+      },
+      "available": {
+        "title": "Pembaruan tersedia",
+        "description": "Mengunduh dan memasang memakan waktu beberapa menit dan berakhir dengan reboot. Inilah persis yang terjadi."
+      },
+      "downloading": {
+        "title": "Mengunduh pembaruan",
+        "description": "Paket sedang diambil dari GitHub. Belum ada yang diganti dan modem tetap bekerja."
+      },
+      "verifying": {
+        "title": "Memverifikasi unduhan",
+        "description": "QManager sedang mencocokkan paket dengan SHA-256-nya sebelum ada yang diganti."
+      },
+      "staged": {
+        "title": "Siap dipasang",
+        "description": "Paket sudah diunduh dan terverifikasi. Pemasangan mengganti QManager dan me-reboot modem."
+      },
+      "installing": {
+        "title": "Memasang pembaruan",
+        "description": "Aplikasi dan layanannya sedang diganti. Jangan matikan daya modem."
+      },
+      "rebooting": {
+        "title": "Me-reboot modem",
+        "description": "Pemasangan selesai. Modem sedang reboot dan sesi ini terputus sampai ia kembali."
+      },
+      "chip": {
+        "loading": "Memeriksa",
+        "unreachable": "Tak terjangkau",
+        "check_failed": "Pemeriksaan gagal",
+        "download_failed": "Unduhan gagal",
+        "install_failed": "Pemasangan gagal",
+        "up_to_date": "Terbaru",
+        "available": "Tersedia",
+        "downloading": "Mengunduh",
+        "verifying": "Memverifikasi",
+        "staged": "Siap",
+        "installing": "Memasang",
+        "rebooting": "Reboot"
+      }
+    },
+    "delta": {
+      "installed": "Terpasang",
+      "available": "Tersedia",
+      "channel_stable": "Stabil",
+      "channel_prerelease": "Pra-rilis"
+    },
+    "steps": {
+      "aria_label": "Langkah pembaruan",
+      "download": {
+        "label": "Unduh",
+        "detail": "Mengambil paket rilis dari GitHub"
+      },
+      "verify": {
+        "label": "Verifikasi",
+        "detail": "Mencocokkan paket dengan SHA-256-nya"
+      },
+      "install": {
+        "label": "Pasang",
+        "detail": "Mengganti aplikasi dan layanannya"
+      },
+      "reboot": {
+        "label": "Reboot",
+        "detail": "Modem akan reboot. Sesi Anda akan terputus."
+      },
+      "state": {
+        "done": "Selesai",
+        "active": "Berjalan"
+      }
+    },
+    "notice": {
+      "rest": "Pemasangan me-reboot modem, yang memutus sesi ini dan setiap koneksi yang melewatinya selama sekitar satu menit.",
+      "staged": "Pemasangan mengganti QManager dan me-reboot modem. Sesi ini terputus lalu kembali sendiri.",
+      "running": "Jangan matikan daya modem.",
+      "failed_check": "QManager gagal membaca daftar rilis. Build di modem ini tidak tersentuh, jadi ini kegagalan pembacaan, bukan kehilangan.",
+      "failed_download": "Unduhan tidak selesai, jadi tidak ada yang terpasang. Build yang sudah ada di modem tidak tersentuh.",
+      "versions": "Setiap opsi di sini me-reboot modem, dan build yang lebih lama bisa membatalkan pengaturan yang dibawa build yang lebih baru.",
+      "failed_install": "Pemasangan tidak selesai, jadi modem mungkin menjalankan berkas yang tercampur. Memasang lagi mengembalikannya ke build yang pasti.",
+      "stalled": "Pemasang tidak menunjukkan kemajuan selama dua menit. Jika tidak pulih, reboot modem untuk menyelesaikan atau membatalkan pemasangan."
+    },
+    "notes": {
+      "title": "Apa yang berubah",
+      "description": "Catatan rilis yang diterbitkan bersama {{version}}.",
+      "empty_title": "Tidak ada catatan rilis",
+      "empty_description": "GitHub tidak mengembalikan changelog untuk rilis ini, jadi tidak ada yang bisa ditampilkan di sini.",
+      "dialog_title": "Catatan rilis untuk {{version}}",
+      "region_label": "Catatan rilis"
+    },
+    "preferences": {
+      "title": "Preferensi Pembaruan",
+      "description": "Bagaimana modem ini menentukan kapan memperbarui dirinya.",
+      "auto": {
+        "label": "Pembaruan otomatis",
+        "description": "Memeriksa sekali sehari pada waktu acak dan memasang apa yang ditemukannya. Modem reboot untuk menyelesaikannya.",
+        "error": "Tidak dapat menyimpan pengaturan pembaruan otomatis"
+      },
+      "prerelease": {
+        "label": "Sertakan pra-rilis",
+        "description": "Menawarkan build yang ditandai pra-rilis di GitHub. Build itu datang lebih awal dan lebih sedikit diuji.",
+        "error": "Tidak dapat menyimpan pengaturan pra-rilis"
+      }
+    },
+    "versions": {
+      "title": "Manajemen Versi",
+      "description": "Pasang, pasang ulang, atau kembali ke build mana pun yang sudah diterbitkan.",
+      "select_label": "Pilih versi untuk dipasang",
+      "select_placeholder": "Pilih versi",
+      "install": "Pasang",
+      "current": "Saat ini",
+      "no_binary": "Tidak ada paket",
+      "dialog": {
+        "title_install": "Pasang {{version}}?",
+        "title_reinstall": "Pasang ulang {{version}}?",
+        "description_install": "Ini memasang {{version}} menggantikan {{current}}. Modem reboot setelah selesai.",
+        "description_reinstall": "Ini memasang ulang {{version}} di atas salinan yang sudah ada di modem, untuk memperbaikinya. Modem reboot setelah selesai.",
+        "size": "Ukuran unduhan: {{size}}.",
+        "warning": "Jangan matikan daya modem selagi sedang memasang.",
+        "cancel": "Batal",
+        "confirm_install": "Pasang sekarang",
+        "confirm_reinstall": "Pasang ulang sekarang"
+      },
+      "empty_title": "Tidak ada versi untuk dipilih",
+      "empty_description": "GitHub tidak mengembalikan rilis yang membawa paket yang bisa dipasang, jadi tidak ada yang bisa dipasang atau dikembalikan di sini."
+    },
+    "banner": {
+      "title": "Pembaruan terakhir tidak selesai",
+      "description": "Penanda tertunda untuk {{pending}} bertahan melewati reboot sementara yang berjalan adalah {{version}}, jadi berkas yang terpasang mungkin tercampur. Memasang ulang {{pending}} mengembalikan modem ini ke build yang pasti.",
+      "action": "Selesaikan pemasangan",
+      "description_unknown": "Sebuah pemasangan tidak selesai sementara yang berjalan adalah {{version}}, jadi berkas yang terpasang mungkin tercampur. Memasang ulang mengembalikan modem ini ke build yang pasti."
+    },
+    "states": {
+      "loading": {
+        "status": "Memeriksa pembaruan",
+        "notes": "Memuat catatan rilis"
+      },
+      "unreachable": {
+        "title": "Tidak dapat menjangkau layanan pembaruan",
+        "description": "QManager tidak dapat menjangkau endpoint pembaruan di modem ini. Build yang terpasang tidak tersentuh, jadi ini kegagalan pembacaan, bukan kehilangan."
+      }
+    },
+    "time": {
+      "just_now": "baru saja",
+      "minutes": "{{value}} menit lalu",
+      "minutes_one": "semenit lalu",
+      "hours": "{{value}} jam lalu",
+      "hours_one": "sejam lalu",
+      "days": "{{value}} hari lalu",
+      "days_one": "sehari lalu"
+    },
+    "toast": {
+      "prerelease_on": "Pembaruan pra-rilis diaktifkan",
+      "prerelease_off": "Pembaruan pra-rilis dinonaktifkan",
+      "auto_on": "Pembaruan otomatis diaktifkan",
+      "auto_off": "Pembaruan otomatis dinonaktifkan",
+      "save_failed": "Tidak dapat menyimpan preferensi itu"
+    },
+    "stall_dialog": {
+      "title": "Reboot modem sekarang?",
+      "description": "Pemasangan tampak macet. Reboot akan menghentikannya dan memutus sesi ini; modem kembali sendiri.",
+      "cancel": "Tetap tunggu",
+      "confirm": "Reboot sekarang"
+    }
+  },
+  "at_terminal": {
+    "page": {
+      "title": "AT Terminal",
+      "description": "Kirim perintah AT langsung ke modem dan baca balasannya persis seperti yang dikembalikan. Perintah yang akan mematikan radio ditahan dulu untuk konfirmasi, dan beberapa ditolak sepenuhnya."
+    },
+    "card": {
+      "title": "Konsol",
+      "description": "Balasan ditampilkan mentah, dalam kata-kata modem sendiri. 100 perintah terakhir tersimpan di peramban ini sampai Anda menghapusnya."
+    },
+    "actions": {
+      "clear": "Hapus",
+      "export": "Ekspor"
+    },
+    "game": {
+      "playing": "Sedang memainkan Signal Storm"
+    },
+    "empty": {
+      "title": "Belum ada yang dikirim",
+      "description": "Ketik perintah AT pada prompt di bawah, atau buka Perintah untuk memilih perintah siap pakai."
+    },
+    "transcript": {
+      "label": "Transkrip perintah",
+      "copy": "Salin perintah ini beserta balasannya",
+      "copied": "Tersalin",
+      "status": {
+        "success": "Berhasil",
+        "error": "Gagal",
+        "blocked": "Diblokir"
+      }
+    },
+    "hint": {
+      "key": "Tab",
+      "label": "Tekan Tab untuk melengkapi perintah ini dari riwayat Anda, atau Shift+Tab untuk keluar dari kolom."
+    },
+    "gate": {
+      "title": "Perintah ini dapat memutus koneksi Anda",
+      "confirm": "Tetap kirim",
+      "cancel": "Batal"
+    },
+    "rules": {
+      "not_at": "Di sini hanya perintah AT yang bisa dikirim. Awali baris dengan AT, misalnya AT+CSQ.",
+      "qscanfreq": "Pemindaian frekuensi ditolak di sini. Pemindaian menahan radio tetap mati selama beberapa menit tanpa menampilkan apa pun — gunakan halaman Pemindai Sel, yang melaporkan kemajuan dan bisa dihentikan.",
+      "qscan": "Pemindaian jaringan ditolak di sini. Pemindaian menahan radio tetap mati selama beberapa menit tanpa menampilkan apa pun — gunakan halaman Pemindai Sel, yang melaporkan kemajuan dan bisa dihentikan.",
+      "resetfactory": "Reset pabrik ditolak di sini. Reset menghapus seluruh pengaturan modem sekaligus, termasuk yang dibutuhkan QManager untuk menjangkaunya, dan tidak ada di halaman ini yang bisa membatalkannya.",
+      "reboot": "Perintah ini me-reboot modem. Semua koneksi yang lewat modem terputus, termasuk halaman ini, dan apa pun yang sedang berjalan hilang — perlu sekitar satu menit sampai modem kembali, dengan jamnya di Januari 1970 sampai jaringan menyetelnya lagi.",
+      "radio_off": "Perintah ini mematikan radio modem. Jika Anda membuka halaman ini lewat koneksi modem itu sendiri, termasuk melalui Tailscale, halaman ini akan hilang sampai radio dinyalakan kembali dari perangkatnya langsung."
+    },
+    "input": {
+      "label": "Perintah AT",
+      "placeholder": "AT+COPS?",
+      "send": "Kirim"
+    },
+    "responses": {
+      "failed": "Perintah gagal dan modem tidak memberikan alasan.",
+      "unexpected": "Perintah ini tidak dapat dikirim. Periksa Log Sistem untuk melihat laporan dari backend.",
+      "unreachable": "Tidak dapat menjangkau backend QManager di modem. Pastikan perangkat masih terjangkau, lalu kirim ulang.",
+      "game": "Memulai Signal Storm…"
+    },
+    "commands": {
+      "trigger": "Perintah",
+      "search_placeholder": "Cari perintah",
+      "empty": "Tidak ada perintah yang cocok dengan pencarian itu.",
+      "count_one": "{{count}} perintah",
+      "count_other": "{{count}} perintah",
+      "manage": "Kelola perintah",
+      "groups": {
+        "modem": "Modem",
+        "network": "Mode jaringan",
+        "sim": "Slot SIM",
+        "apn": "APN",
+        "bands": "Band",
+        "passthrough": "IP passthrough",
+        "custom": "Kustom"
+      },
+      "presets": {
+        "reboot": "Mulai ulang modem",
+        "disconnect": "Matikan radio",
+        "connect": "Nyalakan radio",
+        "signal_info": "Info sinyal (serving cell)",
+        "ca_info": "Info carrier aggregation",
+        "imei_show": "Tampilkan IMEI",
+        "mode_show": "Tampilkan mode jaringan",
+        "mode_auto": "Setel mode jaringan ke otomatis",
+        "mode_nr_lte": "Setel mode jaringan ke 5G NR dan LTE",
+        "mode_nr": "Setel mode jaringan ke 5G NR saja",
+        "mode_lte": "Setel mode jaringan ke LTE saja",
+        "nr5g_disable_status": "Tampilkan status aktif SA dan NSA",
+        "nr5g_enable_both": "Aktifkan SA dan NSA sekaligus",
+        "nr5g_disable_sa": "Nonaktifkan SA saja",
+        "nr5g_disable_nsa": "Nonaktifkan NSA saja",
+        "sim_slot_get": "Tampilkan slot SIM aktif",
+        "sim_slot_1": "Beralih ke slot SIM 1",
+        "sim_slot_2": "Beralih ke slot SIM 2",
+        "apn_list": "Tampilkan daftar APN",
+        "apn_nrbroadband": "Setel APN ke NRBROADBAND",
+        "bands_nr_sa": "Tampilkan band 5G NR SA yang aktif",
+        "bands_nr_nsa": "Tampilkan band 5G NR NSA yang aktif",
+        "bands_lte": "Tampilkan band LTE yang aktif",
+        "ippt_addresses": "Tampilkan alamat IP yang diberikan",
+        "ippt_enable": "Aktifkan IP passthrough",
+        "ippt_disable": "Nonaktifkan IP passthrough"
+      },
+      "errors": {
+        "required": "Nama dan perintah keduanya wajib diisi.",
+        "must_start_at": "Perintah harus diawali dengan AT.",
+        "duplicate_command": "Perintah itu sudah ada di daftar.",
+        "duplicate_label": "Nama itu sudah dipakai perintah lain."
+      },
+      "manage_dialog": {
+        "title": "Kelola perintah kustom",
+        "description": "Perintah yang Anda tambahkan di sini disimpan di peramban ini dan muncul di bawah Kustom pada daftar.",
+        "empty": "Anda belum menambahkan perintah kustom apa pun.",
+        "label_field": "Nama perintah",
+        "label_placeholder": "Nama perintah",
+        "command_field": "Perintah AT",
+        "command_placeholder": "AT+…",
+        "add": "Tambah",
+        "delete": "Hapus {{label}}"
+      }
+    }
+  },
+  "languages": {
+    "page": {
+      "title": "Bahasa",
+      "description": "Pilih bahasa yang dipakai antarmuka QManager, dan pasang paket terjemahan komunitas yang diterbitkan untuk perangkat ini."
+    },
+    "actions": {
+      "refresh": "Muat ulang",
+      "refreshing": "Memuat ulang…",
+      "refresh_aria": "Muat ulang bahasa terpasang dan katalog komunitas",
+      "check_again": "Periksa lagi",
+      "install": "Pasang",
+      "update": "Perbarui",
+      "cancel": "Batal",
+      "install_aria": "Pasang {{language}}",
+      "update_aria": "Perbarui {{language}}",
+      "cancel_aria": "Batalkan pemasangan {{language}}",
+      "remove_aria": "Hapus paket {{language}}",
+      "copy_command": "Salin perintah pemasangan manual"
+    },
+    "band": {
+      "head": "Di perangkat ini",
+      "display": {
+        "eyebrow": "Bahasa tampilan",
+        "caption_built_in": "Bawaan, {{code}}",
+        "caption_downloaded": "Terunduh, {{code}}",
+        "caption_unknown": "Tidak ada di katalog perangkat ini"
+      },
+      "ready": {
+        "eyebrow": "Siap dipakai",
+        "caption_built_in_one": "{{count}} bawaan",
+        "caption_built_in_other": "{{count}} bawaan",
+        "caption_with_downloaded_one": "{{builtIn}} bawaan, {{count}} terunduh",
+        "caption_with_downloaded_other": "{{builtIn}} bawaan, {{count}} terunduh",
+        "caption_unknown": "Tidak dapat membaca daftar"
+      },
+      "catalog": {
+        "eyebrow": "Katalog komunitas",
+        "value_unreachable": "Tidak terjangkau",
+        "caption_unreachable": "Gagal menjangkau GitHub",
+        "caption_none": "Belum ada yang diterbitkan",
+        "caption_available": "Siap dipasang",
+        "caption_updates_one": "Pembaruan tersedia",
+        "caption_updates_other": "{{count}} pembaruan tersedia"
+      }
+    },
+    "display": {
+      "title": "Bahasa tampilan",
+      "description": "Pilih bahasa yang dipakai antarmuka QManager. Perubahan berlaku seketika, dan hanya di perangkat ini.",
+      "group_aria": "Bahasa tampilan",
+      "built_in": "Bawaan",
+      "version": "v{{version}}"
+    },
+    "remove": {
+      "title": "Hapus {{language}}?",
+      "description": "Tindakan ini menghapus paket {{language}} yang sudah diunduh dari perangkat ini. Anda bisa memasangnya lagi kapan saja.",
+      "description_active": "{{language}} adalah bahasa yang sedang Anda baca sekarang. Menghapusnya mengembalikan QManager ke bahasa Inggris.",
+      "cancel": "Biarkan saja",
+      "confirm": "Hapus",
+      "removing": "Menghapus…"
+    },
+    "community": {
+      "title": "Paket komunitas",
+      "description": "Paket terjemahan untuk QManager yang diterbitkan oleh komunitas. Memasang salah satunya menambahkannya ke daftar di atas.",
+      "list_aria": "Paket bahasa komunitas",
+      "completeness": "{{pct}}% diterjemahkan",
+      "size": {
+        "kb": "{{value}} KB",
+        "mb": "{{value}} MB"
+      },
+      "contributors_one": "{{count}} penerjemah",
+      "contributors_other": "{{count}} penerjemah",
+      "contributors_none": "Komunitas",
+      "incompatible": "Perlu QManager versi lebih baru"
+    },
+    "install": {
+      "percent": "{{pct}}%",
+      "progress_aria": "Memasang {{language}}"
+    },
+    "steps": {
+      "pending": "Dalam antrean",
+      "downloading": "Mengunduh",
+      "verifying": "Memeriksa checksum",
+      "extracting": "Mengekstrak",
+      "validating": "Memvalidasi",
+      "installing": "Memasang",
+      "cancelling": "Membatalkan",
+      "working": "Memproses"
+    },
+    "failure": {
+      "manual": "Tidak ada yang diubah di perangkat. Anda bisa memasang paket ini secara manual lewat SSH:"
+    },
+    "states": {
+      "unreachable": {
+        "title": "Gagal menjangkau katalog paket",
+        "description": "Perangkat tidak dapat memuat daftar paket komunitas dari GitHub. Bahasa yang sudah terpasang tidak tersentuh — ini hanya pembacaan yang gagal, dan tidak ada yang berubah di modem."
+      },
+      "none": {
+        "title": "Belum ada paket komunitas",
+        "description": "Belum ada yang menerbitkan paket terjemahan yang bisa diunduh untuk QManager. Bahasa di atas sudah tertanam di firmware dan selalu tersedia."
+      }
+    },
+    "loading": {
+      "status": "Memuat bahasa"
+    },
+    "toast": {
+      "switched": "Beralih ke {{language}}",
+      "switch_failed": "Gagal memuat paket {{language}}",
+      "switch_failed_detail": "Mungkin perlu dipasang ulang.",
+      "installing": "Memasang {{language}}…",
+      "installed": "{{language}} terpasang",
+      "install_failed": "Gagal memasang {{language}}",
+      "install_failed_generic": "Pemasangan paket bahasa gagal",
+      "use_now": "Pakai sekarang",
+      "install_cancelled": "Pemasangan dibatalkan",
+      "removed": "{{language}} dihapus",
+      "removed_active": "{{language}} dihapus, kembali ke bahasa Inggris",
+      "remove_failed": "Gagal menghapus {{language}}",
+      "copied": "Perintah pemasangan disalin",
+      "copy_failed": "Gagal menyalin perintah pemasangan"
+    },
+    "errors": {
+      "generic": "Paket bahasa tidak dapat dipasang."
+    }
+  },
+  "signal_storm": {
+    "hud": {
+      "score": "SKOR",
+      "best": "TERBAIK",
+      "wave": "GELOMBANG"
+    },
+    "power_ups": {
+      "rapid_fire": "⚡ TEMBAK CEPAT",
+      "spread": "◈ SEBAR",
+      "shield": "◉ PERISAI"
+    },
+    "pause": {
+      "title": "DIJEDA",
+      "resume_hint": "Tekan P untuk melanjutkan"
+    },
+    "game_over": {
+      "title": "PERMAINAN SELESAI",
+      "score_label": "SKOR",
+      "new_high_score": "★ SKOR TERTINGGI BARU ★",
+      "best_prefix": "TERBAIK:",
+      "controls_hint": "Enter untuk coba lagi  •  Esc untuk keluar"
+    },
+    "boss_defeated": "BOSS DIKALAHKAN",
+    "muted": "DIBISUKAN",
+    "boss_names": {
+      "tier_1": "PERUSAK SINYAL",
+      "tier_2": "PENGACAK FREKUENSI",
+      "tier_3": "PEMBLOKIR BAND",
+      "tier_4": "PENGHANCUR JARINGAN",
+      "tier_5": "PERUSAK INTI"
+    },
+    "boss_subtitles": {
+      "tier_1": "Mengganggu koneksi Anda",
+      "tier_2": "Mengacak semua frekuensi",
+      "tier_3": "Memblokir setiap band",
+      "tier_4": "Menghancurkan jaringan Anda",
+      "tier_5": "Merusak inti sistem"
+    }
+  },
+  "known_sims": {
+    "section": "SIM Terdaftar",
+    "rows": {
+      "count": {
+        "consequence": "QManager mengingat SIM yang pernah terdeteksi, sehingga hanya memberi tahu Anda saat SIM yang benar-benar baru dipasang. Menghapus akan melupakan semua SIM kecuali yang sedang terpasang.",
+        "label": "SIM yang diingat"
+      }
+    },
+    "states": {
+      "empty_title": "Belum ada SIM yang tercatat",
+      "empty_description": "QManager mencatat setiap SIM saat pertama kali dipasang. Pasang SIM untuk memulai daftar.",
+      "error_title": "Tidak dapat membaca SIM terdaftar",
+      "error_description": "Perangkat tidak menjawab. Tidak ada yang dilupakan; ini kegagalan pembacaan dan jumlahnya masih tersimpan di modem."
+    },
+    "clear_button": "Hapus",
+    "clear_dialog_title": "Hapus SIM yang dikenal?",
+    "clear_dialog_description": "Ini akan melupakan setiap SIM yang pernah dikenali QManager, kecuali yang sedang terpasang — sehingga SIM aktif Anda tidak ditandai sebagai baru. SIM yang pernah digunakan akan diberitahukan lagi saat dipasang berikutnya.",
+    "clear_dialog_confirm": "Hapus",
+    "clear_dialog_clearing": "Menghapus…",
+    "toast_cleared": "SIM yang dikenal telah dihapus",
+    "toast_clear_failed": "Gagal menghapus SIM yang dikenal"
+  },
+  "health_check": {
+    "page": {
+      "title": "Pemeriksaan Kesehatan Sistem",
+      "description": "Periksa setiap subsistem QManager di perangkat ini, dari broker AT hingga layanan dan firewall, lalu unduh paket yang sudah disamarkan untuk dibagikan ke dukungan."
+    },
+    "actions": {
+      "run": "Jalankan diagnostik",
+      "running": "Menjalankan…",
+      "download": "Unduh paket",
+      "downloading": "Mengunduh…",
+      "clear": "Hapus",
+      "clearing": "Menghapus…",
+      "retry": "Coba Lagi"
+    },
+    "clear_dialog": {
+      "title": "Hapus hasil diagnostik?",
+      "description": "Ini akan menghapus proses terakhir, setiap berkas output per pemeriksaan, dan paket diagnostik yang dapat diunduh dari perangkat. Halaman akan kembali ke kondisi kosongnya.",
+      "cancel": "Batal",
+      "confirm": "Hapus hasil"
+    },
+    "band": {
+      "head": "Diagnostik terakhir",
+      "unreachable": "Perangkat tidak merespons",
+      "stale": "Menampilkan hasil baca terakhir",
+      "result": {
+        "eyebrow": "Hasil",
+        "unreachable": "Tidak dapat dijangkau",
+        "none": "Belum dijalankan",
+        "running": "{{done}} / {{total}}",
+        "failed_one": "{{count}} gagal",
+        "failed_other": "{{count}} gagal",
+        "warned_one": "{{count}} peringatan",
+        "warned_other": "{{count}} peringatan",
+        "passed": "Semua lolos",
+        "errored": "Gagal dijalankan",
+        "caption_errored": "Proses berhenti lebih awal",
+        "caption_unreachable": "Perangkat tidak menjawab",
+        "caption_none": "Belum diperiksa",
+        "caption_running": "Dimulai {{when}}",
+        "caption_finished": "Selesai {{when}}",
+        "caption_warnings_one": "Selesai {{when}} ({{count}} peringatan)",
+        "caption_warnings_other": "Selesai {{when}} ({{count}} peringatan)"
+      },
+      "checks": {
+        "eyebrow": "Pemeriksaan",
+        "value": "{{passed}} / {{total}} lolos",
+        "caption_one": "{{count}} subsistem",
+        "caption_other": "{{count}} subsistem",
+        "caption_skipped_one": "{{subsystems}} ({{count}} dilewati)",
+        "caption_skipped_other": "{{subsystems}} ({{count}} dilewati)",
+        "caption_none": "Belum ada yang diukur"
+      },
+      "bundle": {
+        "eyebrow": "Paket diagnostik",
+        "value_ready": "Siap",
+        "value_building": "Membuat…",
+        "caption_ready": "Siap diunduh",
+        "caption_building": "Dibuat setelah proses selesai",
+        "caption_absent": "Dibuat setelah dijalankan",
+        "caption_unavailable": "Tidak ada paket dari proses ini"
+      }
+    },
+    "status": {
+      "pass": "Lolos",
+      "fail": "Gagal",
+      "warn": "Peringatan",
+      "skip": "Dilewati",
+      "running": "Berjalan",
+      "pending": "Menunggu"
+    },
+    "attention": {
+      "title": "Perlu perhatian",
+      "description": "Semua pemeriksaan yang gagal atau memicu peringatan pada proses terakhir. Mulai dari sini."
+    },
+    "all_checks": {
+      "title": "Semua pemeriksaan",
+      "description": "Setiap pemeriksaan yang dijalankan diagnostik, dikelompokkan menurut subsistem yang bersangkutan."
+    },
+    "tally": {
+      "failed_one": "{{count}} gagal",
+      "failed_other": "{{count}} gagal",
+      "warnings_one": "{{count}} peringatan",
+      "warnings_other": "{{count}} peringatan",
+      "passed_one": "{{count}} lolos",
+      "passed_other": "{{count}} lolos"
+    },
+    "states": {
+      "empty": {
+        "title": "Diagnostik belum pernah dijalankan",
+        "description": "QManager memeriksa setiap subsistem di perangkat ini dan mengemas hasilnya menjadi paket diagnostik yang sudah disamarkan, siap dikirim ke dukungan.",
+        "checks_one": "{{count}} pemeriksaan",
+        "checks_other": "{{count}} pemeriksaan"
+      },
+      "running": {
+        "title": "Belum ada yang gagal",
+        "description": "Diagnostik masih memproses pemeriksaannya. Apa pun yang gagal atau memicu peringatan akan muncul di sini."
+      },
+      "incomplete": {
+        "title": "Diagnostik ini tidak selesai",
+        "description": "Proses berhenti sebelum semua pemeriksaan melaporkan hasilnya, sehingga pemeriksaan yang belum terjangkau tidak punya hasil sama sekali. Tidak ada di sini yang menyatakan perangkat ini sehat — jalankan diagnostik lagi."
+      },
+      "all_clear": {
+        "title_one": "Semua {{count}} pemeriksaan lolos",
+        "title_other": "Semua {{count}} pemeriksaan lolos",
+        "description": "Tidak ada yang gagal dan tidak ada peringatan yang muncul. Setiap subsistem merespons sebagaimana mestinya."
+      },
+      "all_clear_skipped": {
+        "title_one": "Semua {{count}} pemeriksaan yang dijalankan lolos",
+        "title_other": "Semua {{count}} pemeriksaan yang dijalankan lolos",
+        "description_one": "Tidak ada yang gagal dan tidak ada peringatan yang muncul. {{count}} pemeriksaan dilewati, jadi proses ini tidak menyatakan apa pun tentangnya.",
+        "description_other": "Tidak ada yang gagal dan tidak ada peringatan yang muncul. {{count}} pemeriksaan dilewati, jadi proses ini tidak menyatakan apa pun tentangnya."
+      },
+      "error": {
+        "title": "Tidak dapat membaca diagnostik",
+        "description": "QManager meminta hasil health check terakhir dari perangkat, tetapi tidak mendapatkan respons."
+      }
+    },
+    "notice": {
+      "run_error": "Proses melaporkan masalah saat diagnostik ini berjalan."
+    },
+    "loading": {
+      "status": "Memuat hasil diagnostik",
+      "output": "Memuat…"
+    },
+    "output": {
+      "show": "Tampilkan output yang direkam untuk {{label}}",
+      "hide": "Sembunyikan output yang direkam untuk {{label}}",
+      "truncated": "Menampilkan 4 KB terakhir dari output yang direkam.",
+      "empty": "(tidak ada output yang direkam)",
+      "failed": "Gagal memuat output: {{error}}"
+    },
+    "time": {
+      "just_now": "Baru saja",
+      "seconds": "{{count}}dtk lalu",
+      "minutes": "{{count}}m lalu",
+      "hours": "{{count}}j lalu",
+      "days": "{{count}}h lalu"
+    },
+    "toast": {
+      "run_failed": "Tidak dapat memulai diagnostik",
+      "cleared": "Hasil diagnostik telah dihapus",
+      "clear_failed": "Tidak dapat menghapus hasil",
+      "download_failed": "Tidak dapat mengunduh paket diagnostik"
+    },
+    "category": {
+      "binaries": {
+        "label": "Biner & Versi",
+        "description": "Alat yang diperlukan dan biner broker AT"
+      },
+      "permissions": {
+        "label": "Filesystem & Izin",
+        "description": "Node perangkat, socket broker, jalur yang dapat ditulis, dan ruang kosong"
+      },
+      "at_transport": {
+        "label": "Transport AT",
+        "description": "Uji bolak-balik melalui qcmd dan broker qmanager_atd"
+      },
+      "sms": {
+        "label": "SIM & SMS",
+        "description": "Kesiapan SIM, penyimpanan SMS, dan kunci modem bersama"
+      },
+      "services": {
+        "label": "Layanan",
+        "description": "Instance procd untuk daemon QManager dan server web"
+      },
+      "network": {
+        "label": "Jaringan",
+        "description": "Alamat data seluler, keterjangkauan, DNS, server web, dan firewall"
+      },
+      "configuration": {
+        "label": "Konfigurasi",
+        "description": "Konfigurasi UCI dan JSON, kesegaran cache, dan versi terpasang"
+      }
+    },
+    "tests": {
+      "bin": {
+        "atd": "Biner broker AT qmanager_atd",
+        "qcmd": "qcmd terhubung ke qmanager_atd",
+        "qsms": "qsms terhubung ke qmanager_atd",
+        "jq": "jq",
+        "curl": "curl",
+        "openssl": "openssl",
+        "nft": "nft",
+        "ethtool": "ethtool",
+        "msmtp": "msmtp (peringatan email)",
+        "nfqws": "nfqws (Traffic Engine)",
+        "tailscale": "tailscale (opsional)"
+      },
+      "perm": {
+        "smd11": "Kanal AT /dev/smd11",
+        "atd_socket": "Socket broker AT hanya untuk root",
+        "tmp_writable": "/tmp dapat ditulis",
+        "var_lock": "/var/lock dapat ditulis",
+        "overlay_space": "Ruang kosong overlay",
+        "tmp_space": "Ruang kosong /tmp"
+      },
+      "at": {
+        "echo": "Echo AT",
+        "cgmi": "Produsen AT+CGMI",
+        "cgmm": "Model AT+CGMM",
+        "cgsn": "IMEI AT+CGSN",
+        "cfun": "Status radio AT+CFUN?",
+        "concurrent": "Panggilan bersamaan diserialkan",
+        "long_flag": "Tidak ada flag perintah panjang yang basi"
+      },
+      "sms": {
+        "cpin": "SIM siap (AT+CPIN?)",
+        "cpms": "Penyimpanan SMS merespons (AT+CPMS?)",
+        "lock": "Kunci modem dapat diambil"
+      },
+      "svc": {
+        "ping": "Daemon ping qmanager",
+        "poller": "Poller qmanager",
+        "atd": "Broker qmanager_atd",
+        "uhttpd": "Server web uhttpd",
+        "watchcat": "Watchdog koneksi",
+        "tower_failover": "Daemon failover menara",
+        "dpi": "Traffic Engine (nfqws)",
+        "sms_forward": "Daemon penerusan SMS",
+        "tailscale": "Tailscale (opsional)"
+      },
+      "net": {
+        "wan_ip": "Antarmuka data seluler memiliki IPv4",
+        "ping": "Ping mencapai target uji",
+        "dns": "DNS berhasil me-resolve",
+        "reachable": "Daemon ping melaporkan terjangkau",
+        "uhttpd_listen": "Server web mendengarkan",
+        "fw4": "Tabel firewall fw4 dimuat",
+        "dpi_chain": "Rantai nft Traffic Engine"
+      },
+      "cfg": {
+        "uci": "Konfigurasi UCI quecmanager dapat dibaca",
+        "qmanager_dir": "/etc/qmanager tersedia",
+        "json": "File JSON konfigurasi valid",
+        "poller_fresh": "Cache poller segar",
+        "ping_fresh": "Cache ping segar",
+        "version": "Versi QManager tercatat"
+      }
+    }
+  },
+  "adaptive_polling": {
+    "page_title": "Polling Adaptif",
+    "page_description": "Kueri modem lebih jarang saat tidak ada yang membuka QManager.",
+    "card_title": "Polling adaptif",
+    "card_description": "Status diperbarui dengan kecepatan penuh saat halaman terbuka, lalu melambat.",
+    "tier": {
+      "active": "Kecepatan penuh",
+      "idle": "Siaga (diperlambat)",
+      "deep": "Siaga dalam (minimal)"
+    },
+    "tier_aria": "Polling saat ini: {{tier}}",
+    "enabled": {
+      "label": "Perlambat saat siaga",
+      "on": "Polling melambat setelah masa tenggang di bawah.",
+      "off": "Status selalu diperbarui dengan kecepatan penuh.",
+      "hint_label": "Yang tetap berjalan",
+      "hint": "Peringatan dan watchdog koneksi tetap bekerja pada kecepatan apa pun. Hanya pembaruan status yang melambat."
+    },
+    "fields": {
+      "active_grace": {
+        "label": "Masa tenggang",
+        "consequence": "Kecepatan penuh berlanjut selama ini setelah halaman terakhir ditutup ({{min}} hingga {{max}} dtk)."
+      },
+      "idle_interval": {
+        "label": "Interval siaga",
+        "consequence": "Jeda antar pembaruan saat siaga ({{min}} hingga {{max}} dtk)."
+      },
+      "idle_threshold": {
+        "label": "Siaga dalam setelah",
+        "consequence": "Waktu siaga sebelum pembaruan melambat lebih lanjut ({{min}} hingga {{max}} dtk)."
+      },
+      "deep_idle_interval": {
+        "label": "Interval siaga dalam",
+        "consequence": "Jeda antar pembaruan saat siaga dalam ({{min}} hingga {{max}} dtk)."
+      }
+    },
+    "unit_seconds": "dtk",
+    "error_title": "Tidak dapat memuat polling adaptif",
+    "error_description": "Pengaturan tidak dimuat. Coba lagi sebentar lagi.",
+    "save_failed_status": "Belum disimpan",
+    "default_status": "Waktu default",
+    "toast_saved": "Polling adaptif disimpan.",
+    "toast_failed": "Tidak dapat menyimpan polling adaptif."
+  },
+  "logs": {
+    "page": {
+      "title": "Log Sistem",
+      "description": "QManager menyimpan lognya di memori modem, sehingga log ini kosong lagi setelah setiap reboot dan tidak menggerus flash. Saring di sini untuk melihat aktivitas masing-masing komponen.",
+      "refresh": "Segarkan",
+      "clear": "Hapus log",
+      "copy": "Salin"
+    },
+    "band": {
+      "head": "Kondisi log",
+      "severity": {
+        "eyebrow": "Tingkat keparahan",
+        "errors_one": "{{count}} kesalahan",
+        "errors_other": "{{count}} kesalahan",
+        "warnings_one": "{{count}} peringatan",
+        "warnings_other": "{{count}} peringatan",
+        "clean": "Bersih",
+        "caption_unread": "Belum ada pembacaan yang masuk",
+        "caption_errors_one": "{{count}} peringatan dari {{lines}} baris yang dibaca",
+        "caption_errors_other": "{{count}} peringatan dari {{lines}} baris yang dibaca",
+        "caption_warnings_one": "Tidak ada kesalahan dari {{count}} baris yang dibaca",
+        "caption_warnings_other": "Tidak ada kesalahan dari {{count}} baris yang dibaca",
+        "caption_clean_one": "Tidak ada peringatan dari {{count}} baris yang dibaca",
+        "caption_clean_other": "Tidak ada peringatan dari {{count}} baris yang dibaca"
+      },
+      "feed": {
+        "eyebrow": "Aliran",
+        "live": "Langsung",
+        "paused": "Dijeda",
+        "stopped": "Terhenti",
+        "caption_unread": "Menunggu pembacaan pertama",
+        "caption_live": "Disegarkan {{age}}, setiap 10 detik",
+        "caption_paused": "Penyegaran otomatis dijeda, dibaca {{age}}",
+        "caption_stopped": "Pembacaan terakhir gagal, {{age}}"
+      },
+      "file": {
+        "eyebrow": "File log",
+        "size": "{{size}} KB",
+        "caption_one": "{{count}} baris, {{rotated}} diarsipkan",
+        "caption_other": "{{count}} baris, {{rotated}} diarsipkan",
+        "caption_unread": "Ukuran tidak dilaporkan"
+      }
+    },
+    "card": {
+      "title": "Transkrip",
+      "description": "Menampilkan {{shown}} baris. Log aktif menyimpan {{held}}.",
+      "description_loading": "Membaca log…",
+      "description_unreadable": "QManager tidak dapat membaca log."
+    },
+    "rail": {
+      "label": "Saring berdasarkan tingkat",
+      "all": "Semua",
+      "DEBUG": "Debug",
+      "INFO": "Info",
+      "WARN": "Warn",
+      "ERROR": "Error"
+    },
+    "filters": {
+      "search_label": "Cari di log",
+      "search_placeholder": "Cari pesan",
+      "component_label": "Saring berdasarkan komponen",
+      "component_all": "Semua komponen",
+      "lines_label": "Baris yang dibaca",
+      "lines_option": "{{lines}} baris",
+      "archived": "Sertakan yang diarsipkan"
+    },
+    "day": {
+      "today": "Hari ini",
+      "yesterday": "Kemarin",
+      "unknown": "Tanpa tanggal"
+    },
+    "time": {
+      "now": "baru saja",
+      "seconds": "{{value}} dtk lalu",
+      "minutes": "{{value}} mnt lalu",
+      "hours": "{{value}} jam lalu",
+      "days": "{{value}} hr lalu"
+    },
+    "severity": {
+      "DEBUG": "Debug",
+      "INFO": "Informasi",
+      "WARN": "Peringatan",
+      "ERROR": "Kesalahan"
+    },
+    "notice": {
+      "stale": "QManager kehilangan kontak saat menyegarkan. Ini adalah baris terakhir yang dibacanya dari perangkat."
+    },
+    "empty": {
+      "title": "Log ini kosong",
+      "description": "QManager menyimpan lognya di memori dan mengosongkannya setiap kali reboot, sehingga belum ada yang tertulis sejak perangkat ini terakhir kali dinyalakan."
+    },
+    "empty_filtered": {
+      "title": "Tidak ada yang cocok dengan filter ini",
+      "description": "Log ini memiliki baris, tetapi tidak satu pun cocok dengan level, komponen, atau pencarian yang Anda pilih.",
+      "action": "Hapus filter"
+    },
+    "error": {
+      "title": "Tidak dapat membaca log",
+      "description": "QManager tidak dapat menjangkau pembaca log di perangkat ini. Log itu sendiri tidak tersentuh — ini kegagalan pembacaan, bukan kehilangan data.",
+      "retry": "Coba lagi"
+    },
+    "clear_dialog": {
+      "title": "Hapus log sistem?",
+      "description": "Ini akan mengosongkan log aktif dan menghapus kedua file arsip. Semua yang sudah tertulis akan hilang selamanya, dan baris baru akan langsung mulai masuk.",
+      "cancel": "Batal",
+      "confirm": "Hapus log",
+      "clearing": "Menghapus…"
+    },
+    "toast": {
+      "cleared": "Log sistem telah dihapus",
+      "clear_failed": "Gagal menghapus log sistem",
+      "refresh_failed": "Gagal membaca log sistem",
+      "copied": "Log disalin ke clipboard",
+      "copy_failed": "Tidak dapat menyalin log"
+    }
+  },
+  "band": {
+    "head": "Berlaku saat ini",
+    "unreachable": "Tidak terjangkau",
+    "clock": {
+      "eyebrow": "Zona waktu",
+      "caption_unread": "Tidak dapat membaca zona waktu",
+      "caption_saved": "Dipakai untuk log dan jadwal"
+    },
+    "reboot": {
+      "eyebrow": "Reboot berikutnya",
+      "off": "Mati",
+      "day_separator": ", ",
+      "caption_repeats": "Berulang: {{days}}",
+      "caption_off": "Tidak ada reboot otomatis",
+      "caption_no_day": "Aktif, tetapi belum ada hari yang dipilih",
+      "caption_unread": "Tidak dapat membaca jadwal",
+      "never": "Tidak pernah"
+    },
+    "sims": {
+      "eyebrow": "SIM Terdaftar",
+      "caption_none": "Belum ada yang tercatat",
+      "caption_known": "Hanya SIM baru yang memunculkan peringatan",
+      "caption_unread": "Tidak dapat membaca jumlahnya"
+    },
+    "stale": "Pembacaan terakhir yang dikonfirmasi"
+  },
+  "preferences": {
+    "section": "Waktu & Satuan",
+    "card": {
+      "title": "Perangkat & Satuan",
+      "description": "Bagaimana modem ini menyimpan waktu, satuan yang dipakai pembacaan, dan SIM yang diingatnya.",
+      "save": "Simpan Preferensi"
+    },
+    "rows": {
+      "unsaved": "Belum tersimpan",
+      "timezone": {
+        "label": "Zona waktu",
+        "consequence": "Modem tidak punya jam bertenaga baterai. Inilah acuan setiap baris log, peristiwa, dan jadwal.",
+        "placeholder": "Pilih zona waktu",
+        "search": "Cari zona waktu…",
+        "empty": "Tidak ada zona waktu yang cocok."
+      },
+      "temperature": {
+        "label": "Suhu",
+        "consequence": "Berlaku untuk setiap pembacaan suhu di QManager.",
+        "celsius": "Celsius (°C)",
+        "fahrenheit": "Fahrenheit (°F)"
+      },
+      "distance": {
+        "label": "Jarak",
+        "consequence": "Berlaku untuk jarak menara di halaman pemindai sel dan antena.",
+        "km": "Kilometer (km)",
+        "miles": "Mil (mi)"
+      }
+    },
+    "states": {
+      "error_title": "Tidak dapat membaca preferensi Anda",
+      "error_body": "QManager gagal membaca preferensi perangkat ini. Tidak ada yang diubah — zona waktu dan satuan yang sudah tersimpan tetap berlaku di modem.",
+      "error_body_detail": "QManager gagal membaca preferensi perangkat ini. Tidak ada yang diubah — zona waktu dan satuan yang sudah tersimpan tetap berlaku di modem. Perangkat menjawab: {{detail}}",
+      "stale": "Modem tidak menjawab permintaan terakhir. Yang ditampilkan adalah kondisi terakhir yang dikonfirmasinya."
+    },
+    "toast": {
+      "saved": "Preferensi tersimpan",
+      "failed": "Gagal menyimpan preferensi"
+    }
+  },
+  "reboot": {
+    "card": {
+      "title": "Reboot Terjadwal",
+      "description": "Reboot modem secara otomatis sesuai jadwal mingguan."
+    },
+    "rows": {
+      "enabled": {
+        "label": "Reboot otomatis",
+        "armed": "Aktif",
+        "off": "Mati",
+        "consequence": "Modem akan reboot sesuai jadwal ini. Sesi Anda terputus sekitar sembilan puluh detik lalu kembali sendiri.",
+        "no_day": "Tidak pernah berjalan"
+      },
+      "time": {
+        "label": "Waktu",
+        "consequence": "Waktu lokal perangkat, bukan waktu peramban Anda."
+      },
+      "days": {
+        "label": "Ulangi pada",
+        "consequence": "Tanpa hari yang dipilih, jadwal tidak akan pernah berjalan.",
+        "rail": "Hari reboot dalam seminggu"
+      },
+      "clock": {
+        "label": "Waktu modem",
+        "consequence": "Tanggal dan waktu yang dipakai jadwal, dalam zona waktu yang diatur di Perangkat & Satuan.",
+        "unsynced": "Belum diatur",
+        "unsynced_consequence": "Modem belum mengambil waktu dari jaringan, jadi reboot terjadwal tidak bisa berjalan sampai itu terjadi."
+      }
+    },
+    "days": {
+      "sun": "Min",
+      "mon": "Sen",
+      "tue": "Sel",
+      "wed": "Rab",
+      "thu": "Kam",
+      "fri": "Jum",
+      "sat": "Sab"
+    },
+    "states": {
+      "error": {
+        "title": "Tidak dapat membaca jadwal",
+        "description": "QManager tidak dapat memuat jadwal perangkat ini. Yang sudah tersimpan tetap berlaku di modem. Ini kegagalan pembacaan, bukan penonaktifan."
+      },
+      "stale": "QManager kehilangan kontak saat menyegarkan. Ini adalah nilai terakhir yang dibacanya dari perangkat.",
+      "autosave": "Tersimpan otomatis",
+      "saving": "Menyimpan…"
+    },
+    "toast": {
+      "enabled": "Reboot terjadwal diaktifkan",
+      "disabled": "Reboot terjadwal dinonaktifkan",
+      "saved": "Jadwal reboot tersimpan",
+      "save_failed": "Gagal menyimpan jadwal reboot",
+      "update_failed": "Gagal memperbarui jadwal reboot",
+      "unsaved": "Perubahan jadwal reboot tidak tersimpan — Anda meninggalkan halaman sebelum sempat disimpan."
+    }
+  },
+  "passwords": {
+    "card": {
+      "title": "Kata Sandi",
+      "description": "Ubah kata sandi yang Anda pakai untuk masuk ke QManager, atau kata sandi root untuk SSH. Masing-masing meminta kata sandinya yang sekarang terlebih dahulu."
+    },
+    "tabs": {
+      "aria": "Kata sandi yang diubah",
+      "web": "Kata Sandi Web",
+      "ssh": "Kata Sandi SSH"
+    },
+    "web": {
+      "label": "Kata sandi web saat ini",
+      "consequence": "Kata sandi yang Anda pakai untuk masuk ke QManager.",
+      "dialog_title": "Ubah kata sandi web",
+      "dialog_description": "Anda akan keluar setelah mengubahnya."
+    },
+    "ssh": {
+      "label": "Kata sandi SSH saat ini",
+      "consequence": "Kata sandi root untuk sesi SSH ke modem ini.",
+      "dialog_title": "Ubah kata sandi SSH",
+      "dialog_description": "Langsung berlaku; sesi SSH yang sedang berjalan tetap terbuka.",
+      "toast_saved": "Kata sandi SSH berhasil diperbarui."
+    },
+    "continue": "Lanjutkan",
+    "toggle": {
+      "show": "Tampilkan kata sandi",
+      "hide": "Sembunyikan kata sandi"
+    },
+    "dialog": {
+      "new_label": "Kata sandi baru",
+      "confirm_label": "Konfirmasi kata sandi baru",
+      "match": "Kata sandi cocok",
+      "mismatch": "Kata sandi tidak cocok",
+      "cancel": "Batal",
+      "save": "Simpan kata sandi"
+    },
+    "errors": {
+      "too_short": "Kata sandi minimal 5 karakter.",
+      "weak": "Kata sandi minimal 5 karakter dan menyertakan huruf besar, huruf kecil, dan angka.",
+      "verify_failed": "Tidak dapat memeriksa kata sandi. Coba lagi.",
+      "change_failed": "Tidak dapat mengubah kata sandi. Coba lagi."
+    }
+  },
+  "web_port": {
+    "card_title": "Port Web",
+    "card_description": "Port yang didengarkan antarmuka ini. LuCI ikut pindah.",
+    "http_label": "Port HTTP",
+    "http_consequence": "Port tanpa enkripsi untuk antarmuka ini dan LuCI.",
+    "https_label": "Port HTTPS",
+    "https_consequence": "Port terenkripsi untuk antarmuka ini dan LuCI.",
+    "pending": "Akan terbuka di {{origin}} setelah diterapkan.",
+    "moving": "Pindah ke {{origin}}…",
+    "invalid": "Gunakan bilangan bulat dari 1 sampai 65535.",
+    "same": "HTTP dan HTTPS harus memakai port yang berbeda.",
+    "discard": "Buang",
+    "confirm_title": "Ubah port web?",
+    "confirm_description": "QManager dimulai ulang di port baru dan halaman ini pindah ke {{origin}}. Jika port baru gagal dimulai, port lama kembali dengan sendirinya.",
+    "confirm_action": "Ubah port",
+    "toast_failed": "Tidak dapat mengubah port web.",
+    "toast_unchanged": "Port web disimpan.",
+    "toast_unreachable": "Port baru tidak merespons, jadi QManager tetap di port lama.",
+    "error_title": "Tidak dapat membaca port web",
+    "error_description": "Port tidak termuat. Coba lagi sebentar lagi."
+  }
+}

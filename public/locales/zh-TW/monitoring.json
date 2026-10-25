@@ -1,0 +1,822 @@
+{
+  "shared": {
+    "os_linux": "Linux",
+    "os_macos": "macOS",
+    "os_windows": "Windows",
+    "os_ios": "iOS",
+    "os_android": "Android",
+    "os_freebsd": "FreeBSD",
+    "os_unknown": "—",
+    "unknown": "未知"
+  },
+  "network_events": {
+    "title": "網路事件",
+    "description": "檢視近期的連線、訊號和設定事件。",
+    "card_title": "網路事件",
+    "card_description": "裝置輪詢器記錄的近期網路事件。",
+    "tab_all": "全部",
+    "tab_band_changes": "頻段變更",
+    "tab_network_mode": "網路模式",
+    "tab_data_connection": "資料連線",
+    "sort_label": "排序方式",
+    "sort_newest": "最新優先",
+    "sort_oldest": "最早優先",
+    "sort_type": "事件型別",
+    "limit_label": "最大事件數",
+    "limit_all": "全部事件",
+    "limit_10": "10 條事件",
+    "limit_25": "25 條事件",
+    "empty_all": "未找到網路事件。",
+    "empty_band_changes": "未找到頻段變更事件。",
+    "empty_network_mode": "未找到網路模式事件。",
+    "empty_data_connection": "未找到資料連線事件。",
+    "auto_refresh_paused": "自動重新整理已暫停 — 顯示截至 {{time}} 的事件。",
+    "failed_to_load": "載入網路事件失敗：{{error}}",
+    "auto_refresh_label": "自動重新整理",
+    "refresh_button": "重新整理",
+    "table_header_event_type": "事件型別",
+    "table_header_message": "訊息",
+    "table_header_time": "日期和時間",
+    "showing_count_one": "顯示 {{shown}} / {{total}} 條事件",
+    "showing_count_other": "顯示 {{shown}} / {{total}} 條事件",
+    "last_updated": "上次更新：{{time}}",
+    "aria_refresh": "重新整理網路事件"
+  },
+  "alerts": {
+    "activity": {
+      "cause": {
+        "planned": "計畫內",
+        "unexpected": "非預期",
+        "watchdog": "看門狗"
+      },
+      "channel": {
+        "email": "Email",
+        "sms": "SMS"
+      },
+      "day": {
+        "today": "今天",
+        "undated": "沒有記錄時間",
+        "yesterday": "昨天"
+      },
+      "description": "已傳送的提醒和重新啟動，最新的在前。",
+      "empty": {
+        "description": "管道傳送警示後會顯示在這裡，重新啟動也會自動記錄並附上原因。",
+        "title": "目前尚無記錄"
+      },
+      "error": {
+        "title": "無法載入活動記錄",
+        "description": "裝置沒有回應。請稍後再試。",
+        "retry": "重試"
+      },
+      "event": {
+        "reboot": "數據機已重新啟動"
+      },
+      "notice": {
+        "stale": "顯示我們最後成功讀取到的活動記錄。"
+      },
+      "sr": {
+        "failed": "警示傳送失敗",
+        "reboot": "已記錄重新啟動",
+        "sent": "警示已傳送"
+      },
+      "time": {
+        "days_one": "{{count}} 天前",
+        "days_other": "{{count}} 天前",
+        "hours_one": "{{count}} 小時前",
+        "hours_other": "{{count}} 小時前",
+        "just_now": "剛剛",
+        "minutes_one": "{{count}} 分鐘前",
+        "minutes_other": "{{count}} 分鐘前",
+        "unknown": "未知"
+      },
+      "title": "活動記錄",
+      "transcript_label": "警示與重新啟動記錄",
+      "trigger": {
+        "test": "測試提醒"
+      }
+    },
+    "channels": {
+      "description": "設定每種管道如何通知您。",
+      "email": {
+        "address_error": "請輸入有效的電子郵件地址。",
+        "mailer_install": "安裝 msmtp",
+        "mailer_installing": "安裝中",
+        "mailer_missing": "尚未安裝 msmtp 郵件程式，因此目前無法傳送 Email。SMS 仍可正常儲存。",
+        "mailer_recheck": "重新檢查",
+        "password_hide": "隱藏應用程式密碼",
+        "password_hint": "請在您的 Google 帳戶中為此裝置產生一組應用程式密碼。",
+        "password_keep": "留空以保留已儲存的密碼",
+        "password_label": "Gmail 應用程式密碼",
+        "password_link": "開啟 Google 應用程式密碼頁面",
+        "password_missing": "需要應用程式密碼才能傳送 Email。",
+        "password_placeholder": "xxxx xxxx xxxx xxxx",
+        "password_show": "顯示應用程式密碼",
+        "recipient_hint": "警示會送達的地址。",
+        "recipient_label": "收件人 Email",
+        "recipient_missing": "需要填寫收件人地址。",
+        "sender_hint": "用來寄送警示的 Gmail 帳號。",
+        "sender_label": "寄件人 Email",
+        "sender_missing": "需要填寫寄件人地址。",
+        "test": "傳送測試 Email",
+        "title": "電子郵件提醒",
+        "sub": "連線恢復後透過 Gmail 傳送。"
+      },
+      "empty": {
+        "description": "此裝置未回傳任何警示管道，因此目前沒有可設定的項目。",
+        "title": "沒有回報任何管道"
+      },
+      "loading": "正在載入警示管道",
+      "name": {
+        "email": "Email",
+        "sms": "SMS"
+      },
+      "rail_label": "警示管道",
+      "save": {
+        "action": "儲存設定",
+        "blocked": "請修正標示的欄位",
+        "blocked_in": "請修正 {{channels}} 中的錯誤",
+        "clean": "所有變更已儲存",
+        "discard": "捨棄",
+        "failed": "設定無法儲存。",
+        "succeeded": "警示設定已儲存",
+        "errors": {}
+      },
+      "secret_saved": "已儲存",
+      "sms": {
+        "phone_error": "請輸入含國碼的號碼，例如 +14155551234。",
+        "phone_hint": "請加上國碼，並以加號開頭。",
+        "phone_label": "收件人電話",
+        "phone_missing": "需要填寫收件人電話號碼。",
+        "test": "傳送測試 SMS",
+        "title": "簡訊提醒",
+        "sub": "斷線期間也能送達。"
+      },
+      "status": {
+        "incomplete": "尚待設定",
+        "needs_fixing": "有未儲存的錯誤",
+        "off": "已關閉",
+        "ready": "已就緒",
+        "unused": "沒有已路由的事件"
+      },
+      "test": {
+        "blocked_busy": "另一項測試仍在執行中。",
+        "blocked_dirty": "請先儲存變更。測試會依照已儲存的設定執行。",
+        "blocked_incomplete": "請先完成此管道的設定並儲存，才能傳送測試。",
+        "blocked_mailer": "請安裝 msmtp 郵件程式才能傳送測試 Email。",
+        "blocked_off": "請先開啟此管道並儲存，才能傳送測試。",
+        "failed": "測試無法傳送。",
+        "sending": "傳送中",
+        "succeeded": "測試 {{channel}} 已傳送",
+        "errors": {
+          "send_failed_sms": "測試簡訊未傳送，請檢查訊號、SIM 卡餘額和號碼。",
+          "send_failed_email": "測試郵件未傳送，請檢查電子郵件地址、應用程式密碼和網路連線。"
+        }
+      },
+      "threshold_error": "請輸入 1 到 60 之間的整數分鐘。",
+      "threshold_hint": "較短的斷線只記錄，不傳送。",
+      "threshold_label": "警示前等待時間",
+      "threshold_unit": "分鐘",
+      "title": "管道",
+      "sends_for": "傳送事件",
+      "error": {
+        "title": "無法載入管道",
+        "description": "裝置沒有回應。請稍後再試。",
+        "retry": "重試"
+      }
+    },
+    "coverage": {
+      "description": "依已儲存的設定，哪些提醒會送達。",
+      "emptyDesc": "裝置未回報任何警示功能，因此這裡沒有可開啟的項目。",
+      "emptyTitle": "沒有可路由的項目",
+      "errorDesc": "裝置沒有回應，因此無法顯示會觸發的項目。",
+      "errorRetry": "重試",
+      "errorTitle": "無法載入涵蓋範圍",
+      "event": {
+        "connection_lost": {
+          "name": "連線中斷"
+        },
+        "connection_restored": {
+          "name": "連線已恢復"
+        },
+        "reboot": {
+          "name": "數據機已重新啟動"
+        }
+      },
+      "loading": "正在載入涵蓋範圍",
+      "reason": {
+        "email_needs_internet": "需要網路連線",
+        "not_supported": "此管道無法傳送此事件"
+      },
+      "staleNotice": "顯示我們上次從裝置讀取到的設定。",
+      "title": "涵蓋範圍",
+      "verdict": {
+        "all": "全部涵蓋",
+        "outage": "斷線未涵蓋",
+        "partial": "已涵蓋 {{covered}}/{{total}}",
+        "none": "不會傳送任何提醒"
+      },
+      "needsSetup": "{{channel}} 需要設定",
+      "notSent": "不傳送"
+    },
+    "page": {
+      "description": "連線中斷、恢復或數據機重新啟動時，會通知哪些對象。",
+      "refresh": "重新整理",
+      "title": "警示",
+      "unreadable": "裝置沒有回應。"
+    }
+  },
+  "watchdog": {
+    "page": {
+      "title": "看門狗",
+      "description": "監控網際網路連線，在中斷時依恢復階梯逐步處理。",
+      "refresh": "重新整理",
+      "unreadableTitle": "無法讀取看門狗設定",
+      "unreadable": "數據機沒有回應。",
+      "retry": "重試"
+    },
+    "band": {
+      "checks": "失敗偵測",
+      "recoveries": "恢復",
+      "reboots": "重啟",
+      "absent": "未回報",
+      "checksCaption": "開始恢復前",
+      "cooldownCaption": "{{seconds}} 秒後重新偵測",
+      "recoveriesLast": "第 {{tier}} 步，{{ago}}",
+      "recoveriesNone": "尚無記錄",
+      "rebootsCaption": "最近一小時",
+      "rebootsOff": "重啟步驟已關閉",
+      "aria": "看門狗狀態",
+      "cooldownStep": "第 {{tier}} 步已執行，{{seconds}} 秒後重新偵測。"
+    },
+    "phase": {
+      "off": {
+        "label": "已關閉",
+        "blurb": "看門狗未監控連線。"
+      },
+      "unknown": {
+        "label": "未知",
+        "blurb": "數據機沒有回應，因此無法得知看門狗目前的狀態。"
+      },
+      "starting": {
+        "label": "啟動中",
+        "blurb": "服務剛啟用，尚未回報狀態。"
+      },
+      "not_running": {
+        "label": "未回報",
+        "blurb": "已啟用，但看門狗已停止回報。"
+      },
+      "auto_disabled": {
+        "label": "已自動關閉",
+        "blurb": "已達到重啟次數上限。待連線穩定後再重新開啟。"
+      },
+      "monitor": {
+        "label": "監控中",
+        "blurb": "連線狀況良好，正在監控是否發生斷線。"
+      },
+      "suspect": {
+        "label": "檢查中",
+        "blurb": "剛才有一次連線檢查失敗，正在確認後才會採取行動。"
+      },
+      "recovery": {
+        "label": "恢復中",
+        "blurb": "正在依序執行恢復步驟，以恢復連線。"
+      },
+      "cooldown": {
+        "label": "冷卻中",
+        "blurb": "正在等待上一個恢復步驟生效，然後再重新偵測。"
+      },
+      "locked": {
+        "label": "已暫停",
+        "blurb": "有維護作業正在進行，看門狗暫時不會採取行動。"
+      },
+      "radio_off": {
+        "blurb": "無線電已關閉，看門狗暫時不會採取行動。"
+      },
+      "disabled": {
+        "label": "已停用",
+        "blurb": "服務正在執行，但功能已關閉。"
+      },
+      "ssr_hold": {
+        "label": "等待中",
+        "blurb": "基頻正在自行重新啟動，復原作業會等待其恢復。"
+      }
+    },
+    "master": {
+      "aria": "啟用連線看門狗"
+    },
+    "ladder": {
+      "title": "恢復階梯",
+      "description": "按順序嘗試，從最溫和的方式開始。",
+      "aria": "恢復階梯",
+      "status": {
+        "blocked": "需要插槽",
+        "done": "已嘗試",
+        "running": "正在執行"
+      },
+      "tier1": {
+        "name": "重新註冊到網路",
+        "consequence": "連線會中斷幾秒鐘。"
+      },
+      "tier2": {
+        "name": "重新啟動無線電",
+        "consequence": "鎖定基地台時跳過。"
+      },
+      "tier3": {
+        "name": "切換到備用 SIM 卡",
+        "consequence": "將使用備用卡運作，直到您切回。",
+        "slotLabel": "備用 SIM 卡插槽",
+        "slot": "插槽 {{slot}}"
+      },
+      "tier4": {
+        "name": "重啟裝置",
+        "consequence": "離線約一分鐘。",
+        "capLabel": "每小時最大重啟次數",
+        "capLead": "最多",
+        "capUnit": "次/小時"
+      },
+      "tierAria": "啟用此恢復步驟：{{name}}",
+      "failback": {
+        "name": "切回主要 SIM 卡",
+        "consequence": "定期重試主要 SIM 卡，每次嘗試都會短暫斷線。",
+        "lead": "每",
+        "unit": "分鐘",
+        "intervalLabel": "主要 SIM 卡複查間隔"
+      }
+    },
+    "detection": {
+      "title": "偵測",
+      "description": "靜默連線多久後會被判定為斷線。",
+      "probe": {
+        "label": "探測間隔",
+        "short": "{{seconds}}秒"
+      },
+      "threshold": {
+        "label": "斷線判定",
+        "unit": "次探測失敗"
+      },
+      "cooldown": {
+        "label": "步驟間隔",
+        "unit": "秒"
+      },
+      "timeline": {
+        "eyebrow": "連線中斷時",
+        "declaredStep": "判定斷線，執行第 {{tier}} 步",
+        "declaredReboot": "判定斷線，執行第 4 步：重啟",
+        "step": "第 {{tier}} 步",
+        "reboot": "第 4 步：重啟",
+        "about": "約 {{time}}",
+        "seconds": "{{s}} 秒",
+        "minutes": "{{m}} 分鐘",
+        "minutesSeconds": "{{m}} 分 {{s}} 秒",
+        "off": "看門狗已關閉，不會執行任何步驟。",
+        "none": "沒有啟用任何步驟，不會執行任何操作。",
+        "invalid": "輸入有效的偵測數值即可預覽時間線。",
+        "stopped": "第 3 步沒有插槽，恢復流程將止步於此。"
+      },
+      "quality": {
+        "label": "品質觸發",
+        "unit": "次",
+        "caption": "延遲超過 {{ms}} ms 或封包遺失超過 {{pct}}%",
+        "link": "臨界值"
+      },
+      "ssr": {
+        "label": "基頻重新啟動等待",
+        "unit": "秒",
+        "caption": "先等待模組自行重新啟動完成"
+      }
+    },
+    "activity": {
+      "title": "恢復活動",
+      "description": "看門狗執行過的操作，最新優先。",
+      "tier4Reboot": "看門狗重新啟動了數據機",
+      "type": {
+        "recovery": "恢復",
+        "failover": "SIM 卡故障轉移"
+      },
+      "day": {
+        "today": "今天",
+        "yesterday": "昨天"
+      },
+      "time": {
+        "just_now": "剛剛",
+        "minutes_one": "{{count}} 分鐘前",
+        "minutes_other": "{{count}} 分鐘前",
+        "hours_one": "{{count}} 小時前",
+        "hours_other": "{{count}} 小時前",
+        "days_one": "{{count}} 天前",
+        "days_other": "{{count}} 天前"
+      },
+      "empty": {
+        "title": "尚無恢復活動",
+        "description": "當看門狗處理斷線時，恢復步驟和 SIM 卡切換會顯示在這裡。"
+      },
+      "error": {
+        "title": "無法載入恢復活動",
+        "retry": "重試"
+      },
+      "allEvents": "全部事件"
+    },
+    "save": {
+      "discard": "捨棄",
+      "action": "儲存",
+      "clean": "所有變更已儲存",
+      "blockedIn": "儲存前請檢查 {{fields}}",
+      "toastOk": "看門狗設定已儲存",
+      "toastFail": "無法儲存看門狗設定",
+      "confirmReboot": {
+        "title": "允許看門狗重啟數據機？",
+        "body": "儲存後，當所有更溫和的步驟都失敗時，看門狗可以自行重啟數據機。此頁面會消失約一分鐘，等待數據機恢復。",
+        "cap": "每小時最多重啟 {{cap}} 次。達到上限後，看門狗會自行關閉，直到您重新開啟。",
+        "cancel": "取消",
+        "action": "允許重啟"
+      }
+    },
+    "errors": {
+      "failThreshold": "必須介於 1 到 20 之間",
+      "probeInterval": "必須介於 1 到 60 秒之間",
+      "cooldown": "必須介於 10 到 300 秒之間",
+      "maxReboots": "必須介於 1 到 10 之間",
+      "backupSim": "選擇備用 SIM 卡插槽以啟用故障轉移",
+      "qualityConsecutive": "必須介於 1 到 60 之間",
+      "ssrGrace": "必須介於 10 到 120 秒之間",
+      "recheckInterval": "必須介於 5 到 1440 分鐘之間"
+    },
+    "failover": {
+      "title": "目前使用備用 SIM 卡",
+      "body": "已切換到插槽 {{current}}，{{since}}。原始 SIM 卡位於插槽 {{original}}。",
+      "recently": "最近",
+      "revert": "還原至原始 SIM 卡",
+      "reverting": "正在還原…",
+      "confirmTitle": "還原至原始 SIM 卡？",
+      "confirmBody": "這將切換回 SIM 卡插槽 {{original}}。數據機重新連線期間，網路會短暫中斷。",
+      "cancel": "取消",
+      "confirm": "還原 SIM 卡",
+      "requested": "已請求還原 SIM 卡。看門狗將盡快處理。",
+      "failed": "無法請求還原 SIM 卡"
+    },
+    "strip": {
+      "title": "探測",
+      "noReply": "無回應",
+      "reply": "{{ms}} 毫秒",
+      "tipAgo": "{{time}}前",
+      "ago": "{{minutes}} 分鐘前",
+      "now": "現在",
+      "empty": "數據機沒有探測資料",
+      "aria": "{{total}} 次探測，{{missed}} 次無回應"
+    },
+    "sim_swap_title": "檢測到新 SIM 卡",
+    "sim_swap_with_profile": "檢測到新 SIM 卡。設定檔 <strong>{{profile_name}}</strong> 匹配此 SIM。",
+    "sim_swap_no_profile": "檢測到新 SIM 卡。未找到匹配的設定檔。",
+    "sim_swap_apply_button": "套用設定檔",
+    "sim_swap_dismiss_button": "關閉",
+    "sim_swap_dismiss_aria": "關閉 SIM 更換通知"
+  },
+  "netbird": {
+    "actions": {
+      "cancel": "取消",
+      "retry": "重試"
+    },
+    "page": {
+      "title": "NetBird VPN",
+      "description": "您的網狀 VPN：本數據機在網路中的狀態，以及網路中的其他裝置。",
+      "refresh": "重新整理",
+      "stale": "顯示的是最近一次成功讀取的狀態。{{message}}",
+      "unreadableTitle": "無法讀取 NetBird 狀態",
+      "unreadable": "裝置沒有回應。"
+    },
+    "mutex": {
+      "title": "已安裝其他 VPN",
+      "description": "同一時間只能安裝一個 VPN。請先在 <link>Tailscale 頁面</link>解除安裝 {{other_vpn}}。"
+    },
+    "status": {
+      "aria": "NetBird 狀態",
+      "connected": "已連線",
+      "disconnected": "已中斷連線",
+      "serviceStopped": "服務已停止",
+      "notInstalled": "未安裝",
+      "unknown": "未知"
+    },
+    "band": {
+      "dash": "—",
+      "connectionEyebrow": "連線",
+      "version": "版本 {{version}}",
+      "versionUnknown": "版本未知",
+      "deviceEyebrow": "本裝置",
+      "deviceUnknown": "尚無 NetBird 位址",
+      "controlEyebrow": "控制平面",
+      "controlIssue": "需要處理",
+      "controlIdle": "連線後可用",
+      "controlOk": "管理與訊號伺服器",
+      "controlDetail": "管理伺服器：{{management}}，訊號伺服器：{{signal}}",
+      "peersEyebrow": "線上節點",
+      "peersTotal_one": "網路中有 {{count}} 個節點",
+      "peersTotal_other": "網路中有 {{count}} 個節點",
+      "noPeers": "尚無節點"
+    },
+    "connection": {
+      "title": "連線",
+      "description": "本數據機是否加入 NetBird 網路，以及加入後的行為。",
+      "version": "v{{version}}",
+      "connect": "連線",
+      "connecting": "連線中…",
+      "disconnect": "中斷連線",
+      "disconnecting": "中斷連線中…",
+      "startService": "啟動服務",
+      "starting": "啟動中…",
+      "stopService": "停止服務",
+      "stopping": "停止中…",
+      "bootTitle": "開機自動啟動",
+      "bootDescription": "數據機重新啟動後自動啟用 NetBird。",
+      "on": "開啟",
+      "off": "關閉",
+      "setupKeyLabel": "設定金鑰",
+      "setupKeyPlaceholder": "輸入設定金鑰（可選）",
+      "setupKeyHelp": "貼上 NetBird 控制台中的設定金鑰；若本數據機已註冊，可留空。"
+    },
+    "device": {
+      "title": "本裝置",
+      "description": "數據機在 NetBird 網路中的識別資訊。",
+      "fqdn": "FQDN",
+      "netbirdIp": "NetBird IP",
+      "interface": "介面",
+      "management": "管理伺服器",
+      "signal": "訊號伺服器",
+      "emptyTitle": "尚未接入網路",
+      "emptyDescription": "連線 NetBird 後，此處會顯示本數據機的位址、名稱和連結狀態。"
+    },
+    "peers": {
+      "title": "網路節點",
+      "description": "您的 NetBird 網路中的其他裝置，及其是否可連線。",
+      "dash": "—",
+      "unnamed": "未命名裝置",
+      "colDevice": "裝置",
+      "colAddress": "位址",
+      "colConnection": "路徑",
+      "colStatus": "狀態",
+      "colLastSeen": "上次上線",
+      "online": "線上",
+      "offline": "離線",
+      "p2p": "P2P",
+      "relayed": "中繼",
+      "countOnline": "{{total}} 個中 {{online}} 個線上",
+      "errorTitle": "無法載入節點",
+      "emptyTitle": "沒有其他裝置",
+      "emptyDescription": "尚無其他裝置加入此網路。在 NetBird 控制台新增裝置後，會顯示在這裡。",
+      "offlineTitle": "未連線",
+      "offlineDescription": "連線 NetBird 後即可查看網路中的其他裝置。",
+      "connectedCount_one": "{{count}} 個節點已連線",
+      "connectedCount_other": "{{count}} 個節點已連線",
+      "noDetail": "目前的 NetBird 版本不提供逐節點詳細資訊。更新 NetBird 後即可查看。"
+    },
+    "install": {
+      "title": "NetBird",
+      "description": "一種網狀 VPN，無需開放連接埠即可隨時隨地存取本數據機。",
+      "conditionTitle": "未安裝 NetBird",
+      "conditionDescription": "安裝時會透過目前工作階段所用的行動網路連結下載 NetBird 套件，因此會消耗流量，且安裝期間連線會變慢。",
+      "install": "安裝 NetBird",
+      "installing": "安裝中…",
+      "checkAgain": "重新檢查",
+      "done": "NetBird 已安裝。",
+      "failed": "安裝未完成。",
+      "manualLabel": "或在命令列中安裝",
+      "copyCommand": "複製安裝指令",
+      "manualCommand": "opkg update && opkg install netbird"
+    },
+    "danger": {
+      "uninstall": "解除安裝",
+      "removing": "移除中…",
+      "dialogTitle": "解除安裝 NetBird？",
+      "dialogDescription": "將從本數據機移除 NetBird 套件、防火牆規則及所有連線狀態。之後重新啟動可清除殘留。",
+      "rebootTitle": "建議重新啟動",
+      "rebootDescription": "NetBird 已移除。重新啟動可清除殘留的防火牆規則和其他檔案。是否立即重新啟動？",
+      "rebootLater": "稍後重新啟動",
+      "rebootNow": "立即重新啟動",
+      "rebooting": "重新啟動中…"
+    },
+    "toast": {
+      "bootEnabled": "NetBird 將在開機時啟動",
+      "bootDisabled": "NetBird 不會在開機時啟動",
+      "bootFailed": "無法變更開機啟動設定",
+      "connected": "正在連線至 NetBird",
+      "connectFailed": "無法連線至 NetBird",
+      "disconnected": "NetBird 已中斷連線",
+      "disconnectFailed": "無法中斷 NetBird 連線",
+      "serviceStarted": "NetBird 服務已啟動",
+      "serviceStartFailed": "無法啟動 NetBird 服務",
+      "serviceStopped": "NetBird 服務已停止",
+      "serviceStopFailed": "無法停止 NetBird 服務",
+      "uninstalled": "NetBird 已解除安裝",
+      "uninstallFailed": "無法解除安裝 NetBird",
+      "installed": "NetBird 已安裝",
+      "installFailed": "NetBird 安裝未完成",
+      "copied": "安裝指令已複製",
+      "copyFailed": "無法複製指令"
+    },
+    "errors": {
+      "fetch_failed": "無法載入 NetBird 狀態"
+    }
+  },
+  "connection_quality": {
+    "page": {
+      "title": "連線品質",
+      "description": "數據機 ping 的目標，以及把緩慢連線記為事件的門檻。"
+    },
+    "targets": {
+      "title": "探測目標",
+      "description": "依序 ping，直到有目標回應，用來判斷網際網路是否連通。",
+      "restore": "還原預設值",
+      "save": "儲存探測目標",
+      "leg": {
+        "ipv4": "IPv4 目標",
+        "ipv6": "IPv6 備援目標"
+      },
+      "error": {
+        "title": "無法讀取探測目標",
+        "body": "已儲存的目標仍在使用。",
+        "retry": "重試"
+      },
+      "toast": {
+        "saved": "探測目標已儲存。",
+        "failed": "無法儲存探測目標。"
+      },
+      "validation": {
+        "empty": "請輸入一個目標。",
+        "too_long": "最多 {{max}} 個字元。",
+        "spaces": "不允許包含空格。",
+        "disallowed": "包含不允許使用的字元。",
+        "ipv4_invalid": "請輸入 IPv4 位址或主機名稱。",
+        "ipv6_invalid": "不是有效的 IPv6 位址。",
+        "ipv6_colon": "IPv6 位址應包含冒號。"
+      },
+      "verdict": {
+        "ipv4": "IPv4 正在回應",
+        "ipv6": "IPv6 正在回應",
+        "none": "無回應",
+        "unknown": "未回報"
+      },
+      "group": {
+        "sensitivity": "靈敏度",
+        "ipv4": "IPv4",
+        "ipv6": "IPv6 備援"
+      },
+      "fallback_hint": "只有在 IPv4 目標沒有回應時才會 ping，因此純 IPv6 連線不會被誤判為斷線。",
+      "fallback_hint_label": "關於 IPv6 備援",
+      "interval": {
+        "label": "探測間隔",
+        "value": "每 {{seconds}} 秒",
+        "override": "每 {{seconds}} 秒（由看門狗設定）"
+      },
+      "failed": "儲存失敗",
+      "profile": {
+        "sensitive": "靈敏",
+        "regular": "一般",
+        "relaxed": "寬鬆",
+        "quiet": "安靜"
+      }
+    },
+    "thresholds": {
+      "title": "品質門檻",
+      "description": "何時把緩慢或封包遺失的連線記錄為網路事件。",
+      "latency": {
+        "title": "延遲"
+      },
+      "loss": {
+        "title": "封包遺失"
+      },
+      "preset": {
+        "standard": "標準",
+        "tolerant": "寬鬆",
+        "very_tolerant": "非常寬鬆",
+        "custom": "自訂"
+      },
+      "save": "儲存門檻",
+      "error": {
+        "title": "無法讀取品質門檻",
+        "body": "已儲存的門檻仍在使用。",
+        "retry": "重試"
+      },
+      "toast": {
+        "saved": "品質門檻已儲存。",
+        "failed": "無法儲存品質門檻。"
+      },
+      "row": {
+        "flags": "觸發條件",
+        "now": "目前",
+        "limit": "門檻"
+      },
+      "flags": {
+        "latency_one": "{{count}} 個樣本超過 {{ms}} 毫秒",
+        "latency_other": "{{count}} 個樣本超過 {{ms}} 毫秒",
+        "loss_one": "{{count}} 個樣本達到 {{pct}}% 或以上",
+        "loss_other": "{{count}} 個樣本達到 {{pct}}% 或以上",
+        "pending": "請輸入門檻"
+      },
+      "now": {
+        "latency": "{{ms}} 毫秒",
+        "loss": "{{pct}}%",
+        "no_reply": "無回覆",
+        "collecting": "正在收集",
+        "over_latency": "超出 {{ms}} 毫秒門檻",
+        "over_loss": "超出 {{pct}}% 門檻"
+      },
+      "default_chip": "內建預設值",
+      "failed": "儲存失敗",
+      "unit": {
+        "latency": "毫秒",
+        "loss": "%"
+      },
+      "validation": {
+        "range": "請輸入 {{min}} 到 {{max}} 之間的整數。"
+      }
+    }
+  },
+  "prometheus": {
+    "page": {
+      "title": "Prometheus",
+      "description": "讓 Prometheus 伺服器採集此數據機的訊號與運作狀態資料。"
+    },
+    "card": {
+      "title": "Prometheus 指標",
+      "description": "抓取需要下方的權杖；裝置識別碼絕不會包含在內。"
+    },
+    "endpoint": {
+      "label": "指標端點",
+      "consequence_off": "Prometheus 無法讀取此數據機。",
+      "consequence_on": "Prometheus 憑權杖可讀取訊號、運營商和運作狀態資料。"
+    },
+    "freshness": {
+      "label": "抓取時效",
+      "hint_label": "關於抓取時效",
+      "hint": "僅在 Prometheus 至少每分鐘抓取一次時生效。最後一次抓取兩分鐘後恢復正常輪詢。",
+      "options": {
+        "adaptive": "自適應",
+        "balanced": "均衡",
+        "realtime": "即時"
+      },
+      "consequence": {
+        "adaptive": "抓取不會改變數據機的讀取頻率。",
+        "balanced": "Prometheus 抓取期間，數據機不會降到最慢的輪詢頻率。",
+        "realtime": "Prometheus 抓取期間，每 2 秒讀取一次數據機，與開啟儀表板時相同。"
+      }
+    },
+    "status": {
+      "label": "抓取狀態",
+      "endpoint_off": "端點已關閉"
+    },
+    "facts": {
+      "no_scrapes": "尚無抓取記錄",
+      "last_scrape_seconds_one": "上次抓取在 {{count}} 秒前",
+      "last_scrape_seconds_other": "上次抓取在 {{count}} 秒前",
+      "last_scrape_minutes_one": "上次抓取在 {{count}} 分鐘前",
+      "last_scrape_minutes_other": "上次抓取在 {{count}} 分鐘前",
+      "last_scrape_hours_one": "上次抓取在 {{count}} 小時前",
+      "last_scrape_hours_other": "上次抓取在 {{count}} 小時前",
+      "holding": "保持較快輪詢",
+      "adaptive_off": "自適應輪詢已關閉，因此資料始終是即時的"
+    },
+    "token": {
+      "label": "Bearer 權杖",
+      "consequence": "將其貼上到 Prometheus 中作為抓取認證資訊。",
+      "show": "顯示權杖",
+      "hide": "隱藏權杖",
+      "copy": "複製",
+      "regenerate": "重新產生"
+    },
+    "regenerate_dialog": {
+      "title": "產生新權杖？",
+      "description": "在您把新權杖貼上到 Prometheus 配置之前，它無法抓取。",
+      "cancel": "取消",
+      "confirm": "產生權杖"
+    },
+    "config": {
+      "label": "抓取配置",
+      "consequence": "將此 job 新增到您的 Prometheus 配置中。",
+      "hint_label": "關於抓取配置",
+      "hint": "數據機的憑證為自行簽署，因此跳過驗證。透過 Tailscale 時，也可以使用普通 http。",
+      "copy": "複製配置",
+      "copied": "已複製",
+      "wrap": "自動換行",
+      "empty_title": "尚無抓取配置",
+      "empty_description": "開啟端點並儲存後即可取得。"
+    },
+    "foot": {
+      "save": "儲存",
+      "discard": "放棄",
+      "token_on_save": "儲存時會建立權杖。"
+    },
+    "toast": {
+      "saved": "Prometheus 設定已儲存。",
+      "save_failed": "無法儲存 Prometheus 設定。",
+      "regenerated": "已產生新權杖。",
+      "regenerate_failed": "無法產生新權杖。",
+      "token_copied": "權杖已複製。",
+      "config_copied": "抓取配置已複製。",
+      "copy_failed": "無法複製到剪貼簿。"
+    },
+    "error": {
+      "title": "無法載入 Prometheus 設定",
+      "description": "數據機沒有回應。請檢查連線後重試。",
+      "retry": "重試"
+    }
+  }
+}
