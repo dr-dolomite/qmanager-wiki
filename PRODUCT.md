@@ -20,7 +20,7 @@ Deliver an approachable yet instrument-grade, zero-footprint web documentation h
 The unified, hardware-aware management portal and knowledge base that bridges high-end cellular diagnostic tooling (traditionally restricted to proprietary software like Qualcomm QXDM) with an Apple-inspired, consumer-friendly documentation experience.
 
 ## Operating Context
-- Web browsers accessing local router/modem gateways (`http://192.168.224.1` for RM551E or `http://192.168.225.1` for RM520N) or the hosted hub on Vercel.
+- Web browsers accessing local router/modem gateways (`http://192.168.224.1` for RM551E or `http://192.168.225.1` for RM520N) or the hosted hub on Cloudflare Pages.
 - Physical hardware environments: Qualcomm Snapdragon modems (RM551E-GL, RM520N-GL, RM521F, RG501, RM502, RM500Q) operating with on-modem custom OpenWRT (RM551E), standalone on-modem Linux (SDXLEMUR on RM520N/RM521F). Standalone 5G-to-Ethernet boards plug into the WAN port of any router (GL.iNet, OpenWrt, etc.); installing QManager on a host router is not a supported setup.
 - Dual-scenario access: Field troubleshooting during intermittent cellular outages (requiring offline-ready speed and scannability) vs. desktop setup and planning.
 
@@ -30,7 +30,7 @@ The unified, hardware-aware management portal and knowledge base that bridges hi
 - Fast client-side global instant search (Cmd+K / Ctrl+K), responsive sticky sidebar, and active scrollspy TOC.
 - Progressive disclosure navigation with difficulty badges (`Beginner`, `Advanced`, `Expert RF`) and expandable technical deep-dives.
 - Dual-theme system: Native Light and Dark mode support with instant toggle and system preference sync.
-- Technical constraint: Static pre-rendering with Next.js App Router for zero-cost deployment on Vercel Free Tier; zero heavy external runtime services.
+- Technical constraint: Static pre-rendering with Next.js App Router for zero-cost deployment on Cloudflare Pages (static export); zero heavy external runtime services.
 
 ## Brand Commitments
 - **Name**: QManager Documentation Hub (Wiki)

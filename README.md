@@ -1,6 +1,6 @@
 # QManager Documentation Hub (Wiki)
 
-The unified, instrument-grade documentation portal for **QManager** (RM551E Custom OpenWRT & RM520N On-Modem Linux), deployed on **Vercel Free Tier**.
+The unified, instrument-grade documentation portal for **QManager** (RM551E Custom OpenWRT & RM520N On-Modem Linux), deployed on **Cloudflare Pages**.
 
 ---
 
@@ -64,18 +64,14 @@ bun run build
 
 ---
 
-## Free Vercel Deployment
+## Free Cloudflare Pages Deployment
 
-This project is pre-configured for **Vercel Free Tier** zero-configuration deployment:
+The site is a static export (`output: "export"` in `next.config.ts`), so `bun run build` writes plain HTML to `out/`. Security headers and asset caching live in `public/_headers`.
 
-1. Push this repository to GitHub:
-   \`\`\`sh
-   git init
-   git add .
-   git commit -m "feat: complete QManager documentation website"
-   git remote add origin https://github.com/your-org/qmanager-docs.git
-   git push -u origin main
-   \`\`\`
-2. Go to [vercel.com/new](https://vercel.com/new) and import the repository.
-3. Framework Preset will auto-detect as **Next.js**.
-4. Click **Deploy**. Vercel will build the static routes and deploy globally in seconds!
+1. Push this repository to GitHub.
+2. In the Cloudflare dashboard, go to **Workers & Pages -> Create -> Pages -> Connect to Git** and select the repository.
+3. Use these build settings:
+   - **Build command:** `bun run build` (or `npm install && npm run build`)
+   - **Build output directory:** `out`
+   - **Environment variable:** `NODE_VERSION` = `20` or higher
+4. Click **Deploy**. Every push to `main` redeploys automatically, and other branches get preview URLs.

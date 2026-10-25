@@ -34,7 +34,42 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 # Finder (MacOS) folder config
 .DS_Store
 
-# local tooling / agent config
-.agent
-.impeccable
+# env files and secrets (keep any real keys out of git)
+.env*
+!.env.example
+.dev.vars
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+secrets/
+credentials*.json
+service-account*.json
+
+# Cloudflare / Vercel local state
+.wrangler
+.vercel
+
+# Claude Code and other local AI tooling
 .claude
+.agent
+.agents
+.impeccable
+.cursor
+.cursorrules
+.windsurf
+.gemini
+.codex
+.aider*
+.continue
+.github/copilot-instructions.md
+.mcp.json
+CLAUDE.md
+CLAUDE.local.md
+AGENTS.md
+GEMINI.md
+
+# OS / editor junk
+Thumbs.db
+.vscode
