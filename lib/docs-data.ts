@@ -116,7 +116,9 @@ QManager stands on the shoulders of dedicated researchers and engineers in the o
 
 - **Cameron Thompson ([\`iamromulan\`](https://github.com/iamromulan))**: Creator of the [Cellular Modem Wiki](https://github.com/iamromulan/cellular-modem-wiki), [Quectel RGMII Toolkit](https://github.com/iamromulan/quectel-rgmii-toolkit), and [QuecDeploy](https://github.com/iamromulan/quecdeploy). Cameron's reverse engineering of Quectel RGMII setups, Multi-PDP context routing (\`AT+QMAP="mpdn_rule"\`), Qflash/EDL test-point unbricking procedures, Realtek RTL8125 PCIe stability patches, and T-Mobile CA EFS combos established the modern open-source standard for standalone Quectel deployments.
 - **Nate Carlson**: Author of early RGMII documentation, carrier board pinout mapping, and foundational AT terminal bridging techniques over virtual PTYs (\`socat-at-bridge\`).
-- **aesthernr & rbflurry**: Authors and maintainers of **SimpleAdmin**, the pioneering OpenWRT cellular dashboard whose early architecture inspired QManager's clean-slate redesign.
+- **aesthernr**: Created the first version of **SimpleAdmin**, building a UI on top of Nate Carlson's work. It targeted the RM520N primarily.
+- **rbflurry**: Applied the first patches that made SimpleAdmin usable. That work became the base for the fork that was developed into **SimpleAdmin 2**, released as part of Cameron's toolkit and the version most people know, whose architecture inspired QManager's clean-slate redesign.
+- **WuTang Clan**: Early testers and supporters of this project.
 - **carp4**: Reverse engineer responsible for solving the mathematical challenge/response algorithm behind Quectel's \`AT+QADBKEY?\` challenge, creating the open-source \`qadbkey-unlock\` utility.
 
 ---
@@ -130,8 +132,9 @@ QManager stands on the shoulders of dedicated researchers and engineers in the o
 ## Next Steps
 
 1. Check [Hardware Compatibility](/docs/getting-started/hardware-compatibility/) to verify your modem chipset and standalone Ethernet board, then plug it into any router's WAN port.
-2. Follow the [RM551E Series Installation](/docs/getting-started/installation-openwrt/) or [RM520N & Qualcomm X5*/X6* Installation](/docs/getting-started/installation-rm520n/) guide to deploy QManager in under 2 minutes.
-3. Learn how to configure your APN and optimize signal reception in [Signal & Cellular Operations](/docs/cellular/live-signal/).
+2. Put the modem in standalone Ethernet mode by following [Preparing the Modem: Standalone Ethernet (PHY) Mode](/docs/getting-started/modem-ethernet-mode/).
+3. Follow the [RM551E Series Installation](/docs/getting-started/installation-openwrt/) or [RM520N & Qualcomm X5*/X6* Installation](/docs/getting-started/installation-rm520n/) guide to deploy QManager in under 2 minutes.
+4. Learn how to configure your APN and optimize signal reception in [Signal & Cellular Operations](/docs/cellular/live-signal/).
 `
       },
       {
@@ -290,6 +293,204 @@ Standalone carrier boards equipped with the **Realtek RTL8125 2.5GbE PHY** can e
 `
       },
       {
+        slug: "modem-ethernet-mode",
+        category: "getting-started",
+        title: "Preparing the Modem: Standalone Ethernet (PHY) Mode",
+        description: "Switch the modem into standalone 5G-to-Ethernet mode with the right AT commands for X5*/X6* and RM551E modems before installing QManager.",
+        edition: "universal",
+        badge: "Required",
+        readTime: "7 min read",
+        updatedAt: "2026-10-25",
+        toc: [
+          { id: "why-standalone-mode", title: "Why Standalone Mode", level: 2 },
+          { id: "where-this-fits-in-setup", title: "Where This Fits in Setup", level: 2 },
+          { id: "x5x6-modems-rm520n-rm521f-rg501q-rm50xq", title: "X5*/X6* Modems (RM520N, RM521F, RG501Q, RM50xQ)", level: 2 },
+          { id: "rm551e-snapdragon-x75-sdxpinn", title: "RM551E (Snapdragon X75 / SDXPINN)", level: 2 },
+          { id: "set-the-apn-and-verify-the-connection", title: "Set the APN and Verify the Connection", level: 2 },
+          { id: "optional-ip-passthrough", title: "Optional: IP Passthrough", level: 2 },
+          { id: "reverting-to-router-driven-mode", title: "Reverting to Router-Driven Mode", level: 2 },
+          { id: "credits-sources", title: "Credits & Sources", level: 2 }
+        ],
+        content: `
+# Preparing the Modem: Standalone Ethernet (PHY) Mode
+
+Before you install QManager, the modem has to run in **standalone Ethernet mode**. This guide explains why that matters, lists the AT commands for each modem family, and shows how to confirm the connection and switch back if needed.
+
+---
+
+## Why Standalone Mode
+
+By default, a Quectel modem runs in a TE ("terminal equipment") mode. In this mode the modem is a peripheral attached to a host over USB (NDIS/QMI or MBIM) or PCIe, and the host is in charge. On a router, the router's drivers and ModemManager or QMI scripts dial the data call, keep it up, and re-dial it whenever it drops.
+
+That host-driven arrangement is the fragile part. Router-side scripts and drivers vary by vendor and firmware, and a router reboot or a driver hiccup can take the data call down. Some users have found this setup unreliable.
+
+\`\`\`diagram-modem-modes
+Router-driven (default, TE mode): cell tower -> modem (USB QMI/MBIM or PCIe endpoint) -> router. The router needs modem drivers and dial scripts, and it dials, keeps alive and re-dials the data call. If the router reboots or a driver hiccups, the data call drops until the router dials again.
+Standalone Ethernet (AP mode, required for QManager): cell tower -> modem (dials and keeps the data call up, runs its own DHCP server and QManager) -> PCIe Root Complex -> Ethernet PHY (RTL8125 on the M.2-to-Ethernet board) -> Ethernet cable -> router WAN port, which just asks for an IP. If the router reboots, the modem stays online.
+\`\`\`
+
+In standalone mode (AP initiator), the Linux system running on the modem itself dials and maintains the cellular connection. The modem runs its own DHCP server and exposes a plain Ethernet port through the board's PHY, such as an RTL8125. The router connects to that port like any other ISP uplink and requests an address. It needs no modem drivers, and the modem is already connected when the router starts up.
+
+Cameron Thompson's Cellular Modem Wiki makes the same point: "the modem's onboard connection management often works better than the scripts many routers use."
+
+Removing the router from connection management removes a whole variable, which is why standalone mode is more stable. It is also the only arrangement QManager supports, because QManager runs on the modem itself.
+
+| Aspect | Router-driven (TE) | Standalone (AP) |
+|---|---|---|
+| Who dials the data call | The router, through its modem drivers and scripts | The modem, which keeps the connection up on its own |
+| What the router needs | QMI or MBIM drivers plus dial and keep-alive scripts | A DHCP client on its WAN port. No modem drivers or scripts |
+| What happens when the router reboots | The data call drops and has to be re-dialed | The modem stays connected |
+| Where QManager runs | Not supported | On the modem itself |
+| Modem modes | \`usbnet\` 0 or 2, \`pcie/mode\` 0 | \`usbnet\` 1, \`pcie/mode\` 1 |
+
+---
+
+## Where This Fits in Setup
+
+Standalone mode is step 2 of the setup:
+
+1. [Unlock ADB access](/docs/getting-started/installation-rm520n/#unlocking-adb-access) so you can reach the modem's shell later. The AT commands below only need a USB serial connection.
+2. **Switch the modem to Ethernet mode** (this page).
+3. Set your APN and verify the data call.
+4. Mount the modem in the Ethernet board and plug the board into the router's WAN port.
+5. Install QManager with the [RM551E guide](/docs/getting-started/installation-openwrt/) or the [X5&#42;/X6&#42; guide](/docs/getting-started/installation-rm520n/).
+
+Send the AT commands with the modem connected to your computer over USB. You can use Quectel's QNavigator with "automatic initialization" unchecked, or any serial AT terminal.
+
+> [!NOTE]
+> The board needs its own power. USB alone is not enough, so plug in the extra power (DC or passive PoE) at the same time as USB. If you use PoE, it must be passive. Active 802.3af or 802.3at PoE does not work. The RM551E is only recognized over USB if it powers on from USB first, so connect USB and then add the extra power.
+
+---
+
+## X5&#42;/X6&#42; Modems (RM520N, RM521F, RG501Q, RM50xQ)
+
+These commands apply to Snapdragon X5&#42;/X6&#42; modems, which use the SDXLEMUR (X62/X65) and SDXPRAIRIE (X55) platforms. Send them in order:
+
+\`\`\`at
+AT+QCFG="data_interface",0,0
+AT+QETH="eth_driver","r8125",1
+AT+QCFG="pcie/mode",1
+AT+QCFG="usbnet",1
+AT+CFUN=1,1
+\`\`\`
+
+| Command | What it does |
+|---|---|
+| \`AT+QCFG="data_interface",0,0\` | Keeps the host data and diagnostic interfaces on USB (\`0\` = USB, \`1\` = PCIe), so the PCIe bus is free to drive the Ethernet chip. |
+| \`AT+QETH="eth_driver","r8125",1\` | Enables the driver for the RTL8125 2.5GbE chip on the board. X5&#42;/X6&#42; modems need the endpoint driver enabled after switching to RC mode. To see the current driver and the supported list, send \`AT+QETH="eth_driver"\`. |
+| \`AT+QCFG="pcie/mode",1\` | Sets PCIe Root Complex (RC) mode. The modem becomes the PCIe host and drives the Ethernet chip as its endpoint. The default, \`0\`, is endpoint mode, where a host drives the modem. |
+| \`AT+QCFG="usbnet",1\` | Sets USB ECM, an AP mode in which the modem manages its own connection. |
+| \`AT+CFUN=1,1\` | Reboots the modem to apply the changes. |
+
+The modem reboots after the last command. Wait for it to come back before you continue.
+
+---
+
+## RM551E (Snapdragon X75 / SDXPINN)
+
+On the RM551E, send these three commands in order:
+
+\`\`\`at
+AT+QCFG="pcie/mode",1
+AT+QCFG="usbnet",1
+AT+CFUN=1,1
+\`\`\`
+
+This sequence is shorter than the X5&#42;/X6&#42; one. Cameron's SDXPINN guide uses only these three commands. There is no \`data_interface\` line and no \`AT+QETH="eth_driver"\` line, Cameron's [M.2 form factor notes](https://github.com/iamromulan/cellular-modem-wiki/blob/main/quectel/m.2_formfactor.md) list only the RM50x, RM52x and RM530 as needing the endpoint driver enabled after switching to RC mode.
+
+> [!CAUTION]
+> Do not copy the X5&#42;/X6&#42; block onto an RM551E. Do not copy USB VID/PID values between families either. See the [USB VID / PID warning](/docs/getting-started/installation-rm520n/#unlocking-adb-access) in the RM520N install guide.
+
+---
+
+## Set the APN and Verify the Connection
+
+Set the APN for PDP context 1, then reboot the modem:
+
+\`\`\`at
+AT+CGDCONT=1,"IPV4V6","your-apn"
+AT+CFUN=1,1
+\`\`\`
+
+Replace \`your-apn\` with your carrier's APN. After the modem comes back up, check the connection:
+
+| Command | What to look for |
+|---|---|
+| \`AT+QSIMSTAT?\` | SIM detected. \`0,1\` means yes. |
+| \`AT+QENG="servingcell"\` | \`NOCONN\` is normal. \`LIMSERV\` usually means the APN is wrong. |
+| \`AT+QMAP="WWAN"\` | Connected when you see \`+QMAP: "WWAN",1,1,"IPV4","<address>"\`. The first \`1\` means connected with an IP address. The second \`1\` is the PDP context in use. |
+| \`AT+CGDCONT?\` | The APN set for each PDP context. |
+| \`AT+QCFG="pcie/mode"\` | Reports \`1\`. |
+| \`AT+QCFG="usbnet"\` | Reports \`1\`. |
+
+A default MBN profile can override your APN after a reboot, so check \`AT+CGDCONT?\` again after rebooting. The data call uses PDP context 1 by default.
+
+---
+
+## Optional: IP Passthrough
+
+By default, the modem acts as a NAT router for IPv4. On X5&#42;/X6&#42; modems its LAN gateway is \`192.168.225.1\`. Under QManager on the RM551E it is \`192.168.224.1\`. Your router therefore receives a private address behind the modem, which is double NAT. IP passthrough hands the cellular address straight to the router and removes the second layer of NAT.
+
+To enable passthrough on an X5&#42;/X6&#42; modem:
+
+\`\`\`at
+AT+QMAP="MPDN_rule",0,1,0,1,1,"FF:FF:FF:FF:FF:FF"
+\`\`\`
+
+The fields are:
+
+- **Rule:** \`0\`
+- **PDP context:** \`1\`
+- **VLAN:** \`0\` (none)
+- **IP passthrough mode:** \`1\` (Ethernet)
+- **Auto-connect:** \`1\` (on)
+- **MAC address:** \`"FF:FF:FF:FF:FF:FF"\` passes the IP to the last connected Ethernet device.
+
+The modem's gateway stays reachable while passthrough is on.
+
+To turn passthrough off:
+
+\`\`\`at
+AT+QMAP="MPDN_rule",0
+AT+QMAPWAC=1
+\`\`\`
+
+Releasing the rule briefly shuts off the Ethernet port, which then comes back up. \`AT+QMAPWAC=1\` is only needed if the modem is not in ECM mode (\`usbnet\` 1). You can optionally reboot with \`AT+CFUN=1,1\` afterwards.
+
+> [!CAUTION]
+> **RM551E, December 2024 firmware:** Do not release the rule with \`AT+QMAP="mpdn_rule",0\` and then reboot. Releasing the rule alone will not bring PDP context 1 back, and a reboot after releasing it can stop the rule from being set again. Flashing fresh firmware appears to be the only fix once the modem is in that state.
+>
+> Instead, release the rule and set a new one right away: \`AT+QMAP="mpdn_rule",0\`, then \`AT+QMAP="mpdn_rule",0,1,0,0,1\`.
+
+---
+
+## Reverting to Router-Driven Mode
+
+To return the modem to its default router-driven mode, send:
+
+\`\`\`at
+AT+QCFG="pcie/mode",0
+AT+QCFG="usbnet",0
+AT+CFUN=1,1
+\`\`\`
+
+QManager will not work in this mode.
+
+---
+
+## Credits & Sources
+
+The commands and behaviour in this guide come from Cameron Thompson's [Cellular Modem Wiki](https://github.com/iamromulan/cellular-modem-wiki). The specific pages used are:
+
+- [SDXLEMUR: M.2 to Ethernet](https://github.com/iamromulan/cellular-modem-wiki/blob/main/quectel/sdxlemur/sdxlemur_m.2_to_eth.md)
+- [SDXPRAIRIE: M.2 to Ethernet](https://github.com/iamromulan/cellular-modem-wiki/blob/main/quectel/sdxprairie/sdxprairie_m.2_to_eth.md)
+- [SDXPINN: M.2 to Ethernet](https://github.com/iamromulan/cellular-modem-wiki/blob/main/quectel/sdxpinn/sdxpinn_m.2_to_eth.md)
+- [M.2 Form Factor Modes](https://github.com/iamromulan/cellular-modem-wiki/blob/main/quectel/m.2_formfactor.md)
+- [SDXLEMUR Advanced Configuration](https://github.com/iamromulan/cellular-modem-wiki/blob/main/quectel/sdxlemur/sdxlemur_advanced.md)
+- [Verizon Connection Notes](https://github.com/iamromulan/cellular-modem-wiki/blob/main/quectel/verizon_connection.md), the source of the RM551E rule caution
+`
+      },
+      {
         slug: "installation-openwrt",
         category: "getting-started",
         title: "Installation on RM551E (Custom OpenWRT)",
@@ -297,9 +498,10 @@ Standalone carrier boards equipped with the **Realtek RTL8125 2.5GbE PHY** can e
         edition: "openwrt",
         badge: "RM551E",
         readTime: "4 min read",
-        updatedAt: "2026-10-21",
+        updatedAt: "2026-10-25",
         toc: [
           { id: "prerequisites", title: "Prerequisites", level: 2 },
+          { id: "switch-the-modem-to-ethernet-mode", title: "Switch the Modem to Ethernet Mode", level: 2 },
           { id: "one-line-install", title: "One-Line Automated Installation", level: 2 },
           { id: "release-channels", title: "Selecting Release Channels", level: 2 },
           { id: "post-install-verification", title: "Post-Installation Verification", level: 2 },
@@ -318,6 +520,25 @@ This guide covers installing **QManager** on the **Quectel RM551E** series modem
 2. SSH access to your modem (\`ssh root@192.168.224.1\`).
 3. An active internet connection (or see [Manual Offline Installation](/docs/getting-started/manual-installation/)).
 4. \`curl\` installed (\`opkg update && opkg install curl\`). *Note: The installer strictly requires \`curl\` (tools like BusyBox \`wget\` or \`uclient-fetch\` are not supported).*
+
+---
+
+## Switch the Modem to Ethernet Mode
+
+This step is required. Put the modem into standalone Ethernet mode before you install QManager. Send these commands over USB with an AT terminal, such as Quectel's QNavigator with "automatic initialization" unchecked:
+
+\`\`\`at
+AT+QCFG="pcie/mode",1
+AT+QCFG="usbnet",1
+AT+CFUN=1,1
+\`\`\`
+
+The modem reboots after the last command.
+
+> [!CAUTION]
+> The X5&#42;/X6&#42; commands are different. Do not use them on the RM551E.
+
+For what this mode does and how to verify the connection, see [Preparing the Modem: Standalone Ethernet (PHY) Mode](/docs/getting-started/modem-ethernet-mode/).
 
 ---
 
@@ -391,10 +612,11 @@ curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-in
         edition: "rm520n",
         badge: "RM520N & X5*/X6*",
         readTime: "5 min read",
-        updatedAt: "2026-10-23",
+        updatedAt: "2026-10-25",
         toc: [
           { id: "prerequisites-rm520n", title: "Prerequisites & Preparation", level: 2 },
           { id: "unlocking-adb-access", title: "Unlocking ADB & Root Shell Access (carp4 & Value 2 Bypass)", level: 2 },
+          { id: "switch-the-modem-to-ethernet-mode", title: "Switch the Modem to Ethernet Mode", level: 2 },
           { id: "one-line-install-rm520n", title: "One-Line Automated Installation", level: 2 },
           { id: "entware-and-services", title: "Entware & Lighttpd Bootstrap", level: 2 },
           { id: "accessing-web-console", title: "Accessing the Web Console", level: 2 },
@@ -463,6 +685,24 @@ AT+QCFG="usbcfg",0x2C7C,0x0801,1,1,1,1,1,2,0
 > - **RM550V / RM551E**: Use Quectel VID \`0x2C7C\` and PID **\`0x0122\`**.
 > 
 > **Never copy PID \`0x0801\` onto an RM550V/RM551E** or PID \`0x0122\` onto an RM520N! Doing so alters the hardware USB descriptor, causing USB ports to disappear completely and requiring hardware EDL test-point recovery.
+
+---
+
+## Switch the Modem to Ethernet Mode
+
+This step is required. Before you install QManager, put the modem into standalone Ethernet mode. Without it, the modem stays in its default router-driven mode, which QManager does not support.
+
+Send these commands over USB with an AT terminal, such as Quectel's QNavigator with "automatic initialization" unchecked:
+
+\`\`\`at
+AT+QCFG="data_interface",0,0
+AT+QETH="eth_driver","r8125",1
+AT+QCFG="pcie/mode",1
+AT+QCFG="usbnet",1
+AT+CFUN=1,1
+\`\`\`
+
+The modem reboots after the last command. Once it is back up, set your APN and confirm the data call. The steps, what each command does, and how to verify the connection are in [Preparing the Modem: Standalone Ethernet (PHY) Mode](/docs/getting-started/modem-ethernet-mode/). That page also covers IP passthrough.
 
 ---
 
@@ -939,7 +1179,7 @@ The hardware unbricking procedures, test-point pinout validation, and zero-space
         edition: "universal",
         badge: "Hardware & Bus",
         readTime: "6 min read",
-        updatedAt: "2026-10-24",
+        updatedAt: "2026-10-25",
         toc: [
           { id: "m2-bkey-pinout-signals", title: "M.2 Key-B Architecture & Critical Signal Lines", level: 2 },
           { id: "te-vs-ap-modes", title: "Terminal Equipment (TE) vs Application Processor (AP) Modes", level: 2 },
@@ -1021,11 +1261,13 @@ AT+QCFG="pcie/mode",<mode>
 - \`1\` = **Root Complex (RC) Mode**: Required when modem is installed into an RGMII/PCIe Ethernet breakout carrier board to drive the on-board PHY.
 
 ### Binding the Realtek RTL8125 PHY:
-When running in PCIe RC mode on an SDX62/65 or SDXPINN board, bind the Ethernet PHY driver:
+When running in PCIe RC mode on an X5&#42;/X6&#42; board (SDX55, SDX62/65), bind the Ethernet PHY driver:
 \`\`\`
 AT+QETH="eth_driver","r8125",1
 \`\`\`
 Reboot the module. On boot, the modem's internal kernel loads \`r8125.ko\` and exposes the physical network interface as \`eth0\`.
+
+The RM551E (SDXPINN) sequence in Cameron's guide has no \`eth_driver\` line, so do not send it there. The full, per-family command sets are in [Preparing the Modem: Standalone Ethernet (PHY) Mode](/docs/getting-started/modem-ethernet-mode/).
 
 ---
 
@@ -1056,8 +1298,9 @@ Upstream research by Cameron Thompson and the open-source community validated se
 
 ### USB Power Initialization Sequencing Quirk
 When performing initial configuration or recovery using both a DC power source (12V/24V) and a USB-C data cable connected to a PC:
-- **The Quirk**: Connecting the USB data cable *before* the main DC/PoE rail can cause the modem's internal voltage supervisor to trigger an under-voltage lockout (UVLO). The USB 5V rail cannot supply the 3.5A RF surge current required during boot, causing bootloops or dropped PCIe enumeration.
-- **The Golden Rule**: **Always energize the DC barrel jack or 24V PoE injector first**. Allow 5 seconds for internal voltage rails to stabilize, then connect the USB data cable to your PC.
+- **The Quirk**: The USB 5V rail cannot supply the RF surge current a 5G modem draws, so running the board from USB alone causes bootloops or dropped PCIe enumeration.
+- **The Rule**: Cameron's guides say to **plug in the board's extra power (DC or passive PoE) at the same time as USB**.
+- **RM551E / RM550V exception**: these modules are only recognized over USB if they **power on from USB first**. Connect USB, then add the DC or PoE power right after.
 
 ---
 

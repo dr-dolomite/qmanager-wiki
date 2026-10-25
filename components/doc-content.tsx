@@ -8,6 +8,12 @@ import type { Element, ElementContent } from "hast";
 import { Check, Copy, AlertTriangle, ChevronLeft, ChevronRight } from "lucide-react";
 import { DOC_CATEGORIES, DocArticle } from "@/lib/docs-data";
 import { cn } from "@/lib/utils";
+import { ModemModesDiagram } from "@/components/diagrams/modem-modes-diagram";
+
+// ```diagram-<name> fences render a native diagram; the fence body is the plain-text fallback for llms.txt and search.
+const DIAGRAMS: Record<string, React.ComponentType> = {
+  "modem-modes": ModemModesDiagram,
+};
 
 interface DocContentProps {
   article: DocArticle;
@@ -400,6 +406,9 @@ export default function DocContent({ article, prev, next }: DocContentProps) {
               const props = React.isValidElement(child)
                 ? (child.props as { className?: string; children?: React.ReactNode })
                 : {};
+              const diagram = /language-diagram-([\w-]+)/.exec(props.className || "")?.[1];
+              const Diagram = diagram ? DIAGRAMS[diagram] : undefined;
+              if (Diagram) return <Diagram />;
               return <CodeBlock className={props.className}>{props.children}</CodeBlock>;
             },
             code({ className, children }) {
