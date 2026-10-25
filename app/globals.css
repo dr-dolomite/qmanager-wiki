@@ -400,6 +400,97 @@ pre code {
   }
 }
 
+/* Modem modes diagram: data flows along the wires from tower to router. The wire is one tile
+   of dash and gap that slides by exactly its own width, so the loop never seams. A cut wire
+   stops and turns into red stubs. Everything holds still when the diagram is off screen. */
+.wire {
+  --wire-on: var(--primary);
+  --wire-off: var(--border-hover);
+}
+
+.wire[data-idle] {
+  --wire-on: var(--border-hover);
+}
+
+.wire[data-cut] {
+  --wire-on: color-mix(in oklab, var(--destructive) 75%, transparent);
+  --wire-off: transparent;
+}
+
+.wire-x {
+  background-image: linear-gradient(90deg, var(--wire-on) 50%, var(--wire-off) 50%);
+  background-size: 14px 100%;
+  background-repeat: repeat-x;
+}
+
+.wire-y {
+  background-image: linear-gradient(180deg, var(--wire-on) 50%, var(--wire-off) 50%);
+  background-size: 100% 14px;
+  background-repeat: repeat-y;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wire-x:not([data-cut], [data-idle]) {
+    animation: wire-march-x 700ms linear infinite;
+  }
+
+  .wire-y:not([data-cut], [data-idle]) {
+    animation: wire-march-y 700ms linear infinite;
+  }
+
+  /* The connection manager's refresh icon takes one quick turn every few seconds, a keep-alive ping. */
+  .keepalive-beat {
+    animation: keepalive-beat 5200ms var(--ease-settle) infinite;
+  }
+
+  .redial-spin {
+    animation: redial-spin 700ms linear infinite;
+  }
+
+  .status-ping {
+    animation: led-ping 900ms var(--ease-settle) 1 both;
+  }
+
+  [data-live="false"] :is(.keepalive-beat, .redial-spin),
+  [data-flow="false"] .wire {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-ping {
+    display: none;
+  }
+}
+
+@keyframes wire-march-x {
+  to {
+    background-position-x: 14px;
+  }
+}
+
+@keyframes wire-march-y {
+  to {
+    background-position-y: 14px;
+  }
+}
+
+@keyframes keepalive-beat {
+  0%,
+  80% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes redial-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
