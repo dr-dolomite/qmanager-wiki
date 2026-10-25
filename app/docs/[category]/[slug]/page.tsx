@@ -22,15 +22,15 @@ export async function generateMetadata({
 
   if (!article) {
     return {
-      title: "Article Not Found — QManager Docs",
+      title: "Article Not Found",
     };
   }
 
   return {
-    title: `${article.title} — QManager Documentation`,
+    title: article.title,
     description: article.description,
     openGraph: {
-      title: `${article.title} — QManager Documentation`,
+      title: `${article.title} | QManager`,
       description: article.description,
       type: "article",
     },

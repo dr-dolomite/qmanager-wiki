@@ -15,7 +15,10 @@ const rethinkSans = Rethink_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "QManager Documentation — Web GUI & Management for Quectel Modems",
+  title: {
+    default: "QManager",
+    template: "%s | QManager",
+  },
   description: "Official documentation and installation guide for QManager & QManager-RM520N. Advanced modem control, band locking, live signal, SMS, and watchdog resilience.",
   icons: {
     icon: "/qmanager-mark.svg",
