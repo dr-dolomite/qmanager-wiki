@@ -293,9 +293,7 @@ export default function HardwareMatrix() {
               className="reveal row-span-5 grid grid-rows-subgrid gap-y-0 rounded-2xl border border-border bg-card p-6 sm:p-7"
             >
               <p className="flex items-center gap-2.5 text-sm text-muted-foreground">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Icon className="size-4" aria-hidden="true" />
-                </span>
+                <Icon className="size-4 shrink-0" aria-hidden="true" />
                 {arch.platform}
               </p>
 
@@ -411,9 +409,7 @@ export default function HardwareMatrix() {
                   key={host.name}
                   className="flex items-start gap-3 border-t border-border/80 py-4"
                 >
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <HostIcon className="size-4" aria-hidden="true" />
-                  </span>
+                  <HostIcon className="mt-0.5 size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-foreground">{host.name}</p>
                     <p className="mt-0.5 text-sm text-pretty text-muted-foreground">

@@ -84,9 +84,10 @@ export default function ContactSection() {
                     {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
                     className="group flex min-w-0 flex-1 items-start gap-4 rounded-2xl px-3 py-4 transition-colors hover:bg-muted/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <Icon className="size-5" aria-hidden="true" />
-                    </span>
+                    <Icon
+                      className="mt-0.5 size-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary"
+                      aria-hidden="true"
+                    />
                     <span className="flex min-w-0 flex-1 flex-col">
                       <span className="text-base font-semibold text-foreground tracking-tight transition-colors group-hover:text-primary">
                         {route.label}

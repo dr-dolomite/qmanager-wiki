@@ -1,14 +1,15 @@
 import React from "react";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
 import {
-  Radio,
-  SlidersHorizontal,
-  Network,
-  CreditCard,
-  ShieldCheck,
-  Wrench,
-  ArrowRight,
-} from "lucide-react";
+  BracketsCurlyIcon,
+  CellTowerIcon,
+  HeartbeatIcon,
+  SimCardIcon,
+  TerminalWindowIcon,
+  WifiHighIcon,
+} from "@phosphor-icons/react/ssr";
 import { DOC_CATEGORIES } from "@/lib/docs-data";
 
 const CATEGORY_COUNT = DOC_CATEGORIES.length;
@@ -21,7 +22,7 @@ interface FeatureTopic {
 
 interface FeatureCard {
   title: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: PhosphorIcon;
   summary: string;
   categoryHref: string;
   topics: FeatureTopic[];
@@ -30,7 +31,7 @@ interface FeatureCard {
 const FEATURES: FeatureCard[] = [
   {
     title: "Signal & Cellular Operations",
-    icon: Radio,
+    icon: CellTowerIcon,
     summary: "Real-time 4x4 MIMO per-port telemetry, acoustic antenna alignment, and Carrier Aggregation breakdown.",
     categoryHref: "/docs/cellular/live-signal/",
     topics: [
@@ -43,7 +44,7 @@ const FEATURES: FeatureCard[] = [
   },
   {
     title: "Network & Hotspot Settings",
-    icon: Network,
+    icon: WifiHighIcon,
     summary: "Bypass carrier hotspot (tethering) limits with TTL adjustment, IP Passthrough bridge mode, and DPI optimization.",
     categoryHref: "/docs/networking/ttl-mtu-engine/",
     topics: [
@@ -55,7 +56,7 @@ const FEATURES: FeatureCard[] = [
   },
   {
     title: "SIM & APN Provisioning",
-    icon: CreditCard,
+    icon: SimCardIcon,
     summary: "Instant ICCID detection, multi-profile APN mapping, dual-SIM binding, and automatic PDP context management.",
     categoryHref: "/docs/profiles/apn-management/",
     topics: [
@@ -67,7 +68,7 @@ const FEATURES: FeatureCard[] = [
   },
   {
     title: "Watchdog & Self-Healing",
-    icon: ShieldCheck,
+    icon: HeartbeatIcon,
     summary: "4-tier auto-recovery pipeline: interface reset → radio power toggle → SIM failover → system reboot.",
     categoryHref: "/docs/resilience/connection-watchdog/",
     topics: [
@@ -78,7 +79,7 @@ const FEATURES: FeatureCard[] = [
   },
   {
     title: "Remote Access & Diagnostics",
-    icon: Wrench,
+    icon: TerminalWindowIcon,
     summary: "Built-in Tailscale and Netbird mesh VPNs, interactive AT console, and Prometheus metrics scraping.",
     categoryHref: "/docs/management/tailscale-vpn/",
     topics: [
@@ -90,7 +91,7 @@ const FEATURES: FeatureCard[] = [
   },
   {
     title: "For Developers",
-    icon: SlidersHorizontal,
+    icon: BracketsCurlyIcon,
     summary: "Complete JSON REST API endpoint specifications, baseband serial multiplexing, and a lightweight, zero-overhead backend.",
     categoryHref: "/docs/developer/api-reference/",
     topics: [
@@ -134,9 +135,7 @@ export default function FeatureGrid() {
               <div>
                 {/* Header */}
                 <div className="mb-4 flex items-center justify-between gap-3">
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Icon className="size-5" aria-hidden="true" />
-                  </div>
+                  <Icon weight="fill" className="size-7 text-primary" aria-hidden="true" />
                   <Link
                     href={feature.categoryHref}
                     aria-label={`${feature.title} overview`}

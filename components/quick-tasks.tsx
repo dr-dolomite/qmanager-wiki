@@ -2,13 +2,20 @@
 
 import React from "react";
 import Link from "next/link";
-import { Radio, Zap, ShieldCheck, Globe, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+import {
+  BroadcastIcon,
+  GlobeHemisphereWestIcon,
+  HeartbeatIcon,
+  LockKeyIcon,
+} from "@phosphor-icons/react/ssr";
 
 interface QuickTask {
   title: string;
   description: string;
   href: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: PhosphorIcon;
 }
 
 const QUICK_TASKS: QuickTask[] = [
@@ -16,25 +23,25 @@ const QUICK_TASKS: QuickTask[] = [
     title: "Boost Signal & Aim Antennas",
     description: "Live signal meter to help you point and position directional antennas for peak RSRP and SINR.",
     href: "/docs/cellular/antenna-alignment/",
-    icon: Radio,
+    icon: BroadcastIcon,
   },
   {
     title: "Lock Fast Bands & Towers",
     description: "Pin your connection to the fastest 5G & LTE frequency bands or lock onto specific cell towers.",
     href: "/docs/cellular/band-locking/",
-    icon: Zap,
+    icon: LockKeyIcon,
   },
   {
     title: "Automated Watchdog",
     description: "Self-healing recovery daemon that monitors latency and automatically restores dropped links.",
     href: "/docs/resilience/connection-watchdog/",
-    icon: ShieldCheck,
+    icon: HeartbeatIcon,
   },
   {
     title: "Remote Mesh Access",
     description: "Securely monitor and configure your modem from anywhere over Tailscale or Netbird VPN.",
     href: "/docs/management/tailscale-vpn/",
-    icon: Globe,
+    icon: GlobeHemisphereWestIcon,
   },
 ];
 
@@ -61,9 +68,7 @@ export default function QuickTasks() {
               className="reveal group flex flex-col justify-between rounded-2xl border border-border bg-card p-5 sm:p-6 transition-[border-color,box-shadow] duration-150 hover:border-primary/40 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <div>
-                <div className="mb-4 flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <Icon className="size-5" aria-hidden="true" />
-                </div>
+                <Icon weight="fill" className="mb-5 size-7 text-primary" aria-hidden="true" />
                 <h3 className="text-base font-semibold text-foreground tracking-tight transition-colors group-hover:text-primary">
                   {task.title}
                 </h3>
