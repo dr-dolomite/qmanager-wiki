@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getAllArticles, getArticle, getAdjacentArticles } from "@/lib/docs-data";
 import DocContent from "@/components/doc-content";
 import DocToc from "@/components/doc-toc";
+import { SITE_NAME, SITE_OG_IMAGE } from "@/lib/site";
 
 export function generateStaticParams() {
   const articles = getAllArticles();
@@ -29,10 +30,21 @@ export async function generateMetadata({
   return {
     title: article.title,
     description: article.description,
+    alternates: { canonical: `/docs/${category}/${slug}/` },
     openGraph: {
       title: `${article.title} | QManager`,
       description: article.description,
       type: "article",
+      url: `/docs/${category}/${slug}/`,
+      siteName: SITE_NAME,
+      modifiedTime: article.updatedAt,
+      images: [SITE_OG_IMAGE],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${article.title} | QManager`,
+      description: article.description,
+      images: [SITE_OG_IMAGE.url],
     },
   };
 }
