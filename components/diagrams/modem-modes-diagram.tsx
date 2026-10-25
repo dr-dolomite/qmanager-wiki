@@ -150,14 +150,21 @@ const BADGE_STYLES: Record<Signal, string> = {
   warn: "border-warning/50 bg-card text-foreground",
 };
 
-const toneStyles: Record<Tone, { chip: string; icon: string; outcomeIcon: LucideIcon }> = {
+// The card that owns the data call is tinted from its lane's tone, so the eye lands on it before
+// reading a word. `card` is the resting tint, `busy` the same card while it re-dials, `rule` the
+// hairline above its ownership footer.
+const toneStyles: Record<Tone, { card: string; busy: string; rule: string; icon: string; outcomeIcon: LucideIcon }> = {
   risk: {
-    chip: "border-warning/45 bg-warning/[0.10]",
+    card: "border-warning/45 bg-[color-mix(in_oklab,var(--warning)_7%,var(--card))]",
+    busy: "border-warning/60 bg-[color-mix(in_oklab,var(--warning)_12%,var(--card))]",
+    rule: "border-warning/30",
     icon: "text-warning",
     outcomeIcon: TriangleAlert,
   },
   ok: {
-    chip: "border-success/40 bg-success/[0.08]",
+    card: "border-success/40 bg-[color-mix(in_oklab,var(--success)_6%,var(--card))]",
+    busy: "border-success/40 bg-[color-mix(in_oklab,var(--success)_6%,var(--card))]",
+    rule: "border-success/30",
     icon: "text-success",
     outcomeIcon: CircleCheck,
   },
@@ -276,13 +283,16 @@ function LaneRow({ lane, phase }: { lane: Lane; phase: PhaseKey }) {
 
                 <div
                   data-off={off || undefined}
-                  className="group/node relative flex h-full flex-col rounded-xl border border-border bg-card px-3.5 py-3 @min-[620px]:px-3 shadow-[0_1px_2px_oklch(0_0_0/0.04)]"
+                  className={cn(
+                    "group/node relative flex h-full flex-col rounded-xl border px-4 py-4 shadow-[0_1px_2px_oklch(0_0_0/0.04)] transition-colors duration-300 motion-reduce:transition-none",
+                    node.manager ? (chipState === "busy" ? tone.busy : tone.card) : "border-border bg-card"
+                  )}
                 >
                   {badge && (
                     <span
                       aria-hidden="true"
                       className={cn(
-                        "swap-in absolute -top-2.5 right-3 z-10 rounded-full border px-2 py-0.5 text-[11px] font-medium leading-[1.3]",
+                        "swap-in absolute -top-3 right-3 z-10 rounded-full border px-2.5 py-0.5 text-xs font-medium leading-[1.4]",
                         BADGE_STYLES[badge.signal]
                       )}
                     >
@@ -290,33 +300,35 @@ function LaneRow({ lane, phase }: { lane: Lane; phase: PhaseKey }) {
                     </span>
                   )}
 
-                  <div className="flex flex-1 flex-col transition-opacity duration-300 group-data-[off]/node:opacity-40 motion-reduce:transition-none">
-                    <div className="flex items-start gap-3 @min-[620px]:flex-col @min-[620px]:gap-2.5 @min-[620px]:pb-3">
-                      <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground">
+                  <div className="flex flex-1 flex-col gap-4 transition-opacity duration-300 group-data-[off]/node:opacity-40 motion-reduce:transition-none">
+                    <div className="flex items-start gap-3 @min-[620px]:flex-col @min-[620px]:gap-3">
+                      <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground">
                         <Icon className="size-[18px]" strokeWidth={1.75} aria-hidden="true" />
                       </span>
                       <div className="min-w-0 pt-px @min-[620px]:pt-0">
                         <p className="text-[14px] font-medium leading-[1.3] text-foreground">{node.name}</p>
-                        <p className="mt-0.5 text-[13px] leading-[1.4] text-muted-foreground">{node.detail}</p>
+                        <p className="mt-1 text-[13px] leading-[1.45] text-muted-foreground">{node.detail}</p>
                       </div>
                     </div>
+                    {/* Ownership is a footer of the card, not a box inside it: a ruled line of its own
+                        that can wrap onto two lines without ever looking cramped. */}
                     {node.manager && (
                       <p
                         className={cn(
-                          "mt-3 flex items-center gap-2 rounded-lg border px-2.5 py-1.5 text-[13px] font-medium leading-[1.35] text-foreground transition-colors @min-[620px]:mt-auto",
-                          chipState === "busy" ? "border-warning/50 bg-warning/[0.12]" : tone.chip
+                          "flex items-center justify-center gap-2.5 border-t pt-3.5 text-center text-[13px] font-medium leading-[1.4] text-foreground @min-[620px]:mt-auto",
+                          tone.rule
                         )}
                       >
                         <RefreshCw
                           className={cn(
-                            "size-3.5 shrink-0",
+                            "size-4 shrink-0",
                             chipState === "busy" ? "text-warning" : tone.icon,
                             chipState === "busy" ? "redial-spin" : chipState === "down" ? "" : "keepalive-beat"
                           )}
                           strokeWidth={2}
                           aria-hidden="true"
                         />
-                        <span>
+                        <span className="text-balance">
                           <span className="sr-only">Connection manager: </span>
                           {node.manager}
                         </span>
