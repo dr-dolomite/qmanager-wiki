@@ -195,7 +195,7 @@ function Model({ children }: { children: ReactNode }) {
 export default function HardwareMatrix() {
   return (
     <section id="hardware" className="scroll-mt-20 border-t border-border/80 py-12 sm:py-16">
-      <div className="mb-10">
+      <div className="reveal mb-10">
         <h2 className="text-2xl font-bold tracking-tight text-balance text-foreground sm:text-3xl">
           Modem &amp; hardware compatibility
         </h2>
@@ -207,8 +207,12 @@ export default function HardwareMatrix() {
 
       {/* Support levels */}
       <div className="grid gap-4 sm:grid-cols-3">
-        {SUPPORT_LEVELS.map((level) => (
-          <div key={level.title} className="rounded-2xl bg-muted/40 p-5">
+        {SUPPORT_LEVELS.map((level, i) => (
+          <div
+            key={level.title}
+            className="reveal rounded-2xl bg-muted/40 p-5"
+            style={{ "--i": i } as CSSProperties}
+          >
             <div className="flex items-start justify-between gap-4">
               <h3 className="text-sm font-semibold text-foreground">{level.title}</h3>
               <SignalBars level={level.bars} lit={level.lit} />
@@ -278,14 +282,15 @@ export default function HardwareMatrix() {
 
       {/* Architecture cards */}
       <div className="mt-10 grid gap-6 md:grid-cols-3">
-        {ARCHITECTURES.map((arch) => {
+        {ARCHITECTURES.map((arch, i) => {
           const Icon = arch.icon;
           const tone = TONES[arch.model.tone];
           const StatusIcon = tone.icon;
           return (
             <article
               key={arch.model.name}
-              className="row-span-5 grid grid-rows-subgrid gap-y-0 rounded-2xl border border-border bg-card p-6 sm:p-7"
+              style={{ "--i": i } as CSSProperties}
+              className="reveal row-span-5 grid grid-rows-subgrid gap-y-0 rounded-2xl border border-border bg-card p-6 sm:p-7"
             >
               <p className="flex items-center gap-2.5 text-sm text-muted-foreground">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
@@ -354,7 +359,7 @@ export default function HardwareMatrix() {
       </div>
 
       {/* Router pairing */}
-      <div className="mt-6 grid gap-8 rounded-2xl border border-border bg-card p-6 sm:p-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-12">
+      <div className="reveal mt-6 grid gap-8 rounded-2xl border border-border bg-card p-6 sm:p-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-12">
         {/* Left: the one thing to know, and how it physically connects */}
         <div className="flex flex-col">
           <h3 className="text-lg font-semibold tracking-tight text-balance text-foreground sm:text-xl">

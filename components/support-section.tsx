@@ -43,7 +43,7 @@ const TIP_OPTIONS: TipOption[] = [
 export default function SupportSection() {
   return (
     <section id="support" className="scroll-mt-20 py-12 sm:py-16 border-t border-border/80">
-      <div className="mx-auto mb-10 max-w-xl text-center">
+      <div className="reveal mx-auto mb-10 max-w-xl text-center">
         <h2 className="text-2xl font-bold tracking-tight text-foreground text-balance sm:text-3xl">
           Support the project
         </h2>
@@ -52,7 +52,7 @@ export default function SupportSection() {
         </p>
       </div>
 
-      <div className="mx-auto max-w-4xl rounded-2xl border border-border/60 bg-muted/30">
+      <div className="reveal mx-auto max-w-4xl rounded-2xl border border-border/60 bg-muted/30">
         <ul className="grid divide-y divide-border/60 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {TIP_OPTIONS.map((option) => (
             <li key={option.title} className="flex flex-col gap-3 p-5">

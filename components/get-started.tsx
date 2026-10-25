@@ -31,7 +31,7 @@ export default function GetStarted() {
       className="border-t border-border/80 py-12 sm:py-16"
     >
       <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-16">
-        <div>
+        <div className="reveal">
           <h2
             id="get-started-heading"
             className="text-2xl font-bold tracking-tight text-foreground text-balance sm:text-3xl"
@@ -54,7 +54,10 @@ export default function GetStarted() {
         </div>
 
         {/* The modem's own status screen on a soft plate; radio waves spread from its corner */}
-        <div className="relative isolate overflow-hidden rounded-3xl bg-surface-container p-6 sm:p-8">
+        <div
+          className="reveal relative isolate overflow-hidden rounded-3xl bg-surface-container p-6 sm:p-8"
+          style={{ "--i": 1 } as CSSProperties}
+        >
           <svg
             aria-hidden="true"
             viewBox="0 0 520 520"

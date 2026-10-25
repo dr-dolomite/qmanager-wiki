@@ -107,7 +107,7 @@ export default function QuickInstall() {
       <span id="install-rm551e" aria-hidden="true" className="absolute top-0 scroll-mt-20" />
       <span id="install-rm520n" aria-hidden="true" className="absolute top-0 scroll-mt-20" />
 
-      <div className="mb-10">
+      <div className="reveal mb-10">
         <h2 id="install-heading" className="text-2xl font-bold tracking-tight text-foreground text-balance sm:text-3xl">
           Install in one step
         </h2>
@@ -116,7 +116,7 @@ export default function QuickInstall() {
         </p>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-xs">
+      <div className="reveal overflow-hidden rounded-2xl border border-border bg-card shadow-xs">
         {/* Card Header */}
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border bg-muted/40 px-5 py-3 sm:px-8">
           <div className="flex items-center gap-2">
@@ -126,7 +126,7 @@ export default function QuickInstall() {
 
           <div className="flex flex-wrap items-center gap-2">
             {activeTab === "rm520n" && (
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-2.5 py-0.5 text-xs font-medium text-emerald-700 dark:text-emerald-400">
+              <span className="swap-in inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-2.5 py-0.5 text-xs font-medium text-emerald-700 dark:text-emerald-400">
                 <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
                 <span>Checksum-verified download</span>
               </span>
@@ -142,8 +142,14 @@ export default function QuickInstall() {
           <div
             role="tablist"
             aria-label="Choose your modem"
-            className="grid grid-cols-2 gap-1 rounded-full border border-border bg-muted/50 p-1 sm:inline-grid"
+            className="relative grid grid-cols-2 gap-1 rounded-full border border-border bg-muted/50 p-1 sm:inline-grid"
           >
+            {/* One shared selection pill that slides to the active option (columns are equal: 1fr) */}
+            <span
+              aria-hidden="true"
+              className="segment-pill pointer-events-none absolute inset-y-1 left-1 w-[calc(50%-0.375rem)] rounded-full bg-background shadow-xs"
+              style={activeTab === "rm520n" ? { transform: "translateX(calc(100% + 0.25rem))" } : undefined}
+            />
             {TARGETS.map((target) => {
               const isActive = activeTab === target;
               return (
@@ -157,9 +163,9 @@ export default function QuickInstall() {
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => selectTab(target)}
                   onKeyDown={(e) => handleTabKeyDown(e, target)}
-                  className={`inline-flex h-10 min-w-0 items-center justify-center gap-1.5 rounded-full px-3 text-sm whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background sm:px-5 ${
+                  className={`relative inline-flex h-10 min-w-0 items-center justify-center gap-1.5 rounded-full px-3 text-sm whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background sm:px-5 ${
                     isActive
-                      ? "bg-background text-foreground font-semibold shadow-xs"
+                      ? "text-foreground font-semibold"
                       : "text-muted-foreground font-medium hover:text-foreground"
                   }`}
                 >
@@ -178,7 +184,7 @@ export default function QuickInstall() {
           >
             {/* Command Box */}
             <div className="flex flex-col gap-3 rounded-xl border border-border bg-muted/30 dark:bg-background/60 p-3 sm:flex-row sm:items-center sm:p-4">
-              <code className="min-w-0 flex-1 whitespace-pre-wrap break-all font-mono text-sm leading-relaxed text-foreground">
+              <code key={activeTab} className="swap-in min-w-0 flex-1 whitespace-pre-wrap break-all font-mono text-sm leading-relaxed text-foreground">
                 <span className="text-primary select-none font-semibold">{PROMPTS[activeTab]}</span>
                 {currentCommand}
               </code>
@@ -195,7 +201,7 @@ export default function QuickInstall() {
               >
                 {copied ? (
                   <>
-                    <Check className="h-4 w-4" aria-hidden="true" />
+                    <Check className="swap-in h-4 w-4" aria-hidden="true" />
                     <span>Copied</span>
                   </>
                 ) : (
@@ -212,7 +218,7 @@ export default function QuickInstall() {
 
             {/* Compatibility note for the RM520N installer */}
             {activeTab === "rm520n" && (
-              <div className="mt-3 flex items-start gap-2.5 rounded-xl border border-primary/20 bg-primary/5 p-3.5 text-sm leading-relaxed text-muted-foreground">
+              <div className="swap-in mt-3 flex items-start gap-2.5 rounded-xl border border-primary/20 bg-primary/5 p-3.5 text-sm leading-relaxed text-muted-foreground">
                 <Info className="mt-0.5 h-4 w-4 text-primary shrink-0" aria-hidden="true" />
                 <p>
                   Tested on the RM520N-GL and RG501Q-EU. Other Snapdragon X55 and X6x modems that run Linux on the modem itself should work too.

@@ -104,7 +104,7 @@ const FEATURES: FeatureCard[] = [
 export default function FeatureGrid() {
   return (
     <section id="features" className="py-12 sm:py-16 scroll-mt-20 border-t border-border/80">
-      <div className="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div className="reveal mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
             Core feature documentation
@@ -123,12 +123,13 @@ export default function FeatureGrid() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {FEATURES.map((feature) => {
+        {FEATURES.map((feature, i) => {
           const Icon = feature.icon;
           return (
             <div
               key={feature.title}
-              className="flex flex-col justify-between rounded-2xl border border-border bg-card p-5 sm:p-6"
+              style={{ "--i": i % 3 } as React.CSSProperties}
+              className="reveal flex flex-col justify-between rounded-2xl border border-border bg-card p-5 sm:p-6"
             >
               <div>
                 {/* Header */}

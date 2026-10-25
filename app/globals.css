@@ -302,3 +302,175 @@ pre code {
     opacity: 1;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * Landing motion. Every element is fully visible by default; motion only layers
+ * on top where the browser and the visitor's motion preference allow it.
+ * ------------------------------------------------------------------------- */
+
+:root {
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hero, on load: the promise rises out of a soft blur, then the product plate lifts in
+   while the capture inside it counter-zooms into focus, like a lens finding the screen.
+   --d is each element's delay in ms. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-rise {
+    animation: hero-rise 900ms var(--ease-settle) calc(var(--d, 0) * 1ms) both;
+  }
+
+  .hero-plate {
+    animation: hero-plate 1100ms var(--ease-settle) 180ms both;
+  }
+
+  .hero-shot {
+    animation: hero-shot 1400ms var(--ease-settle) 180ms both;
+  }
+
+  /* The badge's status light comes up like a modem's link LED: a few pulses, then still. */
+  .led-ping {
+    animation: led-ping 1600ms var(--ease-settle) 1000ms 3 both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise,
+  .hero-plate {
+    animation: fade-in 400ms ease-out calc(var(--d, 0) * 0.5ms) both;
+  }
+}
+
+/* On scroll, scrubbed to the scroll position rather than fired on a timer, so the page
+   moves exactly as fast as the visitor does and anchor jumps land in the settled state. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Leaving the hero, the product stage recedes into the page. */
+    .hero-recede {
+      animation: hero-recede linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 100%;
+    }
+
+    /* Section intros and blocks settle up into place. --i staggers siblings in a row. */
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--i, 0) * 7%) cover calc(26% + var(--i, 0) * 5%);
+      animation-timing-function: var(--ease-settle);
+    }
+
+    /* The screenshot frame rises into place like a display being set down on the desk. */
+    .reveal-stage {
+      transform-origin: 50% 0%;
+      animation: reveal-stage linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 38%;
+      animation-timing-function: var(--ease-settle);
+    }
+  }
+}
+
+/* State swaps (tabs, copy confirmation): the new content arrives, the old does not linger. */
+@media (prefers-reduced-motion: no-preference) {
+  .swap-in {
+    animation: swap-in 420ms var(--ease-settle) both;
+  }
+
+  .swap-in-image {
+    animation: swap-in-image 600ms var(--ease-settle) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swap-in,
+  .swap-in-image {
+    animation: fade-in 200ms ease-out both;
+  }
+}
+
+/* Segmented control: the selection pill slides between options. */
+.segment-pill {
+  transition: transform 380ms var(--ease-settle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .segment-pill {
+    transition: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.75rem);
+    filter: blur(10px);
+  }
+}
+
+@keyframes hero-plate {
+  from {
+    opacity: 0;
+    transform: translateY(2.5rem) scale(0.94);
+  }
+}
+
+@keyframes hero-shot {
+  from {
+    transform: scale(1.12);
+    filter: blur(6px);
+  }
+}
+
+@keyframes led-ping {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+@keyframes hero-recede {
+  to {
+    transform: translateY(6%) scale(0.92);
+    opacity: 0.35;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(2.5rem);
+  }
+}
+
+@keyframes reveal-stage {
+  from {
+    opacity: 0.25;
+    transform: perspective(1600px) rotateX(14deg) scale(0.88);
+  }
+}
+
+@keyframes swap-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.375rem);
+  }
+}
+
+@keyframes swap-in-image {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+    filter: blur(4px);
+  }
+}

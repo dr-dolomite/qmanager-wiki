@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type CSSProperties } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, BookOpen, Terminal, ExternalLink } from "lucide-react";
@@ -18,6 +18,9 @@ import { DOC_CATEGORIES } from "@/lib/docs-data";
 const CATEGORY_COUNT = DOC_CATEGORIES.length;
 const GUIDE_COUNT = DOC_CATEGORIES.reduce((sum, category) => sum + category.articles.length, 0);
 
+/* Load-sequence delay for a hero element, in ms (motion lives in globals.css: hero-*). */
+const delay = (ms: number) => ({ "--d": ms }) as CSSProperties;
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -28,8 +31,14 @@ export default function Home() {
         <section className="grid items-center gap-12 pt-10 pb-6 sm:pt-14 sm:pb-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-14 lg:pt-20 lg:pb-12">
           <div>
             {/* Version Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/40 px-3.5 py-1.5 shadow-xs">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
+            <div
+              className="hero-rise inline-flex items-center gap-2 rounded-full border border-border bg-muted/40 px-3.5 py-1.5 shadow-xs"
+              style={delay(0)}
+            >
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="led-ping absolute inset-0 rounded-full bg-emerald-500 opacity-0" />
+                <span className="relative h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
               <span className="text-xs font-semibold text-foreground font-figure tabular-nums">
                 v0.1.35
               </span>
@@ -41,16 +50,17 @@ export default function Home() {
 
             {/* Title */}
             <h1 className="mt-7 text-[2.75rem] leading-[1.02] sm:text-6xl xl:text-[5.25rem] font-bold tracking-[-0.035em] text-foreground">
-              High-speed 5G <span className="block text-primary">made simple.</span>
+              <span className="hero-rise block" style={delay(80)}>High-speed 5G</span>{" "}
+              <span className="hero-rise block text-primary" style={delay(180)}>made simple.</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed text-pretty">
+            <p className="hero-rise mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed text-pretty" style={delay(300)}>
               Manage and optimize your Quectel modem with a clean, friendly dashboard. Easy setup for home routers, powerful tools when you want them.
             </p>
 
             {/* Action CTAs */}
-            <div className="mt-9 flex flex-wrap items-center gap-3">
+            <div className="hero-rise mt-9 flex flex-wrap items-center gap-3" style={delay(400)}>
               <a
                 href="#install"
                 className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-6 text-base font-semibold text-primary-foreground shadow-xs transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -82,7 +92,7 @@ export default function Home() {
             </div>
 
             {/* Spec rail: the key numbers, kept quiet so the headline and product lead */}
-            <dl className="mt-12 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-border/70 pt-7 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+            <dl className="hero-rise mt-12 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-border/70 pt-7 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4" style={delay(520)}>
               <div>
                 <dt className="text-xs text-muted-foreground">Peak 5G-A downlink</dt>
                 <dd className="mt-1 text-xl font-bold tracking-tight text-foreground font-figure tabular-nums">
@@ -110,29 +120,32 @@ export default function Home() {
             </dl>
           </div>
 
-          {/* Product stage: real RM520N capture on a primary-blue plate */}
-          <div className="mx-auto w-full max-w-md sm:max-w-lg lg:max-w-none">
-            <div className="rounded-[2rem] bg-primary p-6 sm:p-12">
+          {/* Product stage: real RM520N capture on a primary-blue plate. The plate lifts in on load
+              while the capture counter-zooms into focus, then the stage recedes as you scroll on. */}
+          <div className="hero-recede mx-auto w-full max-w-md sm:max-w-lg lg:max-w-none">
+            <div className="hero-plate rounded-[2rem] bg-primary p-6 sm:p-12">
               {/* Crop the capture's outer margin so only the card itself shows */}
               <div className="relative aspect-[1088/1048] overflow-hidden rounded-[1.4rem] shadow-[0_24px_60px_-20px_rgb(0_0_0/0.55)] ring-1 ring-black/10">
-                <Image
-                  src="/screenshots/rm520n-overview-card-light.png"
-                  alt="QManager modem overview on an RM520N-GL: connected on 5G-NSA, bands B1 and N41, 80 MHz bandwidth"
-                  width={1168}
-                  height={1128}
-                  className="absolute top-[-3.82%] left-[-3.68%] w-[107.35%] max-w-none dark:hidden"
-                  sizes="(min-width: 1024px) 560px, 90vw"
-                  priority
-                />
-                <Image
-                  src="/screenshots/rm520n-overview-card.png"
-                  alt="QManager modem overview on an RM520N-GL: connected on 5G-NSA, bands B1 and N41, 80 MHz bandwidth"
-                  width={1168}
-                  height={1128}
-                  className="absolute top-[-3.82%] left-[-3.68%] hidden w-[107.35%] max-w-none dark:block"
-                  sizes="(min-width: 1024px) 560px, 90vw"
-                  priority
-                />
+                <div className="hero-shot absolute inset-0">
+                  <Image
+                    src="/screenshots/rm520n-overview-card-light.png"
+                    alt="QManager modem overview on an RM520N-GL: connected on 5G-NSA, bands B1 and N41, 80 MHz bandwidth"
+                    width={1168}
+                    height={1128}
+                    className="absolute top-[-3.82%] left-[-3.68%] w-[107.35%] max-w-none dark:hidden"
+                    sizes="(min-width: 1024px) 560px, 90vw"
+                    priority
+                  />
+                  <Image
+                    src="/screenshots/rm520n-overview-card.png"
+                    alt="QManager modem overview on an RM520N-GL: connected on 5G-NSA, bands B1 and N41, 80 MHz bandwidth"
+                    width={1168}
+                    height={1128}
+                    className="absolute top-[-3.82%] left-[-3.68%] hidden w-[107.35%] max-w-none dark:block"
+                    sizes="(min-width: 1024px) 560px, 90vw"
+                    priority
+                  />
+                </div>
               </div>
             </div>
           </div>

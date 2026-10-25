@@ -60,7 +60,7 @@ export default function ContactSection() {
       className="scroll-mt-20 py-12 sm:py-16 border-t border-border/80"
     >
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-16">
-        <div>
+        <div className="reveal">
           <h2
             id="contact-heading"
             className="text-2xl font-bold tracking-tight text-foreground text-balance sm:text-3xl"
@@ -122,7 +122,8 @@ export default function ContactSection() {
         {/* The Discord invite, staged like the product shots: a white card on a soft plate */}
         <aside
           aria-labelledby="contact-discord-heading"
-          className="self-start rounded-3xl bg-surface-container p-6 sm:p-8"
+          className="reveal self-start rounded-3xl bg-surface-container p-6 sm:p-8"
+          style={{ "--i": 1 } as React.CSSProperties}
         >
           <div className="flex items-center gap-3">
             <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#5865F2] text-white">

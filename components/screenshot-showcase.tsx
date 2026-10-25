@@ -147,7 +147,7 @@ export default function ScreenshotShowcase() {
 
   return (
     <section id="screenshots" className="scroll-mt-20 py-12 sm:py-16 border-t border-border/80">
-      <div className="mb-10">
+      <div className="reveal mb-10">
         <h2 className="text-2xl font-bold tracking-tight text-foreground text-balance sm:text-3xl">
           Live web interface preview
         </h2>
@@ -197,7 +197,7 @@ export default function ScreenshotShowcase() {
         id={`showcase-panel-${currentTab.id}`}
         role="tabpanel"
         aria-labelledby={`showcase-tab-${currentTab.id}`}
-        className="overflow-hidden rounded-2xl border border-border bg-card shadow-xs"
+        className="reveal-stage overflow-hidden rounded-2xl border border-border bg-card shadow-xs"
       >
         {/* Frame Browser Bar */}
         <div className="flex items-center gap-3 border-b border-border bg-muted/40 px-5 py-2.5 sm:px-6">
@@ -214,15 +214,18 @@ export default function ScreenshotShowcase() {
         {/* Image Content: 4:3 crop from the top-left on phones, the full 16:10 capture from sm */}
         <div className="bg-muted/20 p-2 sm:p-3">
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-border/60 bg-background sm:aspect-[16/10]">
-            {(["light", "dark"] as const).map((theme) => (
-              <ShowcaseImage key={`${currentTab.id}-${theme}`} tab={currentTab} theme={theme} />
-            ))}
+            {/* Keyed per tab so each switch remounts and the new capture settles in */}
+            <div key={currentTab.id} className="swap-in-image absolute inset-0">
+              {(["light", "dark"] as const).map((theme) => (
+                <ShowcaseImage key={theme} tab={currentTab} theme={theme} />
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Caption & Highlights: what the view is (left), what it shows (right) */}
         <div className="grid gap-5 border-t border-border bg-card p-5 sm:p-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,8fr)] lg:gap-12">
-          <div>
+          <div key={`${currentTab.id}-caption`} className="swap-in">
             <h3 className="text-lg font-semibold tracking-tight text-balance text-foreground">
               {currentTab.title}
             </h3>
@@ -231,7 +234,7 @@ export default function ScreenshotShowcase() {
             </p>
           </div>
 
-          <ul className="grid sm:grid-cols-2 sm:gap-x-6" aria-label={`${currentTab.title} highlights`}>
+          <ul key={`${currentTab.id}-highlights`} className="swap-in grid sm:grid-cols-2 sm:gap-x-6" aria-label={`${currentTab.title} highlights`}>
             {currentTab.highlights.map((item) => (
               <li
                 key={item}

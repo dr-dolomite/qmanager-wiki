@@ -41,7 +41,7 @@ const QUICK_TASKS: QuickTask[] = [
 export default function QuickTasks() {
   return (
     <section className="py-12 sm:py-16">
-      <div className="mb-10">
+      <div className="reveal mb-10">
         <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
           Popular tasks &amp; guides
         </h2>
@@ -51,13 +51,14 @@ export default function QuickTasks() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {QUICK_TASKS.map((task) => {
+        {QUICK_TASKS.map((task, i) => {
           const Icon = task.icon;
           return (
             <Link
               key={task.title}
               href={task.href}
-              className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-5 sm:p-6 transition-[border-color,box-shadow] duration-150 hover:border-primary/40 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              style={{ "--i": i } as React.CSSProperties}
+              className="reveal group flex flex-col justify-between rounded-2xl border border-border bg-card p-5 sm:p-6 transition-[border-color,box-shadow] duration-150 hover:border-primary/40 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <div>
                 <div className="mb-4 flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
