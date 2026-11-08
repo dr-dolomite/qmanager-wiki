@@ -7,6 +7,7 @@ import { Search, Menu, X, ExternalLink } from "lucide-react";
 import SearchModal from "@/components/search-modal";
 import GithubIcon from "@/components/github-icon";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { NavbarVersionBadge } from "@/components/version-badge";
 
 export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -49,9 +50,7 @@ export default function Navbar() {
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-semibold tracking-tight text-foreground text-sm sm:text-base">QManager</span>
-                <span className="hidden rounded-full border border-border bg-muted/70 px-2 py-0.5 text-xs sm:inline-flex font-medium text-muted-foreground font-figure tabular-nums">
-                  v0.1.36 • v0.1.19
-                </span>
+                <NavbarVersionBadge />
               </div>
             </Link>
 

@@ -13,6 +13,7 @@ import ScreenshotShowcase from "@/components/screenshot-showcase";
 import SupportSection from "@/components/support-section";
 import ContactSection from "@/components/contact-section";
 import GetStarted from "@/components/get-started";
+import { HeroVersionBadge } from "@/components/version-badge";
 import { DOC_CATEGORIES } from "@/lib/docs-data";
 
 const CATEGORY_COUNT = DOC_CATEGORIES.length;
@@ -31,22 +32,7 @@ export default function Home() {
         <section className="grid items-center gap-12 pt-10 pb-6 sm:pt-14 sm:pb-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-14 lg:pt-20 lg:pb-12">
           <div>
             {/* Version Badge */}
-            <div
-              className="hero-rise inline-flex items-center gap-2 rounded-full border border-border bg-muted/40 px-3.5 py-1.5 shadow-xs"
-              style={delay(0)}
-            >
-              <span className="relative flex h-2 w-2" aria-hidden="true">
-                <span className="led-ping absolute inset-0 rounded-full bg-emerald-500 opacity-0" />
-                <span className="relative h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              <span className="text-xs font-semibold text-foreground font-figure tabular-nums">
-                v0.1.36 (RM551E) • v0.1.19 (RM520N)
-              </span>
-              <span className="text-border">•</span>
-              <span className="text-xs text-muted-foreground font-medium">
-                Built for Qualcomm 5G Modems
-              </span>
-            </div>
+            <HeroVersionBadge style={delay(0)} />
 
             {/* Title */}
             <h1 className="mt-7 text-[2.75rem] leading-[1.02] sm:text-6xl xl:text-[5.25rem] font-bold tracking-[-0.035em] text-foreground">
