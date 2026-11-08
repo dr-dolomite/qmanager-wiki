@@ -5,11 +5,18 @@ import Link from "next/link";
 import { Copy, Check, Server, Zap, ArrowRight, ShieldCheck, Terminal, Info } from "lucide-react";
 
 type InstallTarget = "rm551e" | "rm520n";
+type OpenWrtMethod = "opkg" | "curl";
 
 const TARGETS: InstallTarget[] = ["rm551e", "rm520n"];
 
-const COMMANDS: Record<InstallTarget, string> = {
-  rm551e: "curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-installer.sh | sh",
+const COMMANDS: {
+  rm551e: Record<OpenWrtMethod, string>;
+  rm520n: string;
+} = {
+  rm551e: {
+    opkg: "opkg update && opkg install sdxpinn-qmanager",
+    curl: "curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-installer.sh | sh",
+  },
   rm520n: "curl -fsSL -o /tmp/qmanager-installer.sh https://github.com/dr-dolomite/QManager-RM520N/raw/refs/heads/main/qmanager-installer.sh && bash /tmp/qmanager-installer.sh",
 };
 
@@ -36,16 +43,17 @@ const HASH_TO_TARGET: Record<string, InstallTarget> = {
 };
 
 const TAB_META: Record<InstallTarget, { label: string; icon: React.ReactNode }> = {
-  rm551e: { label: "RM551E", icon: <Server className="h-4 w-4 shrink-0" aria-hidden="true" /> },
+  rm551e: { label: "RM551E (OpenWrt)", icon: <Server className="h-4 w-4 shrink-0" aria-hidden="true" /> },
   rm520n: { label: "RM520N & similar", icon: <Zap className="h-4 w-4 shrink-0" aria-hidden="true" /> },
 };
 
 export default function QuickInstall() {
   const [activeTab, setActiveTab] = useState<InstallTarget>("rm551e");
+  const [openwrtMethod, setOpenwrtMethod] = useState<OpenWrtMethod>("opkg");
   const [copied, setCopied] = useState(false);
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const currentCommand = COMMANDS[activeTab];
+  const currentCommand = activeTab === "rm551e" ? COMMANDS.rm551e[openwrtMethod] : COMMANDS.rm520n;
 
   const selectTab = useCallback((target: InstallTarget) => {
     setActiveTab(target);
@@ -121,7 +129,9 @@ export default function QuickInstall() {
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border bg-muted/40 px-5 py-3 sm:px-8">
           <div className="flex items-center gap-2">
             <Terminal className="h-4 w-4 text-primary" aria-hidden="true" />
-            <span className="text-sm font-semibold text-foreground">One-line installer</span>
+            <span className="text-sm font-semibold text-foreground">
+              {activeTab === "rm551e" && openwrtMethod === "opkg" ? "Official OpenWrt SDXPINN Feed" : "One-line installer"}
+            </span>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -131,8 +141,13 @@ export default function QuickInstall() {
                 <span>Checksum-verified download</span>
               </span>
             )}
+            {activeTab === "rm551e" && openwrtMethod === "opkg" && (
+              <span className="swap-in inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-2.5 py-0.5 text-xs font-medium text-primary">
+                <span>SDXPINN Package Feed</span>
+              </span>
+            )}
             <span className="rounded-full border border-border bg-background px-2.5 py-0.5 text-xs text-muted-foreground font-figure tabular-nums">
-              v0.1.35
+              {activeTab === "rm551e" ? "v0.1.36" : "v0.1.19"}
             </span>
           </div>
         </div>
@@ -176,6 +191,37 @@ export default function QuickInstall() {
             })}
           </div>
 
+          {/* Method selector for RM551E (OpenWrt) */}
+          {activeTab === "rm551e" && (
+            <div className="mt-3 flex items-center gap-2">
+              <span className="text-xs text-muted-foreground font-medium">Install method:</span>
+              <div className="inline-flex rounded-lg border border-border bg-muted/40 p-0.5 text-xs">
+                <button
+                  type="button"
+                  onClick={() => { setOpenwrtMethod("opkg"); setCopied(false); }}
+                  className={`rounded-md px-2.5 py-1 font-medium transition-colors ${
+                    openwrtMethod === "opkg"
+                      ? "bg-background text-foreground shadow-xs font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Official Feed (opkg)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setOpenwrtMethod("curl"); setCopied(false); }}
+                  className={`rounded-md px-2.5 py-1 font-medium transition-colors ${
+                    openwrtMethod === "curl"
+                      ? "bg-background text-foreground shadow-xs font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  One-Line Script (curl)
+                </button>
+              </div>
+            </div>
+          )}
+
           <div
             id="install-command-panel"
             role="tabpanel"
@@ -184,7 +230,7 @@ export default function QuickInstall() {
           >
             {/* Command Box */}
             <div className="flex flex-col gap-3 rounded-xl border border-border bg-muted/30 dark:bg-background/60 p-3 sm:flex-row sm:items-center sm:p-4">
-              <code key={activeTab} className="swap-in min-w-0 flex-1 whitespace-pre-wrap break-all font-mono text-sm leading-relaxed text-foreground">
+              <code key={`${activeTab}-${openwrtMethod}`} className="swap-in min-w-0 flex-1 whitespace-pre-wrap break-all font-mono text-sm leading-relaxed text-foreground">
                 <span className="text-primary select-none font-semibold">{PROMPTS[activeTab]}</span>
                 {currentCommand}
               </code>
@@ -215,6 +261,16 @@ export default function QuickInstall() {
                 {copied ? "Command copied to clipboard" : ""}
               </span>
             </div>
+
+            {/* Note for the RM551E official feed */}
+            {activeTab === "rm551e" && openwrtMethod === "opkg" && (
+              <div className="swap-in mt-3 flex items-start gap-2.5 rounded-xl border border-primary/20 bg-primary/5 p-3.5 text-sm leading-relaxed text-muted-foreground">
+                <Info className="mt-0.5 h-4 w-4 text-primary shrink-0" aria-hidden="true" />
+                <p>
+                  Official package from iamromulan&apos;s SDXPINN feed for OpenWrt 23.05. Manages services, configures uhttpd, and integrates with LuCI.
+                </p>
+              </div>
+            )}
 
             {/* Compatibility note for the RM520N installer */}
             {activeTab === "rm520n" && (

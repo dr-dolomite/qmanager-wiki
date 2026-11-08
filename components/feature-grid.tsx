@@ -80,7 +80,7 @@ const FEATURES: FeatureCard[] = [
   {
     title: "Remote Access & Diagnostics",
     icon: TerminalWindowIcon,
-    summary: "Built-in Tailscale and Netbird mesh VPNs, interactive AT console, and Prometheus metrics scraping.",
+    summary: "Built-in Tailscale mesh VPN, interactive AT console, and Prometheus metrics scraping.",
     categoryHref: "/docs/management/tailscale-vpn/",
     topics: [
       { label: "Tailscale VPN", href: "/docs/management/tailscale-vpn/" },

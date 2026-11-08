@@ -40,7 +40,7 @@ export default function Home() {
                 <span className="relative h-2 w-2 rounded-full bg-emerald-500" />
               </span>
               <span className="text-xs font-semibold text-foreground font-figure tabular-nums">
-                v0.1.35
+                v0.1.36 (RM551E) • v0.1.19 (RM520N)
               </span>
               <span className="text-border">•</span>
               <span className="text-xs text-muted-foreground font-medium">

@@ -74,12 +74,14 @@ QManager is engineered across two primary hardware architectures to match the mo
 
 | Feature / Aspect | RM551E Series (Custom OpenWRT) | RM520N Series (Native Linux) |
 |---|---|---|
+| **Release Version Stream** | \`v0.1.36\` (\`v0.1.36-draft\`) | \`v0.1.19\` (\`v0.1.19-draft\`) |
 | **Baseband Processor** | Qualcomm Snapdragon X75 | Qualcomm Snapdragon X62 / X65 (SDXLEMUR) |
-| **Execution Environment** | Custom On-Modem OpenWRT | On-Modem Poky Linux (ARMv7l SDXLEMUR, Kernel 5.4) |
+| **Execution Environment** | Custom On-Modem OpenWRT (23.05 aarch64) | On-Modem Poky Linux (ARMv7l SDXLEMUR, Kernel 5.4) |
 | **Physical Setup** | Standalone modem in an M.2-to-Ethernet board, plugged into any router's WAN port | Standalone modem in an RGMII/Ethernet breakout board, plugged into any router's WAN port |
 | **HTTP Web Server** | Embedded \`uhttpd\` | Entware \`lighttpd\` running on modem |
-| **Process Supervision** | \`procd\` services | \`systemd\` unit files |
+| **Process Supervision** | \`procd\` services (14 services) | \`systemd\` units (25 services, 2 timers) |
 | **Network Control** | OpenWRT \`uci\` and \`netifd\` | Direct \`sysfs\`, \`iproute2\`, and \`iptables\` mangling |
+| **Modem Access Lane** | Dual-Lane: Rust \`qmanager_atd\` over \`/dev/smd11\` + QMI QRTR socket | Dual-Lane: Rust \`qmanager_atd\` over \`/dev/smd11\` + QMI QRTR socket (\`qsms\`) |
 | **Primary Repository** | \`dr-dolomite/QManager\` | \`dr-dolomite/QManager-RM520N\` |
 
 ### The Same App on Both Modems
@@ -92,12 +94,13 @@ QManager is engineered across two primary hardware architectures to match the mo
 ## Core Capabilities
 
 - **Real-Time 4x4 MIMO Signal Diagnostics**: View live RSRP, RSRQ, SINR, and RSSI per antenna port with 30-minute historical telemetry graphs.
+- **Dual-Lane Modem Telemetry & Control**: High-speed serialized AT daemon (\`qmanager_atd\` over \`/dev/smd11\`) combined with lock-free QMI QRTR telemetry (\`/tmp/qmanager_qmi.json\`) and non-blocking SMS.
 - **Precision Band & Tower Locking**: Lock your connection to specific LTE or 5G NR frequency bands, or lock directly to a physical cell tower (PCI / EARFCN / ARFCN) with automated safety unlocking.
-- **4-Tier Watchdog Resilience**: Multi-stage auto-recovery pipeline: network interface reset (\`ifup\`) → radio toggle (\`CFUN=0/1\`) → dual SIM failover → full system reboot with token-bucket rate limiting.
+- **4-Tier Watchdog Resilience**: Multi-stage auto-recovery pipeline: network interface reset (\`ifup\`) → radio toggle (\`CFUN=0/1\`) → dual SIM failover → full system reboot with token-bucket rate limiting and parallel fallback probing.
 - **Network Mangling & Bypassing**: Built-in IPv4 TTL and IPv6 Hop Limit mangling (\`iptables\` / \`nftables\`) to bypass carrier mobile hotspot throttling.
 - **Carrier Aggregation (CA) Breakdown**: Real-time display of Primary Carrier (PCC) and Secondary Component Carriers (SCC1–SCC3) with aggregated downlink/uplink channel bandwidth.
 - **Embedded AT Terminal**: Safe, serialized interactive AT command console with history and auto-complete.
-- **Integrated VPN & Remote Access**: One-click setup for Tailscale and Netbird mesh VPNs to monitor your modem remotely behind CGNAT without public IPs.
+- **Integrated VPN & Remote Access**: One-click setup for Tailscale mesh VPN to monitor your modem remotely behind CGNAT without public IPs (NetBird VPN has been retired on RM520N due to memory constraints).
 
 ---
 
@@ -362,7 +365,7 @@ Send the AT commands with the modem connected to your computer over USB. You can
 
 ---
 
-## X5&#42;/X6&#42; Modems (RM520N, RM521F, RG501Q, RM50xQ)
+## X5\*/X6\* Modems (RM520N, RM521F, RG501Q, RM50xQ)
 
 These commands apply to Snapdragon X5&#42;/X6&#42; modems, which use the SDXLEMUR (X62/X65) and SDXPRAIRIE (X55) platforms. Send them in order:
 
@@ -502,6 +505,7 @@ The commands and behaviour in this guide come from Cameron Thompson's [Cellular 
         toc: [
           { id: "prerequisites", title: "Prerequisites", level: 2 },
           { id: "switch-the-modem-to-ethernet-mode", title: "Switch the Modem to Ethernet Mode", level: 2 },
+          { id: "official-feed-install", title: "Official OpenWrt SDXPINN Package Feed (Recommended)", level: 2 },
           { id: "one-line-install", title: "One-Line Automated Installation", level: 2 },
           { id: "release-channels", title: "Selecting Release Channels", level: 2 },
           { id: "post-install-verification", title: "Post-Installation Verification", level: 2 },
@@ -542,6 +546,22 @@ For what this mode does and how to verify the connection, see [Preparing the Mod
 
 ---
 
+## Official OpenWrt SDXPINN Package Feed (Recommended)
+
+QManager is officially pre-packaged as an OpenWrt IPK package (\`sdxpinn-qmanager\`) in **iamromulan's SDXPINN package feed**. This is the recommended installation method on OpenWrt 23.05:
+
+\`\`\`sh
+opkg update
+opkg install sdxpinn-qmanager
+\`\`\`
+
+### Key Advantages of the Package Feed:
+- **Clean Package Lifecycle**: Handles dependencies, \`uhttpd\` configuration, and \`procd\` service registration automatically.
+- **LuCI Web Integration**: Integrates directly with the OpenWrt LuCI administration web interface.
+- **Easy Upgrades**: Upgrade alongside your system packages with \`opkg upgrade sdxpinn-qmanager\`.
+
+---
+
 ## One-Line Automated Installation
 
 Open your terminal or SSH client, connect to your RM551E modem, and execute:
@@ -569,9 +589,9 @@ By default, the installer grabs the newest available release. You can specify ch
 curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-installer.sh | sh -s -- --channel stable
 \`\`\`
 
-### Pin a Specific Version Tag (e.g. v0.1.35)
+### Pin a Specific Version Tag (e.g. v0.1.36)
 \`\`\`sh
-curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-installer.sh | sh -s -- --tag v0.1.35
+curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-installer.sh | sh -s -- --tag v0.1.36
 \`\`\`
 
 ---
@@ -585,7 +605,7 @@ curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-in
    *(Stock on-modem RM551E default IP address)*
 
 2. If prompted, log in with your modem root credentials.
-3. The dashboard will automatically probe the serial port (\`/dev/ttyUSB2\` or \`/dev/cdc-wdm0\`) and begin streaming real-time signal metrics!
+3. The dashboard will automatically probe the serial port (\`/dev/smd11\`) and begin streaming real-time signal metrics!
 
 > [!TIP]
 > If your web browser returns a 404 or CGI error, ensure the web server was restarted:
@@ -619,6 +639,7 @@ curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-in
           { id: "switch-the-modem-to-ethernet-mode", title: "Switch the Modem to Ethernet Mode", level: 2 },
           { id: "one-line-install-rm520n", title: "One-Line Automated Installation", level: 2 },
           { id: "entware-and-services", title: "Entware & Lighttpd Bootstrap", level: 2 },
+          { id: "security-and-filesystem-contracts", title: "Filesystem & Security Contracts", level: 2 },
           { id: "accessing-web-console", title: "Accessing the Web Console", level: 2 },
           { id: "troubleshooting-rm520n", title: "Troubleshooting & Reset", level: 2 }
         ],
@@ -748,6 +769,15 @@ During execution, the installer:
 
 ---
 
+## Filesystem & Security Contracts
+
+The RM520N environment enforces strict embedded Linux contracts:
+- **RootFS Remount Lifecycle**: The factory Poky Linux root partition boots read-only (\`ro\`). The installer issues \`mount -o remount,rw /\` during installation to deploy systemd units, configuration files, and secrets.
+- **Kernel \`fs.protected_regular=1\` Handling**: Under Linux 5.4 with \`fs.protected_regular=1\`, unprivileged writing by \`www-data\` to existing files in world-writable \`/tmp\` is blocked unless pre-created. QManager pre-seeds runtime state files (\`/tmp/qmlive/*.json\`, \`/tmp/qmanager.log\`) with \`root:root\` mode \`0666\` so CGI handlers can update telemetry in place.
+- **Secrets Boundary**: Sensitive tokens, APN passwords, and Tailscale credentials reside in \`/etc/qmanager-secrets/\` with strict \`0700 root:root\` permissions, isolated from web-accessible paths.
+
+---
+
 ## Accessing the Web Console
 
 Once the script completes (typically 30–60 seconds), the console outputs:
@@ -802,7 +832,7 @@ bash /tmp/qmanager_install/uninstall_rm520n.sh
           { id: "when-to-use-manual", title: "When to Use Offline Install", level: 2 },
           { id: "downloading-release-bundle", title: "Downloading the Release Bundle", level: 2 },
           { id: "transferring-to-device", title: "Transferring to the Device (SCP/ADB)", level: 2 },
-          { id: "manual-unpack-and-run", title: "Extracting and Running install.sh", level: 2 }
+          { id: "manual-unpack-and-run", title: "Extracting and Running the Installer", level: 2 }
         ],
         content: `
 # Manual Offline Tarball Installation
@@ -821,54 +851,68 @@ For field deployments without active WAN connectivity, air-gapped industrial rou
 
 ## Downloading the Release Bundle
 
-From a computer with internet access, download the latest release tarball and SHA-256 checksum from GitHub:
+From a computer with internet access, download the appropriate release tarball and SHA-256 checksum from GitHub:
 
 - **For RM551E Series (Custom OpenWRT)**: [QManager Releases](https://github.com/dr-dolomite/QManager/releases)
+  - Release archive: \`qmanager-v0.1.36.tar.gz\`
+  - Checksum: \`qmanager-v0.1.36.tar.gz.sha256\`
 - **For Qualcomm X5* & X6* Modems On-Modem (RM520N, RG501, RM521F, etc.)**: [QManager-RM520N Releases](https://github.com/dr-dolomite/QManager-RM520N/releases)
-
-Files needed:
-- \`qmanager-vX.Y.Z.tar.gz\`
-- \`qmanager-vX.Y.Z.tar.gz.sha256\`
+  - Release archive: \`qmanager-rm520n-v0.1.19.tar.gz\`
+  - Checksum: \`qmanager-rm520n-v0.1.19.tar.gz.sha256\`
 
 ---
 
 ## Transferring to the Device (SCP/ADB)
 
-### Over SCP (RM551E or Modem with SSH):
+### Over SCP:
 \`\`\`sh
-# For RM551E (192.168.224.1):
-scp qmanager-v0.1.35.tar.gz root@192.168.224.1:/tmp/
+# For RM551E on OpenWRT (192.168.224.1):
+scp qmanager-v0.1.36.tar.gz root@192.168.224.1:/tmp/
 
 # For RM520N & SDX55/SDX6X modems (192.168.225.1):
-scp qmanager-v0.1.35.tar.gz root@192.168.225.1:/tmp/
+scp qmanager-rm520n-v0.1.19.tar.gz root@192.168.225.1:/tmp/
 \`\`\`
 
 ### Over ADB (Qualcomm RM520N, RG501 & X5*/X6* Modems):
 \`\`\`sh
-adb push qmanager-v0.1.35.tar.gz /tmp/
+adb push qmanager-rm520n-v0.1.19.tar.gz /tmp/
 \`\`\`
 
 ---
 
-## Extracting and Running install.sh
+## Extracting and Running the Installer
 
 SSH or ADB into the device:
 
+### On RM551E (OpenWRT):
 \`\`\`sh
 cd /tmp
-# Verify SHA256 checksum
-sha256sum qmanager-v0.1.35.tar.gz
+sha256sum qmanager-v0.1.36.tar.gz
 
 # Extract bundle
 mkdir -p /tmp/qmanager_install
-tar -xzf qmanager-v0.1.35.tar.gz -C /tmp/qmanager_install
+tar -xzf qmanager-v0.1.36.tar.gz -C /tmp/qmanager_install
 cd /tmp/qmanager_install
 
 # Execute bundled installer
 sh install.sh
 \`\`\`
 
-The bundled \`install.sh\` script automatically copies the frontend static files, installs backend shell CGI scripts, configures permissions, and sets up service autorun.
+### On RM520N & Qualcomm X5*/X6* Modems (Poky Linux):
+\`\`\`sh
+cd /tmp
+sha256sum qmanager-rm520n-v0.1.19.tar.gz
+
+# Extract bundle
+mkdir -p /tmp/qmanager_install
+tar -xzf qmanager-rm520n-v0.1.19.tar.gz -C /tmp/qmanager_install
+cd /tmp/qmanager_install
+
+# Execute bundled installer
+bash install_rm520n.sh
+\`\`\`
+
+The bundled installer script automatically copies the frontend static files, installs backend shell CGI scripts, configures permissions, and sets up service autorun.
 `
       },
       {
@@ -899,21 +943,30 @@ QManager features built-in Over-The-Air (OTA) update checking and one-click upgr
 
 1. In the QManager web interface, navigate to **Settings > System / About**.
 2. Click **Check for Updates**.
-3. If a newer release is published on GitHub, the release notes and version diff will appear.
-4. Click **Install Update**. The system will download the archive, verify its signature, unpack new assets, and refresh the browser interface without dropping your cellular connection.
+3. The system queries GitHub Releases according to your hardware platform's release stream:
+   - **RM551E (OpenWRT)**: Checks \`dr-dolomite/QManager\` (version stream \`v0.1.36\`).
+   - **RM520N & X5*/X6* (Poky Linux)**: Checks \`dr-dolomite/QManager-RM520N\` (version stream \`v0.1.19\`).
+4. If a newer release is published, the release notes and version diff will appear.
+5. Click **Install Update**. The system will download the archive, verify its signature, unpack new assets, and refresh the browser interface without dropping your cellular connection.
 
 ---
 
 ## Command Line Upgrades
 
-To upgrade via terminal at any time, simply re-run the bootstrap installer. It will automatically detect your existing installation and upgrade in-place:
+To upgrade via terminal at any time:
 
 ### On OpenWRT:
+If installed via the official SDXPINN package feed (recommended):
+\`\`\`sh
+opkg update && opkg upgrade sdxpinn-qmanager
+\`\`\`
+
+Or if using the one-line installer script:
 \`\`\`sh
 curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-installer.sh | sh
 \`\`\`
 
-### On RM520N-GL:
+### On RM520N & Qualcomm X5*/X6* Modems:
 \`\`\`bash
 curl -fsSL -o /tmp/qmanager-installer.sh \
   https://github.com/dr-dolomite/QManager-RM520N/raw/refs/heads/main/qmanager-installer.sh && \
@@ -1372,11 +1425,11 @@ QManager displays the individual signal strength and quality for **all four ante
 
 ## Live Telemetry Engine Architecture
 
-Rather than executing slow AT commands on every browser poll, QManager's backend features a dedicated **tmpfs circular buffer**:
-1. The background daemon reads cellular metrics every 1,000ms.
-2. Formats readings into a compact JSON slice in \`/tmp/qmlive/signal.json\`.
-3. The web frontend fetches this static file via HTTP \`ETag\` cache headers.
-4. If the modem enters high-load state, the adaptive engine backs off automatically to prevent AT command collisions.
+Rather than executing slow, blocking AT commands on every browser poll, QManager operates a **Dual-Lane Telemetry Architecture**:
+1. **Lane 1 — Serial AT Command Daemon (\`qmanager_atd\`)**: High-priority commands and configuration changes pass through the compiled Rust broker holding an exclusive \`flock\` on \`/var/lock/qmanager.lock\` over \`/dev/smd11\`.
+2. **Lane 2 — Lock-Free QMI QRTR Socket (\`AF_QIPCRTR\`)**: Real-time signal telemetry communicates over Qualcomm IPC Router sockets (family 42) directly into \`/tmp/qmanager_qmi.json\` and \`/tmp/qmlive/signal.json\` every 1,000ms with zero AT serial lock contention.
+3. **On-Demand Polling Separation (SSR Protection)**: Querying MIMO layer counts (\`AT+QNWCFG="lte_mimo_layers"\`, \`AT+QNWCFG="nr5g_mimo_layers"\`) and Timing Advance at high frequency triggers Qualcomm Subsystem Restart (SSR) baseband panics on SDX75 (RM551E). QManager strictly separates these queries, fetching them exclusively on-demand via \`radio_details.sh\` when the detailed RF card is viewed.
+4. **Adaptive Throttling**: The web frontend fetches telemetry slices via HTTP \`ETag\` cache headers. When browser tabs lose focus (Page Visibility API), polling suspends to eliminate idle modem CPU overhead.
 
 ---
 
@@ -1528,6 +1581,16 @@ AT+QNWPREFCFG="nsa_nr5g_band",<hex_mask>
 AT+QNWPREFCFG="nr5g_band",<hex_mask>
 \`\`\`
 
+### 5G SA Band Substring Collision Regex Safety
+When querying or parsing 5G Standalone (SA) bands, naive pattern matching with \`grep 'nr5g_band'\` causes dangerous substring collisions by matching \`nsa_nr5g_band\` (5G Non-Standalone) and \`nrdc_nr5g_band\` (NR Dual Connectivity).
+
+QManager's backend parser enforces strict negative lookups:
+\`\`\`sh
+# Enforce negative lookups to prevent substring collisions:
+grep -v 'nsa_' | grep -v 'nrdc_'
+\`\`\`
+This ensures that 5G SA band bitmasks are isolated cleanly without corrupting NSA or NR-DC carrier aggregation configurations.
+
 ---
 
 ## Automatic Band Failover Safeguard
@@ -1568,6 +1631,7 @@ To prevent getting stranded, QManager includes **Band Safety Fallback**:
           { id: "what-is-tower-locking", title: "What is Tower Locking (Cell Lock)?", level: 2 },
           { id: "identifying-target-cells", title: "Identifying Target Cell Towers", level: 2 },
           { id: "configuring-cell-lock", title: "Configuring Cell Lock in QManager", level: 2 },
+          { id: "mutual-exclusion-rule", title: "Mutual Exclusion: Tower Lock vs Frequency Lock", level: 2 },
           { id: "auto-failover-logic", title: "Auto-Failover on Cell Outage", level: 2 },
           { id: "screens-in-qmanager", title: "Screens in QManager", level: 2 }
         ],
@@ -1614,6 +1678,19 @@ AT+QNWLOCK="common/5g",<pci>,<arfcn>,<scs>,<band>
 
 ---
 
+## Mutual Exclusion: Tower Lock vs Frequency Lock
+
+> [!CAUTION]
+> **Strict Mutual Exclusion Rule**:
+> Physical cell tower locking (\`AT+QNWLOCK\`) and frequency channel locking (\`AT+QNWCFG="lte_earfcn_lock"\` / \`nr5g_earfcn_lock\`) are **strictly mutually exclusive** in Quectel modem basebands:
+> - Activating a physical cell tower lock automatically invalidates and clears active frequency locks.
+> - Conversely, configuring a frequency channel lock immediately clears physical cell locks.
+> - Attempting to force both simultaneously causes Qualcomm baseband desynchronization, missed page frames, and unexpected radio teardowns.
+
+QManager's backend state machine manages this cleanly: when a physical tower lock is applied, any active frequency locks are flushed first, and vice-versa.
+
+---
+
 ## Auto-Failover on Cell Outage
 
 What happens if maintenance takes down your locked tower?
@@ -1649,6 +1726,7 @@ QManager's background watchdog continuously checks link ping:
           { id: "pcc-and-scc-breakdown", title: "PCC vs SCC1-SCC3 Breakdown", level: 2 },
           { id: "why-ca-sleeps", title: "Why Does CA Disappear When Idle?", level: 2 },
           { id: "tmobile-sa-efs-patches", title: "T-Mobile SA 4xCA & 5xCA EFS Patches", level: 2 },
+          { id: "sdx75-mimo-ta-separation", title: "SDX75 MIMO & Timing Advance Separation (SSR Crash Prevention)", level: 2 },
           { id: "screens-in-qmanager", title: "Screens in QManager", level: 2 }
         ],
         content: `
@@ -1720,6 +1798,18 @@ As reverse engineered and documented by **Cameron Thompson ([\`iamromulan\`](htt
 > [!WARNING]
 > **Stock March 2025 Firmware Warning**:
 > Avoid flashing the stock March 2025 firmware release for SDX62/SDXLEMUR. This firmware build introduces a regression that overrides custom EFS tables on every boot and enforces strict digital signature verification on RRC combo files, preventing community 4xCA/5xCA combos from activating. Stick with verified late-2024 or patched community releases for maximum CA throughput.
+
+---
+
+## SDX75 MIMO & Timing Advance Separation (SSR Crash Prevention)
+
+On Qualcomm SDX75 (Quectel RM551E), high-frequency background polling of MIMO spatial stream layer counts (\`AT+QNWCFG="lte_mimo_layers"\` and \`AT+QNWCFG="nr5g_mimo_layers"\`) alongside Timing Advance (TA) triggers Qualcomm Subsystem Restart (SSR) baseband crash loops.
+
+QManager strictly isolates these diagnostics:
+- **Removed from Background Poller**: The continuous 1-second telemetry poller (\`poller.sh\`) excludes all \`mimo_layers\` and TA queries entirely.
+- **Dedicated On-Demand Endpoint**: MIMO layer counts and TA are queried only on-demand via \`/www/cgi-bin/quecmanager/cellular/radio_details.sh\` when an operator specifically inspects the Detailed Radio card.
+- This architectural separation guarantees that high-speed continuous data throughput never triggers a baseband panic.
+
 ## Screens in QManager
 
 ![QManager RM520N Cellular and radio information screen](/screenshots/features/rm520n-cellular-info-light.webp "RM520N: Cellular Information lists every active carrier with its band, channel, and signal.")
@@ -2497,7 +2587,7 @@ This multi-PDP configuration methodology and the December 2024 firmware bug miti
         readTime: "5 min read",
         updatedAt: "2026-10-21",
         toc: [
-          { id: "the-staleness-counter", title: "Monotonic Staleness Counter", level: 2 },
+          { id: "the-staleness-counter", title: "Monotonic Staleness Counter & Parallel Probing", level: 2 },
           { id: "the-4-tier-recovery-pipeline", title: "The 4-Tier Recovery Pipeline", level: 2 },
           { id: "hardware-ethernet-watchdog", title: "Hardware Ethernet & PCIe Link Watchdog (ethernet_watchdog.sh)", level: 2 },
           { id: "cfunfix-boot-recovery", title: "RF State Recovery on Boot (cfunfix.service)", level: 2 },
@@ -2513,12 +2603,12 @@ Cellular connections are prone to silent lockups, tower handoff freezes, and car
 
 ---
 
-## Monotonic Staleness Counter
+## Monotonic Staleness Counter & Parallel Probing
 
-Rather than relying on basic ping probes that can fail during transient packet drops, QManager uses a **Monotonic Staleness Counter**:
-- Sends lightweight ICMP and DNS probes to diverse endpoints (Cloudflare, Google, OpenDNS).
-- A single failure does not trigger a panic.
-- If failures persist consecutively across the configured threshold (e.g. 90 seconds), the multi-tier recovery pipeline engages.
+Rather than relying on naive sequential ping probes that can take 30–60 seconds to detect drops, QManager utilizes an advanced **Monotonic Staleness & Parallel Outage Detection Engine**:
+- **Parallel Fallback Probing (4–7s Detection Time)**: The moment a primary ICMP probe times out, the watchdog instantly fires concurrent probes across secondary targets, DNS endpoints (Cloudflare, Google, OpenDNS), and IPv6 gateways in parallel. This confirms link dropouts in just 4–7 seconds without waiting through multi-hop sequential timeouts.
+- **Non-Resetting Latency Ring Preservation**: When recovering from transient outages or failing over across interfaces, historical round-trip times and jitter records in the 30-minute circular ring buffer are preserved intact rather than wiped, maintaining continuity on the latency monitoring dashboard.
+- **RM520N Native Rust \`ping-daemon\`**: On the RM520N, probing is driven by a compiled native Rust background daemon (\`ping-daemon\`). This eliminates shell-forking overhead and keeps modem CPU usage below 1% during continuous high-frequency health probing.
 
 ---
 
@@ -2527,7 +2617,7 @@ Rather than relying on basic ping probes that can fail during transient packet d
 QManager avoids premature reboots by attempting least-disruptive interventions first:
 
 \`\`\`
-[Link Outage Detected]
+[Link Outage Confirmed in 4-7s]
          │
          ▼
 [Tier 1: Interface Reset] ──> Soft restart network interface (ifup / ip link)
@@ -2536,10 +2626,10 @@ QManager avoids premature reboots by attempting least-disruptive interventions f
 [Tier 2: Radio Toggle]    ──> Cycle baseband RF via AT+CFUN=0 then AT+CFUN=1
          │ (Still offline after 60s)
          ▼
-[Tier 3: SIM Failover]     ──> Switch to secondary SIM card or alternate APN
+[Tier 3: SIM Failover]     ──> Switch to secondary SIM card (Golden Rule sequence)
          │ (Still offline after 90s)
          ▼
-[Tier 4: System Reboot]   ──> Full hardware reset (reboot)
+[Tier 4: System Reboot]   ──> Full hardware reset (reboot with token-bucket limits)
 \`\`\`
 
 ---
@@ -2627,10 +2717,28 @@ For mission-critical internet deployments, QManager supports dual physical SIM s
 
 ## Hardware Dual-SIM Support
 
-Quectel RM520N modems feature dual USIM interfaces (SIM1 and SIM2). Switching between slots is executed in hardware via:
-\`\`\`
-AT+QUIMSLOT=1   # Activate Slot 1
-AT+QUIMSLOT=2   # Activate Slot 2
+Quectel RM520N and RM551E modems feature dual USIM interfaces (SIM1 and SIM2).
+
+### The Golden Rule SIM Switching Sequence
+> [!CAUTION]
+> **SIM Bus Lockup Hazard**:
+> Switching active SIM slots via \`AT+QUIMSLOT\` while radio power is active (\`CFUN=1\`) can lock up the USIM bus or corrupt the baseband SIM interface, requiring a hardware power-cycle.
+> 
+> The **Golden Rule sequence** is strictly enforced by QManager:
+> 1. Cut RF transceiver power: \`AT+CFUN=0\`
+> 2. Wait 2 seconds for bus de-assertion (\`sleep 2\`)
+> 3. Switch physical USIM slot: \`AT+QUIMSLOT=1\` or \`AT+QUIMSLOT=2\`
+> 4. Wait 2 seconds for power rail stabilization (\`sleep 2\`)
+> 5. Restore full radio transceiver functionality: \`AT+CFUN=1\`
+> 6. Verify active slot with \`AT+QUIMSLOT?\` and perform fail-closed verification before network registration (\`AT+COPS=0\`).
+
+\`\`\`sh
+# Automated Golden Rule SIM Switch:
+AT+CFUN=0
+sleep 2
+AT+QUIMSLOT=2
+sleep 2
+AT+CFUN=1
 \`\`\`
 
 ---
@@ -2654,7 +2762,8 @@ In **Resilience > SIM Failover**:
         updatedAt: "2026-10-21",
         toc: [
           { id: "the-at-lockup-problem", title: "The AT Command Lockup Problem", level: 2 },
-          { id: "dynamic-polling-tiers", title: "Dynamic Polling Tiers", level: 2 }
+          { id: "dynamic-polling-tiers", title: "Dynamic Polling Tiers", level: 2 },
+          { id: "page-visibility-heartbeat", title: "Page Visibility API & Client Heartbeat", level: 2 }
         ],
         content: `
 # Adaptive Polling Engine & CPU Throttling
@@ -2682,6 +2791,15 @@ QManager solves this with an **Adaptive Polling Engine**:
 | **Deep Sleep Tier**| No web clients connected | 30,000 ms (30s) | Watchdog ping and health check only |
 
 This reduces modem CPU utilization from ~35% down to under 1.5% during normal background operation!
+
+---
+
+## Page Visibility API & Client Heartbeat
+
+In v0.1.36 and v0.1.19, QManager introduces client-side **Page Visibility API** integration and active heartbeat telemetry:
+- **Tab Focus Detection (\`document.visibilityState\`)**: When an operator switches to another browser tab or minimizes the browser, the client halts background polling requests immediately.
+- **Client Heartbeat Pings (\`/quecmanager/system/heartbeat.sh\`)**: Active tabs dispatch periodic lightweight heartbeat pings to indicate that a human operator is viewing the interface.
+- **Automatic Engine Suspension**: If no heartbeats arrive for 60 seconds, backend polling daemons suspend telemetry collection completely. This drops modem temperature and avoids baseband processor wakeups when the dashboard is not actively in view.
 `
       },
       {
@@ -2696,6 +2814,8 @@ This reduces modem CPU utilization from ~35% down to under 1.5% during normal ba
         toc: [
           { id: "phantom-wan-guard", title: "WAN Interface Guard (OpenWRT)", level: 2 },
           { id: "memory-and-storage-checks", title: "Memory & Storage Monitoring", level: 2 },
+          { id: "thermal-architecture-at-qtemp-warning", title: "Thermal Architecture & SDX75 AT+QTEMP Warning", level: 2 },
+          { id: "rm520n-thermal-mitigation", title: "RM520N Thermal Mitigation (Sysfs & Fan Control)", level: 2 },
           { id: "screens-in-qmanager", title: "Screens in QManager", level: 2 }
         ],
         content: `
@@ -2720,6 +2840,30 @@ QManager's **WAN Guard** monitors \`ubus\` network events, detects orphaned inte
 - Tracks \`/tmp\` and \`/var/log\` usage to prevent RAM disk overflow.
 - Automatically trims rotated log files.
 - Displays live system load average and temperature readouts from modem thermal zones.
+
+---
+
+## Thermal Architecture & SDX75 AT+QTEMP Warning
+
+> [!CAUTION]
+> **Baseband Panic Warning on Qualcomm SDX75 (RM551E)**:
+> Issuing the traditional Quectel AT command \`AT+QTEMP\` on Qualcomm Snapdragon X75 (RM551E) modems immediately causes a **kernel baseband panic and crash loop**.
+> 
+> QManager strictly prohibits \`AT+QTEMP\` on the RM551E. Thermal diagnostics are retrieved exclusively through the Linux kernel sysfs interface:
+> \`\`\`sh
+> # Read thermal zone sensors safely without baseband interaction:
+> cat /sys/class/thermal/thermal_zone*/temp
+> \`\`\`
+
+---
+
+## RM520N Thermal Mitigation (Sysfs & Fan Control)
+
+In earlier firmware versions, thermal mitigation was attempted via background daemons (\`qmanager_low_power*\`). These daemons have been **permanently stripped** from the \`development\` branch of \`QManager-RM520N\` due to instability and unintended modem radio shutdowns.
+
+Thermal management on RM520N & SDX62/SDX55 platforms is handled cleanly via:
+- Direct Linux kernel sysfs temperature reading (\`/sys/class/thermal/\`).
+- Native PWM fan speed scripts and carrier board hardware cooling without destabilizing the cellular baseband.
 ## Screens in QManager
 
 ![QManager RM551E System settings screen](/screenshots/features/rm551e-system-settings-light.webp "RM551E: Set the time zone and units, and schedule automatic reboots.")
@@ -2749,6 +2893,7 @@ QManager's **WAN Guard** monitors \`ubus\` network events, detects orphaned inte
           { id: "browser-sms-client", title: "Browser SMS Client Features", level: 2 },
           { id: "sending-sms-via-at", title: "Sending SMS Messages", level: 2 },
           { id: "storage-management", title: "SIM vs ME Storage Management", level: 2 },
+          { id: "qmi-qrtr-sms", title: "Dual-Lane Non-Blocking SMS via QMI QRTR (qsms)", level: 2 },
           { id: "screens-in-qmanager", title: "Screens in QManager", level: 2 }
         ],
         content: `
@@ -2780,6 +2925,17 @@ Manage cellular text messages without taking your SIM card out of the router.
 ## SIM vs ME Storage Management
 
 Quectel modems can store SMS messages in the SIM card memory (\`SM\`) or the modem's onboard flash (\`ME\`). QManager allows you to select storage locations and provides a one-click **Clear Read Messages** button to prevent SIM storage overflow.
+
+---
+
+## Dual-Lane Non-Blocking SMS via QMI QRTR (qsms)
+
+Standard SMS handling on Quectel modems typically relies on serial AT commands (\`AT+CMGL\`, \`AT+CMGS\`). On busy routers, executing slow SMS read and write operations blocks the single serial interface (\`/dev/smd11\`), creating latency spikes in background telemetry collection.
+
+QManager implements a **Dual-Lane SMS Architecture** powered by the \`qsms\` daemon:
+- **Direct QMI Wireless Messaging Service (WMS)**: Bypasses the AT serial interface entirely and speaks directly to the Qualcomm baseband over Qualcomm IPC Router sockets (\`AF_QIPCRTR\`, family 42).
+- **Zero Serial Contention**: Receiving, decoding, and sending SMS messages runs concurrently with live 4x4 MIMO polling and watchdog probes without requiring locks on \`/var/lock/qmanager.lock\`.
+- **Fast PDU Processing**: Incoming multi-part PDUs and UCS2-encoded messages are assembled in-memory with near-instant UI dispatch.
 ## Screens in QManager
 
 ![QManager RM551E SMS conversation screen](/screenshots/features/rm551e-sms-conversation-light.webp "RM551E: Open a conversation to read the full thread and reply from the browser.")
@@ -2898,12 +3054,12 @@ Configure lightweight \`msmtp\` in **Messages > Alert Settings**:
     id: "management",
     title: "Remote Management & Tools",
     iconName: "Wrench",
-    description: "Tailscale/Netbird mesh VPN, serialized AT terminal broker, ping/traceroute diagnostics, backup & restore, and Prometheus metrics.",
+    description: "Tailscale mesh VPN, serialized AT terminal broker, ping/traceroute diagnostics, backup & restore, and Prometheus metrics.",
     articles: [
       {
         slug: "tailscale-vpn",
         category: "management",
-        title: "Tailscale & Netbird VPN Remote Access",
+        title: "Tailscale VPN Remote Access",
         description: "One-click mesh VPN setup to access QManager securely over the internet without public IPs or port forwarding.",
         edition: "universal",
         badge: "Remote Access",
@@ -2917,7 +3073,7 @@ Configure lightweight \`msmtp\` in **Messages > Alert Settings**:
           { id: "screens-in-qmanager", title: "Screens in QManager", level: 2 }
         ],
         content: `
-# Tailscale & Netbird VPN Remote Access
+# Tailscale VPN Remote Access
 
 Mobile networks place cellular modems behind strict **Carrier-Grade NAT (CGNAT)**, making it impossible to access your router from outside using standard DDNS or port forwarding.
 
@@ -2927,10 +3083,14 @@ Mobile networks place cellular modems behind strict **Carrier-Grade NAT (CGNAT)*
 
 ## Bypassing Carrier CGNAT
 
-QManager integrates native **Tailscale** and **Netbird** mesh VPN support:
-- Connects outbound over WireGuard.
+QManager integrates native **Tailscale** mesh VPN support as its primary remote access solution:
+- Connects outbound over WireGuard to your private tailnet.
 - Assigns a secure 100.x.x.x Tailscale IP to your modem.
-- Enables you to reach QManager from anywhere in the world on your laptop, phone, or tablet.
+- Enables you to reach QManager from anywhere in the world on your laptop, phone, or tablet without public IP exposure.
+
+> [!NOTE]
+> **NetBird VPN Status on RM520N**:
+> NetBird was previously evaluated as an alternative mesh VPN. However, on Qualcomm SDXLEMUR (RM520N) running Poky Linux, NetBird incurred excessive memory usage (>70MB) and high background CPU spikes. NetBird has been **permanently removed** from the \`QManager-RM520N\` \`development\` branch. Tailscale is the officially supported and resource-optimized remote management solution across all platforms.
 
 ---
 
@@ -2994,10 +3154,15 @@ The **AT Terminal** gives advanced users direct access to the modem's baseband p
 
 Cellular baseband ports cannot handle concurrent callers: if two processes send AT commands simultaneously to \`/dev/smd11\` or \`/dev/ttyUSB2\`, both commands corrupt and the serial channel locks up.
 
-QManager serializes every AT interaction via \`qcmd\`:
-- **RM520N & SDX55/SDX6X Linux**: Uses POSIX \`flock\` on \`/tmp/qmanager_at.lock\` to gate access through the native ARM binary \`atcli_smd11\`, writing directly to the hardware SMD channel at \`/dev/smd11\` without requiring socat or extra bridge daemons.
-- **RM551E & OpenWRT**: Serializes access through \`qcmd\` and the \`qmanager_atd\` daemon over Quectel serial device channels.
-- Guarantees sequential atomic command execution with deterministic lock timeouts and zero collision risk.
+QManager solves this with a **Dual-Lane Modem Access Architecture**:
+- **Lane 1 — Compiled Rust AT Broker (\`qmanager_atd\` / \`atcli_smd11\`)**:
+  - Gated by an exclusive POSIX \`flock\` on \`/var/lock/qmanager.lock\` over the baseband control channel (\`/dev/smd11\`).
+  - Serializes interactive web terminal sessions, APN writes, band locks, and recovery interventions.
+  - Guarantees sequential atomic command execution with deterministic lock timeouts and zero collision risk.
+- **Lane 2 — Lock-Free QMI QRTR Socket (\`AF_QIPCRTR\`, family 42)**:
+  - Bypasses the AT serial interface entirely using Qualcomm's internal IPC Router bus.
+  - Streams high-frequency cellular telemetry into \`/tmp/qmanager_qmi.json\` and powers the \`qsms\` daemon without taking or waiting on \`/var/lock/qmanager.lock\`.
+  - By offloading telemetry and SMS to Lane 2, the interactive AT terminal in Lane 1 never suffers from queue starvation or polling delays.
 
 ---
 
@@ -3240,8 +3405,11 @@ qmanager_traffic_bytes_total{direction="tx"} 245109281
         updatedAt: "2026-10-21",
         toc: [
           { id: "stateless-design", title: "Stateless Execution Model", level: 2 },
+          { id: "subsystem-footprint", title: "Subsystem & Service Footprint (Audited Counts)", level: 2 },
+          { id: "dual-lane-architecture", title: "Dual-Lane Modem Access (AT Broker & QMI QRTR)", level: 2 },
           { id: "cgi-shell-backend", title: "POSIX Shell CGI Backend", level: 2 },
-          { id: "broker-ipc", title: "Daemon IPC & Shared Memory", level: 2 },
+          { id: "broker-ipc", title: "Daemon IPC, Shared Memory & Security Contracts", level: 2 },
+          { id: "frontend-visibility-heartbeat", title: "Page Visibility API & Client Heartbeat", level: 2 },
           { id: "rootfs-overlays-and-binds", title: "RootFS Overlays & Entware Bind Mounts (sdxpinn-mount-fix)", level: 2 },
           { id: "volatile-journald-logging", title: "NAND Wear Protection: Volatile journald Logging", level: 2 },
           { id: "experimental-overhaul-branch", title: "Status of the overhaul-SDXLEMUR Branch", level: 2 }
@@ -3265,6 +3433,36 @@ QManager adopts a **stateless, micro-CGI architecture**:
 
 ---
 
+## Subsystem & Service Footprint (Audited Counts)
+
+The two supported hardware targets differ in underlying process supervisor, file layout, and package delivery. The table below lists the exact audited footprint across upstream repositories:
+
+| Subsystem Component | RM551E (\`dr-dolomite/QManager\`) | RM520N (\`dr-dolomite/QManager-RM520N\`) |
+|---|---|---|
+| **Target OS / Environment** | Custom OpenWrt 23.05 (aarch64) | Embedded Poky Linux (ARMv7l SDXLEMUR, Kernel 5.4) |
+| **Release Version Stream** | \`v0.1.36\` (\`v0.1.36-draft\`) | \`v0.1.19\` (\`v0.1.19-draft\`) |
+| **CGI Endpoints** | **101 endpoints** in \`/www/cgi-bin/quecmanager/\` | **95 endpoints** in \`/usrdata/qmanager/www/cgi-bin/quecmanager/\` |
+| **Service Units** | **14 init.d services** supervised by \`procd\` | **27 systemd units** (25 services, 2 timers) |
+| **Shared Shell Libraries** | **40 libraries** in \`/usr/lib/qmanager/\` | **51 shared libraries** in \`/usrdata/qmanager/lib/\` |
+| **Compiled Daemons / Utilities** | Rust \`qmanager_atd\`, \`qsms\` | Rust \`qmanager_atd\`, \`ping-daemon\`, \`qsms\` (51 daemons/utilities) |
+| **Frontend Pre-rendered Routes**| 52 Next.js static routes | 52 Next.js static routes |
+
+---
+
+## Dual-Lane Modem Access (AT Broker & QMI QRTR)
+
+To achieve maximum throughput and avoid AT command collisions, both hardware targets implement **Dual-Lane Modem Access**:
+1. **Lane 1 (Serialized AT Command Bus)**:
+   - Handled by the compiled Rust broker (\`qmanager_atd\`) communicating over \`/dev/smd11\`.
+   - Access is synchronized with an exclusive kernel lock (\`/var/lock/qmanager.lock\` with POSIX \`flock\`).
+   - Dedicated to user AT terminal execution, configuration commits, and recovery routines.
+2. **Lane 2 (Lock-Free QMI QRTR Telemetry & SMS)**:
+   - Communicates via Qualcomm IPC Router (\`AF_QIPCRTR\` QRTR sockets, family 42).
+   - Polls high-frequency signal metrics into \`/tmp/qmanager_qmi.json\` and handles SMS via the \`qsms\` daemon.
+   - Operates completely lock-free without blocking or contending with Lane 1.
+
+---
+
 ## POSIX Shell CGI Backend
 
 Located in \`/www/cgi-bin/quecmanager/\` (on OpenWRT) or \`/usrdata/qmanager/www/cgi-bin/quecmanager/\` (on RM520N Native Linux):
@@ -3274,9 +3472,23 @@ Located in \`/www/cgi-bin/quecmanager/\` (on OpenWRT) or \`/usrdata/qmanager/www
 
 ---
 
-## Daemon IPC & Shared Memory
+## Daemon IPC, Shared Memory & Security Contracts
 
 For operations requiring persistent state (like telemetry history or AT serial locking via \`qcmd\`), QManager utilizes shared memory in **tmpfs** (\`/tmp/\` and \`/tmp/qmlive/\`). Multiple processes read and write via atomic file swaps and POSIX \`flock\` without incurring NAND flash wear.
+
+### RM520N Filesystem & Security Contracts
+On the RM520N platform running Linux 5.4:
+- **\`fs.protected_regular=1\` Contract**: The kernel parameter \`fs.protected_regular=1\` blocks unprivileged processes (such as \`www-data\`) from writing to existing files in world-writable \`/tmp\` that they do not own. QManager pre-seeds runtime telemetry files (\`/tmp/qmlive/*.json\`, \`/tmp/qmanager.log\`) with \`root:root\` mode \`0666\` during systemd setup, allowing CGI scripts to perform in-place updates without permission errors.
+- **RootFS Remount Contract**: The stock Poky Linux root partition mounts \`ro\` (read-only) at boot. During installation and update verification, QManager remounts the rootfs \`rw\` (\`mount -o remount,rw /\`) to write service files, system configurations, and init scripts.
+- **Secrets Isolation**: Sensitive credentials—including auth tokens, API keys, and Tailscale pre-auth keys—are stored exclusively in \`/etc/qmanager-secrets/\` with strict \`0700 root:root\` permissions, outside of the web server document root.
+
+---
+
+## Page Visibility API & Client Heartbeat
+
+To prevent unnecessary thermal load and baseband wakeups when no user is watching:
+- **Client Tab Visibility**: The web frontend listens to browser \`visibilitychange\` events via the Page Visibility API. When the tab is minimized or hidden, all high-frequency telemetry polling is halted immediately.
+- **Heartbeat Daemon**: Active client sessions emit periodic heartbeats to \`/quecmanager/system/heartbeat.sh\`. If no active clients check in within 60 seconds, the background polling daemons throttle back to deep sleep mode.
 
 ---
 
@@ -3339,6 +3551,7 @@ In the upstream community (e.g. Cameron Thompson's repositories), researchers ex
         updatedAt: "2026-10-21",
         toc: [
           { id: "api-conventions", title: "API Conventions & Headers", level: 2 },
+          { id: "endpoint-catalog-overview", title: "Endpoint Catalog & Architecture Totals", level: 2 },
           { id: "signal-endpoints", title: "Signal & Cellular Endpoints", level: 2 },
           { id: "configuration-endpoints", title: "Configuration Endpoints", level: 2 },
           { id: "at-broker-endpoints", title: "AT Command Endpoints", level: 2 }
@@ -3357,6 +3570,19 @@ All QManager backend functions can be automated via standard HTTP JSON requests.
 - **Headers**:
   - \`Content-Type: application/json\`
   - Cookie session header (if authentication is active)
+
+---
+
+## Endpoint Catalog & Architecture Totals
+
+QManager maintains an audited, strictly typed set of CGI shell endpoints tailored to each hardware environment:
+- **RM551E (OpenWrt 23.05)**: **101 CGI endpoints** in \`/www/cgi-bin/quecmanager/\` across cellular (24), device (16), network (18), sms (12), and system (31) modules.
+- **RM520N (Poky Linux)**: **95 CGI endpoints** in \`/usrdata/qmanager/www/cgi-bin/quecmanager/\` interfacing direct sysfs and systemd APIs.
+
+### Key Architectural Endpoints:
+- \`GET /cellular/radio_details.sh\`: On-demand query endpoint for 4x4 MIMO spatial layer counts and Timing Advance, isolating heavy telemetry from the background loop to prevent baseband panics.
+- \`POST /system/heartbeat.sh\`: Page Visibility API heartbeat receiver preventing modem thermal load when browser tabs are hidden.
+- \`GET /cellular/qmi_signal.sh\`: Directly serves parsed \`/tmp/qmanager_qmi.json\` data from the lock-free QMI QRTR socket.
 
 ---
 
@@ -3456,24 +3682,32 @@ QManager is ported across two distinctly different Linux environments. This docu
 
 ## Architectural Divergence Summary
 
-| Subsystem | QManager (OpenWRT) | QManager-RM520N (SDXLEMUR) |
+| Subsystem | QManager (OpenWRT - RM551E) | QManager-RM520N (SDXLEMUR - RM520N) |
 |---|---|---|
-| **Init / Service Manager** | OpenWRT \`procd\` | Systemd (\`systemctl\`) |
+| **Version Stream** | \`v0.1.36\` (\`v0.1.36-draft\`) | \`v0.1.19\` (\`v0.1.19-draft\`) |
+| **Init / Service Manager** | OpenWRT \`procd\` (**14 services**) | Systemd (**27 units**: 25 services, 2 timers) |
+| **CGI API Endpoints** | **101 endpoints** in \`/www/cgi-bin/quecmanager/\` | **95 endpoints** in \`/usrdata/qmanager/www/cgi-bin/quecmanager/\` |
+| **Daemons & Libraries** | 40 shell libraries in \`/usr/lib/qmanager/\` | **51 shared libraries**, 51 daemons/utilities (\`ping-daemon\`, \`qsms\`) |
+| **Serial AT Broker** | Rust \`qmanager_atd\` over \`/dev/smd11\` with \`flock\` | Rust \`atcli_smd11\` / \`qmanager_atd\` over \`/dev/smd11\` with \`flock\` |
+| **Telemetry Lane** | Dual-Lane: Rust AT broker + QMI QRTR socket | Dual-Lane: Rust AT broker + QMI QRTR socket (\`/tmp/qmanager_qmi.json\`) |
+| **SMS Architecture** | QMI WMS over QRTR socket (\`AF_QIPCRTR\`) | Non-blocking \`qsms\` daemon over QRTR socket (family 42) |
+| **Remote Access VPN** | Tailscale mesh VPN | Tailscale mesh VPN (NetBird **permanently removed** due to RAM footprint) |
+| **Thermal Management**| Linux sysfs (strict \`AT+QTEMP\` prohibition) | Linux sysfs & PWM fan control (\`qmanager_low_power\` daemons **stripped**) |
 | **Network Daemon** | \`netifd\` + OpenWRT \`uci\` | Direct \`iproute2\` / Qualcomm proprietary daemons |
-| **Firewall** | \`fw4\` (nftables) or \`fw3\` (iptables) | Native \`iptables\` / \`ip6tables\` |
-| **Package Management** | \`opkg\` | Entware (\`opkg\` pointing to Entware armv7sf-k3.2 repo) |
+| **Firewall** | \`fw4\` (nftables) or \`fw3\` (iptables) | Native \`iptables\` / \`ip6tables\` with \`fs.protected_regular=1\` handling |
+| **Package Management** | \`opkg\` (official SDXPINN feed) | Entware (\`opkg\` pointing to Entware armv7sf repo) |
 | **Web Server** | \`uhttpd\` | \`lighttpd\` with \`mod_cgi\` |
 | **File Paths** | Web files in \`/www/qmanager\` | Web files in \`/usrdata/qmanager/www\` |
-| **Serial AT Interface** | \`/dev/ttyUSB2\` or \`/dev/cdc-wdm0\` | \`/dev/mhi_DUN\` or \`/dev/smd11\` (internal IPC bus) |
+| **Serial AT Interface** | \`/dev/smd11\` or \`/dev/ttyUSB2\` | \`/dev/smd11\` (internal SMD register bus) |
 
 ---
 
 ## Subsystem-by-Subsystem Comparison
 
-### Serial Port Handling
-On the OpenWRT build, the modem communicates across a USB bus using the \`option\` or \`qmi_wwan\` kernel drivers. Latency is ~5–10ms per AT command.
+### Serial Port Handling & Dual-Lane Modem Access
+On the OpenWRT build, the modem communicates across a serialized channel using the compiled Rust \`qmanager_atd\` daemon over \`/dev/smd11\` with POSIX \`flock\` on \`/var/lock/qmanager.lock\`.
 
-On the RM520N-GL internal Linux, the application communicates with the baseband through internal Qualcomm shared memory devices (\`/dev/mhi_DUN\` or SMD channels) with near-zero (< 1ms) latency!
+On the RM520N-GL internal Linux, the application communicates through Qualcomm shared memory devices (\`/dev/smd11\`) with near-zero (< 1ms) latency. High-frequency telemetry and SMS are offloaded to Lane 2 via Qualcomm IPC Router (\`AF_QIPCRTR\` sockets, family 42), keeping the serial interface free for interactive commands.
 
 ---
 
@@ -3544,6 +3778,7 @@ AT+CFUN=0;+CGDCONT=1,"IPV4V6","fast.t-mobile.com";+CFUN=1
 | **\`+QPRTPARA\`** | \`AT+QPRTPARA=1\` | Restore NVRAM factory default parameters. (\`AT+QPRTPARA=3\` restores backup NV parameters). |
 | **\`+QPRTPARA\`** | \`AT+QPRTPARA=4\` | Backup current NV configuration to recovery flash partition. |
 | **\`+QSCLK\`** | \`AT+QSCLK=0\` | Sleep mode control (0 = disable baseband sleep, 1 = enable sleep/low-power). |
+| **\`+QTEMP\`** | \`AT+QTEMP\` | Internal thermal query. **⚠️ HAZARD ON SDX75 / RM551E**: Strictly prohibited on SDX75; calling \`AT+QTEMP\` throws the baseband into an immediate kernel panic loop. Read sysfs \`/sys/class/thermal/\` instead. |
 
 ---
 
@@ -3555,6 +3790,19 @@ AT+CFUN=0;+CGDCONT=1,"IPV4V6","fast.t-mobile.com";+CFUN=1
 - **\`AT+CFUN=4\`**: Airplane mode. Disables RF transceiver; safe for antenna disconnection.
 - **\`AT+CFUN=1,1\`**: Hardware reboot. Performs full warm reboot of baseband processor and reloads NVRAM.
 - **\`AT+CFUN=7\`**: Offline / Factory Test mode. **⚠️ Warning**: On RM550V/RM551E modules, invoking \`CFUN 7\` on mismatched EFS combos can lock the modem into an unprovisioned test loop.
+
+### SIM Slot Switching (\`AT+QUIMSLOT\`) & Golden Rule Sequence
+- **Command**: \`AT+QUIMSLOT=<slot>\` (1 or 2).
+- **⚠️ Bus Lockup Hazard**: Never issue \`AT+QUIMSLOT\` while radio transceiver power is active (\`CFUN=1\`). Doing so locks the USIM hardware bus and corrupts baseband SIM state.
+- **Mandatory Golden Rule Sequence**:
+  \`\`\`sh
+  AT+CFUN=0
+  sleep 2
+  AT+QUIMSLOT=2
+  sleep 2
+  AT+CFUN=1
+  \`\`\`
+- Always follow with \`AT+QUIMSLOT?\` to verify active slot before initiating network registration (\`AT+COPS=0\`).
 
 ### Network Registration Queries
 - **\`AT+CREG?\`**: Query 2G/3G GSM circuit-switched registration.
@@ -3592,6 +3840,13 @@ Quectel Qualcomm modems store pre-compiled carrier firmware configuration bundle
 - **4G Cell Lock**: \`AT+QNWLOCK="common/4g",<num_cells>,<earfcn>,<pci>\`
 - **5G Cell Lock**: \`AT+QNWLOCK="common/5g",<num_cells>,<arfcn>,<pci>,<scs>,<band>\`
 - **Unlock All Cells**: \`AT+QNWLOCK="common/4g",0\` and \`AT+QNWLOCK="common/5g",0\`
+- **4G Frequency Lock**: \`AT+QNWCFG="lte_earfcn_lock",<earfcn>\` (unlock with \`AT+QNWCFG="lte_earfcn_lock",0\`)
+- **5G Frequency Lock**: \`AT+QNWCFG="nr5g_earfcn_lock",<arfcn>\` (unlock with \`AT+QNWCFG="nr5g_earfcn_lock",0\`)
+
+> [!WARNING]
+> **Strict Mutual Exclusion**: In Qualcomm baseband firmware, physical tower locking (\`AT+QNWLOCK\`) and frequency channel locking (\`AT+QNWCFG="lte_earfcn_lock"\`) are strictly mutually exclusive. Applying one while the other is active results in command rejection or RRC connection failure. QManager enforces clearing existing locks (\`0\`) before applying an alternative locking strategy.
+> 
+> **SDX75 SSR Crash Avoidance**: Diagnostic commands querying active MIMO layers (\`AT+QNWCFG="mimo_layers"\`) and Timing Advance must **never** be polled in continuous telemetry loops. On Qualcomm SDX75 modems (RM551E), periodic execution triggers baseband Subsystem Restarts (SSR). QManager isolates these commands to the on-demand \`radio_details.sh\` endpoint.
 
 ---
 

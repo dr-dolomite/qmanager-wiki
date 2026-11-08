@@ -50,7 +50,7 @@ export default function Navbar() {
               <div className="flex items-center gap-2">
                 <span className="font-semibold tracking-tight text-foreground text-sm sm:text-base">QManager</span>
                 <span className="hidden rounded-full border border-border bg-muted/70 px-2 py-0.5 text-xs sm:inline-flex font-medium text-muted-foreground font-figure tabular-nums">
-                  v0.1.35
+                  v0.1.36 • v0.1.19
                 </span>
               </div>
             </Link>

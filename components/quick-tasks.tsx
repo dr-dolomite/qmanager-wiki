@@ -39,7 +39,7 @@ const QUICK_TASKS: QuickTask[] = [
   },
   {
     title: "Remote Mesh Access",
-    description: "Securely monitor and configure your modem from anywhere over Tailscale or Netbird VPN.",
+    description: "Securely monitor and configure your modem from anywhere over Tailscale mesh VPN.",
     href: "/docs/management/tailscale-vpn/",
     icon: GlobeHemisphereWestIcon,
   },
