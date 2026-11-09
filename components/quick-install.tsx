@@ -244,7 +244,7 @@ export default function QuickInstall() {
                 className={`inline-flex h-11 w-full shrink-0 items-center justify-center gap-2 rounded-full border px-6 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:w-auto ${
                   copied
                     ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
-                    : "border-border bg-background text-foreground hover:bg-muted"
+                    : "border-primary bg-primary text-primary-foreground shadow-xs hover:bg-primary/90"
                 }`}
               >
                 {copied ? (
@@ -254,7 +254,7 @@ export default function QuickInstall() {
                   </>
                 ) : (
                   <>
-                    <Copy className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                    <Copy className="h-4 w-4" aria-hidden="true" />
                     <span>Copy</span>
                   </>
                 )}
