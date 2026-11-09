@@ -63,7 +63,8 @@ const SUPPORT_LEVELS: SupportLevel[] = [
 ];
 
 /* A signal-strength glyph: the product is a modem, so confidence reads like reception.
- * Tier hues stay in the positive range (green, violet, blue); no amber or red. */
+ * Supported tiers stay in the positive range (green, violet, blue); red is reserved
+ * for the crossed-out "not supported" glyph (level 0). */
 const BAR_HEIGHTS = [30, 55, 78, 100];
 
 function SignalBars({
@@ -86,13 +87,13 @@ function SignalBars({
         <span
           key={height}
           className={`signal-bar block rounded-[2px] ${size === "lg" ? "w-[5px]" : "w-[3px]"} ${
-            i < level && lit ? lit : "bg-foreground/15"
+            i < level && lit ? lit : level === 0 ? "bg-destructive/35" : "bg-foreground/15"
           }`}
           style={{ height: `${height}%`, "--i": i } as CSSProperties}
         />
       ))}
       {level === 0 && (
-        <span className="absolute top-1/2 -left-[2px] h-px w-[calc(100%+4px)] -rotate-[40deg] bg-muted-foreground" />
+        <span className="absolute top-1/2 -left-[2px] h-px w-[calc(100%+4px)] -rotate-[40deg] bg-destructive" />
       )}
     </span>
   );
@@ -346,7 +347,7 @@ export default function HardwareMatrix() {
 
               <a
                 href={arch.installHref}
-                className="mt-8 inline-flex h-11 w-full items-center justify-center gap-2 self-end rounded-full border border-border bg-background text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="mt-8 inline-flex h-11 w-full items-center justify-center gap-2 self-end rounded-full bg-primary text-sm font-semibold text-primary-foreground shadow-xs transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               >
                 {arch.install}
                 <ArrowRight className="size-4" aria-hidden="true" />

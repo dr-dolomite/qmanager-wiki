@@ -1,8 +1,7 @@
 import React, { type CSSProperties } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, BookOpen, Terminal, ExternalLink } from "lucide-react";
-import GithubIcon from "@/components/github-icon";
+import { ArrowRight, BookOpen, Terminal } from "lucide-react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import QuickTasks from "@/components/quick-tasks";
@@ -13,7 +12,7 @@ import ScreenshotShowcase from "@/components/screenshot-showcase";
 import SupportSection from "@/components/support-section";
 import ContactSection from "@/components/contact-section";
 import GetStarted from "@/components/get-started";
-import { HeroVersionBadge } from "@/components/version-badge";
+import { HeroBadge } from "@/components/version-badge";
 import { DOC_CATEGORIES } from "@/lib/docs-data";
 
 const CATEGORY_COUNT = DOC_CATEGORIES.length;
@@ -31,8 +30,8 @@ export default function Home() {
         {/* HERO SECTION: oversized promise on the left, the real modem UI on the right (stacks below lg) */}
         <section className="grid items-center gap-12 pt-10 pb-6 sm:pt-14 sm:pb-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-14 lg:pt-20 lg:pb-12">
           <div>
-            {/* Version Badge */}
-            <HeroVersionBadge style={delay(0)} />
+            {/* Badge (versions live in the navbar) */}
+            <HeroBadge style={delay(0)} />
 
             {/* Title */}
             <h1 className="mt-7 text-[2.75rem] leading-[1.02] sm:text-6xl xl:text-[5.25rem] font-bold tracking-[-0.035em] text-foreground">
@@ -63,18 +62,6 @@ export default function Home() {
                 <span>Browse Guides</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
-
-              <a
-                href="https://github.com/dr-dolomite/QManager"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-12 items-center gap-2 rounded-full px-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                <GithubIcon className="h-4 w-4" />
-                <span>GitHub</span>
-                <ExternalLink className="h-3.5 w-3.5 opacity-60" aria-hidden="true" />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
             </div>
 
             {/* Spec rail: the key numbers, kept quiet so the headline and product lead */}

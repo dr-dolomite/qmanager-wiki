@@ -164,7 +164,7 @@ export default function QuickInstall() {
             {/* One shared selection pill that slides to the active option (columns are equal: 1fr) */}
             <span
               aria-hidden="true"
-              className="segment-pill pointer-events-none absolute inset-y-1 left-1 w-[calc(50%-0.375rem)] rounded-full bg-background shadow-xs"
+              className="segment-pill pointer-events-none absolute inset-y-1 left-1 w-[calc(50%-0.375rem)] rounded-full bg-primary shadow-xs"
               style={activeTab === "rm520n" ? { transform: "translateX(calc(100% + 0.25rem))" } : undefined}
             />
             {TARGETS.map((target) => {
@@ -182,7 +182,7 @@ export default function QuickInstall() {
                   onKeyDown={(e) => handleTabKeyDown(e, target)}
                   className={`relative inline-flex h-10 min-w-0 items-center justify-center gap-1.5 rounded-full px-3 text-sm whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background sm:px-5 ${
                     isActive
-                      ? "text-foreground font-semibold"
+                      ? "text-primary-foreground font-semibold"
                       : "text-muted-foreground font-medium hover:text-foreground"
                   }`}
                 >
@@ -201,9 +201,9 @@ export default function QuickInstall() {
                 <button
                   type="button"
                   onClick={() => { setOpenwrtMethod("curl"); setCopied(false); }}
-                  className={`rounded-md px-2.5 py-1 font-medium transition-colors ${
+                  className={`rounded-md px-2.5 py-1 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                     openwrtMethod === "curl"
-                      ? "bg-background text-foreground shadow-xs font-semibold"
+                      ? "bg-primary text-primary-foreground shadow-xs font-semibold"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -212,9 +212,9 @@ export default function QuickInstall() {
                 <button
                   type="button"
                   onClick={() => { setOpenwrtMethod("opkg"); setCopied(false); }}
-                  className={`rounded-md px-2.5 py-1 font-medium transition-colors ${
+                  className={`rounded-md px-2.5 py-1 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                     openwrtMethod === "opkg"
-                      ? "bg-background text-foreground shadow-xs font-semibold"
+                      ? "bg-primary text-primary-foreground shadow-xs font-semibold"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
