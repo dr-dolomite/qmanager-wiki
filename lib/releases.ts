@@ -22,12 +22,33 @@ export const GITHUB_REPOS = {
   },
 } as const;
 
-const CACHE_KEY = "qmanager_cached_releases_v1";
+// v2: v1 caches may contain the non-version "language-packs" tag.
+const CACHE_KEY = "qmanager_cached_releases_v2";
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
 
+const VERSION_TAG_RE = /^v?(\d+)\.(\d+)\.(\d+)$/;
+
+function parseVersion(tag: string): [number, number, number] | null {
+  const m = VERSION_TAG_RE.exec(tag);
+  return m ? [Number(m[1]), Number(m[2]), Number(m[3])] : null;
+}
+
+function isVersionTag(tag: unknown): tag is string {
+  return typeof tag === "string" && parseVersion(tag) !== null;
+}
+
+function compareVersions(a: string, b: string): number {
+  const pa = parseVersion(a)!;
+  const pb = parseVersion(b)!;
+  return pa[0] - pb[0] || pa[1] - pb[1] || pa[2] - pb[2];
+}
+
+// `/releases/latest` is unusable here: it skips pre-releases (all QManager
+// versions are pre-releases) and would return the rolling "language-packs"
+// release. List releases instead and pick the highest semver tag.
 async function fetchRepoLatestTag(owner: string, repo: string, fallback: string): Promise<string> {
   try {
-    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`, {
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases?per_page=100`, {
       headers: {
         Accept: "application/vnd.github.v3+json",
       },
@@ -35,8 +56,18 @@ async function fetchRepoLatestTag(owner: string, repo: string, fallback: string)
     if (!res.ok) {
       return fallback;
     }
-    const data = await res.json();
-    return typeof data?.tag_name === "string" && data.tag_name ? data.tag_name : fallback;
+    const data: unknown = await res.json();
+    if (!Array.isArray(data)) {
+      return fallback;
+    }
+    const tags = data
+      .filter((r) => r && !r.draft)
+      .map((r) => r.tag_name)
+      .filter(isVersionTag);
+    if (tags.length === 0) {
+      return fallback;
+    }
+    return tags.reduce((best, tag) => (compareVersions(tag, best) > 0 ? tag : best));
   } catch {
     return fallback;
   }
@@ -51,7 +82,12 @@ export async function getLatestReleases(): Promise<ReleaseVersions> {
     const rawCache = window.localStorage.getItem(CACHE_KEY);
     if (rawCache) {
       const parsed = JSON.parse(rawCache) as ReleaseVersions;
-      if (parsed.updatedAt && Date.now() - parsed.updatedAt < CACHE_TTL_MS && parsed.rm551e && parsed.rm520n) {
+      if (
+        parsed.updatedAt &&
+        Date.now() - parsed.updatedAt < CACHE_TTL_MS &&
+        isVersionTag(parsed.rm551e) &&
+        isVersionTag(parsed.rm520n)
+      ) {
         return parsed;
       }
     }

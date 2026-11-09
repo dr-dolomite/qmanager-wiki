@@ -2,10 +2,11 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useLatestReleases } from "@/hooks/use-latest-releases";
 import { Copy, Check, Server, Zap, ArrowRight, ShieldCheck, Terminal, Info } from "lucide-react";
 
 type InstallTarget = "rm551e" | "rm520n";
-type OpenWrtMethod = "opkg" | "curl";
+type OpenWrtMethod = "curl" | "opkg";
 
 const TARGETS: InstallTarget[] = ["rm551e", "rm520n"];
 
@@ -14,8 +15,8 @@ const COMMANDS: {
   rm520n: string;
 } = {
   rm551e: {
-    opkg: "opkg update && opkg install sdxpinn-qmanager",
     curl: "curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-installer.sh | sh",
+    opkg: "opkg update && opkg install sdxpinn-qmanager",
   },
   rm520n: "curl -fsSL -o /tmp/qmanager-installer.sh https://github.com/dr-dolomite/QManager-RM520N/raw/refs/heads/main/qmanager-installer.sh && bash /tmp/qmanager-installer.sh",
 };
@@ -49,8 +50,9 @@ const TAB_META: Record<InstallTarget, { label: string; icon: React.ReactNode }> 
 
 export default function QuickInstall() {
   const [activeTab, setActiveTab] = useState<InstallTarget>("rm551e");
-  const [openwrtMethod, setOpenwrtMethod] = useState<OpenWrtMethod>("opkg");
+  const [openwrtMethod, setOpenwrtMethod] = useState<OpenWrtMethod>("curl");
   const [copied, setCopied] = useState(false);
+  const { releases } = useLatestReleases();
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const currentCommand = activeTab === "rm551e" ? COMMANDS.rm551e[openwrtMethod] : COMMANDS.rm520n;
@@ -147,7 +149,7 @@ export default function QuickInstall() {
               </span>
             )}
             <span className="rounded-full border border-border bg-background px-2.5 py-0.5 text-xs text-muted-foreground font-figure tabular-nums">
-              {activeTab === "rm551e" ? "v0.1.36" : "v0.1.19"}
+              {releases[activeTab]}
             </span>
           </div>
         </div>
@@ -198,17 +200,6 @@ export default function QuickInstall() {
               <div className="inline-flex rounded-lg border border-border bg-muted/40 p-0.5 text-xs">
                 <button
                   type="button"
-                  onClick={() => { setOpenwrtMethod("opkg"); setCopied(false); }}
-                  className={`rounded-md px-2.5 py-1 font-medium transition-colors ${
-                    openwrtMethod === "opkg"
-                      ? "bg-background text-foreground shadow-xs font-semibold"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  Official Feed (opkg)
-                </button>
-                <button
-                  type="button"
                   onClick={() => { setOpenwrtMethod("curl"); setCopied(false); }}
                   className={`rounded-md px-2.5 py-1 font-medium transition-colors ${
                     openwrtMethod === "curl"
@@ -217,6 +208,17 @@ export default function QuickInstall() {
                   }`}
                 >
                   One-Line Script (curl)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setOpenwrtMethod("opkg"); setCopied(false); }}
+                  className={`rounded-md px-2.5 py-1 font-medium transition-colors ${
+                    openwrtMethod === "opkg"
+                      ? "bg-background text-foreground shadow-xs font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Official Feed (opkg)
                 </button>
               </div>
             </div>
