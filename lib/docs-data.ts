@@ -1,3 +1,9 @@
+import { FALLBACK_RELEASES } from "./releases";
+
+// Single source of truth for version numbers quoted in the docs below.
+const RM551E_VERSION = FALLBACK_RELEASES.rm551e;
+const RM520N_VERSION = FALLBACK_RELEASES.rm520n;
+
 export interface DocArticle {
   slug: string;
   category: string;
@@ -74,7 +80,7 @@ QManager is engineered across two primary hardware architectures to match the mo
 
 | Feature / Aspect | RM551E Series (Custom OpenWRT) | RM520N Series (Native Linux) |
 |---|---|---|
-| **Release Version Stream** | \`v0.1.36\` (\`v0.1.36-draft\`) | \`v0.1.19\` (\`v0.1.19-draft\`) |
+| **Release Version Stream** | \`${RM551E_VERSION}\` | \`${RM520N_VERSION}\` |
 | **Baseband Processor** | Qualcomm Snapdragon X75 | Qualcomm Snapdragon X62 / X65 (SDXLEMUR) |
 | **Execution Environment** | Custom On-Modem OpenWRT (23.05 aarch64) | On-Modem Poky Linux (ARMv7l SDXLEMUR, Kernel 5.4) |
 | **Physical Setup** | Standalone modem in an M.2-to-Ethernet board, plugged into any router's WAN port | Standalone modem in an RGMII/Ethernet breakout board, plugged into any router's WAN port |
@@ -589,9 +595,9 @@ By default, the installer grabs the newest available release. You can specify ch
 curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-installer.sh | sh -s -- --channel stable
 \`\`\`
 
-### Pin a Specific Version Tag (e.g. v0.1.36)
+### Pin a Specific Version Tag (e.g. ${RM551E_VERSION})
 \`\`\`sh
-curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-installer.sh | sh -s -- --tag v0.1.36
+curl -sL https://raw.githubusercontent.com/dr-dolomite/QManager/main/qmanager-installer.sh | sh -s -- --tag ${RM551E_VERSION}
 \`\`\`
 
 ---
@@ -854,11 +860,11 @@ For field deployments without active WAN connectivity, air-gapped industrial rou
 From a computer with internet access, download the appropriate release tarball and SHA-256 checksum from GitHub:
 
 - **For RM551E Series (Custom OpenWRT)**: [QManager Releases](https://github.com/dr-dolomite/QManager/releases)
-  - Release archive: \`qmanager-v0.1.36.tar.gz\`
-  - Checksum: \`qmanager-v0.1.36.tar.gz.sha256\`
+  - Release archive: \`qmanager-${RM551E_VERSION}.tar.gz\`
+  - Checksum: \`qmanager-${RM551E_VERSION}.tar.gz.sha256\`
 - **For Qualcomm X5* & X6* Modems On-Modem (RM520N, RG501, RM521F, etc.)**: [QManager-RM520N Releases](https://github.com/dr-dolomite/QManager-RM520N/releases)
-  - Release archive: \`qmanager-rm520n-v0.1.19.tar.gz\`
-  - Checksum: \`qmanager-rm520n-v0.1.19.tar.gz.sha256\`
+  - Release archive: \`qmanager-rm520n-${RM520N_VERSION}.tar.gz\`
+  - Checksum: \`qmanager-rm520n-${RM520N_VERSION}.tar.gz.sha256\`
 
 ---
 
@@ -867,15 +873,15 @@ From a computer with internet access, download the appropriate release tarball a
 ### Over SCP:
 \`\`\`sh
 # For RM551E on OpenWRT (192.168.224.1):
-scp qmanager-v0.1.36.tar.gz root@192.168.224.1:/tmp/
+scp qmanager-${RM551E_VERSION}.tar.gz root@192.168.224.1:/tmp/
 
 # For RM520N & SDX55/SDX6X modems (192.168.225.1):
-scp qmanager-rm520n-v0.1.19.tar.gz root@192.168.225.1:/tmp/
+scp qmanager-rm520n-${RM520N_VERSION}.tar.gz root@192.168.225.1:/tmp/
 \`\`\`
 
 ### Over ADB (Qualcomm RM520N, RG501 & X5*/X6* Modems):
 \`\`\`sh
-adb push qmanager-rm520n-v0.1.19.tar.gz /tmp/
+adb push qmanager-rm520n-${RM520N_VERSION}.tar.gz /tmp/
 \`\`\`
 
 ---
@@ -887,11 +893,11 @@ SSH or ADB into the device:
 ### On RM551E (OpenWRT):
 \`\`\`sh
 cd /tmp
-sha256sum qmanager-v0.1.36.tar.gz
+sha256sum qmanager-${RM551E_VERSION}.tar.gz
 
 # Extract bundle
 mkdir -p /tmp/qmanager_install
-tar -xzf qmanager-v0.1.36.tar.gz -C /tmp/qmanager_install
+tar -xzf qmanager-${RM551E_VERSION}.tar.gz -C /tmp/qmanager_install
 cd /tmp/qmanager_install
 
 # Execute bundled installer
@@ -901,11 +907,11 @@ sh install.sh
 ### On RM520N & Qualcomm X5*/X6* Modems (Poky Linux):
 \`\`\`sh
 cd /tmp
-sha256sum qmanager-rm520n-v0.1.19.tar.gz
+sha256sum qmanager-rm520n-${RM520N_VERSION}.tar.gz
 
 # Extract bundle
 mkdir -p /tmp/qmanager_install
-tar -xzf qmanager-rm520n-v0.1.19.tar.gz -C /tmp/qmanager_install
+tar -xzf qmanager-rm520n-${RM520N_VERSION}.tar.gz -C /tmp/qmanager_install
 cd /tmp/qmanager_install
 
 # Execute bundled installer
@@ -944,8 +950,8 @@ QManager features built-in Over-The-Air (OTA) update checking and one-click upgr
 1. In the QManager web interface, navigate to **Settings > System / About**.
 2. Click **Check for Updates**.
 3. The system queries GitHub Releases according to your hardware platform's release stream:
-   - **RM551E (OpenWRT)**: Checks \`dr-dolomite/QManager\` (version stream \`v0.1.36\`).
-   - **RM520N & X5*/X6* (Poky Linux)**: Checks \`dr-dolomite/QManager-RM520N\` (version stream \`v0.1.19\`).
+   - **RM551E (OpenWRT)**: Checks \`dr-dolomite/QManager\` (version stream \`${RM551E_VERSION}\`).
+   - **RM520N & X5*/X6* (Poky Linux)**: Checks \`dr-dolomite/QManager-RM520N\` (version stream \`${RM520N_VERSION}\`).
 4. If a newer release is published, the release notes and version diff will appear.
 5. Click **Install Update**. The system will download the archive, verify its signature, unpack new assets, and refresh the browser interface without dropping your cellular connection.
 
@@ -3440,7 +3446,7 @@ The two supported hardware targets differ in underlying process supervisor, file
 | Subsystem Component | RM551E (\`dr-dolomite/QManager\`) | RM520N (\`dr-dolomite/QManager-RM520N\`) |
 |---|---|---|
 | **Target OS / Environment** | Custom OpenWrt 23.05 (aarch64) | Embedded Poky Linux (ARMv7l SDXLEMUR, Kernel 5.4) |
-| **Release Version Stream** | \`v0.1.36\` (\`v0.1.36-draft\`) | \`v0.1.19\` (\`v0.1.19-draft\`) |
+| **Release Version Stream** | \`${RM551E_VERSION}\` | \`${RM520N_VERSION}\` |
 | **CGI Endpoints** | **101 endpoints** in \`/www/cgi-bin/quecmanager/\` | **95 endpoints** in \`/usrdata/qmanager/www/cgi-bin/quecmanager/\` |
 | **Service Units** | **14 init.d services** supervised by \`procd\` | **27 systemd units** (25 services, 2 timers) |
 | **Shared Shell Libraries** | **40 libraries** in \`/usr/lib/qmanager/\` | **51 shared libraries** in \`/usrdata/qmanager/lib/\` |
@@ -3684,7 +3690,7 @@ QManager is ported across two distinctly different Linux environments. This docu
 
 | Subsystem | QManager (OpenWRT - RM551E) | QManager-RM520N (SDXLEMUR - RM520N) |
 |---|---|---|
-| **Version Stream** | \`v0.1.36\` (\`v0.1.36-draft\`) | \`v0.1.19\` (\`v0.1.19-draft\`) |
+| **Version Stream** | \`${RM551E_VERSION}\` | \`${RM520N_VERSION}\` |
 | **Init / Service Manager** | OpenWRT \`procd\` (**14 services**) | Systemd (**27 units**: 25 services, 2 timers) |
 | **CGI API Endpoints** | **101 endpoints** in \`/www/cgi-bin/quecmanager/\` | **95 endpoints** in \`/usrdata/qmanager/www/cgi-bin/quecmanager/\` |
 | **Daemons & Libraries** | 40 shell libraries in \`/usr/lib/qmanager/\` | **51 shared libraries**, 51 daemons/utilities (\`ping-daemon\`, \`qsms\`) |
